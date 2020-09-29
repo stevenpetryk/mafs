@@ -1,0 +1,7 @@
+build
+dist
+
+docs/.cache
+docs/package.json
+docs/package-lock.json
+docs/public

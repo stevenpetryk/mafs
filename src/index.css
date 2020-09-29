@@ -1,0 +1,60 @@
+.MafsView {
+  display: block;
+  background: var(--mafs-bg);
+  overflow: hidden;
+  user-select: none;
+  font-family: sans-serif;
+  font-variant-numeric: tabular-nums;
+
+  --mafs-bg: black;
+  --mafs-fg: white;
+
+  --mafs-origin-color: var(--mafs-fg);
+  --mafs-line-color: #555;
+  --grid-line-subdivision-color: #222;
+
+  --mafs-red: #f11d0e;
+  --mafs-orange: #f14e0e;
+  --mafs-yellow: #ffe44a;
+  --mafs-green: #15e272;
+  --mafs-blue: #58a6ff;
+  --mafs-indigo: #7c58ff;
+  --mafs-violet: #ae58ff;
+  --mafs-pink: #ee00ab;
+}
+
+.MafsView text {
+  fill: var(--mafs-fg);
+  cursor: default;
+}
+
+.MafsView path {
+  stroke: var(--mafs-fg);
+}
+
+.MafsView .draggable {
+  transition: r 0.2s ease, stroke-width 0.2s ease;
+  stroke-width: 18px;
+  cursor: grab;
+  outline: 0 !important;
+
+  color: hsl(0, 100%, 47%);
+}
+
+.MafsView .draggable:active {
+  cursor: grabbing;
+}
+
+.MafsView .draggable:focus,
+.MafsView circle.draggable:hover,
+.MafsView circle.draggable.dragging {
+  r: 15px;
+  stroke-width: 0;
+}
+
+.shadow {
+  paint-order: stroke;
+  stroke-width: 3px;
+  stroke: var(--mafs-bg);
+  stroke-opacity: 0.75;
+}

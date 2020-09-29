@@ -1,0 +1,46 @@
+{
+  "name": "mafs-docs",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "yarn develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "dedent": "^0.7.0",
+    "gatsby": "^2.24.50",
+    "js-easing-functions": "^1.0.3",
+    "lodash.kebabcase": "^4.1.1",
+    "mafs": "link:../build",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-helmet": "^6.1.0",
+    "react-highlight.js": "^1.0.7",
+    "vec-la": "^1.5.0"
+  },
+  "devDependencies": {
+    "@mdx-js/mdx": "^1.6.16",
+    "@mdx-js/react": "^1.6.16",
+    "@types/dedent": "^0.7.0",
+    "@types/lodash.kebabcase": "^4.1.6",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-helmet": "^6.1.0",
+    "gatsby-plugin-codegen": "^1.2.14",
+    "gatsby-plugin-mdx": "^1.2.37",
+    "gatsby-plugin-postcss": "^2.3.11",
+    "gatsby-plugin-react-helmet": "^3.3.10",
+    "gatsby-source-filesystem": "^2.3.27",
+    "gatsby-transformer-javascript-frontmatter": "^2.3.11",
+    "gatsby-transformer-json": "^2.4.11",
+    "postcss-exclude-files": "^1.0.15",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.8.10"
+  },
+  "resolutions": {
+    "graphql": "^14.6.0"
+  }
+}

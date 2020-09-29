@@ -1,0 +1,6 @@
+node_modules
+build
+
+gatsby-config.js
+*.config.js
+.eslintrc.js

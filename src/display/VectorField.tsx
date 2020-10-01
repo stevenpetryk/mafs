@@ -8,6 +8,7 @@ export interface VectorFieldProps {
   xy: (x: number, y: number) => [number, number]
   opacity: (x: number, y: number) => number
   step: number
+  opacityStep: number
   color?: string
 }
 
@@ -28,7 +29,7 @@ interface Layer {
  * @param opacityGrainularity the granulity of the opacity layers
  * @returns a list of layers
  */
-function generateOpacityLayers (opacityGrainularity: number = 5): Layer[] {
+function generateOpacityLayers (opacityGrainularity: number): Layer[] {
   var layers: Layer[] = []
   const step = 1/opacityGrainularity;
   for (var i = 1; i > 0; i-=step) {
@@ -60,11 +61,16 @@ function findClosetLayer (layers: Layer[], pointOpacity: number): Layer {
   return bestLayer
 }
 
-const VectorField: React.VFC<VectorFieldProps> = ({ xy, opacity = (x,y)=>1, step = 1, color = "var(--mafs-fg)" }) => {
+const VectorField: React.VFC<VectorFieldProps> = ({ xy, opacity = (x,y)=>1, step = 1, opacityStep = 0.2, color = "var(--mafs-fg)" }) => {
   const { pixelMatrix } = useScaleContext()
   const { xPanes, yPanes } = usePaneContext()
 
-  const layers = generateOpacityLayers();
+  //Impose restrictions on opacityStep
+  opacityStep = Math.min(1,Math.max(0.01,opacityStep))
+  //Calculate grainularity from step
+  var opacityGrainularity = Math.ceil(1/opacityStep)
+  //Create layers
+  const layers = generateOpacityLayers(opacityGrainularity);
 
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {

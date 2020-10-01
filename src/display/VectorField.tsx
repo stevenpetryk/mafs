@@ -6,7 +6,7 @@ import { useScaleContext } from "view/ScaleContext"
 
 export interface VectorFieldProps {
   xy: (x: number, y: number) => [number, number]
-  opacity: (x: number, y: number) => number
+  xyOpacity: (x: number, y: number) => number
   step: number
   opacityStep: number
   color?: string
@@ -61,7 +61,7 @@ function findClosetLayer (layers: Layer[], pointOpacity: number): Layer {
   return bestLayer
 }
 
-const VectorField: React.VFC<VectorFieldProps> = ({ xy, opacity = (x,y)=>1, step = 1, opacityStep = 0.2, color = "var(--mafs-fg)" }) => {
+const VectorField: React.VFC<VectorFieldProps> = ({ xy, xyOpacity = (x,y)=>1, step = 1, opacityStep = 0.2, color = "var(--mafs-fg)" }) => {
   const { pixelMatrix } = useScaleContext()
   const { xPanes, yPanes } = usePaneContext()
 
@@ -90,7 +90,7 @@ const VectorField: React.VFC<VectorFieldProps> = ({ xy, opacity = (x,y)=>1, step
         const left = vec.add(pixelTip, vec.rotate(arrowVector, (5 / 6) * Math.PI))
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 
-        const trueOpacity = opacity(x,y)
+        const trueOpacity = xyOpacity(x,y)
         var layer = findClosetLayer(layers,trueOpacity)
         layer.d +=
           ` M ${pixelTail[0]} ${pixelTail[1]}` +

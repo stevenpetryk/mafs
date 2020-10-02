@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: yarn install
       - run: yarn build
 
   lint:
@@ -19,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: yarn install
       - run: yarn lint
 
   check-format:
@@ -28,4 +30,5 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: yarn install
       - run: yarn format:check

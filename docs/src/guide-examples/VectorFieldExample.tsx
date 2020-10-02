@@ -18,6 +18,9 @@ const VectorFieldExample: React.VFC = () => {
           -(x - a.x) - (y - a.y),
         ]}
         step={0.5}
+        xyOpacity={(x, y) =>
+          (Math.abs(x) + Math.abs(y)) / 10
+        }
       />
       {a.element}
     </Mafs>

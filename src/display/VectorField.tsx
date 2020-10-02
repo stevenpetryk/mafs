@@ -1,8 +1,10 @@
+import clamp from "lodash.clamp"
 import React from "react"
-
-import { usePaneContext } from "../view/PaneManager"
 import * as vec from "vec-la"
+
+import { usePaneContext } from "view/PaneManager"
 import { useScaleContext } from "view/ScaleContext"
+import { theme } from "./Theme"
 
 export interface VectorFieldProps {
   xy: (x: number, y: number) => [number, number]
@@ -14,12 +16,14 @@ export interface VectorFieldProps {
 
 export type Vector = [number, number]
 
+const xyOpacityDefault = () => 1
+
 const VectorField: React.VFC<VectorFieldProps> = ({
   xy,
-  xyOpacity = (x, y) => 1,
   step = 1,
-  opacityStep = 0.2,
-  color = "var(--mafs-fg)",
+  xyOpacity = xyOpacityDefault,
+  opacityStep = xyOpacity === xyOpacityDefault ? 1 : 0.2,
+  color = theme.foreground,
 }) => {
   const { pixelMatrix } = useScaleContext()
   const { xPanes, yPanes } = usePaneContext()
@@ -74,8 +78,8 @@ const VectorField: React.VFC<VectorFieldProps> = ({
           d={layer.d}
           key={index}
           style={{
-            stroke: color || "var(--mafs-fg)",
-            fill: color || "var(--mafs-fg)",
+            stroke: color,
+            fill: color,
             opacity: layer.opacity,
             fillOpacity: layer.opacity,
             strokeOpacity: layer.opacity,
@@ -126,15 +130,7 @@ function generateOpacityLayers(opacityGrainularity: number): Layer[] {
  * @return the layer that this opacity value belongs to.
  */
 function findClosetLayer(layers: Layer[], pointOpacity: number): Layer {
-  let bestLayer: Layer = layers[0]
-
-  for (const layer of layers) {
-    if (layer.opacity > pointOpacity) {
-      bestLayer = layer
-    } else {
-      break
-    }
-  }
-
-  return bestLayer
+  pointOpacity = clamp(pointOpacity, 0, 1)
+  const index = layers.length - 1 - Math.round(pointOpacity * (layers.length - 1))
+  return layers[index]
 }

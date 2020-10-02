@@ -7,7 +7,6 @@ import {
   CartesianCoordinates,
   useStopwatch,
 } from "mafs"
-import * as vec from "vec-la"
 
 import range from "lodash.range"
 import { easeInOutCubic } from "js-easing-functions"
@@ -16,18 +15,6 @@ interface Partition {
   polygon: [number, number][]
   area: number
 }
-
-const translateMatrix = (x: number) => [
-  1,
-  0,
-  x,
-  0,
-  1,
-  0,
-  0,
-  0,
-  1,
-]
 
 export default function RiemannHomepage() {
   // Inputs

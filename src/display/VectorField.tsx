@@ -15,27 +15,27 @@ export interface VectorFieldProps {
 export type Vector = [number, number]
 
 interface Layer {
-  d:string,
-  opacity:number
+  d: string
+  opacity: number
 }
 
 /**
- * Generates a list of layers. Each layer will eventually be convereted to a <path> 
+ * Generates a list of layers. Each layer will eventually be convereted to a <path>
  * with a certain opacity.
- * 
- * The higher the opacityGrainularity, the more fidelity you get accross opacities, 
+ *
+ * The higher the opacityGrainularity, the more fidelity you get accross opacities,
  * however the more layers you have, the more lag you get.
- * 
+ *
  * @param opacityGrainularity the granulity of the opacity layers
  * @returns a list of layers
  */
-function generateOpacityLayers (opacityGrainularity: number): Layer[] {
+function generateOpacityLayers(opacityGrainularity: number): Layer[] {
   var layers: Layer[] = []
-  const step = 1/opacityGrainularity;
-  for (var i = 1; i > 0; i-=step) {
-    var layer: Layer ={
+  const step = 1 / opacityGrainularity
+  for (var i = 1; i > 0; i -= step) {
+    var layer: Layer = {
       d: "",
-      opacity: i
+      opacity: i,
     }
     layers.push(layer)
   }
@@ -44,15 +44,15 @@ function generateOpacityLayers (opacityGrainularity: number): Layer[] {
 
 /**
  * Takes in a pointOpacity (a number) and returns the layer it belongs to from layers.
- * 
+ *
  * @param layers the layers to catagorize pointOpacity to.
  * @param pointOpacity the opacity to categorize to a layer.
  * @return the layer that this opacity value belongs to.
  */
-function findClosetLayer (layers: Layer[], pointOpacity: number): Layer {
-  var bestLayer: Layer = layers[0];
-  for (let layer of layers){
-    if (layer.opacity>pointOpacity){
+function findClosetLayer(layers: Layer[], pointOpacity: number): Layer {
+  var bestLayer: Layer = layers[0]
+  for (let layer of layers) {
+    if (layer.opacity > pointOpacity) {
       bestLayer = layer
     } else {
       break
@@ -61,16 +61,22 @@ function findClosetLayer (layers: Layer[], pointOpacity: number): Layer {
   return bestLayer
 }
 
-const VectorField: React.VFC<VectorFieldProps> = ({ xy, xyOpacity = (x,y)=>1, step = 1, opacityStep = 0.2, color = "var(--mafs-fg)" }) => {
+const VectorField: React.VFC<VectorFieldProps> = ({
+  xy,
+  xyOpacity = (x, y) => 1,
+  step = 1,
+  opacityStep = 0.2,
+  color = "var(--mafs-fg)",
+}) => {
   const { pixelMatrix } = useScaleContext()
   const { xPanes, yPanes } = usePaneContext()
 
   //Impose restrictions on opacityStep
-  opacityStep = Math.min(1,Math.max(0.01,opacityStep))
+  opacityStep = Math.min(1, Math.max(0.01, opacityStep))
   //Calculate grainularity from step
-  var opacityGrainularity = Math.ceil(1/opacityStep)
+  var opacityGrainularity = Math.ceil(1 / opacityStep)
   //Create layers
-  const layers = generateOpacityLayers(opacityGrainularity);
+  const layers = generateOpacityLayers(opacityGrainularity)
 
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
@@ -90,8 +96,8 @@ const VectorField: React.VFC<VectorFieldProps> = ({ xy, xyOpacity = (x,y)=>1, st
         const left = vec.add(pixelTip, vec.rotate(arrowVector, (5 / 6) * Math.PI))
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 
-        const trueOpacity = xyOpacity(x,y)
-        var layer = findClosetLayer(layers,trueOpacity)
+        const trueOpacity = xyOpacity(x, y)
+        var layer = findClosetLayer(layers, trueOpacity)
         layer.d +=
           ` M ${pixelTail[0]} ${pixelTail[1]}` +
           ` L ${pixelTip[0]} ${pixelTip[1]} ` +
@@ -106,7 +112,7 @@ const VectorField: React.VFC<VectorFieldProps> = ({ xy, xyOpacity = (x,y)=>1, st
     for (const [yMin, yMax] of yPanes) {
       fieldForRegion(xMin, xMax, yMin, yMax)
     }
-  } 
+  }
 
   return (
     <>
@@ -114,13 +120,13 @@ const VectorField: React.VFC<VectorFieldProps> = ({ xy, xyOpacity = (x,y)=>1, st
         <path
           d={layer.d}
           key={index}
-          style={{ 
-            stroke: color || "var(--mafs-fg)", 
+          style={{
+            stroke: color || "var(--mafs-fg)",
             fill: color || "var(--mafs-fg)",
             opacity: layer.opacity,
             fillOpacity: layer.opacity,
-            strokeOpacity: layer.opacity
-            }}
+            strokeOpacity: layer.opacity,
+          }}
           strokeLinecap="round"
           strokeLinejoin="round"
         />

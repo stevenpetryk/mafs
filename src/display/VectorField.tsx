@@ -26,8 +26,8 @@ const VectorField: React.VFC<VectorFieldProps> = ({
 
   //Impose restrictions on opacityStep
   opacityStep = Math.min(1, Math.max(0.01, opacityStep))
-  //Calculate grainularity from step
-  var opacityGrainularity = Math.ceil(1 / opacityStep)
+  //Calculate granularity from step
+  const opacityGrainularity = Math.ceil(1 / opacityStep)
   //Create layers
   const layers = generateOpacityLayers(opacityGrainularity)
 
@@ -50,7 +50,7 @@ const VectorField: React.VFC<VectorFieldProps> = ({
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 
         const trueOpacity = xyOpacity(x, y)
-        var layer = findClosetLayer(layers, trueOpacity)
+        const layer = findClosetLayer(layers, trueOpacity)
         layer.d +=
           ` M ${pixelTail[0]} ${pixelTail[1]}` +
           ` L ${pixelTip[0]} ${pixelTip[1]} ` +
@@ -106,10 +106,10 @@ interface Layer {
  * @returns a list of layers
  */
 function generateOpacityLayers(opacityGrainularity: number): Layer[] {
-  var layers: Layer[] = []
+  const layers: Layer[] = []
   const step = 1 / opacityGrainularity
-  for (var i = 1; i > 0; i -= step) {
-    var layer: Layer = {
+  for (let i = 1; i > 0; i -= step) {
+    const layer: Layer = {
       d: "",
       opacity: i,
     }
@@ -126,13 +126,15 @@ function generateOpacityLayers(opacityGrainularity: number): Layer[] {
  * @return the layer that this opacity value belongs to.
  */
 function findClosetLayer(layers: Layer[], pointOpacity: number): Layer {
-  var bestLayer: Layer = layers[0]
-  for (let layer of layers) {
+  let bestLayer: Layer = layers[0]
+
+  for (const layer of layers) {
     if (layer.opacity > pointOpacity) {
       bestLayer = layer
     } else {
       break
     }
   }
+
   return bestLayer
 }

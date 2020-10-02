@@ -14,53 +14,6 @@ export interface VectorFieldProps {
 
 export type Vector = [number, number]
 
-interface Layer {
-  d: string
-  opacity: number
-}
-
-/**
- * Generates a list of layers. Each layer will eventually be convereted to a <path>
- * with a certain opacity.
- *
- * The higher the opacityGrainularity, the more fidelity you get accross opacities,
- * however the more layers you have, the more lag you get.
- *
- * @param opacityGrainularity the granulity of the opacity layers
- * @returns a list of layers
- */
-function generateOpacityLayers(opacityGrainularity: number): Layer[] {
-  var layers: Layer[] = []
-  const step = 1 / opacityGrainularity
-  for (var i = 1; i > 0; i -= step) {
-    var layer: Layer = {
-      d: "",
-      opacity: i,
-    }
-    layers.push(layer)
-  }
-  return layers
-}
-
-/**
- * Takes in a pointOpacity (a number) and returns the layer it belongs to from layers.
- *
- * @param layers the layers to catagorize pointOpacity to.
- * @param pointOpacity the opacity to categorize to a layer.
- * @return the layer that this opacity value belongs to.
- */
-function findClosetLayer(layers: Layer[], pointOpacity: number): Layer {
-  var bestLayer: Layer = layers[0]
-  for (let layer of layers) {
-    if (layer.opacity > pointOpacity) {
-      bestLayer = layer
-    } else {
-      break
-    }
-  }
-  return bestLayer
-}
-
 const VectorField: React.VFC<VectorFieldProps> = ({
   xy,
   xyOpacity = (x, y) => 1,
@@ -136,3 +89,50 @@ const VectorField: React.VFC<VectorFieldProps> = ({
 }
 
 export default VectorField
+
+interface Layer {
+  d: string
+  opacity: number
+}
+
+/**
+ * Generates a list of layers. Each layer will eventually be convereted to a <path>
+ * with a certain opacity.
+ *
+ * The higher the opacityGrainularity, the more fidelity you get accross opacities,
+ * however the more layers you have, the more lag you get.
+ *
+ * @param opacityGrainularity the granulity of the opacity layers
+ * @returns a list of layers
+ */
+function generateOpacityLayers(opacityGrainularity: number): Layer[] {
+  var layers: Layer[] = []
+  const step = 1 / opacityGrainularity
+  for (var i = 1; i > 0; i -= step) {
+    var layer: Layer = {
+      d: "",
+      opacity: i,
+    }
+    layers.push(layer)
+  }
+  return layers
+}
+
+/**
+ * Takes in a pointOpacity (a number) and returns the layer it belongs to from layers.
+ *
+ * @param layers the layers to catagorize pointOpacity to.
+ * @param pointOpacity the opacity to categorize to a layer.
+ * @return the layer that this opacity value belongs to.
+ */
+function findClosetLayer(layers: Layer[], pointOpacity: number): Layer {
+  var bestLayer: Layer = layers[0]
+  for (let layer of layers) {
+    if (layer.opacity > pointOpacity) {
+      bestLayer = layer
+    } else {
+      break
+    }
+  }
+  return bestLayer
+}

@@ -1568,13 +1568,6 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash.meanby@^4.10.5":
-  version "4.10.5"
-  resolved "https://registry.yarnpkg.com/@types/lodash.meanby/-/lodash.meanby-4.10.5.tgz#3301efd2e4385732569230d157a1d21d16a03ed2"
-  integrity sha512-R5Lfi0c/kn/pMfMYVKsteLdUXmsx7z92SjfSeAcD8rohae/Wgj4N9EMKo136jiTApLb5ELNHj2p4O4J5Trwe3g==
-  dependencies:
-    "@types/lodash" "*"
-
 "@types/lodash.memoize@^4.1.6":
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.memoize/-/lodash.memoize-4.1.6.tgz#3221f981790a415cab1a239f25c17efd8b604c23"
@@ -7830,11 +7823,6 @@ lodash.maxby@^4.6.0:
   resolved "https://registry.yarnpkg.com/lodash.maxby/-/lodash.maxby-4.6.0.tgz#082240068f3c7a227aa00a8380e4f38cf0786e3d"
   integrity sha1-CCJABo88eiJ6oAqDgOTzjPB4bj0=
 
-lodash.meanby@^4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/lodash.meanby/-/lodash.meanby-4.10.0.tgz#02306328dbe81a37412cd0b253815fdfbd5025e8"
-  integrity sha1-AjBjKNvoGjdBLNCyU4Ff371QJeg=
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -7854,11 +7842,6 @@ lodash.sample@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/lodash.sample/-/lodash.sample-4.2.1.tgz#5e4291b0c753fa1abeb0aab8fb29df1b66f07f6d"
   integrity sha1-XkKRsMdT+hq+sKq4+ynfG2bwf20=
-
-lodash.sumby@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/lodash.sumby/-/lodash.sumby-4.6.0.tgz#7d87737ddb216da2f7e5e7cd2dd9c403a7887346"
-  integrity sha1-fYdzfdshbaL35efNLdnEA6eIc0Y=
 
 lodash.throttle@^4.1.1:
   version "4.1.1"

@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",
     "format:check": "yarn format -l",
+    "postinstall": "chmod +x prepublish.sh",
     "docs:fix-postcss": "echo 'module.exports = {}' > build/postcss.config.js",
     "docs:build": "yarn build && yarn docs:fix-postcss && cd docs && yarn install && yarn build",
     "docs:start": "yarn docs:fix-postcss && cd docs && yarn start"

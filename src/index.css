@@ -2,6 +2,7 @@
   display: block;
   background: var(--mafs-bg);
   overflow: hidden;
+  -webkit-user-select: none;
   user-select: none;
   font-family: inherit;
   font-variant-numeric: tabular-nums;
@@ -32,11 +33,17 @@
   stroke: var(--mafs-fg);
 }
 
+.MafsWrapper,
+.MafsView .draggable-hitbox {
+  touch-action: none;
+}
+
 .MafsView .draggable {
   transition: r 0.2s ease, stroke-width 0.2s ease;
   stroke-width: 18px;
   cursor: grab;
   outline: 0 !important;
+  touch-action: none;
 
   color: hsl(0, 100%, 47%);
 }

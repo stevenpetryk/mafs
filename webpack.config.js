@@ -41,7 +41,7 @@ module.exports = {
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "build"),
-    library: "",
+    library: "Mafs",
     libraryTarget: "commonjs",
   },
   externals: [

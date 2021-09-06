@@ -8,17 +8,14 @@ Mafs is a set of opinionated React components for creating math visualizations.
 
 ## Development
 
-It's simplest to iterate on Mafs from the documentation site, where things are
-set up such that you can embed and live-update examples. The docs site is
-powered by Gatsby, and directly imports files from the Mafs `src/` folder
-(rather than using the genuine `mafs` NPM package).
-
-To start the docs site (which will also compile Mafs), run the following:
+Development is done inside of the Gatsby documentation site, which directly
+imports Mafs components from `src/`. To start the development server, run:
 
 ```
-cd docs
 yarn start
 ```
+
+Then visit [localhost:8000](http://localhost:8000).
 
 ## Tests
 

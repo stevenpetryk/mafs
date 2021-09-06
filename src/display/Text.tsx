@@ -2,10 +2,8 @@ import React from "react"
 import * as vec from "vec-la"
 import { useScaleContext } from "view/ScaleContext"
 
-/** @public */
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"
 
-/** @public */
 export interface TextProps {
   x: number
   y: number

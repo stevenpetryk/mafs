@@ -7,7 +7,6 @@ import * as vec from "vec-la"
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0
 
-/** @public */
 export interface VectorProps extends Stroked {
   tail?: Vector2
   tip: Vector2

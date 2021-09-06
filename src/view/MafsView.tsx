@@ -24,7 +24,6 @@ export interface MafsViewProps {
   ssr?: boolean
 }
 
-/** @public */
 const MafsView: React.FC<MafsViewProps> = ({
   width: desiredWidth = "auto",
   height = 500,

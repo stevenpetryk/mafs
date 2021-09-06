@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
-/** @public */
 export interface StopwatchArguments {
   /** The start time in seconds */
   startTime?: number
@@ -8,7 +7,6 @@ export interface StopwatchArguments {
   endTime?: number
 }
 
-/** @public */
 export interface Stopwatch {
   /**
    * The amount of time that has passed since the timer started, in high-precision seconds.

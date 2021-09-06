@@ -3,10 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "gatsby build",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "start": "Run `yarn start` from the project root to start the combined development/docs server."
   },
   "dependencies": {
     "dedent": "^0.7.0",

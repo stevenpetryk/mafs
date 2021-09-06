@@ -6,6 +6,7 @@ COPIED_PACKAGE_JSON_STRUCTURE=$(
     {
       name: .name,
       version: .version,
+      license: .license,
       main: "index.js",
       types: "index.d.ts",
       dependencies: .dependencies,

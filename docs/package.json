@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "yarn develop",
+    "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
@@ -15,7 +14,7 @@
     "js-easing-functions": "^1.0.3",
     "lodash.kebabcase": "^4.1.1",
     "lodash.sumby": "^4.6.0",
-    "mafs": "link:../build",
+    "mafs": "link:../src",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-helmet": "^6.1.0",
@@ -23,6 +22,7 @@
     "vec-la": "^1.5.0"
   },
   "devDependencies": {
+    "@hot-loader/react-dom": "^17.0.1",
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
     "@types/dedent": "^0.7.0",

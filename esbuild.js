@@ -1,4 +1,7 @@
-require("esbuild").buildSync({
+const esbuild = require("esbuild")
+const { nodeExternalsPlugin } = require("esbuild-node-externals")
+
+esbuild.build({
   entryPoints: ["src/index.tsx", "src/index.css"],
   bundle: true,
   minify: true,
@@ -6,17 +9,5 @@ require("esbuild").buildSync({
   outdir: "build",
   logLevel: "info",
   watch: process.env.WATCH === "true",
-  external: [
-    "classnames",
-    "gl-matrix-invert",
-    "lodash.clamp",
-    "lodash.range",
-    "lodash.round",
-    "react-use-gesture",
-    "tiny-invariant",
-    "use-resize-observer",
-    "vec-la",
-    "react",
-    "react-dom",
-  ],
+  plugins: [nodeExternalsPlugin()],
 })

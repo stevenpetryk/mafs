@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react"
 import round from "lodash.round"
 import { usePaneContext } from "../../view/PaneManager"
 import { Stroked } from "../../display/Theme"
-import { useScaleContext } from "view/ScaleContext"
+import { useScaleContext } from "../../view/ScaleContext"
 
 export interface OfXProps extends Stroked {
   y: (x: number) => number
@@ -57,10 +57,10 @@ const OfX: React.VFC<OfXProps> = ({
     [y, yLowerBound, yUpperBound, subsampling]
   )
 
-  const d = useMemo(() => `M ${panes.map(([min, max]) => getSegment(min, max)).join(" ")}`, [
-    panes,
-    getSegment,
-  ])
+  const d = useMemo(
+    () => `M ${panes.map(([min, max]) => getSegment(min, max)).join(" ")}`,
+    [panes, getSegment]
+  )
 
   return (
     <path

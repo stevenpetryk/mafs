@@ -1,6 +1,6 @@
 import React from "react"
 import * as vec from "vec-la"
-import { useScaleContext } from "view/ScaleContext"
+import { useScaleContext } from "../view/ScaleContext"
 
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"
 

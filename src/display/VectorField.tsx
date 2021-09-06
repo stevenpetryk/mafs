@@ -2,8 +2,8 @@ import clamp from "lodash.clamp"
 import React from "react"
 import * as vec from "vec-la"
 
-import { usePaneContext } from "view/PaneManager"
-import { useScaleContext } from "view/ScaleContext"
+import { usePaneContext } from "../view/PaneManager"
+import { useScaleContext } from "../view/ScaleContext"
 import { theme } from "./Theme"
 
 export interface VectorFieldProps {

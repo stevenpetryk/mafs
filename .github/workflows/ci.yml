@@ -40,6 +40,4 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - run: yarn install
-      - run: cd docs && yarn install && cd ..
-      - run: yarn build:docs
+      - run: cd docs && yarn install && yarn build:docs

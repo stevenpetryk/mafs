@@ -12,6 +12,7 @@
     "build": "rm -rf build && yarn -s build:code & yarn -s build:types",
     "build:code": "node esbuild.js",
     "build:types": "yarn tsc && yarn api-extractor run && rm -rf build/type-declarations",
+    "build:docs": "cd docs && yarn gatsby build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",
     "format:check": "yarn format -l",

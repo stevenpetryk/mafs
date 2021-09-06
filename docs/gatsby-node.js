@@ -9,6 +9,9 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         "react-dom": "@hot-loader/react-dom",
         mafs: path.resolve(__dirname, "../src"),
       },
+      fallback: {
+        path: require.resolve("path-browserify"),
+      },
     },
   })
 }

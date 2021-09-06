@@ -37,6 +37,6 @@
   }
 
   a.button:focus {
-    @apply shadow-outline;
+    @apply ring;
   }
 }

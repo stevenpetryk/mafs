@@ -1,6 +1,5 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import path from "path"
 import kebabCase from "lodash.kebabcase"
 
 import { GuidesSidebarQuery } from "./__generated__/GuidesSidebarQuery"
@@ -38,6 +37,8 @@ const GuidesSidebar: React.VFC = () => {
 export default GuidesSidebar
 
 function useSectionsAndPages() {
+  const path = require("path")
+
   const data = useStaticQuery<GuidesSidebarQuery>(graphql`
     query GuidesSidebarQuery {
       allGuideSectionsJson(sort: { fields: order }) {

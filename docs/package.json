@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "dedent": "^0.7.0",
-    "gatsby": "^2.24.50",
+    "gatsby": "^3.13.0",
     "js-easing-functions": "^1.0.3",
     "lodash.kebabcase": "^4.1.1",
     "lodash.sumby": "^4.6.0",
@@ -20,26 +20,31 @@
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
-    "@mdx-js/mdx": "^1.6.16",
-    "@mdx-js/react": "^1.6.16",
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
     "@types/dedent": "^0.7.0",
     "@types/lodash.kebabcase": "^4.1.6",
     "@types/lodash.sumby": "^4.6.6",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-helmet": "^6.1.0",
-    "gatsby-plugin-codegen": "^1.2.14",
-    "gatsby-plugin-mdx": "^1.2.37",
-    "gatsby-plugin-postcss": "^2.3.11",
-    "gatsby-plugin-react-helmet": "^3.3.10",
-    "gatsby-source-filesystem": "^2.3.27",
-    "gatsby-transformer-javascript-frontmatter": "^2.3.11",
-    "gatsby-transformer-json": "^2.4.11",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-helmet": "^6.1.2",
+    "autoprefixer": "^10.3.4",
+    "gatsby-plugin-codegen": "^3.0.1",
+    "gatsby-plugin-mdx": "^2.13.0",
+    "gatsby-plugin-postcss": "^4.13.0",
+    "gatsby-plugin-react-helmet": "^4.13.0",
+    "gatsby-source-filesystem": "^3.13.0",
+    "gatsby-transformer-javascript-frontmatter": "^3.13.0",
+    "gatsby-transformer-json": "^3.13.0",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.3.6",
     "postcss-exclude-files": "^1.0.15",
-    "postcss-import": "^12.0.1",
-    "tailwindcss": "^1.8.10"
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.2.10"
   },
   "resolutions": {
-    "graphql": "^14.6.0"
+    "graphql": "^15.4.0",
+    "graphql-compose": "^7.25.0",
+    "webpack": "^5.24.2"
   }
 }

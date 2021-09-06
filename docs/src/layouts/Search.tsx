@@ -30,7 +30,7 @@ export const Search: React.VFC = () => {
           placeholder-gray-600
           border border-gray-400
           shadow-sm
-          outline-none focus:shadow-outline focus:border-blue-400
+          outline-none focus:ring focus:border-blue-400
           bg-no-repeat bg-left-nudge
         `}
       style={{

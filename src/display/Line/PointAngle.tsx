@@ -1,3 +1,4 @@
+import { Vector2 } from "../../math"
 import React from "react"
 import * as vec from "vec-la"
 import { Stroked } from "../../display/Theme"

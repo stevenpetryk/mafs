@@ -3,6 +3,7 @@ import { useScaleContext } from "view/ScaleContext"
 import { Stroked } from "../display/Theme"
 import { theme } from "./Theme"
 import * as vec from "vec-la"
+import { Vector2 } from "../math"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0

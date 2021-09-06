@@ -1,3 +1,4 @@
+import { Vector2 } from "../../math"
 import React from "react"
 import { Stroked } from "../../display/Theme"
 import PointAngle from "./PointAngle"

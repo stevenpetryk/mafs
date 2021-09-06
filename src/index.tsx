@@ -28,3 +28,4 @@ export {
   UseMovablePointArguments,
 } from "./interaction/useMovablePoint"
 export { default as useStopwatch, Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
+export { Interval, Vector2 } from "./math"

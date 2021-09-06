@@ -8,6 +8,7 @@ import * as vec from "vec-la"
 
 import { useGesture } from "react-use-gesture"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
+import { Interval, Vector2 } from "../math"
 
 export interface MafsViewProps {
   width?: number | string

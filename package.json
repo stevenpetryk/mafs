@@ -12,7 +12,7 @@
     "build:docs": "cd docs && yarn install && yarn gatsby build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",
-    "format:check": "yarn format -l",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,md}\"",
     "postinstall": "chmod +x prepublish.sh",
     "publish": "./prepublish.sh && cd build && npm publish"
   },

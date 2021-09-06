@@ -32,7 +32,11 @@ export default function ProjectileMotion() {
   }
   const [restingX, restingY] = positionAtTime(timeOfFlight)
 
-  const { time: t, start, stop } = useStopwatch({
+  const {
+    time: t,
+    start,
+    stop,
+  } = useStopwatch({
     endTime: timeOfFlight,
   })
 

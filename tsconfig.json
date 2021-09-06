@@ -9,7 +9,6 @@
     "allowJs": true,
     "declaration": true,
     "declarationDir": "./build/type-declarations",
-    "emitDeclarationOnly": true,
     "rootDir": "./src",
     "baseUrl": "./src",
     "strict": true,

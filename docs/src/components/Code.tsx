@@ -1,6 +1,5 @@
 import React from "react"
 
-import Highlight from "react-highlight.js"
 import dedent from "dedent"
 
 interface CodeProps {

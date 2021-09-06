@@ -1,7 +1,10 @@
 /* eslint-disable */
 const path = require("path")
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin")
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
+  const config = getConfig()
+
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
@@ -13,5 +16,11 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         path: require.resolve("path-browserify"),
       },
     },
+    plugins: [
+      ...config.plugins,
+      new MonacoWebpackPlugin({
+        languages: ["typescript", "javascript", "css", "bash"],
+      }),
+    ],
   })
 }

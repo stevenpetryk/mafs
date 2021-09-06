@@ -1,0 +1,22 @@
+require("esbuild").buildSync({
+  entryPoints: ["src/index.tsx", "src/index.css"],
+  bundle: true,
+  minify: true,
+  sourcemap: false,
+  outdir: "build",
+  logLevel: "info",
+  watch: process.env.WATCH === "true",
+  external: [
+    "classnames",
+    "gl-matrix-invert",
+    "lodash.clamp",
+    "lodash.range",
+    "lodash.round",
+    "react-use-gesture",
+    "tiny-invariant",
+    "use-resize-observer",
+    "vec-la",
+    "react",
+    "react-dom",
+  ],
+})

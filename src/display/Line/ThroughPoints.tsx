@@ -3,7 +3,6 @@ import * as vec from "vec-la"
 import round from "lodash.round"
 import { Stroked, theme } from "../../display/Theme"
 import { useScaleContext } from "view/ScaleContext"
-import { Vector2 } from "typings/math"
 
 export interface ThroughPointsProps extends Stroked {
   point1: Vector2

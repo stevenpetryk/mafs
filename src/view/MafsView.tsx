@@ -5,7 +5,6 @@ import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
 import round from "lodash.round"
 import * as vec from "vec-la"
-import { Vector2, Interval } from "typings/math"
 
 import { useGesture } from "react-use-gesture"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
@@ -21,11 +20,11 @@ export interface MafsViewProps {
    * nothing in it.
    *
    * Note that server-side rendering complicated graphs can really bloat your HTML.
-   * @default false
    */
   ssr?: boolean
 }
 
+/** @public */
 const MafsView: React.FC<MafsViewProps> = ({
   width: desiredWidth = "auto",
   height = 500,
@@ -62,26 +61,24 @@ const MafsView: React.FC<MafsViewProps> = ({
     { enabled: pan }
   )
 
-  const mapX = useCallback((x: number) => round(((x - xMin) / (xMax - xMin)) * width), [
-    xMin,
-    xMax,
-    width,
-  ])
+  const mapX = useCallback(
+    (x: number) => round(((x - xMin) / (xMax - xMin)) * width),
+    [xMin, xMax, width]
+  )
 
-  const mapY = useCallback((y: number) => round(((y - yMax) / (yMin - yMax)) * height), [
-    yMin,
-    yMax,
-    height,
-  ])
+  const mapY = useCallback(
+    (y: number) => round(((y - yMax) / (yMin - yMax)) * height),
+    [yMin, yMax, height]
+  )
 
   const scaleX = useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
   const scaleY = useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
   const unscaleX = useCallback((x: number) => round((x / width) * xSpan, 5), [xSpan, width])
   const unscaleY = useCallback((y: number) => round((-y / height) * ySpan, 5), [ySpan, height])
-  const pixelMatrix = useMemo(() => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(), [
-    scaleX,
-    scaleY,
-  ])
+  const pixelMatrix = useMemo(
+    () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
+    [scaleX, scaleY]
+  )
   const inversePixelMatrix = useMemo(
     () => vec.matrixBuilder().scale(unscaleX(1), unscaleY(1)).get(),
     [unscaleX, unscaleY]

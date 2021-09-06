@@ -133,6 +133,7 @@ function snappedRange(min: number, max: number, step: number) {
   return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)
 }
 
+/** @public */
 export function autoPi(x: number): string {
   if (x === 0) return "0"
   if (Math.abs(Math.PI - x) < 0.001) return "π"

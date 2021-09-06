@@ -7,7 +7,7 @@ COPIED_PACKAGE_JSON_STRUCTURE=$(
       name: .name,
       version: .version,
       main: "index.js",
-      types: "mafs.d.ts",
+      types: "index.d.ts",
       dependencies: .dependencies,
       peerDependencies: .peerDependencies,
     }

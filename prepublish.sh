@@ -2,7 +2,7 @@
 set -eu
 
 COPIED_PACKAGE_JSON_STRUCTURE=$(
-  tr -d '\012' <<-BOOP
+  tr -d '\012' <<-PACKAGEJSON
     {
       name: .name,
       version: .version,
@@ -11,7 +11,7 @@ COPIED_PACKAGE_JSON_STRUCTURE=$(
       dependencies: .dependencies,
       peerDependencies: .peerDependencies,
     }
-BOOP
+PACKAGEJSON
 )
 
 echo "Creating custom package.json for this version"

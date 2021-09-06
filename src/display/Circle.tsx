@@ -1,7 +1,7 @@
 import React from "react"
 import { Filled } from "./Theme"
 import Ellipse from "./Ellipse"
-import { Vector2 } from "typings/math"
+import { Vector2 } from "../math"
 
 export interface CircleProps extends Filled {
   center: Vector2

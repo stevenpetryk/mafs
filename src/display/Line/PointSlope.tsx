@@ -1,7 +1,7 @@
+import { Vector2 } from "../../math"
 import React from "react"
 import { Stroked } from "../../display/Theme"
 import PointAngle from "./PointAngle"
-import { Vector2 } from "typings/math"
 
 export interface PointSlopeProps extends Stroked {
   point: Vector2

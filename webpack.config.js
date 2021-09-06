@@ -1,5 +1,3 @@
-// @ts-check
-
 const path = require("path")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -9,8 +7,6 @@ const nodeExternals = require("webpack-node-externals")
 const ShellPlugin = require("webpack-shell-plugin")
 
 const mode = process.env.NODE_ENV === "production" ? "production" : "development"
-
-// Remove pesky .css.js files from the build
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -54,6 +50,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name]",
     }),
+    // Remove pesky .css.js files from the build
     new WithoutFilesPlugin([/\.css\.js(\.map)?$/]),
     new ShellPlugin({ onBuildEnd: ["./prepublish.sh"] }),
   ],

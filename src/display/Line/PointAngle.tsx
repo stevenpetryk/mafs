@@ -1,8 +1,8 @@
+import { Vector2 } from "../../math"
 import React from "react"
 import * as vec from "vec-la"
 import { Stroked } from "../../display/Theme"
 import ThroughPoints from "./ThroughPoints"
-import { Vector2 } from "typings/math"
 
 export interface PointAngleProps extends Stroked {
   point: Vector2

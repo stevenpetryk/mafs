@@ -3,8 +3,8 @@ import { useMemo, useState } from "react"
 import MovablePoint from "./MovablePoint"
 import * as vec from "vec-la"
 import { theme } from "display/Theme"
-import { Vector2 } from "../typings/math"
 import invert from "gl-matrix-invert"
+import { Vector2 } from "../math"
 
 const identity = vec.matrixBuilder().get()
 

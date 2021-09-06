@@ -3,7 +3,7 @@ import classnames from "classnames"
 import * as vec from "vec-la"
 import { useDrag } from "react-use-gesture"
 import { useScaleContext } from "view/ScaleContext"
-import { Vector2 } from "typings/math"
+import { Vector2 } from "../math"
 
 interface MovablePointProps {
   x: number

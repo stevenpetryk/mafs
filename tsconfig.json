@@ -8,11 +8,12 @@
     "jsx": "react",
     "allowJs": true,
     "declaration": true,
-    "declarationMap": true,
+    "declarationDir": "./build/type-declarations",
     "rootDir": "./src",
     "baseUrl": "./src",
     "strict": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "checkJs": true
   },
   "include": ["src/**/*"]
 }

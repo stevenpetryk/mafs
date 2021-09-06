@@ -52,7 +52,7 @@
   stroke-width: 0;
 }
 
-.shadow {
+.MafsView .shadow {
   paint-order: stroke;
   stroke-width: 3px;
   stroke: var(--mafs-bg);

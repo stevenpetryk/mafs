@@ -2,16 +2,16 @@
 set -eu
 
 COPIED_PACKAGE_JSON_STRUCTURE=$(
-  tr -d '\012' <<-BOOP
+  tr -d '\012' <<-PACKAGEJSON
     {
       name: .name,
       version: .version,
       main: "index.js",
-      types: "mafs.d.ts",
+      types: "index.d.ts",
       dependencies: .dependencies,
       peerDependencies: .peerDependencies,
     }
-BOOP
+PACKAGEJSON
 )
 
 echo "Creating custom package.json for this version"

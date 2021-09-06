@@ -6,7 +6,7 @@
 
 @import "tailwindcss/utilities";
 
-@import "../../../build/index.css";
+@import "mafs/index.css";
 @import "./syntax-highlighting.css";
 
 @import "./fonts/cmun/cmun-serif.css";

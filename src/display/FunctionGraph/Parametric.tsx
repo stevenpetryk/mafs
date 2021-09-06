@@ -1,5 +1,5 @@
 import React from "react"
-import { useScaleContext } from "view/ScaleContext"
+import { useScaleContext } from "../../view/ScaleContext"
 import { Stroked } from "../../display/Theme"
 
 export interface ParametricProps extends Stroked {

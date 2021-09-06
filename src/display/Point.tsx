@@ -1,5 +1,5 @@
 import React from "react"
-import { useScaleContext } from "view/ScaleContext"
+import { useScaleContext } from "../view/ScaleContext"
 import { theme } from "./Theme"
 
 export interface PointProps {

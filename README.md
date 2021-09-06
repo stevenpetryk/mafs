@@ -8,18 +8,14 @@ Mafs is a set of opinionated React components for creating math visualizations.
 
 ## Development
 
-Most development is done using the documentation site—live reload makes it easy to see changes made to the library live on the site. Just set up both the root folder and the `docs/` folder.
+Development is done inside of the Gatsby documentation site, which directly
+imports Mafs components from `src/`. To start the development server, run:
 
 ```
-yarn install
 yarn start
 ```
 
-In another terminal (wait a few seconds for `yarn start` to spin up before running this):
-
-```
-yarn docs:start
-```
+Then visit [localhost:8000](http://localhost:8000).
 
 ## Tests
 

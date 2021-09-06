@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import { useScaleContext } from "view/ScaleContext"
+import { useScaleContext } from "../view/ScaleContext"
 import { Stroked } from "../display/Theme"
 import { theme } from "./Theme"
 import * as vec from "vec-la"

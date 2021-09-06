@@ -4,21 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "files": [
-    "build/**/*"
-  ],
   "scripts": {
-    "build": "yarn -s build:code && yarn -s build:types",
-    "build:code": "NODE_ENV=production webpack",
-    "build:types": "yarn api-extractor run && rm -rf build/type-declarations",
-    "start": "webpack --watch",
+    "start": "cd docs && yarn install && yarn gatsby develop",
+    "build": "rm -rf build && yarn -s build:code & yarn -s build:types",
+    "build:code": "node esbuild.js",
+    "build:types": "yarn tsc && yarn api-extractor run && rm -rf build/type-declarations",
+    "build:docs": "cd docs && yarn install && yarn gatsby build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",
     "format:check": "yarn format -l",
     "postinstall": "chmod +x prepublish.sh",
-    "docs:fix-postcss": "echo 'module.exports = {}' > build/postcss.config.js",
-    "docs:build": "yarn build && yarn docs:fix-postcss && cd docs && yarn install && yarn build",
-    "docs:start": "yarn docs:fix-postcss && cd docs && yarn start"
+    "publish": "./prepublish.sh && cd build && npm publish"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.18.7",
@@ -30,26 +26,17 @@
     "@types/lodash.sumby": "^4.6.6",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
-    "@types/webpack": "^4.41.21",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^4.2.2",
+    "esbuild": "^0.12.25",
+    "esbuild-node-externals": "^1.3.0",
     "eslint": "^7.7.0",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
-    "mini-css-extract-plugin": "^0.11.0",
     "prettier": "^2.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "style-loader": "^1.2.1",
-    "ts-loader": "^8.0.3",
-    "tsconfig-paths-webpack-plugin": "^3.3.0",
-    "typescript": "^4.0.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-node-externals": "^2.5.2",
-    "webpack-shell-plugin": "^0.5.0"
+    "typescript": "^4.0.2"
   },
   "peerDependencies": {
     "react": "^16.8",

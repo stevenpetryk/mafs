@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import classnames from "classnames"
 import * as vec from "vec-la"
 import { useDrag } from "react-use-gesture"
-import { useScaleContext } from "view/ScaleContext"
+import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../math"
 
 interface MovablePointProps {

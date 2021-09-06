@@ -1,8 +1,4 @@
-/**
- * Config file for API Extractor.  For more info, please visit: https://api-extractor.com
- */
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
   "mainEntryPointFilePath": "<projectFolder>/build/type-declarations/index.d.ts",
   "bundledPackages": [],
   "dtsRollup": {
@@ -32,5 +28,6 @@
         "logLevel": "warning"
       }
     }
-  }
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json"
 }

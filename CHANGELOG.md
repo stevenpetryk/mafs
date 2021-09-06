@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.3.2
+
+- Re-released as bundled by esbuild. Slightly smaller bundle with minified CSS. No behavioral changes.
+
 # 0.3.1
 
 - Re-released under MIT license. No code changes.

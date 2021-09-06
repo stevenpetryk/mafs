@@ -4,9 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "files": [
-    "build/**/*"
-  ],
   "scripts": {
     "start": "cd docs && yarn gatsby develop",
     "build": "rm -rf build && yarn -s build:code & yarn -s build:types",

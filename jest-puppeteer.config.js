@@ -4,6 +4,7 @@ module.exports = {
       width: 500,
       height: 500,
     },
+    args: ["--font-render-hinting=none"],
   },
   browserContext: "default",
 }

@@ -23,6 +23,15 @@ export default async function renderToImage(
                 box-sizing: border-box;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
+                font-family: sans-serif;
+                text-rendering: geometricPrecision;
+              }
+              
+              .MafsView {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                font-family: sans-serif;
+                text-rendering: geometricPrecision;
               }
 
               ${css}

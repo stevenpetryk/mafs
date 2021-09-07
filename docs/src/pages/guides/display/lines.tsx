@@ -4,6 +4,8 @@ import { Guide } from "guide"
 
 import CodeAndExample from "components/CodeAndExample"
 
+import LineSegmentExample from "guide-examples/LineSegmentExample"
+import LineSegmentExampleSource from "!raw-loader!guide-examples/LineSegmentExample"
 import LineThroughPointsExample from "guide-examples/LineThroughPointsExample"
 import LineThroughPointsExampleSource from "!raw-loader!guide-examples/LineThroughPointsExample"
 import LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
@@ -20,6 +22,10 @@ const Lines: React.VFC = () => {
   return (
     <GuidesLayout title={frontmatter.title}>
       <p>There are a few components for lines, depending on how you want to construct them.</p>
+
+      <h2>Line segment</h2>
+
+      <CodeAndExample component={<LineSegmentExample />} source={LineSegmentExampleSource} />
 
       <h2>Line through two points</h2>
 

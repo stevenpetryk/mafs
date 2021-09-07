@@ -9,6 +9,7 @@
     "dedent": "^0.7.0",
     "gatsby": "^3.13.0",
     "js-easing-functions": "^1.0.3",
+    "lodash.clamp": "^4.0.3",
     "lodash.kebabcase": "^4.1.1",
     "lodash.sumby": "^4.6.0",
     "mafs": "link:../src",

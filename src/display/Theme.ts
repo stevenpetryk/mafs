@@ -9,6 +9,7 @@ export const theme = {
   indigo: "var(--mafs-indigo)",
   violet: "var(--mafs-violet)",
   pink: "var(--mafs-pink)",
+  yellow: "var(--mafs-yellow)",
 }
 
 export interface Filled {

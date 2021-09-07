@@ -31,7 +31,8 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
 
   const points: [number, number][] = []
 
-  for (let t = tMin; t < tMax - dt / 2; t += dt) {
+  const tAlmostMax = tMax - dt / 2
+  for (let t = tMin; dt > 0 ? t < tAlmostMax : t > tAlmostMax; t += dt) {
     const [x, y] = xy(t)
     points.push([x, y])
   }
@@ -47,7 +48,7 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeDasharray={style === "dashed" ? "4,3" : undefined}
+      strokeDasharray={style === "dashed" ? "1,10" : undefined}
       transform={cssScale}
       {...svgPathProps}
       style={{

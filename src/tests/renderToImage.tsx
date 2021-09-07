@@ -14,6 +14,11 @@ export default async function renderToImage(
   const output = ReactDOMServer.renderToString(
     <>
       <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+          rel="stylesheet"
+        />
+
         <style>{`
         body { 
           margin: 0; 
@@ -23,7 +28,7 @@ export default async function renderToImage(
           -moz-osx-font-smoothing: grayscale;
         }
         .MafsView {
-          font-family: Arial !important;
+          font-family: 'Open Sans', sans-serif !important;
         }
       `}</style>
         <style>{css}</style>

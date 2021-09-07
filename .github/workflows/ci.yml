@@ -55,9 +55,6 @@ jobs:
         with:
           node-version: 12.x
           cache: "yarn"
-      - run: sudo apt install ttf-mscorefonts-installer
-      - run: sudo fc-cache -f
-      - run: fc-match Arial
       - run: yarn install
       - run: yarn test
       - name: Archive visual diffs

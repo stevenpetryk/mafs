@@ -43,6 +43,7 @@
     "jest": "^27.1.0",
     "jest-image-snapshot": "^4.5.1",
     "jest-puppeteer": "^5.0.4",
+    "jest-puppeteer-docker": "^1.4.2",
     "prettier": "^2.1.1",
     "puppeteer": "^10.2.0",
     "react": "^17.0.2",

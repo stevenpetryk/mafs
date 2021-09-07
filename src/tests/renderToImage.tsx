@@ -23,8 +23,8 @@ export default async function renderToImage(
                 box-sizing: border-box; 
               }
               
-              .MafsView text {
-                opacity: 0;
+              .MafsView {
+                font-family: sans-serif !important;
               }
 
               ${css}

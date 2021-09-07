@@ -26,8 +26,13 @@ export default async function renderToImage(
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
               }
+              
               .MafsView {
                 font-family: 'Open Sans' !important;
+              }
+              
+              .MafsView text {
+                filter: blur(1px);
               }
               
               ${css}

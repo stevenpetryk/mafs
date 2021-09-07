@@ -37,7 +37,7 @@ const MafsView: React.FC<MafsViewProps> = ({
   const [visible, setVisible] = useState(ssr ? true : false)
   const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
 
-  const { ref, width = 1 } = useResizeObserver<HTMLDivElement>()
+  const { ref, width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>()
 
   useEffect(() => {
     setVisible(true)

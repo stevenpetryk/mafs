@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "outDir": "./build/",
     "noImplicitAny": true,
     "module": "es6",

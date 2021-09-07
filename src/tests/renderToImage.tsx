@@ -1,9 +1,9 @@
 import React from "react"
 import ReactDOMServer from "react-dom/server"
-
 import fs from "fs"
 import path from "path"
-import { CartesianCoordinates, Mafs } from "."
+
+import { Mafs, CartesianCoordinates } from ".."
 
 const css = fs.readFileSync(path.join(process.cwd(), "src/index.css")).toString()
 

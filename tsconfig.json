@@ -15,5 +15,6 @@
     "moduleResolution": "node",
     "checkJs": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/tests/**/*", "src/**/*.test.*"]
 }

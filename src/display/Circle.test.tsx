@@ -1,6 +1,6 @@
 import React from "react"
 import Circle from "./Circle"
-import renderToImage from "../renderToImage"
+import renderToImage from "../tests/renderToImage"
 
 describe("<Circle />", () => {
   it("Renders", async () => {

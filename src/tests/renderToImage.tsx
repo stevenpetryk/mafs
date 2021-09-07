@@ -20,10 +20,14 @@ export default async function renderToImage(
           box-sizing: border-box; 
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          font-family: "Arial", sans-serif;
         }
       `}</style>
       <style>{css}</style>
+      <style>{`
+        .MafsView {
+          font-family: Arial !important;
+        }
+      `}</style>
 
       <Mafs
         ssr={true}

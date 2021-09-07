@@ -8,6 +8,7 @@ describe("<FunctionGraph.OfX />", () => {
       await renderToImage(
         <>
           <FunctionGraph.OfX y={(x) => (x - 5) ** 2} />
+          <FunctionGraph.OfX y={(x) => 5 - Math.sin(x)} style="dashed" weight={5} />
           <FunctionGraph.OfX y={(x) => 5 - (x - 5) ** 2} color="red" />
           <FunctionGraph.OfX y={(x) => 5 + Math.sin(x)} color="var(--mafs-blue)" />
         </>

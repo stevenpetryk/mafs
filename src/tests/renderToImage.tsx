@@ -17,14 +17,12 @@ export default async function renderToImage(
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              body { 
-                margin: 0; 
-                padding: 0; 
-                box-sizing: border-box; 
-              }
-              
-              .MafsView {
-                font-family: sans-serif !important;
+              body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
               }
 
               ${css}

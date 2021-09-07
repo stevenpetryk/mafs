@@ -22,10 +22,6 @@ export default async function renderToImage(
                 padding: 0;
                 box-sizing: border-box;
               }
-              
-              .MafsView text {
-                opacity: 0;
-              }
 
               ${css}
             `,

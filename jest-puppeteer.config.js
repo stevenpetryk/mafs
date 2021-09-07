@@ -1,4 +1,9 @@
+const getConfig = require("jest-puppeteer-docker/lib/config")
+
+const baseConfig = getConfig()
+
 module.exports = {
+  ...baseConfig,
   launch: {
     defaultViewport: {
       width: 500,

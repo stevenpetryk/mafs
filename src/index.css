@@ -3,7 +3,7 @@
   background: var(--mafs-bg);
   overflow: hidden;
   user-select: none;
-  font-family: sans-serif;
+  font-family: inherit;
   font-variant-numeric: tabular-nums;
 
   --mafs-bg: black;

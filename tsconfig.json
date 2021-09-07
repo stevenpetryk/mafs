@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "outDir": "./build/",
     "noImplicitAny": true,
     "module": "es6",
@@ -14,5 +15,6 @@
     "moduleResolution": "node",
     "checkJs": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/tests/**/*", "src/**/*.test.*"]
 }

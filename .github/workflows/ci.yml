@@ -46,3 +46,23 @@ jobs:
           cache: "yarn"
       - run: yarn install
       - run: yarn build:docs
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+          cache: "yarn"
+      - run: yarn install
+      - run: yarn test
+        env:
+          CI: true
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+      - name: Archive visual diffs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: visual-diffs
+          path: src/**/__diff_output__/**/*.png

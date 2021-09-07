@@ -57,3 +57,9 @@ jobs:
           cache: "yarn"
       - run: yarn install
       - run: yarn test
+      - name: Archive visual diffs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: visual-diffs
+          path: src/**/__diff_output__/**/*.png

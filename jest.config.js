@@ -8,7 +8,9 @@ module.exports = {
   setupFilesAfterEnv: [...puppeteerPreset.setupFilesAfterEnv, "./jest.setup.js"],
   globals: {
     "ts-jest": {
-      babelConfig: "./babel.config.js",
+      babelConfig: {
+        plugins: ["@babel/plugin-proposal-optional-chaining"],
+      },
     },
   },
 }

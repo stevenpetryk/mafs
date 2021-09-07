@@ -14,24 +14,26 @@ export default async function renderToImage(
   const output = ReactDOMServer.renderToString(
     <>
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-          rel="stylesheet"
-        />
-
-        <style>{`
-        body { 
-          margin: 0; 
-          padding: 0; 
-          box-sizing: border-box; 
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-        .MafsView {
-          font-family: 'Open Sans', sans-serif !important;
-        }
-      `}</style>
-        <style>{css}</style>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @import url(https://fonts.googleapis.com/css2?family=Open+Sans);
+            
+              body { 
+                margin: 0; 
+                padding: 0; 
+                box-sizing: border-box; 
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+              }
+              .MafsView {
+                font-family: 'Open Sans' !important;
+              }
+              
+              ${css}
+            `,
+          }}
+        ></style>
       </head>
 
       <body>
@@ -51,5 +53,6 @@ export default async function renderToImage(
   )
 
   await page.setContent(output)
+  await page.evaluateHandle("document.fonts.ready")
   return await page.screenshot()
 }

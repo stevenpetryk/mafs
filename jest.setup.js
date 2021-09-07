@@ -5,6 +5,6 @@ const { toMatchImageSnapshot, configureToMatchImageSnapshot } = require("jest-im
 expect.extend({ toMatchImageSnapshot })
 
 configureToMatchImageSnapshot({
-  failureThreshold: 0.01,
+  failureThreshold: 0.005,
   failureThresholdType: "percent",
 })

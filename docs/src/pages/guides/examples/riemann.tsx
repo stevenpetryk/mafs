@@ -8,7 +8,7 @@ import RiemannSource from "!raw-loader!guide-examples/examples/Riemann.tsx"
 
 export const frontmatter: Guide = {
   title: "Riemann sums",
-  order: 0,
+  order: 1,
 }
 
 const RiemannPage: React.VFC = () => (

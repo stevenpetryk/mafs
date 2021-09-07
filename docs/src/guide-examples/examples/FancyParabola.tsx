@@ -39,7 +39,3 @@ export default function FancyParabola() {
     </Mafs>
   )
 }
-
-// (a/2 + b/2 - a) * (a/2 + b/2 - b)
-// 1/2 (-a + b)(a - b)
-// 1/2 (2ab -a^2 - b^2)

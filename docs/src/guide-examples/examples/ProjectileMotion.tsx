@@ -104,6 +104,7 @@ export default function ProjectileMotion() {
         {initialVelocity.element}
       </Mafs>
 
+      {/* These classnames are part of the Mafs docs website—they won't work for you. */}
       <div className="p-4 bg-black border-t border-gray-900 space-x-4">
         <button
           className="bg-gray-200 font-bold px-4 py-1 rounded-sm"

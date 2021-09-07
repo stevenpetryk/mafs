@@ -8,7 +8,7 @@ import ProjectileMotionSource from "!raw-loader!guide-examples/examples/Projecti
 
 export const frontmatter: Guide = {
   title: "Projectile motion",
-  order: 1,
+  order: 3,
 }
 
 const ProjectilePage: React.VFC = () => (

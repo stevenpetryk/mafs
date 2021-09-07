@@ -13,7 +13,16 @@ export default async function renderToImage(
 ): Promise<Buffer | string | void> {
   const output = ReactDOMServer.renderToString(
     <>
-      <style>{`body { margin: 0; padding: 0; box-sizing: border-box; }`}</style>
+      <style>{`
+        body { 
+          margin: 0; 
+          padding: 0; 
+          box-sizing: border-box; 
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          font-family: "Arial", sans-serif;
+        }
+      `}</style>
       <style>{css}</style>
 
       <Mafs

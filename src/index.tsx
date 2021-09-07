@@ -12,6 +12,7 @@ export {
   PointAngleProps,
   PointSlopeProps,
   ThroughPointsProps,
+  SegmentProps,
 } from "./display/Line"
 export { default as Circle, CircleProps } from "./display/Circle"
 export { default as Ellipse, EllipseProps } from "./display/Ellipse"

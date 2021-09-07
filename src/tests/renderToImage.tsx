@@ -13,7 +13,8 @@ export default async function renderToImage(
 ): Promise<Buffer | string | void> {
   const output = ReactDOMServer.renderToString(
     <>
-      <style>{`
+      <head>
+        <style>{`
         body { 
           margin: 0; 
           padding: 0; 
@@ -21,25 +22,26 @@ export default async function renderToImage(
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
-      `}</style>
-      <style>{css}</style>
-      <style>{`
         .MafsView {
           font-family: Arial !important;
         }
       `}</style>
+        <style>{css}</style>
+      </head>
 
-      <Mafs
-        ssr={true}
-        width={500}
-        height={500}
-        xAxisExtent={[-0.5, 10.5]}
-        yAxisExtent={[-0.5, 10.5]}
-        pan={false}
-      >
-        {coordinates ? <CartesianCoordinates /> : null}
-        {children}
-      </Mafs>
+      <body>
+        <Mafs
+          ssr={true}
+          width={500}
+          height={500}
+          xAxisExtent={[-0.5, 10.5]}
+          yAxisExtent={[-0.5, 10.5]}
+          pan={false}
+        >
+          {coordinates ? <CartesianCoordinates /> : null}
+          {children}
+        </Mafs>
+      </body>
     </>
   )
 

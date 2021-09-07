@@ -18,23 +18,17 @@ export default async function renderToImage(
           dangerouslySetInnerHTML={{
             __html: `
               @import url(https://fonts.googleapis.com/css2?family=Open+Sans);
-            
+
               body { 
                 margin: 0; 
                 padding: 0; 
                 box-sizing: border-box; 
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
               }
-              
+
               .MafsView {
                 font-family: 'Open Sans' !important;
               }
-              
-              .MafsView text {
-                filter: blur(1px);
-              }
-              
+
               ${css}
             `,
           }}

@@ -1,25 +1,31 @@
 # Changelog
 
-# 0.4.0
+## 0.4.1
 
-## New features
+### Bug fixes
+
+- The TypeScript types for `VectorField` no longer (erroneously) require the `xyOpacity` and `opacityStep` props.
+
+## 0.4.0
+
+### New features
 
 - Added [`Line.Segment`](https://mafs.dev/guides/display/lines/)
 - Added [Bezier curve example](https://mafs.dev/guides/examples/bezier-curves/)
 
-## Bug fixes
+### Bug fixes
 
 - `FunctionGraph.Parametric` now supports decreasing values of `t`, enabling functions to be evaluated "backwards".
 
-## Changes
+### Changes
 
 - Dashed lines are now dashier (the dash array was changed from `4,3` to `1,10`).
 
-# 0.3.2
+## 0.3.2
 
 - Re-released as bundled by esbuild. Slightly smaller bundle with minified CSS. No behavioral changes.
 
-# 0.3.1
+## 0.3.1
 
 - Re-released under MIT license. No code changes.
 

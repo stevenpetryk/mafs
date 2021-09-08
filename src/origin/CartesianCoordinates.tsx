@@ -11,6 +11,7 @@ export type LabelMaker = (value: number) => number | string
 let incrementer = 0
 
 export type AxisOptions = {
+  foo?: string
   axis: boolean
   lines: number | false
   subdivisions: number | false

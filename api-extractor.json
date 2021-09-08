@@ -6,7 +6,10 @@
     "untrimmedFilePath": "<projectFolder>/build/index.d.ts"
   },
   "apiReport": {
-    "enabled": false
+    "enabled": true,
+    "reportFileName": "mafs.api.md",
+    "reportFolder": ".api-report",
+    "reportTempFolder": ".api-report/temp"
   },
   "docModel": {
     "enabled": false

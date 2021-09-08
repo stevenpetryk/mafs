@@ -2,19 +2,18 @@ import clamp from "lodash.clamp"
 import React from "react"
 import * as vec from "vec-la"
 
+import { Vector2 } from "../math"
 import { usePaneContext } from "../view/PaneManager"
 import { useScaleContext } from "../view/ScaleContext"
 import { theme } from "./Theme"
 
 export interface VectorFieldProps {
   xy: (x: number, y: number) => [number, number]
-  xyOpacity: (x: number, y: number) => number
+  xyOpacity?: (x: number, y: number) => number
   step: number
-  opacityStep: number
+  opacityStep?: number
   color?: string
 }
-
-export type Vector = [number, number]
 
 const xyOpacityDefault = () => 1
 
@@ -38,7 +37,7 @@ const VectorField: React.VFC<VectorFieldProps> = ({
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
       for (let y = Math.floor(yMin); y <= Math.ceil(yMax); y += step) {
-        const tail: Vector = [x, y]
+        const tail: Vector2 = [x, y]
         const trueOffset = xy(x, y)
         const trueMag = vec.mag(trueOffset)
         const scaledOffset = vec.scale(vec.norm(trueOffset), Math.min(trueMag, step * 0.75))

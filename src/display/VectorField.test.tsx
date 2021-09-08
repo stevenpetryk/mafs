@@ -1,5 +1,5 @@
 import React from "react"
-import { VectorField } from ".."
+import { Theme, VectorField } from ".."
 import renderToImage from "../tests/renderToImage"
 
 describe("<VectorField />", () => {
@@ -19,6 +19,7 @@ describe("<VectorField />", () => {
           xy={() => [0.5, 0.5]}
           step={1}
           xyOpacity={(x, y) => Math.min(Math.sqrt(x ** 2 + y ** 2) / 10, 1)}
+          color={Theme.red}
         />
       )
     ).toMatchImageSnapshot()

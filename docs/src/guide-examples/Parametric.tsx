@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   Mafs,
   CartesianCoordinates,
@@ -7,17 +7,25 @@ import {
 } from "mafs"
 
 export default function Parametric() {
+  const [a, setA] = useState(0)
+
   return (
-    <Mafs height={300} xAxisExtent={[-8, 8]}>
-      <CartesianCoordinates />
-      <FunctionGraph.Parametric
-        xy={(t) => [
-          (t / 4) * Math.cos(t * 2 * Math.PI),
-          (t / 4) * Math.sin(t * 2 * Math.PI),
-        ]}
-        t={[0, 8]}
-        color={Theme.blue}
+    <>
+      <Mafs height={300} xAxisExtent={[-8, 8]}>
+        <CartesianCoordinates />
+        <FunctionGraph.Parametric
+          xy={(t) => [t, Math.sin(t * a)]}
+          t={[-10, 10]}
+          color={Theme.blue}
+        />
+      </Mafs>
+      <input
+        type="range"
+        min={0}
+        max={50}
+        value={a}
+        onChange={(event) => setA(+event.target.value)}
       />
-    </Mafs>
+    </>
   )
 }

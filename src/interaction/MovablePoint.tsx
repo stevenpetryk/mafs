@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import classnames from "classnames"
 import * as vec from "vec-la"
 import { useDrag } from "react-use-gesture"
 import { useScaleContext } from "../view/ScaleContext"
@@ -67,7 +66,7 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
         fill={color}
         stroke={color}
         strokeOpacity={0.25}
-        className={classnames("draggable", { dragging })}
+        className={`draggable ${dragging ? "dragging" : ""}`}
         onKeyDown={handleKeyDown}
         tabIndex={0}
       ></circle>

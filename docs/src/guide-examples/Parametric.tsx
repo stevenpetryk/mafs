@@ -22,7 +22,7 @@ export default function Parametric() {
       <input
         type="range"
         min={0}
-        max={50}
+        max={100}
         value={a}
         onChange={(event) => setA(+event.target.value)}
       />

@@ -44,36 +44,47 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
   const points = useMemo(() => {
     const points = new SortedArrayMap<number, Vector2>()
 
+    const minSamples = 2000
+    const dt = (tMax - tMin) / minSamples
+
     points.set(tMin, xy(tMin))
     points.set(tMax, xy(tMax))
 
     const areaThreshold = 0.5
 
     function tesselate(min: number, mid: number, max: number, depth = 0) {
-      points.set(mid, xy(mid))
+      if (!points.get(min)) {
+        return
+      }
       const area = triangleArea(points.get(min), points.get(mid), points.get(max))
-      if (area > areaThreshold || depth < 8) {
+      if (area > areaThreshold && depth < 8) {
         const leftMid = (mid + min) / 2
         const rightMid = (max + mid) / 2
+        points.set(leftMid, xy(leftMid))
+        points.set(rightMid, xy(rightMid))
         tesselate(min, leftMid, mid, depth + 1)
         tesselate(mid, rightMid, max, depth + 1)
       }
     }
+    for (let i = tMin + dt / 2, j = 0; i <= tMax - dt / 2; i += dt, j++) {
+      points.set(i, xy(i))
 
-    tesselate(tMin, (tMin + tMax) / 2, tMax)
-
-    const pointsArray = [...points.values()]
-    if (tMin > tMax) {
-      pointsArray.reverse()
+      if (j % 3 == 0 && i > tMin + dt + dt + dt) {
+        tesselate(i - dt - dt, i - dt, i)
+      }
     }
-    return pointsArray
-  }, [tMin, tMax, xy, triangleArea])
 
-  const pathDescriptor = "M " + points.map((p) => p.join(" ")).join(" L ")
+    let pathDescriptor = "M "
+    for (const point of points.values()) {
+      pathDescriptor += point.join(",") + " L "
+    }
+
+    return pathDescriptor.substring(0, pathDescriptor.length - 3)
+  }, [tMin, tMax, triangleArea, xy])
 
   return (
     <path
-      d={pathDescriptor}
+      d={points}
       strokeWidth={weight}
       tabIndex={0}
       fill="none"

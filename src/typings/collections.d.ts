@@ -4,5 +4,6 @@ declare module "collections/sorted-array-map" {
     set(key: K, value: V): void
     values(): V[]
     entries(): [K, V][]
+    map<T>(callback: ([key, value]: [K, V]) => T): T[]
   }
 }

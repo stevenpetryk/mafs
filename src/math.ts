@@ -4,7 +4,7 @@ export type Vector2 = [x: number, y: number]
 export type Interval = [min: number, max: number]
 
 /** Inverts a 3x3 matrix */
-export function matrixInvert(matrix: Matrix) {
+export function matrixInvert(matrix: Matrix): Matrix | null {
   const a = matrix
   const out: Matrix = new Array(9) as Matrix
 

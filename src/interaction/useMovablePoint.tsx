@@ -3,8 +3,8 @@ import { useMemo, useState } from "react"
 import MovablePoint from "./MovablePoint"
 import * as vec from "vec-la"
 import { theme } from "../display/Theme"
-import invert from "gl-matrix-invert"
-import { Vector2 } from "../math"
+import { matrixInvert, Vector2 } from "../math"
+import invariant from "tiny-invariant"
 
 const identity = vec.matrixBuilder().get()
 
@@ -83,9 +83,12 @@ function useMovablePoint(
 }
 
 function getInverseTransform(transform: vec.Matrix) {
-  const inverseTransform = new Array(9) as vec.Matrix
-  invert(inverseTransform, transform)
-  return inverseTransform
+  const invert = matrixInvert(transform)
+  invariant(
+    invert !== null,
+    "Could not invert transform matrix. Your movable point's constraint function might be degenerative (mapping 2D space to a line)."
+  )
+  return invert
 }
 
 export default useMovablePoint

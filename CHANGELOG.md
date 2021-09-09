@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.2
+
+### Bug fixes
+
+- Not really a "bug", but Mafs incorrectly declared too strict of a dependency on React 16.8, causing a peerdependency warning when using React 17.
+
+### Improvements
+
+- Mafs no longer has a runtime dependency on gl-matrix-invert, gl-mat2, gl-mat3, or gl-mat4.
+
 ## 0.4.1
 
 ### Bug fixes

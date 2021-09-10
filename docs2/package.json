@@ -1,0 +1,29 @@
+{
+  "name": "mafs-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "js-easing-functions": "^1.0.3",
+    "lodash.range": "^3.2.0",
+    "mafs": "link:../src",
+    "next": "11.1.2",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom"
+  },
+  "devDependencies": {
+    "@types/lodash.range": "^3.2.6",
+    "@types/react": "17.0.20",
+    "autoprefixer": "^10.3.4",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.14",
+    "typescript": "4.4.2"
+  }
+}

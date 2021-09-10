@@ -1,0 +1,75 @@
+*,
+*:before,
+*:after {
+  position: relative;
+}
+
+body {
+  @apply text-gray-700;
+  @apply antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-semibold;
+  @apply text-gray-900;
+}
+
+h1 .font-display,
+h2 .font-display,
+h3 .font-display,
+h4 .font-display,
+h5 .font-display,
+h6 .font-display {
+  @apply font-normal;
+}
+
+h1 {
+  @apply text-3xl;
+}
+h2 {
+  @apply text-2xl;
+}
+h3 {
+  @apply text-xl;
+}
+
+p code,
+ul code {
+  @apply rounded-sm bg-gray-200 p-1 text-sm;
+}
+
+:focus {
+  /* outline-color: rgba(66, 153, 225, 0.5);
+  outline-width: 3px; */
+}
+
+.prose {
+  @apply text-gray-800;
+  @apply leading-7;
+}
+
+.prose > h2,
+.prose > h3,
+.prose > h4 {
+  margin-top: 3rem !important;
+}
+
+.prose a {
+  @apply text-blue-700 underline;
+}
+
+.prose a:hover {
+  @apply text-blue-900 no-underline;
+}
+
+.prose ul {
+  @apply list-disc pl-8;
+}
+.prose ul > * + * {
+  margin-top: 0.5em;
+}

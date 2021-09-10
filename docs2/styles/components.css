@@ -1,0 +1,36 @@
+.outline-offset-6 {
+  outline-offset: 6px;
+}
+
+.active-sidebar-link:after {
+  display: block;
+  content: "";
+  position: absolute;
+  right: calc(100% + 0.5em);
+  top: 50%;
+  transform: translateY(-50%);
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  @apply bg-indigo-400;
+}
+
+.syntax-badge {
+  @apply absolute text-gray-400 font-bold bg-gray-800 top-0 right-0 px-3 tracking-wider text-xs rounded-bl-md;
+}
+
+footer a {
+  @apply underline;
+}
+
+footer a:hover {
+  @apply no-underline;
+}
+
+a.button {
+  @apply outline-none rounded-md py-4 px-6 no-underline bg-blue-600 text-white;
+}
+
+a.button:hover {
+  @apply text-white bg-blue-500;
+}

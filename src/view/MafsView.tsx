@@ -3,7 +3,7 @@ import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
 import PaneManager from "./PaneManager"
 import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
-import round from "lodash.round"
+import { round } from "../math"
 import * as vec from "vec-la"
 
 import { useGesture } from "react-use-gesture"

@@ -1,5 +1,5 @@
-import range from "lodash.range"
 import React from "react"
+import { range } from "../math"
 import { useScaleContext } from "../view/ScaleContext"
 
 interface GridPatternProps {

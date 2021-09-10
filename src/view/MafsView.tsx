@@ -3,12 +3,11 @@ import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
 import PaneManager from "./PaneManager"
 import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
-import round from "lodash.round"
 import * as vec from "vec-la"
 
 import { useGesture } from "react-use-gesture"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
-import { Interval, Vector2 } from "../math"
+import { round, Interval, Vector2 } from "../math"
 
 export interface MafsViewProps {
   width?: number | string

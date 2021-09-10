@@ -21,16 +21,10 @@
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.14.5",
     "@microsoft/api-extractor": "^7.18.7",
-    "@types/classnames": "^2.2.10",
     "@types/expect-puppeteer": "^4.4.6",
     "@types/jest": "^27.0.1",
     "@types/jest-environment-puppeteer": "^4.4.1",
     "@types/jest-image-snapshot": "^4.3.1",
-    "@types/lodash.clamp": "^4.0.6",
-    "@types/lodash.memoize": "^4.1.6",
-    "@types/lodash.range": "^3.2.6",
-    "@types/lodash.round": "^4.0.6",
-    "@types/lodash.sumby": "^4.6.6",
     "@types/node": "^14",
     "@types/puppeteer": "^5.4.4",
     "@types/react": "^17.0.19",
@@ -49,7 +43,6 @@
     "puppeteer": "^10.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "resize-observer-polyfill": "^1.5.1",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
   },
@@ -58,10 +51,8 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
-    "lodash.clamp": "^4.0.3",
-    "lodash.range": "^3.2.0",
-    "lodash.round": "^4.0.4",
     "react-use-gesture": "^7.0.16",
+    "resize-observer-polyfill": "^1.5.1",
     "tiny-invariant": "^1.1.0",
     "use-resize-observer": "^6.1.0",
     "vec-la": "^1.5.0"

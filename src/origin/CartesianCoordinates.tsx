@@ -1,8 +1,7 @@
 import React, { useMemo } from "react"
 import GridPattern from "./GridPattern"
-import range from "lodash.range"
+import { range, round } from "../math"
 import { usePaneContext } from "../view/PaneManager"
-import round from "lodash.round"
 import { useScaleContext } from "../view/ScaleContext"
 
 export type LabelMaker = (value: number) => number | string

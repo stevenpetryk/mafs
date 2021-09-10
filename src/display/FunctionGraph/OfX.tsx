@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react"
-import round from "lodash.round"
+import { round } from "../../math"
 import { usePaneContext } from "../../view/PaneManager"
 import { Stroked } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"

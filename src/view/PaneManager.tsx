@@ -1,7 +1,6 @@
 import React, { useContext, useMemo } from "react"
 import { useCoordinateContext } from "./CoordinateContext"
-import range from "lodash.range"
-import { Interval } from "../math"
+import { range, Interval } from "../math"
 
 interface PaneContextShape {
   xPanes: Interval[]

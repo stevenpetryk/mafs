@@ -16,6 +16,7 @@
     "start": "cd docs && yarn install && yarn gatsby develop",
     "build": "rm -rf build && parcel build && cp src/index.css build",
     "build:docs": "cd docs && yarn install && yarn gatsby build",
+    "types:breakingupdate": "yarn tsc && yarn api-extractor run --local",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

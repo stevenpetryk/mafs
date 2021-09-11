@@ -7,8 +7,20 @@ export interface ParametricProps extends Stroked {
   xy: (t: number) => Vector2
   t: [number, number]
   color?: string
-  minimumSamplingDepth?: number
   style?: "solid" | "dashed"
+  /**
+   * How deep the interpolation algorithm will go in terms of subdividing the function to find
+   * points that minimize the jaggedness of the function.
+   *
+   * Most functions will not need to override this. It's mainly to support functions that are
+   * very jagged.
+   *
+   * This value affects performance exponentially, O(2^n). The default value is 8, meaning functions
+   * will be subdivided into at least 256 points. For any three consecutive points, if the area of
+   * the triangle formed by those points is larger than 0.1 square pixels, the points will be
+   * further, recursively subdivided.
+   */
+  minimumSamplingDepth?: number
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 

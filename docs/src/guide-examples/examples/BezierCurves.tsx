@@ -69,12 +69,12 @@ export default function BezierCurves() {
   const { time, start } = useStopwatch({
     endTime: duration,
   })
-  // useEffect(() => {
-  //   setTimeout(() => start(), 500)
-  // }, [start])
-  // useEffect(() => {
-  //   setT(easeInOutCubic(time, 0, 0.75, duration))
-  // }, [time])
+  useEffect(() => {
+    setTimeout(() => start(), 500)
+  }, [start])
+  useEffect(() => {
+    setT(easeInOutCubic(time, 0, 0.75, duration))
+  }, [time])
 
   function drawLineSegments(
     pointPath: Vector2[],
@@ -142,9 +142,8 @@ export default function BezierCurves() {
             )
           }
         />
-
         {/* Show remaining bezier with dashed line  */}
-        {/* <FunctionGraph.Parametric
+        <FunctionGraph.Parametric
           // Iterate backwards so that dashes don't move
           t={[1, t]}
           weight={3}
@@ -160,7 +159,7 @@ export default function BezierCurves() {
               t
             )
           }
-        /> */}
+        />
 
         {drawPoints([lerpBezier], Theme.foreground)}
 

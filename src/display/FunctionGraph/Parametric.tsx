@@ -1,9 +1,7 @@
-import React, { useCallback, useMemo } from "react"
-import { useScaleContext } from "../../view/ScaleContext"
+import React, { useMemo } from "react"
+import { triangleArea, Vector2 } from "../../math"
 import { Stroked } from "../../display/Theme"
-import SortedArrayMap from "collections/sorted-array-map"
-import { Theme, Vector2 } from "../.."
-import Point from "../Point"
+import { useScaleContext } from "../../view/ScaleContext"
 
 export interface ParametricProps extends Stroked {
   xy: (t: number) => Vector2
@@ -25,68 +23,46 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
 }) => {
   const { cssScale, scaleX, scaleY } = useScaleContext()
 
-  const triangleArea = useCallback(
-    (a: Vector2, b: Vector2, c: Vector2) => {
-      const totalScale = scaleX(1) * scaleY(1) * -1
-      const ax = a[0]
-      const ay = a[1]
-      const bx = b[0]
-      const by = b[1]
-      const cx = c[0]
-      const cy = c[1]
-      return totalScale * Math.abs((ax * (by - cy) + bx * (cy - ay) + cx * (ay - by)) / 2)
-    },
-    [scaleX, scaleY]
-  )
-
   const [tMin, tMax] = t
+  const areaThreshold = -0.1 / (scaleX(1) * scaleY(1))
 
-  const points = useMemo(() => {
-    const points = new SortedArrayMap<number, Vector2>()
-
-    const minSamples = 2000
-    const dt = (tMax - tMin) / minSamples
-
-    points.set(tMin, xy(tMin))
-    points.set(tMax, xy(tMax))
-
-    const areaThreshold = 0.5
-
-    function tesselate(min: number, mid: number, max: number, depth = 0) {
-      if (!points.get(min)) {
-        return
-      }
-      const area = triangleArea(points.get(min), points.get(mid), points.get(max))
-      if (area > areaThreshold && depth < 8) {
-        const leftMid = (mid + min) / 2
-        const rightMid = (max + mid) / 2
-        points.set(leftMid, xy(leftMid))
-        points.set(rightMid, xy(rightMid))
-        tesselate(min, leftMid, mid, depth + 1)
-        tesselate(mid, rightMid, max, depth + 1)
-      }
-    }
-    for (let i = tMin + dt / 2, j = 0; i <= tMax - dt / 2; i += dt, j++) {
-      points.set(i, xy(i))
-
-      if (j % 3 == 0 && i > tMin + dt + dt + dt) {
-        tesselate(i - dt - dt, i - dt, i)
-      }
-    }
-
+  const svgPath = useMemo(() => {
     let pathDescriptor = "M "
-    for (const point of points.values()) {
-      pathDescriptor += point.join(",") + " L "
+
+    function smartSmooth(
+      min: number,
+      max: number,
+      pushLeft: boolean,
+      pushRight: boolean,
+      depth = 0
+    ) {
+      const mid = (min + max) / 2
+
+      const xyMin = xy(min)
+      const xyMid = xy(mid)
+      const xyMax = xy(max)
+
+      const area = triangleArea(xyMin, xyMid, xyMax)
+
+      if (depth < 8 || area > areaThreshold) {
+        smartSmooth(min, mid, true, false, depth + 1)
+        smartSmooth(mid, max, false, true, depth + 1)
+      } else {
+        if (pushLeft) pathDescriptor += `${xyMin[0]} ${xyMin[1]} L `
+        pathDescriptor += `${xyMid[0]} ${xyMid[1]} L `
+        if (pushRight) pathDescriptor += `${xyMax[0]} ${xyMax[1]} L `
+      }
     }
+
+    smartSmooth(tMin, tMax, true, true)
 
     return pathDescriptor.substring(0, pathDescriptor.length - 3)
-  }, [tMin, tMax, triangleArea, xy])
+  }, [tMin, tMax, xy, areaThreshold])
 
   return (
     <path
-      d={points}
+      d={svgPath}
       strokeWidth={weight}
-      tabIndex={0}
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"

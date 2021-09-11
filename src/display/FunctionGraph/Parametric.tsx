@@ -7,7 +7,7 @@ export interface ParametricProps extends Stroked {
   xy: (t: number) => Vector2
   t: [number, number]
   color?: string
-  samples?: number
+  minimumSamplingDepth?: number
   style?: "solid" | "dashed"
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
@@ -19,6 +19,7 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
   style = "solid",
   weight = 2,
   opacity = 1.0,
+  minimumSamplingDepth = 8,
   svgPathProps = {},
 }) => {
   const { cssScale, scaleX, scaleY } = useScaleContext()
@@ -44,7 +45,7 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
 
       const area = triangleArea(xyMin, xyMid, xyMax)
 
-      if (depth < 8 || area > areaThreshold) {
+      if (depth < minimumSamplingDepth || area > areaThreshold) {
         smartSmooth(min, mid, true, false, depth + 1)
         smartSmooth(mid, max, false, true, depth + 1)
       } else {

@@ -1,4 +1,10 @@
 {
-  "build": { "dockerfile": "Dockerfile" },
-  "appPort": 8000
+  "name": "Node.js",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": { "VARIANT": "16" }
+  },
+  "settings": {},
+  "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "Orta.vscode-jest"],
+  "remoteUser": "node"
 }

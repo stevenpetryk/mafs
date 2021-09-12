@@ -1,0 +1,4 @@
+{
+  "build": { "dockerfile": "Dockerfile" },
+  "appPort": 8000
+}

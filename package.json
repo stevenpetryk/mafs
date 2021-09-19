@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "cd docs && yarn install && yarn gatsby develop",
+    "start": "cd docs2 && yarn install && yarn next dev",
     "build": "rm -rf build && yarn -s build:code & yarn -s build:types",
     "build:code": "node esbuild.js",
     "build:types": "yarn tsc && yarn api-extractor run && rm -rf build/type-declarations",
@@ -41,6 +41,7 @@
     "jest-puppeteer": "^5.0.4",
     "prettier": "^2.1.1",
     "puppeteer": "^10.2.0",
+    "raw-loader": "^4.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "ts-jest": "^27.0.5",
@@ -51,6 +52,8 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
+    "react-highlight.js": "^1.0.7",
     "react-use-gesture": "^7.0.16",
     "resize-observer-polyfill": "^1.5.1",
     "tiny-invariant": "^1.1.0",

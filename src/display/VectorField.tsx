@@ -16,7 +16,7 @@ export interface VectorFieldProps {
 
 const xyOpacityDefault = () => 1
 
-const VectorField: React.VFC<VectorFieldProps> = ({
+const VectorField: React.FC<VectorFieldProps> = ({
   xy,
   step = 1,
   xyOpacity = xyOpacityDefault,

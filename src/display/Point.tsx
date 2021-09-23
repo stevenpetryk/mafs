@@ -10,7 +10,7 @@ export interface PointProps {
   svgCircleProps?: React.SVGProps<SVGCircleElement>
 }
 
-const Point: React.VFC<PointProps> = ({
+const Point: React.FunctionComponent<PointProps> = ({
   x,
   y,
   color = theme.foreground,

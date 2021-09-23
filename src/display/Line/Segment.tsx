@@ -9,7 +9,7 @@ export interface SegmentProps extends Stroked {
   point2: Vector2
 }
 
-const Segment: React.VFC<SegmentProps> = ({
+const Segment: React.FC<SegmentProps> = ({
   point1,
   point2,
   color = theme.foreground,

@@ -18,7 +18,7 @@ interface GridPatternProps {
  * This is a bit more complex than just rendering lines, but is way more performant, since the
  * browser handles making the pattern repeat for us.
  */
-const GridPattern: React.VFC<GridPatternProps> = ({
+const GridPattern: React.FC<GridPatternProps> = ({
   id,
   xLines,
   yLines,

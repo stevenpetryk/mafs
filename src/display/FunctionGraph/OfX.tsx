@@ -10,7 +10,7 @@ export interface OfXProps extends Stroked {
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
-const OfX: React.VFC<OfXProps> = ({
+const OfX: React.FC<OfXProps> = ({
   y,
   color,
   quality = "low",

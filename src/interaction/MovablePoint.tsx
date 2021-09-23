@@ -11,7 +11,7 @@ interface MovablePointProps {
   color?: string
 }
 
-const MovablePoint: React.VFC<MovablePointProps> = ({
+const MovablePoint: React.FC<MovablePointProps> = ({
   x,
   y,
   onMovement,

@@ -1,5 +1,6 @@
 /* eslint-disable */
 const path = require("path")
+const ReactDocgenTypescriptPlugin = require("react-docgen-typescript-plugin").default
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -13,5 +14,13 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         path: require.resolve("path-browserify"),
       },
     },
+    plugins: [
+      new ReactDocgenTypescriptPlugin({
+        include: [
+          path.resolve(__dirname, "../src/**/*.ts"),
+          path.resolve(__dirname, "../src/**/*.tsx"),
+        ],
+      }),
+    ],
   })
 }

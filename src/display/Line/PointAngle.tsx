@@ -9,7 +9,7 @@ export interface PointAngleProps extends Stroked {
   angle: number
 }
 
-const PointAngle: React.VFC<PointAngleProps> = ({ point, angle, ...rest }) => {
+const PointAngle: React.FC<PointAngleProps> = ({ point, angle, ...rest }) => {
   const point2 = vec.add(point, vec.rotate([1, 0], angle))
   return <ThroughPoints point1={point} point2={point2} {...rest} />
 }

@@ -28,7 +28,7 @@ export interface CartesianCoordinatesProps {
   subdivisions?: number | false
 }
 
-const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
+const CartesianCoordinates: React.FC<CartesianCoordinatesProps> = ({
   xAxis: xAxisOverrides,
   yAxis: yAxisOverrides,
   subdivisions = false,
@@ -85,7 +85,7 @@ export interface LabelsProps {
   separation: number
   labelMaker: LabelMaker
 }
-const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
+const XLabels: React.FC<LabelsProps> = ({ separation, labelMaker }) => {
   const { scaleX } = useScaleContext()
   const { xPanes } = usePaneContext()
   const xs = snappedRange(

@@ -9,7 +9,7 @@ export interface ThroughPointsProps extends Stroked {
   point2: Vector2
 }
 
-const ThroughPoints: React.VFC<ThroughPointsProps> = ({
+const ThroughPoints: React.FC<ThroughPointsProps> = ({
   point1,
   point2,
   color = theme.foreground,

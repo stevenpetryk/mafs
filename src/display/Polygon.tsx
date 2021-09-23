@@ -8,7 +8,7 @@ export interface PolygonProps extends Filled {
   svgPolygonProps?: React.SVGProps<SVGPolygonElement>
 }
 
-const Polygon: React.VFC<PolygonProps> = ({
+const Polygon: React.FC<PolygonProps> = ({
   points,
   color = theme.foreground,
   weight = 2,

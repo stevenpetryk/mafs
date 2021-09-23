@@ -9,7 +9,7 @@ export interface CircleProps extends Filled {
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>
 }
 
-const Circle: React.VFC<CircleProps> = ({ radius, ...rest }) => {
+const Circle: React.FC<CircleProps> = ({ radius, ...rest }) => {
   return <Ellipse radius={[radius, radius]} {...rest} />
 }
 

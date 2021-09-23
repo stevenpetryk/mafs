@@ -14,7 +14,7 @@ export interface VectorProps extends Stroked {
   svgLineProps?: React.SVGProps<SVGLineElement>
 }
 
-const Vector: React.VFC<VectorProps> = ({
+const Vector: React.FC<VectorProps> = ({
   tail = [0, 0],
   tip,
   color = theme.foreground,

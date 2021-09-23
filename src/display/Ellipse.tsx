@@ -10,7 +10,7 @@ export interface EllipseProps extends Filled {
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>
 }
 
-const Ellipse: React.VFC<EllipseProps> = ({
+const Ellipse: React.FC<EllipseProps> = ({
   center,
   radius,
   angle = 0,

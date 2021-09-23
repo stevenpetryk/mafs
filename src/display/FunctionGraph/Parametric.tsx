@@ -11,7 +11,7 @@ export interface ParametricProps extends Stroked {
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
-const ParametricFunction: React.VFC<ParametricProps> = ({
+const ParametricFunction: React.FC<ParametricProps> = ({
   xy,
   t,
   color,

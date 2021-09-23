@@ -8,7 +8,7 @@ export interface PointSlopeProps extends Stroked {
   slope: number
 }
 
-const PointSlope: React.VFC<PointSlopeProps> = ({ point, slope, ...rest }) => {
+const PointSlope: React.FC<PointSlopeProps> = ({ point, slope, ...rest }) => {
   return <PointAngle point={point} angle={Math.atan(slope)} {...rest} />
 }
 

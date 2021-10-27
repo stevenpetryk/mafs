@@ -19,4 +19,6 @@ Then visit [localhost:8000](http://localhost:8000).
 
 ## Tests
 
-This library has no tests, but they're planned.
+Mafs uses visual regression testing to ensure consistency between updates. This means that it takes literal screenshots of components as rendered by the browser, and compares them to a known "correct" screenshot.
+
+Currently, these tests are limited to static screenshots—the SVG output of Mafs is rendered to a string and plopped onto a Puppeteer page. This means that interactive things and animations don't work yet.

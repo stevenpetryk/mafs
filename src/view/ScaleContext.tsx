@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import invariant from "tiny-invariant"
+import invariant from "invariant"
 
 import type { Matrix } from "vec-la"
 

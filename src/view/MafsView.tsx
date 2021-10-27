@@ -5,7 +5,7 @@ import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
 import * as vec from "vec-la"
 
-import { useGesture } from "react-use-gesture"
+import { useGesture } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
 import { round, Interval, Vector2 } from "../math"
 

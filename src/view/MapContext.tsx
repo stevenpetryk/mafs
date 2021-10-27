@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import invariant from "tiny-invariant"
+import invariant from "invariant"
 
 export interface MapContextShape {
   mapX: (x: number) => number

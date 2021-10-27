@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import { default as React_2 } from 'react';
 import * as vec from 'vec-la';
 import { VFC } from 'react';

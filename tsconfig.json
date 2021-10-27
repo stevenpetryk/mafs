@@ -9,7 +9,6 @@
     "jsx": "react",
     "allowJs": true,
     "declaration": true,
-    "declarationDir": "./build/type-declarations",
     "emitDeclarationOnly": true,
     "strict": true,
     "moduleResolution": "node",

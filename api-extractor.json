@@ -1,15 +1,14 @@
 {
-  "mainEntryPointFilePath": "<projectFolder>/build/type-declarations/index.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/build/index.d.ts",
   "bundledPackages": [],
-  "dtsRollup": {
-    "enabled": true,
-    "untrimmedFilePath": "<projectFolder>/build/index.d.ts"
-  },
   "apiReport": {
     "enabled": true,
     "reportFileName": "mafs.api.md",
     "reportFolder": ".api-report",
     "reportTempFolder": ".api-report/temp"
+  },
+  "dtsRollup": {
+    "enabled": false
   },
   "docModel": {
     "enabled": false

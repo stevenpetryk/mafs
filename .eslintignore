@@ -3,6 +3,5 @@ build
 docs/public
 
 gatsby-config.js
-esbuild.js
 *.config.js
 .eslintrc.js

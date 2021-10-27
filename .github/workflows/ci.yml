@@ -76,4 +76,5 @@ jobs:
           node-version: 16.x
           cache: "yarn"
       - run: yarn install
+      - run: yarn build
       - run: yarn types

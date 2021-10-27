@@ -21,7 +21,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "types": "yarn api-extractor run",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,md}\""
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,md}\"",
+    "prepublishOnly": "yarn test && yarn build"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.18.17",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.3
+
+### Bug fixes
+
+- Axis labels looked odd in Firefox—they were misaligned. Internally, switching from `alignmentBaseline` to `dominantBaseline` fixed this.
+
 ## 0.4.2
 
 ### Bug fixes

@@ -3,14 +3,15 @@ import PointSlope from "./Line/PointSlope"
 import ThroughPoints from "./Line/ThroughPoints"
 import Segment from "./Line/Segment"
 
-export { PointAngleProps } from "./Line/PointAngle"
-export { PointSlopeProps } from "./Line/PointSlope"
-export { ThroughPointsProps } from "./Line/ThroughPoints"
-export { SegmentProps } from "./Line/Segment"
-
-export default {
+export const Line = {
   PointAngle,
   PointSlope,
   ThroughPoints,
   Segment,
 }
+
+import type { PointAngleProps } from "./Line/PointAngle"
+import type { PointSlopeProps } from "./Line/PointSlope"
+import type { ThroughPointsProps } from "./Line/ThroughPoints"
+import type { SegmentProps } from "./Line/Segment"
+export type { PointAngleProps, PointSlopeProps, ThroughPointsProps, SegmentProps }

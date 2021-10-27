@@ -1,32 +1,56 @@
-export { default as Mafs, MafsViewProps } from "./view/MafsView"
-export {
-  default as CartesianCoordinates,
-  autoPi as labelPi,
+export { default as Mafs } from "./view/MafsView"
+export type { MafsViewProps } from "./view/MafsView"
+
+export { default as CartesianCoordinates, autoPi as labelPi } from "./origin/CartesianCoordinates"
+export type {
   CartesianCoordinatesProps,
   AxisOptions,
   LabelMaker,
 } from "./origin/CartesianCoordinates"
-export { default as FunctionGraph, OfXProps, ParametricProps } from "./display/FunctionGraph"
-export {
-  default as Line,
+
+export { FunctionGraph } from "./display/FunctionGraph"
+export type { OfXProps, ParametricProps } from "./display/FunctionGraph"
+
+export { Line } from "./display/Line"
+export type {
   PointAngleProps,
   PointSlopeProps,
   ThroughPointsProps,
   SegmentProps,
 } from "./display/Line"
-export { default as Circle, CircleProps } from "./display/Circle"
-export { default as Ellipse, EllipseProps } from "./display/Ellipse"
-export { default as Polygon, PolygonProps } from "./display/Polygon"
-export { default as Point, PointProps } from "./display/Point"
-export { default as Vector, VectorProps } from "./display/Vector"
-export { default as VectorField, VectorFieldProps } from "./display/VectorField"
-export { default as Text, TextProps, CardinalDirection } from "./display/Text"
-export { theme as Theme, Filled, Stroked } from "./display/Theme"
-export {
-  default as useMovablePoint,
+
+export { default as Circle } from "./display/Circle"
+export type { CircleProps } from "./display/Circle"
+
+export { default as Ellipse } from "./display/Ellipse"
+export type { EllipseProps } from "./display/Ellipse"
+
+export { default as Polygon } from "./display/Polygon"
+export type { PolygonProps } from "./display/Polygon"
+
+export { default as Point } from "./display/Point"
+export type { PointProps } from "./display/Point"
+
+export { default as Vector } from "./display/Vector"
+export type { VectorProps } from "./display/Vector"
+
+export { default as VectorField } from "./display/VectorField"
+export type { VectorFieldProps } from "./display/VectorField"
+
+export { default as Text } from "./display/Text"
+export type { TextProps, CardinalDirection } from "./display/Text"
+
+export { theme as Theme } from "./display/Theme"
+export type { Filled, Stroked } from "./display/Theme"
+
+export { default as useMovablePoint } from "./interaction/useMovablePoint"
+export type {
   ConstraintFunction,
   UseMovablePoint,
   UseMovablePointArguments,
 } from "./interaction/useMovablePoint"
-export { default as useStopwatch, Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
-export { Interval, Vector2 } from "./math"
+
+export { default as useStopwatch } from "./animation/useStopwatch"
+export type { Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
+
+export type { Interval, Vector2 } from "./math"

@@ -1,19 +1,15 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "outDir": "./build/",
-    "noImplicitAny": true,
+    "noEmit": true,
     "module": "es6",
     "target": "ES2021",
-    "jsx": "react",
-    "allowJs": true,
-    "declaration": true,
-    "declarationDir": "./build/type-declarations",
-    "emitDeclarationOnly": true,
-    "strict": true,
     "moduleResolution": "node",
-    "checkJs": true
+    "jsx": "react",
+    "strict": true,
+    "noImplicitAny": true,
+    "checkJs": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["src/tests/**/*", "src/**/*.test.*"]

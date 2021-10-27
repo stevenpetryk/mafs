@@ -1,10 +1,11 @@
 import OfX from "./FunctionGraph/OfX"
 import Parametric from "./FunctionGraph/Parametric"
 
-export { OfXProps } from "./FunctionGraph/OfX"
-export { ParametricProps } from "./FunctionGraph/Parametric"
-
-export default {
+export const FunctionGraph = {
   OfX,
   Parametric,
 }
+
+import type { OfXProps } from "./FunctionGraph/OfX"
+import type { ParametricProps } from "./FunctionGraph/Parametric"
+export type { OfXProps, ParametricProps }

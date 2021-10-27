@@ -99,7 +99,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
       {xs
         .filter((x) => Math.abs(scaleX(x) - scaleX(0)) > 1)
         .map((x) => (
-          <text key={x} x={scaleX(x)} y={5} alignmentBaseline="hanging" textAnchor="middle">
+          <text key={x} x={scaleX(x)} y={5} dominantBaseline="hanging" textAnchor="middle">
             {labelMaker(x)}
           </text>
         ))}
@@ -120,7 +120,7 @@ const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
       {ys
         .filter((y) => Math.abs(scaleY(y) - scaleY(0)) > 1)
         .map((y) => (
-          <text key={y} x={5} y={scaleY(y)} alignmentBaseline="central">
+          <text key={y} x={5} y={scaleY(y)} dominantBaseline="central">
             {labelMaker(y)}
           </text>
         ))}

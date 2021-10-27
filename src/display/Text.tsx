@@ -37,12 +37,12 @@ const Text: React.FC<TextProps> = ({
   }
 
   let yOffset = 0
-  let alignmentBaseline: React.SVGProps<SVGTextElement>["alignmentBaseline"] = "middle"
+  let dominantBaseline: React.SVGProps<SVGTextElement>["dominantBaseline"] = "middle"
   if (attach.includes("n")) {
-    alignmentBaseline = "baseline"
+    dominantBaseline = "baseline"
     yOffset = 1
   } else if (attach.includes("s")) {
-    alignmentBaseline = "hanging"
+    dominantBaseline = "hanging"
     yOffset = -1
   }
 
@@ -53,7 +53,7 @@ const Text: React.FC<TextProps> = ({
       x={scaleX(x) + pixelX}
       y={scaleY(y) - pixelY}
       fontSize={size}
-      alignmentBaseline={alignmentBaseline}
+      dominantBaseline={dominantBaseline}
       textAnchor={textAnchor}
       style={{
         stroke: color || "var(--mafs-bg)",

@@ -32,9 +32,9 @@
     "@types/react-dom": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
-    "esbuild": "^0.13.9",
+    "esbuild": "^0.12",
     "esbuild-node-externals": "^1.3.0",
-    "eslint": "^8.1.0",
+    "eslint": "^7",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.3.1",
@@ -53,9 +53,9 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
-    "@use-gesture/react": "^10.1.1",
-    "invariant": "^2.2.4",
-    "use-resize-observer": "^8.0.0",
+    "@use-gesture/react": "^10",
+    "invariant": "^2",
+    "use-resize-observer": "^7 || ^8",
     "vec-la": "^1.5.0"
   }
 }

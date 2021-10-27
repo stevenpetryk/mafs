@@ -4,7 +4,7 @@ import MovablePoint from "./MovablePoint"
 import * as vec from "vec-la"
 import { theme } from "../display/Theme"
 import { matrixInvert, Vector2 } from "../math"
-import invariant from "invariant"
+import invariant from "tiny-invariant"
 
 const identity = vec.matrixBuilder().get()
 

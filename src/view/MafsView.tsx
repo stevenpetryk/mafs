@@ -112,7 +112,7 @@ const MafsView: React.FC<MafsViewProps> = ({
 
   return (
     <div
-      className="overflow-hidden w-auto"
+      className="MafsWrapper overflow-hidden w-auto"
       style={{ width: desiredCssWidth }}
       ref={ref}
       {...bind()}

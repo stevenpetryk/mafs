@@ -1,10 +1,8 @@
-import React, { useRef } from "react"
-import { useMemo, useState } from "react"
-import MovablePoint from "./MovablePoint"
+import React, { useMemo, useState } from "react"
 import * as vec from "vec-la"
 import { theme } from "../display/Theme"
-import { matrixInvert, Vector2 } from "../math"
-import invariant from "tiny-invariant"
+import { Vector2 } from "../math"
+import MovablePoint from "./MovablePoint"
 
 const identity = vec.matrixBuilder().get()
 
@@ -36,59 +34,42 @@ export interface UseMovablePoint {
 }
 
 function useMovablePoint(
-  [initialX, initialY]: Vector2,
+  initialPoint: Vector2,
   { constrain, color = theme.pink, transform = identity }: UseMovablePointArguments = {}
 ): UseMovablePoint {
-  let constraintFunction: ConstraintFunction = ([x, y]) => [x, y]
-  if (constrain === "horizontal") {
-    constraintFunction = ([x]) => [x, initialY]
-  } else if (constrain === "vertical") {
-    constraintFunction = ([, y]) => [initialX, y]
-  } else if (typeof constrain === "function") {
-    constraintFunction = constrain
-  }
-
-  const [point, setPoint] = useState(() => constraintFunction([initialX, initialY]))
+  const [initialX, initialY] = initialPoint
+  const [point, setPoint] = useState<Vector2>(initialPoint)
   const [x, y] = point
-  const [displayX, displayY] = vec.transform(point, transform)
 
-  const pickup = useRef<Vector2>([0, 0])
+  const constraintFunction: ConstraintFunction = React.useMemo(() => {
+    if (constrain === "horizontal") {
+      return ([x]) => [x, initialY]
+    } else if (constrain === "vertical") {
+      return ([, y]) => [initialX, y]
+    } else if (typeof constrain === "function") {
+      return constrain
+    }
+
+    return ([x, y]) => [x, y]
+  }, [constrain, initialX, initialY])
 
   const element = useMemo(() => {
     return (
       <MovablePoint
-        x={displayX}
-        y={displayY}
-        color={color}
-        onMovement={({ movement, first }) => {
-          if (first) {
-            pickup.current = vec.transform([x, y], transform)
-          }
-          setPoint(
-            constraintFunction(
-              vec.transform(vec.add(pickup.current, movement), getInverseTransform(transform))
-            )
-          )
-        }}
+        {...{ point, transform, color }}
+        constrain={constraintFunction}
+        point={point}
+        onMove={setPoint}
       />
     )
-  }, [x, y, displayX, displayY, color, transform])
+  }, [point, transform, color, constraintFunction])
 
   return {
     x,
     y,
-    point,
+    point: [x, y],
     element,
   }
-}
-
-function getInverseTransform(transform: vec.Matrix) {
-  const invert = matrixInvert(transform)
-  invariant(
-    invert !== null,
-    "Could not invert transform matrix. Your movable point's constraint function might be degenerative (mapping 2D space to a line)."
-  )
-  return invert
 }
 
 export default useMovablePoint

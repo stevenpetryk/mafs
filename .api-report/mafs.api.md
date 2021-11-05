@@ -279,7 +279,7 @@ export interface UseMovablePoint {
 }
 
 // @public (undocumented)
-export function useMovablePoint([initialX, initialY]: Vector2, { constrain, color, transform }?: UseMovablePointArguments): UseMovablePoint;
+export function useMovablePoint(initialPoint: Vector2, { constrain, color, transform }?: UseMovablePointArguments): UseMovablePoint;
 
 // @public (undocumented)
 export interface UseMovablePointArguments {

@@ -31,7 +31,7 @@ export interface ParametricProps extends Stroked {
    * number of samples based on the roughness of the function. In some pathological cases, you may
    * still need to increase the sampling depth manually—but to do so, see `minimumSamplingDepth`.
    */
-  samples?: number
+  samples?: never
 
   svgPathProps?: React.SVGProps<SVGPathElement>
 }

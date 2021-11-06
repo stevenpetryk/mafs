@@ -35,7 +35,6 @@ describe("<FunctionGraph.Parametric />", () => {
             style="dashed"
             color={Theme.blue}
             weight={5}
-            samples={10}
           />
 
           {/* When `t` is a backwards range (higher to lower) */}

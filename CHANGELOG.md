@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+### Features
+
+- Smooth interpolation for parametric functions: the parametric function sampling algorithm now dynamically increases the number of samples depending on the roughness of a function. See [PR #37](https://github.com/stevenpetryk/mafs/pull/37).
+
 ## 0.4.4
 
 ### Bug fixes

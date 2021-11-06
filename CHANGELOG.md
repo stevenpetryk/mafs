@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.4
+
+### Bug fixes
+
+- Fixes an issue where, given certain `constrain` functions in `useMovablePoint`, using the keyboard to move points didn't work (see PR #23). Also, keyboard movement was generally broken in certain cases.
+
 ## 0.4.3
 
 ### Bug fixes

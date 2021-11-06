@@ -10,7 +10,7 @@ export interface ParametricProps extends Stroked {
   style?: "solid" | "dashed"
   /**
    * How deep the interpolation algorithm will go in terms of subdividing the function to find
-   * points that minimize the jaggedness of the function.
+   * points that minimize the jaggedness of the function. Defaults to 8.
    *
    * Most functions will not need to override this. It's mainly to support functions that are
    * very jagged.
@@ -21,6 +21,18 @@ export interface ParametricProps extends Stroked {
    * further, recursively subdivided.
    */
   minimumSamplingDepth?: number
+
+  /**
+   * @deprecated
+   *
+   * This prop used to represent number of samples used to render the function. It is now ignored.
+   *
+   * The algorithm that renders parametric functions now dynamically increases the
+   * number of samples based on the roughness of the function. In some pathological cases, you may
+   * still need to increase the sampling depth manually—but to do so, see `minimumSamplingDepth`.
+   */
+  samples?: number
+
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 

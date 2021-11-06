@@ -132,7 +132,8 @@ export interface OfXProps extends Stroked {
 export interface ParametricProps extends Stroked {
     // (undocumented)
     color?: string;
-    minimumSamplingDepth?: number;
+    // (undocumented)
+    samples?: number;
     // (undocumented)
     style?: "solid" | "dashed";
     // (undocumented)
@@ -140,7 +141,7 @@ export interface ParametricProps extends Stroked {
     // (undocumented)
     t: [number, number];
     // (undocumented)
-    xy: (t: number) => Vector2;
+    xy: (t: number) => [number, number];
 }
 
 // @public (undocumented)

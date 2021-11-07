@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
 import PaneManager from "./PaneManager"
-import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
 import * as vec from "vec-la"
 
 import { useGesture } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
-import { round, Interval, Vector2 } from "../math"
+import { round, Interval, Vector2, matrixInvert } from "../math"
 
 export interface MafsViewProps {
   width?: number | string
@@ -60,30 +59,34 @@ const MafsView: React.FC<MafsViewProps> = ({
     { enabled: pan }
   )
 
-  const mapX = useCallback(
-    (x: number) => round(((x - xMin) / (xMax - xMin)) * width),
-    [xMin, xMax, width]
+  const xToPixels = useMemo(
+    () =>
+      vec
+        .matrixBuilder()
+        .scale(width / xSpan, 1)
+        .get(),
+    [width, xSpan]
   )
 
-  const mapY = useCallback(
-    (y: number) => round(((y - yMax) / (yMin - yMax)) * height),
-    [yMin, yMax, height]
+  const yToPixels = useMemo(
+    () =>
+      vec
+        .matrixBuilder()
+        .scale(1, -height / ySpan)
+        .get(),
+    [height, ySpan]
   )
 
-  const scaleX = useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
-  const scaleY = useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
-  const unscaleX = useCallback((x: number) => round((x / width) * xSpan, 5), [xSpan, width])
-  const unscaleY = useCallback((y: number) => round((-y / height) * ySpan, 5), [ySpan, height])
-  const pixelMatrix = useMemo(
-    () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
-    [scaleX, scaleY]
-  )
-  const inversePixelMatrix = useMemo(
-    () => vec.matrixBuilder().scale(unscaleX(1), unscaleY(1)).get(),
-    [unscaleX, unscaleY]
-  )
+  const toPixels = useMemo(() => vec.composeTransform(xToPixels, yToPixels), [xToPixels, yToPixels])
+  const fromPixels = useMemo(() => matrixInvert(toPixels)!, [toPixels])
 
-  const cssScale = `scale(${scaleX(1)} ${scaleY(1)})`
+  const scaleX = useCallback((x: number) => vec.transform([x, 1], xToPixels)[0], [xToPixels])
+  const scaleY = useCallback((y: number) => vec.transform([1, y], yToPixels)[1], [yToPixels])
+
+  const cssTransform = useMemo(() => {
+    const m = toPixels
+    return `matrix(${m[0]},${m[3]},${m[1]},${m[4]},${m[2]},${m[5]})`
+  }, [toPixels])
 
   const coordinateContext = useMemo<CoordinateContextShape>(
     () => ({
@@ -101,38 +104,41 @@ const MafsView: React.FC<MafsViewProps> = ({
     () => ({
       scaleX,
       scaleY,
-      pixelMatrix,
-      inversePixelMatrix,
-      cssScale,
+      pixelMatrix: toPixels,
+      inversePixelMatrix: fromPixels,
+      cssScale: cssTransform,
       xSpan,
       ySpan,
     }),
-    [scaleX, scaleY, xSpan, ySpan, pixelMatrix, inversePixelMatrix, cssScale]
+    [scaleX, scaleY, xSpan, ySpan, toPixels, fromPixels, cssTransform]
+  )
+
+  const mapX = useCallback(
+    (x: number) => round(((x - xMin) / (xMax - xMin)) * width),
+    [xMin, xMax, width]
+  )
+
+  const mapY = useCallback(
+    (y: number) => round(((y - yMax) / (yMin - yMax)) * height),
+    [yMin, yMax, height]
   )
 
   return (
-    <div
-      className="MafsWrapper overflow-hidden w-auto"
-      style={{ width: desiredCssWidth }}
-      ref={ref}
-      {...bind()}
-    >
+    <div className="MafsWrapper" style={{ width: desiredCssWidth }} ref={ref} {...bind()}>
       <CoordinateContext.Provider value={coordinateContext}>
         <ScaleContext.Provider value={scaleContext}>
-          <MapContext.Provider value={{ mapX, mapY }}>
-            <PaneManager>
-              <svg
-                width={width}
-                height={height}
-                viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
-                preserveAspectRatio="xMidYMin"
-                style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
-                className="MafsView"
-              >
-                {visible && children}
-              </svg>
-            </PaneManager>
-          </MapContext.Provider>
+          <PaneManager>
+            <svg
+              width={width}
+              height={height}
+              viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
+              preserveAspectRatio="xMidYMin"
+              style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
+              className="MafsView"
+            >
+              {visible && children}
+            </svg>
+          </PaneManager>
         </ScaleContext.Provider>
       </CoordinateContext.Provider>
     </div>

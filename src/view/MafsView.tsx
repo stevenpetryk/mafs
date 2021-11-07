@@ -78,7 +78,7 @@ const MafsView: React.FC<MafsViewProps> = ({
   )
 
   const toPixels = useMemo(() => vec.composeTransform(xToPixels, yToPixels), [xToPixels, yToPixels])
-  const fromPixels = useMemo(() => matrixInvert(toPixels)!, [toPixels])
+  const fromPixels = useMemo(() => matrixInvert(toPixels), [toPixels])
 
   const scaleX = useCallback((x: number) => vec.transform([x, 1], xToPixels)[0], [xToPixels])
   const scaleY = useCallback((y: number) => vec.transform([1, y], yToPixels)[1], [yToPixels])

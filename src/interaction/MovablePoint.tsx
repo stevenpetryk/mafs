@@ -24,7 +24,7 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
   color,
 }) => {
   const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
-  const inverseTransform = useMemo(() => getInverseTransform(transform), [transform])
+  const inverseTransform = useMemo(() => matrixInvert(transform), [transform])
 
   const [dragging, setDragging] = useState(false)
   const [displayX, displayY] = vec.transform(vec.transform(point, transform), pixelMatrix)
@@ -109,15 +109,6 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
       ></circle>
     </g>
   )
-}
-
-function getInverseTransform(transform: vec.Matrix) {
-  const invert = matrixInvert(transform)
-  invariant(
-    invert !== null,
-    "Could not invert transform matrix. Your movable point's constraint function might be degenerative (mapping 2D space to a line)."
-  )
-  return invert
 }
 
 export default MovablePoint

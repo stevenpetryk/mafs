@@ -1,4 +1,5 @@
 import { Matrix } from "vec-la"
+import invariant from "tiny-invariant"
 
 export type Vector2 = [x: number, y: number]
 export type Interval = [min: number, max: number]
@@ -42,8 +43,8 @@ export function matrixInvert(matrix: Matrix): Matrix | null {
 
   // Calculate the determinant
   let det = a00 * b01 + a01 * b11 + a02 * b21
+  invariant(det !== 0, "Matrix is singular and cannot be inverted")
 
-  if (!det) return null
   det = 1.0 / det
 
   out[0] = b01 * det

@@ -82,7 +82,7 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
     smartSmooth(tMin, tMax, true, true)
 
     return pathDescriptor.substring(0, pathDescriptor.length - 3)
-  }, [tMin, tMax, xy, areaThreshold])
+  }, [tMin, tMax, xy, areaThreshold, minimumSamplingDepth])
 
   return (
     <path

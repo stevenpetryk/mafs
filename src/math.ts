@@ -23,7 +23,7 @@ export function clamp(number: number, min: number, max: number): number {
 }
 
 /** Inverts a 3x3 matrix */
-export function matrixInvert(matrix: Matrix): Matrix | null {
+export function matrixInvert(matrix: Matrix): Matrix {
   const a = matrix
   const out: Matrix = new Array(9) as Matrix
 

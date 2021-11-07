@@ -1,6 +1,5 @@
 import { useDrag } from "@use-gesture/react"
 import React, { useMemo, useRef, useState } from "react"
-import invariant from "tiny-invariant"
 import * as vec from "vec-la"
 import { matrixInvert, range, Vector2 } from "../math"
 import { useScaleContext } from "../view/ScaleContext"

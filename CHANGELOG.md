@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+- Bundle is now transpiled to browserslist's `defaults` for compatibility.
+
 ## 0.5.0
 
 ### Features

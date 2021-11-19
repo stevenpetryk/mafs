@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react"
 import * as vec from "vec-la"
 import { theme } from "../display/Theme"
 import { Vector2 } from "../math"
+import { useNearbyObjectsContext } from "../view/NearbyObjectsContext"
 import MovablePoint from "./MovablePoint"
 
 const identity = vec.matrixBuilder().get()

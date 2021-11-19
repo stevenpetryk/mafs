@@ -3,6 +3,7 @@ import React, { useMemo, useRef, useState } from "react"
 import invariant from "tiny-invariant"
 import * as vec from "vec-la"
 import { matrixInvert, range, Vector2 } from "../math"
+import { useNearbyObjectsContext } from "../view/NearbyObjectsContext"
 import { useScaleContext } from "../view/ScaleContext"
 
 export type ConstraintFunction = (position: Vector2) => Vector2
@@ -31,6 +32,32 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
 
   const pickup = useRef<Vector2>([0, 0])
 
+  const { registerObject, unregisterObject } = useNearbyObjectsContext()
+
+  const id = useMemo(() => `movable-point-${Math.random()}`, [])
+
+  const [x, y] = point
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      registerObject(id, { point: [x, y], radius: 20, type: "MovablePoint" })
+    }, 100)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [id, registerObject, unregisterObject, x, y])
+
+  React.useEffect(() => {
+    return () => {
+      unregisterObject(id)
+    }
+  }, [])
+
+  function handleMove(newPoint: Vector2) {
+    onMove(newPoint)
+  }
+
   const bind = useDrag(({ event, down, movement: pixelMovement, first }) => {
     event?.stopPropagation()
     setDragging(down)
@@ -41,7 +68,7 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
     const movement = vec.transform(pixelMovement, inversePixelMatrix)
     const newPoint = constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform))
 
-    onMove(newPoint)
+    handleMove(newPoint)
   })
 
   function handleKeyDown(event: React.KeyboardEvent) {
@@ -87,7 +114,7 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
       )
 
       if (vec.dist(testPoint, point) > min) {
-        onMove(testPoint)
+        handleMove(testPoint)
         break
       }
     }

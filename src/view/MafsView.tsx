@@ -8,6 +8,8 @@ import * as vec from "vec-la"
 import { useGesture } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
 import { round, Interval, Vector2 } from "../math"
+import { NearbyObjectsProvider } from "./NearbyObjectsContext"
+import { MousePositionProvider } from "./MousePositionContext"
 
 export interface MafsViewProps {
   width?: number | string
@@ -120,18 +122,22 @@ const MafsView: React.FC<MafsViewProps> = ({
       <CoordinateContext.Provider value={coordinateContext}>
         <ScaleContext.Provider value={scaleContext}>
           <MapContext.Provider value={{ mapX, mapY }}>
-            <PaneManager>
-              <svg
-                width={width}
-                height={height}
-                viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
-                preserveAspectRatio="xMidYMin"
-                style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
-                className="MafsView"
-              >
-                {visible && children}
-              </svg>
-            </PaneManager>
+            <MousePositionProvider>
+              <NearbyObjectsProvider>
+                <PaneManager>
+                  <svg
+                    width={width}
+                    height={height}
+                    viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
+                    preserveAspectRatio="xMidYMin"
+                    style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
+                    className="MafsView"
+                  >
+                    {visible && children}
+                  </svg>
+                </PaneManager>
+              </NearbyObjectsProvider>
+            </MousePositionProvider>
           </MapContext.Provider>
         </ScaleContext.Provider>
       </CoordinateContext.Provider>

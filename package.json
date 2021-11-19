@@ -59,6 +59,7 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
+    "@swc/helpers": "^0.2.14",
     "@use-gesture/react": "^10",
     "tiny-invariant": "^1",
     "use-resize-observer": "^7 || ^8",

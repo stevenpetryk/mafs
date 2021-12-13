@@ -29,7 +29,7 @@ const Installation: React.VFC = () => (
 
     <p>And then make sure to load the stylesheet:</p>
 
-    <Code language="css" source={`@import "mafs/index.css";`} />
+    <Code language="css" source={`@import "mafs/build/index.css";`} />
 
     <p>Now, in your React app, you should be able to render a Mafs view.</p>
 

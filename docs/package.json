@@ -8,6 +8,7 @@
   "dependencies": {
     "dedent": "^0.7.0",
     "gatsby": "^4.0.0",
+    "graphql": "^15.4.0",
     "js-easing-functions": "^1.0.3",
     "lodash.clamp": "^4.0.3",
     "lodash.kebabcase": "^4.1.1",
@@ -18,7 +19,8 @@
     "react-dom": "link:../node_modules/react-dom",
     "react-helmet": "^6.1.0",
     "react-highlight.js": "^1.0.7",
-    "vec-la": "^1.5.0"
+    "vec-la": "^1.5.0",
+    "webpack": "^5.24.2"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",

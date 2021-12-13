@@ -41,7 +41,7 @@
 
   p code,
   ul code {
-    @apply rounded-sm bg-gray-200 p-1 text-sm;
+    @apply rounded-md bg-gray-200 py-1 px-2 text-sm;
   }
 
   :focus {

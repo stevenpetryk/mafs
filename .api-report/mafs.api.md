@@ -49,6 +49,9 @@ export interface CircleProps extends Filled {
 export type ConstraintFunction = (position: Vector2) => Vector2;
 
 // @public (undocumented)
+export type _ConstraintFunction1 = (position: Vector2) => Vector2;
+
+// @public (undocumented)
 export const Ellipse: React_2.VFC<EllipseProps>;
 
 // @public (undocumented)
@@ -116,6 +119,19 @@ export interface MafsViewProps {
     xAxisExtent?: Interval;
     // (undocumented)
     yAxisExtent?: Interval;
+}
+
+// @public (undocumented)
+export const MovablePoint: React_2.VFC<MovablePointProps>;
+
+// @public (undocumented)
+export interface MovablePointProps {
+    // (undocumented)
+    color?: string;
+    constrain?: _ConstraintFunction1;
+    onMove: (point: Vector2) => void;
+    point: Vector2;
+    transform?: vec.Matrix;
 }
 
 // @public (undocumented)
@@ -273,6 +289,8 @@ export interface UseMovablePoint {
     element: React_2.ReactElement;
     // (undocumented)
     point: Vector2;
+    // (undocumented)
+    setPoint: (point: Vector2) => void;
     // (undocumented)
     x: number;
     // (undocumented)

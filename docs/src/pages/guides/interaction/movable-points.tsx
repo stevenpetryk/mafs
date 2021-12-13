@@ -6,10 +6,13 @@ import CodeAndExample from "components/CodeAndExample"
 
 import PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
 import PointsAlongFunctionSource from "!raw-loader!guide-examples/display/PointsAlongFunction"
+import DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
+import DynamicMovablePointsSource from "!raw-loader!guide-examples/display/DynamicMovablePoints"
 import SnapPoint from "guide-examples/SnapPoint"
 import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import MovableEllipse from "guide-examples/MovableEllipse"
 import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
+import { Advanced } from "components/Advanced"
 
 export const frontmatter: Guide = {
   title: "Movable points",
@@ -86,6 +89,22 @@ const Stopwatch: React.VFC = () => (
     </p>
 
     <CodeAndExample component={<MovableEllipse />} source={MovableEllipseSource} />
+
+    <h2 className="flex flex-col gap-1">
+      <div>
+        <Advanced />
+      </div>
+      <span>Using MovablePoint directly</span>
+    </h2>
+
+    <p>
+      <code>useMovablePoint</code> is a hook that helps you instantiate and manage the state of a
+      <code>MovablePoint</code>. However, if need be, you can also use <code>MovablePoint</code>{" "}
+      directly. This can be useful if you need to work with a dynamic number of movable points
+      (since the React "rules of hooks" ban you from dynamically calling hooks).
+    </p>
+
+    <CodeAndExample component={<DynamicMovablePoints />} source={DynamicMovablePointsSource} />
   </GuidesLayout>
 )
 

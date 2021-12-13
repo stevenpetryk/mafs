@@ -31,6 +31,7 @@ export interface UseMovablePoint {
   y: number
   point: Vector2
   element: React.ReactElement
+  setPoint: (point: Vector2) => void
 }
 
 function useMovablePoint(
@@ -69,6 +70,7 @@ function useMovablePoint(
     y,
     point: [x, y],
     element,
+    setPoint,
   }
 }
 

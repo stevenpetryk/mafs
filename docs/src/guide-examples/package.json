@@ -1,0 +1,12 @@
+{
+  "name": "mafs-examples",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "/index.html",
+  "dependencies": {
+    "mafs": "*",
+    "vec-la": "*"
+  }
+}

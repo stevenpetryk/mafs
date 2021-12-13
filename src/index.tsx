@@ -43,6 +43,7 @@ export type { TextProps, CardinalDirection } from "./display/Text"
 export { theme as Theme } from "./display/Theme"
 export type { Filled, Stroked } from "./display/Theme"
 
+export { default as MovablePoint, MovablePointProps } from "./interaction/MovablePoint"
 export { default as useMovablePoint } from "./interaction/useMovablePoint"
 export type {
   ConstraintFunction,

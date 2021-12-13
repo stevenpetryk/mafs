@@ -1,27 +1,30 @@
 import { useDrag } from "@use-gesture/react"
 import React, { useMemo, useRef, useState } from "react"
 import invariant from "tiny-invariant"
+import { theme } from "../display/Theme"
 import * as vec from "vec-la"
 import { matrixInvert, range, Vector2 } from "../math"
 import { useScaleContext } from "../view/ScaleContext"
 
 export type ConstraintFunction = (position: Vector2) => Vector2
 
-interface MovablePointProps {
+export interface MovablePointProps {
   point: Vector2
   onMove: (point: Vector2) => void
-  transform: vec.Matrix
-  constrain: ConstraintFunction
-  color: string
+  transform?: vec.Matrix
+  constrain?: ConstraintFunction
+  color?: string
 }
+
+const identity = vec.matrixBuilder().get()
 
 /** @private */
 const MovablePoint: React.VFC<MovablePointProps> = ({
   point,
   onMove,
-  transform,
-  constrain,
-  color,
+  constrain = (point) => point,
+  color = theme.pink,
+  transform = identity,
 }) => {
   const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
   const inverseTransform = useMemo(() => getInverseTransform(transform), [transform])

@@ -94,7 +94,7 @@ const Stopwatch: React.VFC = () => (
       <div>
         <Advanced />
       </div>
-      <span>Using MovableHook directly</span>
+      <span>Using MovablePoint directly</span>
     </h2>
 
     <p>

@@ -6,6 +6,7 @@
     "start": "Run `yarn start` from the project root to start the combined development/docs server."
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^0.10.2",
     "dedent": "^0.7.0",
     "gatsby": "^4.0.0",
     "graphql": "^15.4.0",

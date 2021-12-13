@@ -7,6 +7,8 @@
   "main": "/index.html",
   "dependencies": {
     "mafs": "*",
-    "vec-la": "*"
+    "vec-la": "*",
+    "react": "*",
+    "react-dom": "*"
   }
 }

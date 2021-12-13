@@ -9,16 +9,27 @@ import { useScaleContext } from "../view/ScaleContext"
 export type ConstraintFunction = (position: Vector2) => Vector2
 
 export interface MovablePointProps {
+  /** The current position (`[x, y]`) of the point. */
   point: Vector2
+  /** A callback that is called as the user moves the point. */
   onMove: (point: Vector2) => void
+  /**
+   * Transform the point's movement and constraints by a transformation matrix. You can use `vec-la`
+   * to build up such a matrix.
+   */
   transform?: vec.Matrix
+  /**
+   * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
+   *
+   * In mapped movement mode, you must provide a function that maps the user's attempted position
+   * (x, y) to the position the point should "snap" to.
+   */
   constrain?: ConstraintFunction
   color?: string
 }
 
 const identity = vec.matrixBuilder().get()
 
-/** @private */
 const MovablePoint: React.VFC<MovablePointProps> = ({
   point,
   onMove,
@@ -118,7 +129,7 @@ function getInverseTransform(transform: vec.Matrix) {
   const invert = matrixInvert(transform)
   invariant(
     invert !== null,
-    "Could not invert transform matrix. Your movable point's constraint function might be degenerative (mapping 2D space to a line)."
+    "Could not invert transform matrix. Your movable point's transformation matrix might be degenerative (mapping 2D space to a line)."
   )
   return invert
 }

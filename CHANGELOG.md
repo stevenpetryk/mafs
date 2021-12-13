@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0
+
+- `MovablePoint` can now be used directly, no longer is it hidden behind `useMovablePoint`. See the [Movable Points docs](https://mafs.dev/guides/interaction/movable-points/).
+- `useMovablePoint` now returns a `setPoint` function which allows you to set the point's position imperatively.
+
 ## 0.5.1
 
 - Bundle is now transpiled to browserslist's `defaults` for compatibility.

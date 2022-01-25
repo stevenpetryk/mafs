@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import * as React from "react"
 
 import {
   Mafs,
@@ -40,7 +40,7 @@ export default function ProjectileMotion() {
     endTime: timeOfFlight,
   })
 
-  useEffect(() => {
+  React.useEffect(() => {
     stop()
     // Reset the ball's whenever the resting position changes
   }, [restingX, restingY, stop])

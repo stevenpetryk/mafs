@@ -1,3 +1,4 @@
+// @example_height 300
 import React from "react"
 import {
   Mafs,
@@ -7,7 +8,7 @@ import {
 
 export default function HelloFx() {
   return (
-    <Mafs height={300}>
+    <Mafs>
       <CartesianCoordinates subdivisions={4} />
       <FunctionGraph.OfX y={(x) => Math.sin(x)} />
     </Mafs>

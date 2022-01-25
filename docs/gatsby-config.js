@@ -24,6 +24,21 @@ module.exports = {
     },
 
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "mafs",
+        path: `${__dirname}/../build`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-code`,
+      options: {
+        name: `mafs`,
+        extensions: ["css", "mjs"],
+      },
+    },
+
+    {
       resolve: "gatsby-plugin-codegen",
       options: {
         localSchemaFile: path.join(__dirname, "schema.json"),

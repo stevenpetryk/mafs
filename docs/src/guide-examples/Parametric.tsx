@@ -1,3 +1,4 @@
+// @example_height 300
 import React from "react"
 import {
   Mafs,
@@ -8,7 +9,7 @@ import {
 
 export default function Parametric() {
   return (
-    <Mafs height={300} xAxisExtent={[-8, 8]}>
+    <Mafs xAxisExtent={[-8, 8]}>
       <CartesianCoordinates />
       <FunctionGraph.Parametric
         xy={(t) => [

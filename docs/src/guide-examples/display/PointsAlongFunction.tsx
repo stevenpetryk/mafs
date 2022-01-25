@@ -1,3 +1,4 @@
+// @example_height 500
 import React from "react"
 // prettier-ignore
 import { Mafs, FunctionGraph, Point, CartesianCoordinates, useMovablePoint } from "mafs"
@@ -17,7 +18,7 @@ export default function PointsAlongFunction() {
       : []
 
   return (
-    <Mafs height={500} yAxisExtent={[-1.3, 4.7]}>
+    <Mafs yAxisExtent={[-1.3, 4.7]}>
       <CartesianCoordinates />
 
       <FunctionGraph.OfX y={fn} opacity={0.25} />

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+// @example_height 500
+import * as React from "react"
 import {
   CartesianCoordinates,
   FunctionGraph,
@@ -47,7 +48,7 @@ function inPairs<T>(arr: T[]) {
 }
 
 export default function BezierCurves() {
-  const [t, setT] = useState(0.5)
+  const [t, setT] = React.useState(0.5)
   const opacity = 1 - (2 * t - 1) ** 6
 
   const p1 = useMovablePoint([-5, 2])
@@ -69,10 +70,10 @@ export default function BezierCurves() {
   const { time, start } = useStopwatch({
     endTime: duration,
   })
-  useEffect(() => {
+  React.useEffect(() => {
     setTimeout(() => start(), 500)
   }, [start])
-  useEffect(() => {
+  React.useEffect(() => {
     setT(easeInOutCubic(time, 0, 0.75, duration))
   }, [time])
 

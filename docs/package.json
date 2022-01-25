@@ -38,6 +38,7 @@
     "gatsby-plugin-postcss": "^5.1.0",
     "gatsby-plugin-react-helmet": "^5.1.0",
     "gatsby-source-filesystem": "^4.1.0",
+    "gatsby-transformer-code": "^0.2.0",
     "gatsby-transformer-javascript-frontmatter": "^4.1.0",
     "gatsby-transformer-json": "^4.1.0",
     "path-browserify": "^1.0.1",

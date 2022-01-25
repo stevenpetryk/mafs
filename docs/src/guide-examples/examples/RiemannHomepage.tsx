@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+// @example_height 650
+import * as React from "react"
 import {
   Mafs,
   useMovablePoint,
@@ -29,8 +30,8 @@ export default function RiemannHomepage() {
   })
   const value = easeInOutCubic(time, 0, 1, duration)
 
-  useEffect(() => start(), [start])
-  useEffect(() => {
+  React.useEffect(() => start(), [start])
+  React.useEffect(() => {
     time === duration && setReady(true)
   }, [time, duration])
 
@@ -70,7 +71,6 @@ export default function RiemannHomepage() {
 
   return (
     <Mafs
-      height={650}
       xAxisExtent={[-0.4, 1.7]}
       yAxisExtent={[-0.9, 4.5]}
       pan={false}

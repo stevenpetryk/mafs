@@ -1,3 +1,4 @@
+// @example_height 500
 import React from "react"
 import {
   Mafs,
@@ -15,7 +16,7 @@ export default function MovableCircle() {
   const r = vec.mag(pointOnCircle.point)
 
   return (
-    <Mafs height={500}>
+    <Mafs>
       <CartesianCoordinates />
       <Circle center={[0, 0]} radius={r} />
       {pointOnCircle.element}

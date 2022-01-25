@@ -1,3 +1,4 @@
+// @example_height 500
 import React from "react"
 import {
   Mafs,
@@ -13,7 +14,7 @@ export default function SimplePoint() {
   const c = useMovablePoint([0, 2])
 
   return (
-    <Mafs height={500}>
+    <Mafs>
       <CartesianCoordinates />
       <Polygon
         points={[[c.x, -c.y], a, b]}

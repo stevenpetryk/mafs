@@ -1,3 +1,4 @@
+// @example_height 500
 import React from "react"
 // prettier-ignore
 import { Mafs, Ellipse, Circle, CartesianCoordinates, useMovablePoint, Theme, } from "mafs"
@@ -40,7 +41,7 @@ export default function MovableEllipse() {
   })
 
   return (
-    <Mafs height={500}>
+    <Mafs>
       <CartesianCoordinates />
 
       {/*

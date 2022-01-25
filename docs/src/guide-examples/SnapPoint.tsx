@@ -1,3 +1,4 @@
+// @example_height 200
 import React from "react"
 // prettier-ignore
 import { Mafs, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon } from "mafs"
@@ -28,11 +29,7 @@ export default function SnapPoint() {
   })
 
   return (
-    <Mafs
-      height={200}
-      xAxisExtent={[-8.5, 8.5]}
-      yAxisExtent={[-3, 3]}
-    >
+    <Mafs xAxisExtent={[-8.5, 8.5]} yAxisExtent={[-3, 3]}>
       <CartesianCoordinates xAxis={{ labels: false }} />
 
       <Vector tail={[-3, 0]} tip={gridMotion.point} />

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react"
+import * as React from "react"
 
 import SlashImage from "./slash.svg"
 
 export const Search: React.VFC = () => {
-  const input = useRef<HTMLInputElement>(null)
+  const input = React.useRef<HTMLInputElement>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     function trigger(event: KeyboardEvent) {
       if (!input.current) return
 

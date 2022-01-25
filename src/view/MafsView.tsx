@@ -26,7 +26,7 @@ export interface MafsViewProps {
 
 const MafsView: React.FC<MafsViewProps> = ({
   width: desiredWidth = "auto",
-  height = 500,
+  height = (window as any).MAFS_HEIGHT || 500,
   pan = true,
   xAxisExtent = [-5.5, 5.5],
   yAxisExtent = [-3.5, 3.5],

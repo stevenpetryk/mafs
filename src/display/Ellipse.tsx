@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Filled, theme } from "./Theme"
 import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../math"
@@ -47,4 +47,4 @@ const Ellipse: React.VFC<EllipseProps> = ({
   )
 }
 
-export default Ellipse
+export { Ellipse }

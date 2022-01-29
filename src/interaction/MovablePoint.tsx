@@ -1,5 +1,5 @@
 import { useDrag } from "@use-gesture/react"
-import React, { useMemo, useRef, useState } from "react"
+import * as React from "react"
 import invariant from "tiny-invariant"
 import { theme } from "../display/Theme"
 import * as vec from "vec-la"
@@ -38,12 +38,12 @@ const MovablePoint: React.VFC<MovablePointProps> = ({
   transform = identity,
 }) => {
   const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
-  const inverseTransform = useMemo(() => getInverseTransform(transform), [transform])
+  const inverseTransform = React.useMemo(() => getInverseTransform(transform), [transform])
 
-  const [dragging, setDragging] = useState(false)
+  const [dragging, setDragging] = React.useState(false)
   const [displayX, displayY] = vec.transform(vec.transform(point, transform), pixelMatrix)
 
-  const pickup = useRef<Vector2>([0, 0])
+  const pickup = React.useRef<Vector2>([0, 0])
 
   const bind = useDrag(({ event, down, movement: pixelMovement, first }) => {
     event?.stopPropagation()

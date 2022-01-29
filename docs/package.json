@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
+    "@storybook/react-docgen-typescript-plugin": "^1.0.1",
     "@types/dedent": "^0.7.0",
     "@types/lodash.clamp": "^4.0.6",
     "@types/lodash.kebabcase": "^4.1.6",
@@ -43,6 +44,7 @@
     "postcss": "^8.3.6",
     "postcss-exclude-files": "^1.0.15",
     "postcss-import": "^14.0.2",
+    "react-docgen-typescript-plugin": "^1.0.0",
     "tailwindcss": "^2.2.10"
   },
   "resolutions": {

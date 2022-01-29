@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import * as React from "react"
 import * as vec from "vec-la"
 import { theme } from "../display/Theme"
 import { Vector2 } from "../math"
@@ -39,7 +39,7 @@ function useMovablePoint(
   { constrain, color = theme.pink, transform = identity }: UseMovablePointArguments = {}
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
-  const [point, setPoint] = useState<Vector2>(initialPoint)
+  const [point, setPoint] = React.useState<Vector2>(initialPoint)
   const [x, y] = point
 
   const constraintFunction: ConstraintFunction = React.useMemo(() => {
@@ -54,7 +54,7 @@ function useMovablePoint(
     return ([x, y]) => [x, y]
   }, [constrain, initialX, initialY])
 
-  const element = useMemo(() => {
+  const element = React.useMemo(() => {
     return (
       <MovablePoint
         {...{ point, transform, color }}

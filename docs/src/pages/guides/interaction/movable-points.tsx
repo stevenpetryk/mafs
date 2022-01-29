@@ -13,6 +13,7 @@ import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import MovableEllipse from "guide-examples/MovableEllipse"
 import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
 import { Advanced } from "components/Advanced"
+import { MovablePoint } from "mafs"
 
 export const frontmatter: Guide = {
   title: "Movable points",
@@ -21,6 +22,8 @@ export const frontmatter: Guide = {
 
 const Stopwatch: React.VFC = () => (
   <GuidesLayout title={frontmatter.title}>
+    <pre>pls {JSON.stringify(MovablePoint.__docgenInfo)}</pre>
+
     <p>
       Movable points can be dragged around the coordinate plane, or moved via the keyboard. They're
       the cornerstone of lots of interactions.

@@ -22,7 +22,7 @@ export type {
 export { default as Circle } from "./display/Circle"
 export type { CircleProps } from "./display/Circle"
 
-export { Ellipse } from "./display/Ellipse"
+export { default as Ellipse } from "./display/Ellipse"
 export type { EllipseProps } from "./display/Ellipse"
 
 export { default as Polygon } from "./display/Polygon"

@@ -13,7 +13,7 @@ import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import MovableEllipse from "guide-examples/MovableEllipse"
 import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
 import { Advanced } from "components/Advanced"
-import { MovablePoint } from "mafs"
+import { MovablePoint } from "../../../../../src"
 
 export const frontmatter: Guide = {
   title: "Movable points",

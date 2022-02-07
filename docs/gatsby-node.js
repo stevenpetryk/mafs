@@ -19,6 +19,7 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
         include: [
           path.resolve(__dirname, "../src/**/*.ts"),
           path.resolve(__dirname, "../src/**/*.tsx"),
+          "mafs/**/*",
         ],
         tsconfigPath: path.resolve(__dirname, "../tsconfig.json"),
       }),

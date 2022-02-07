@@ -47,4 +47,4 @@ const Ellipse: React.VFC<EllipseProps> = ({
   )
 }
 
-export { Ellipse }
+export default Ellipse

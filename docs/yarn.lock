@@ -1725,17 +1725,17 @@
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
 
-"@storybook/react-docgen-typescript-plugin@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@storybook/react-docgen-typescript-plugin/-/react-docgen-typescript-plugin-1.0.1.tgz#d4c94b1863036128e85e625c4ab888169be89f27"
-  integrity sha512-dqbHa+5gaxaklFCuV1WTvljVPTo3QIJgpW4Ln+QeME7osPZUnUhjN2/djvo+sxrWUrTTuqX5jkn291aDngu9Tw==
+"@storybook/react-docgen-typescript-plugin@1.0.2-canary.6.9d540b91e815f8fc2f8829189deb00553559ff63.0":
+  version "1.0.2-canary.6.9d540b91e815f8fc2f8829189deb00553559ff63.0"
+  resolved "https://registry.yarnpkg.com/@storybook/react-docgen-typescript-plugin/-/react-docgen-typescript-plugin-1.0.2-canary.6.9d540b91e815f8fc2f8829189deb00553559ff63.0.tgz#3103532ff494fb7dc3cf835f10740ecf6a26c0f9"
+  integrity sha512-eVg3BxlOm2P+chijHBTByr90IZVUtgRW56qEOLX7xlww2NBuKrcavBlcmn+HH7GIUktquWkMPtvy6e0W0NgA5w==
   dependencies:
     debug "^4.1.1"
     endent "^2.0.1"
     find-cache-dir "^3.3.1"
     flat-cache "^3.0.4"
     micromatch "^4.0.2"
-    react-docgen-typescript "^2.0.0"
+    react-docgen-typescript "^2.1.1"
     tslib "^2.0.0"
 
 "@szmarczak/http-timer@^1.1.2":
@@ -1927,13 +1927,6 @@
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.clamp/-/lodash.clamp-4.0.6.tgz#ca51ac61e11c6c6109638f44179abb97031619cb"
   integrity sha512-+Rn39PbxYSbFFVXGEpw5t7EM8clP4P3d5rtbBFJYZUsgyWO1S0EYiNf+vKc2dRUy5eSI+oAVVlpgMF0vJcMUtA==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash.kebabcase@^4.1.6":
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.kebabcase/-/lodash.kebabcase-4.1.6.tgz#07b07aeca6c0647836de46f87a3cdfff72166c8e"
-  integrity sha512-+RAD9pCAa8kuVyCYTeDNiwBXwD/0u0p+hos3NSqD+tXTjJextbfF3farfYB+ssAKgEssoewXEtBsfwBpsI7gsA==
   dependencies:
     "@types/lodash" "*"
 
@@ -9586,7 +9579,7 @@ react-docgen-typescript@^1.22.0:
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.22.0.tgz#00232c8e8e47f4437cac133b879b3e9437284bee"
   integrity sha512-MPLbF8vzRwAG3GcjdL+OHQlhgtWsLTXs+7uJiHfEeT3Ur7IsZaNYqRTLQ9sj2nB6M6jylcPCeCmH7qbszJmecg==
 
-react-docgen-typescript@^2.0.0:
+react-docgen-typescript@^2.1.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz#4611055e569edc071204aadb20e1c93e1ab1659c"
   integrity sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==

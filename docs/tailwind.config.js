@@ -1,9 +1,10 @@
 module.exports = {
+  mode: "jit",
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
-  purge: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
       display: ["Computer Modern Serif", "serif"],

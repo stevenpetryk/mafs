@@ -22,12 +22,5 @@ module.exports = {
         path: "./src/pages/guides/",
       },
     },
-
-    {
-      resolve: "gatsby-plugin-codegen",
-      options: {
-        localSchemaFile: path.join(__dirname, "schema.json"),
-      },
-    },
   ],
 }

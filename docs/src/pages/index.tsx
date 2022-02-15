@@ -18,8 +18,8 @@ const Home: React.VFC<PageProps> = () => {
         <div className="text-center pointer-events-none" style={{ gridArea: "1 / 1 / 1 / 1" }}>
           <div className=" pointer-events-auto max-w-5xl mx-auto space-y-12 mt-12 sm:mt-24">
             <div className="space-y-4 px-6">
-              <h1 className="text-4xl sm:text-6xl font-normal font-display">
-                Components for math visualization
+              <h1 className="text-4xl sm:text-5xl font-normal font-display">
+                React components for interactive math
               </h1>
               <p className="text-lg sm:text-2xl text-black">
                 Build interactive, animated visualizations with declarative code.

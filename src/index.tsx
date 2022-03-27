@@ -57,3 +57,5 @@ export { useStopwatch } from "./animation/useStopwatch"
 export type { Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
 
 export type { Interval, Vector2 } from "./math"
+
+export { default as vec } from "./vec"

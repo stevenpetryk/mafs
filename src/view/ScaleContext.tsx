@@ -1,7 +1,7 @@
 import * as React from "react"
 import invariant from "tiny-invariant"
 
-import type { Matrix } from "vec-la"
+import type { Matrix } from "../vec"
 
 export interface ScaleContextShape {
   scaleX: (x: number) => number

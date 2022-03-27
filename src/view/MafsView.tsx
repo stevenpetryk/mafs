@@ -3,7 +3,7 @@ import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
 import PaneManager from "./PaneManager"
 import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
-import * as vec from "vec-la"
+import vec from "../vec"
 
 import { useGesture } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"

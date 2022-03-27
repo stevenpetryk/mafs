@@ -4,8 +4,8 @@ import {
   Circle,
   CartesianCoordinates,
   useMovablePoint,
+  vec,
 } from "mafs"
-import * as vec from "vec-la"
 
 export default function MovableCircle() {
   const pointOnCircle = useMovablePoint([

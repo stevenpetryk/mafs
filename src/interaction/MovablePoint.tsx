@@ -2,7 +2,7 @@ import { useDrag } from "@use-gesture/react"
 import * as React from "react"
 import invariant from "tiny-invariant"
 import { Theme } from "../display/Theme"
-import * as vec from "vec-la"
+import vec, { Matrix } from "../vec"
 import { matrixInvert, range, Vector2 } from "../math"
 import { useScaleContext } from "../view/ScaleContext"
 
@@ -17,7 +17,7 @@ export interface MovablePointProps {
    * Transform the point's movement and constraints by a transformation matrix. You can use `vec-la`
    * to build up such a matrix.
    */
-  transform?: vec.Matrix
+  transform?: Matrix
   /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
    *
@@ -28,20 +28,18 @@ export interface MovablePointProps {
   color?: string
 }
 
-const identity = vec.matrixBuilder().get()
-
 export const MovablePoint: React.VFC<MovablePointProps> = ({
   point,
   onMove,
   constrain = (point) => point,
   color = Theme.pink,
-  transform = identity,
+  transform = vec.identity,
 }) => {
   const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
   const inverseTransform = React.useMemo(() => getInverseTransform(transform), [transform])
 
   const [dragging, setDragging] = React.useState(false)
-  const [displayX, displayY] = vec.transform(vec.transform(point, transform), pixelMatrix)
+  const [displayX, displayY] = vec.trans(vec.trans(point, transform), pixelMatrix)
 
   const pickup = React.useRef<Vector2>([0, 0])
 
@@ -49,11 +47,11 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
     event?.stopPropagation()
     setDragging(down)
 
-    if (first) pickup.current = vec.transform(point, transform)
+    if (first) pickup.current = vec.trans(point, transform)
     if (vec.mag(pixelMovement) === 0) return
 
-    const movement = vec.transform(pixelMovement, inversePixelMatrix)
-    const newPoint = constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform))
+    const movement = vec.trans(pixelMovement, inversePixelMatrix)
+    const newPoint = constrain(vec.trans(vec.add(pickup.current, movement), inverseTransform))
 
     onMove(newPoint)
   })
@@ -97,7 +95,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
       // Transform the test back into the point's coordinate system
       const testMovement = vec.scale(testDir, dx)
       const testPoint = constrain(
-        vec.transform(vec.add(vec.transform(point, transform), testMovement), inverseTransform)
+        vec.trans(vec.add(vec.trans(point, transform), testMovement), inverseTransform)
       )
 
       if (vec.dist(testPoint, point) > min) {
@@ -125,7 +123,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
   )
 }
 
-function getInverseTransform(transform: vec.Matrix) {
+function getInverseTransform(transform: Matrix) {
   const invert = matrixInvert(transform)
   invariant(
     invert !== null,

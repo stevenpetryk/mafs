@@ -2,12 +2,63 @@ export type Vector2 = [x: number, y: number]
 /** An array representing a 3×3 matrix. */
 export type Matrix = [number, number, number, number, number, number, number, number, number]
 
+interface FluentMatrixBuilder {
+  /** Returns a 3×3 matrix representing a translation */
+  translate: (x: number, y: number) => FluentMatrixBuilder
+  /** Returns a 3×3 matrix representing a scale */
+  scale: (x: number, y: number) => FluentMatrixBuilder
+  /** Returns a 3×3 matrix representing a rotation */
+  rotate: (angle: number) => FluentMatrixBuilder
+  /** Returns a 3×3 matrix representing a shear */
+  shear: (x: number, y: number) => FluentMatrixBuilder
+  /** Return the constructed matrix */
+  get: () => Matrix
+}
+
+const identity: Matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1]
+
+function createMatrixBuilder(): FluentMatrixBuilder {
+  let matrix: Matrix = identity
+
+  const builder: FluentMatrixBuilder = {
+    translate(x: number, y: number) {
+      matrix = vec.matrixMult(matrix, [1, 0, x, 0, 1, y, 0, 0, 1])
+      return builder
+    },
+    scale(x: number, y: number) {
+      matrix = vec.matrixMult(matrix, [x, 0, 0, 0, y, 0, 0, 0, 1])
+      return builder
+    },
+    rotate(angle: number) {
+      matrix = vec.matrixMult(
+        matrix,
+        // prettier-ignore
+        [Math.cos(angle), -Math.sin(angle), 0, Math.sin(angle), Math.cos(angle), 0, 0, 0, 1]
+      )
+      return builder
+    },
+    shear(x: number, y: number) {
+      matrix = vec.matrixMult(matrix, [1, y, 0, x, 1, 0, 0, 0, 1])
+      return builder
+    },
+    get() {
+      return matrix
+    },
+  }
+
+  return builder
+}
+
+type TransformCallback = (builder: FluentMatrixBuilder) => FluentMatrixBuilder
+
 /**
  * A series of 2D linear algebra helpers.
  *
  * @note Some code taken from [@francisrstokes/vec-la](https://github.com/francisrstokes/vec-la).
  */
 const vec = {
+  identity,
+
   /** Adds two vectors */
   add(a: Vector2, b: Vector2): Vector2 {
     return [a[0] + b[0], a[1] + b[1]]
@@ -82,6 +133,18 @@ const vec = {
   /** Compute the distance between `v1` and `v2` */
   dist(v1: Vector2, v2: Vector2): number {
     return vec.mag(vec.sub(v1, v2))
+  },
+
+  /** Build a matrix by combining transforms */
+  buildMatrix(transform: TransformCallback): Matrix {
+    return transform(createMatrixBuilder()).get()
+  },
+
+  /** Transform an existing matrix using a transformer */
+  transformMatrix(matrix: Matrix, transform: TransformCallback): Matrix {
+    const builder = createMatrixBuilder()
+    transform(builder)
+    return vec.matrixMult(matrix, builder.get())
   },
 
   /** Inverts `m`, returning `null` if the matrix cannot be inverted */

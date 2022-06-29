@@ -1,0 +1,51 @@
+---
+sidebar_position: 1
+---
+
+# Installation
+
+Install the package from NPM:
+
+```sh
+yarn add mafs
+# or, if using NPM
+npm install --save mafs
+```
+
+And then make sure to load the stylesheet:
+
+```css
+@import "mafs/index.css";
+```
+
+Now, in your React app, you should be able to render a Mafs view.
+
+```tsx live
+function HelloFx() {
+  return (
+    <Mafs>
+      <CartesianCoordinates />
+    </Mafs>
+  )
+}
+```
+
+## Companion packages
+
+Mafs is useful on its own, but can be made even better by using a few third-party libraries and assets.
+
+### Vector math
+
+[vec-la](https://www.npmjs.com/package/vec-la) is a tiny package to do vector math. It implements vectors using arrays, which is the same as what Mafs uses. In fact, Mafs uses the package internally for things like mapping from the Cartesian coordinate space to the pixel coordinate space.
+
+## Fancy math font
+
+The font in use on this site—Computer Modern Serif—does not ship with Mafs to avoid licensing problems. Mafs will inherit the body's font. You can [download Computer Modern webfonts yourself][cmu-serif] to make it available on the page, then customize the Mafs font like this:
+
+[cmu-serif]: https://www.checkmyworking.com/cm-web-fonts/
+
+```css
+.MafsView {
+  font-family: "Computer Modern Serif", serif;
+}
+```

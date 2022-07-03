@@ -1,0 +1,53 @@
+---
+sidebar_position: 3
+---
+
+# Polygons
+
+Polygons take a number of points and create a closed shape.
+
+```jsx live
+function Polygons() {
+  const a = [2, 0]
+  const b = [-2, 0]
+  const c = useMovablePoint([0, 2])
+
+  return (
+    <Mafs height={500}>
+      <CartesianCoordinates />
+      <Polygon points={[[c.x, -c.y], a, b]} strokeStyle="dashed" />
+      <Polygon points={[c.point, a, b]} color={Theme.blue} />
+      {c.element}
+    </Mafs>
+  )
+}
+```
+
+## Floors
+
+If you're making a physics animation, it can be helpful to include some kind of "floor". Use a
+polygon for this. Make it green if you want it to look like grass.
+
+```jsx live
+function SimplePoint() {
+  const velocity = useMovablePoint([3, 3])
+
+  return (
+    <Mafs xAxisExtent={[-1, 10]} yAxisExtent={[-1, 4]}>
+      <CartesianCoordinates />
+      <Polygon
+        color={Theme.green}
+        fillOpacity={0.9}
+        points={[
+          [-1000, 0],
+          [1000, 0],
+          [1000, -1000],
+          [-1000, -1000],
+        ]}
+      />
+      <Vector tip={velocity.point} style="dashed" />
+      {velocity.element}
+    </Mafs>
+  )
+}
+```

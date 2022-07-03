@@ -1,0 +1,81 @@
+---
+sidebar_position: 2
+---
+
+# Lines
+
+There are a few components for lines, depending on how you want to construct them.
+
+## Line segment
+
+```jsx live
+function PointToPoint() {
+  const point1 = useMovablePoint([-1, -1])
+  const point2 = useMovablePoint([2, 1])
+
+  return (
+    <Mafs>
+      <CartesianCoordinates />
+      <Line.Segment point1={point1.point} point2={point2.point} />
+      {point1.element}
+      {point2.element}
+    </Mafs>
+  )
+}
+```
+
+## Line through two points
+
+```jsx live
+function LineThroughPointsExample() {
+  const point1 = useMovablePoint([-1, -1])
+  const point2 = useMovablePoint([2, 1])
+
+  return (
+    <Mafs>
+      <CartesianCoordinates />
+      <Line.ThroughPoints point1={point1.point} point2={point2.point} />
+      {point1.element}
+      {point2.element}
+    </Mafs>
+  )
+}
+```
+
+## Point-slope
+
+```jsx live
+function LinePointSlopeExample() {
+  const point = useMovablePoint([-1, -1])
+  const slope = useMovablePoint([0, 1], {
+    constrain: "vertical",
+  })
+
+  return (
+    <Mafs>
+      <CartesianCoordinates />
+      <Line.PointSlope point={point.point} slope={slope.y} />
+      {point.element}
+      {slope.element}
+    </Mafs>
+  )
+}
+```
+
+## Point and angle
+
+```jsx live
+function LinePointAngleExample() {
+  const point = useMovablePoint([-1, -1])
+  const { time: angle, start } = useStopwatch()
+  React.useEffect(() => start(), [start])
+
+  return (
+    <Mafs>
+      <CartesianCoordinates />
+      <Line.PointAngle point={point.point} angle={angle} />
+      {point.element}
+    </Mafs>
+  )
+}
+```

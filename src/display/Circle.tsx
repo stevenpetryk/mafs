@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Filled } from "./Theme"
 import { Ellipse } from "./Ellipse"
 import { Vector2 } from "../math"

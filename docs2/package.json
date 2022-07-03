@@ -18,6 +18,7 @@
     "@docusaurus/preset-classic": "2.0.0-beta.21",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
+    "lodash-es": "^4.17.21",
     "mafs": "link:../src",
     "prism-react-renderer": "^1.3.3",
     "react": "link:../node_modules/react",

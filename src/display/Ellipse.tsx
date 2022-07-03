@@ -1,5 +1,5 @@
-import React from "react"
-import { Filled, theme } from "./Theme"
+import * as React from "react"
+import { Filled, Theme } from "./Theme"
 import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../math"
 
@@ -10,14 +10,14 @@ export interface EllipseProps extends Filled {
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>
 }
 
-const Ellipse: React.VFC<EllipseProps> = ({
+export const Ellipse: React.VFC<EllipseProps> = ({
   center,
   radius,
   angle = 0,
   strokeStyle = "solid",
   strokeOpacity = 1.0,
   weight = 2,
-  color = theme.foreground,
+  color = Theme.foreground,
   fillOpacity = 0.15,
   svgEllipseProps = {},
 }) => {
@@ -46,5 +46,3 @@ const Ellipse: React.VFC<EllipseProps> = ({
     />
   )
 }
-
-export default Ellipse

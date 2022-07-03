@@ -1,10 +1,10 @@
-import React from "react"
+import * as React from "react"
 import * as vec from "vec-la"
 
 import { clamp, Vector2 } from "../math"
 import { usePaneContext } from "../view/PaneManager"
 import { useScaleContext } from "../view/ScaleContext"
-import { theme } from "./Theme"
+import { Theme } from "./Theme"
 
 export interface VectorFieldProps {
   xy: (x: number, y: number) => [number, number]
@@ -16,12 +16,12 @@ export interface VectorFieldProps {
 
 const xyOpacityDefault = () => 1
 
-const VectorField: React.VFC<VectorFieldProps> = ({
+export const VectorField: React.VFC<VectorFieldProps> = ({
   xy,
   step = 1,
   xyOpacity = xyOpacityDefault,
   opacityStep = xyOpacity === xyOpacityDefault ? 1 : 0.2,
-  color = theme.foreground,
+  color = Theme.foreground,
 }) => {
   const { pixelMatrix } = useScaleContext()
   const { xPanes, yPanes } = usePaneContext()
@@ -89,8 +89,6 @@ const VectorField: React.VFC<VectorFieldProps> = ({
     </>
   )
 }
-
-export default VectorField
 
 interface Layer {
   d: string

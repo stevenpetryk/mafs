@@ -1,4 +1,3 @@
-import React from "react"
 import { FunctionGraph, Theme } from ".."
 import renderToImage from "../tests/renderToImage"
 

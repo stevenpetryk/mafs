@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react"
+import * as React from "react"
 import { useCoordinateContext } from "./CoordinateContext"
 import { range, Interval } from "../math"
 
@@ -18,7 +18,7 @@ const PaneContext = React.createContext<PaneContextShape>({
 PaneContext.displayName = "PaneContext"
 
 export function usePaneContext(): PaneContextShape {
-  return useContext(PaneContext)
+  return React.useContext(PaneContext)
 }
 
 const PaneManager: React.FC = ({ children }) => {
@@ -36,17 +36,17 @@ const PaneManager: React.FC = ({ children }) => {
   const yLowerBound = Math.floor(yMin / yStep) * yStep
   const yUpperBound = Math.ceil(yMax / yStep) * yStep
 
-  const xPanes = useMemo(
+  const xPanes = React.useMemo(
     () => range(xLowerBound, xUpperBound, xStep).map((xMin) => [xMin, xMin + xStep] as Interval),
     [xLowerBound, xUpperBound, xStep]
   )
 
-  const yPanes = useMemo(
+  const yPanes = React.useMemo(
     () => range(yLowerBound, yUpperBound, yStep).map((yMin) => [yMin, yMin + yStep] as Interval),
     [yLowerBound, yUpperBound, yStep]
   )
 
-  const context = useMemo(
+  const context = React.useMemo(
     () => ({
       xPanes,
       yPanes,

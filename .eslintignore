@@ -1,6 +1,7 @@
 node_modules
 build
 docs/public
+docs/src/guide-examples
 
 gatsby-config.js
 *.config.js

@@ -1,4 +1,4 @@
-export const theme = {
+export const Theme = {
   foreground: "var(--mafs-fg)",
   background: "var(--mafs-bg)",
 

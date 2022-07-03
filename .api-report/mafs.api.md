@@ -4,7 +4,7 @@
 
 ```ts
 
-import { default as React_2 } from 'react';
+import * as React_2 from 'react';
 import * as vec from 'vec-la';
 import { VFC } from 'react';
 
@@ -175,7 +175,7 @@ export interface PointAngleProps extends Stroked {
 // @public (undocumented)
 export interface PointProps {
     // (undocumented)
-    color: string;
+    color?: string;
     // (undocumented)
     opacity?: number;
     // (undocumented)

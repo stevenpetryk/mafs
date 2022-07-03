@@ -1,5 +1,5 @@
-import OfX from "./FunctionGraph/OfX"
-import Parametric from "./FunctionGraph/Parametric"
+import { OfX } from "./FunctionGraph/OfX"
+import { ParametricFunction as Parametric } from "./FunctionGraph/Parametric"
 
 export const FunctionGraph = {
   OfX,

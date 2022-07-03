@@ -1,5 +1,4 @@
-import React from "react"
-import Ellipse from "./Ellipse"
+import { Ellipse } from "./Ellipse"
 import renderToImage from "../tests/renderToImage"
 
 describe("<Ellipse />", () => {

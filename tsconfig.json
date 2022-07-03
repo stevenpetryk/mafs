@@ -4,12 +4,11 @@
     "module": "es6",
     "target": "ES2021",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
     "noImplicitAny": true,
     "checkJs": true,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true
+    "allowJs": true
   },
   "include": ["src/**/*"],
   "exclude": ["src/tests/**/*", "src/**/*.test.*"]

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import * as React from "react"
 import invariant from "tiny-invariant"
 
 export interface CoordinateContextShape {
@@ -13,7 +13,7 @@ export interface CoordinateContextShape {
 const CoordinateContext = React.createContext<CoordinateContextShape | null>(null)
 
 export function useCoordinateContext(): CoordinateContextShape {
-  const context = useContext(CoordinateContext)
+  const context = React.useContext(CoordinateContext)
   invariant(
     context,
     "CoordinateContext is not loaded. Are you rendering a Mafs component outside of a MafsView?"

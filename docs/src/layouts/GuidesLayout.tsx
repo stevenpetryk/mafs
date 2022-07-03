@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import DefaultLayout from "./DefaultLayout"
 import GuidesSidebar from "./GuidesSidebar"
 import fancyFx from "helpers/fancyFx"

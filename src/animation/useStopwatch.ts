@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import * as React from "react"
 
 export interface StopwatchArguments {
   /** The start time in seconds */
@@ -23,14 +23,14 @@ export interface Stopwatch {
   setTime: (time: number) => void
 }
 
-export default function useStopwatch(options?: StopwatchArguments): Stopwatch {
+export function useStopwatch(options?: StopwatchArguments): Stopwatch {
   const { startTime = 0, endTime = Infinity } = options || {}
 
-  const startClockTime = useRef<DOMHighResTimeStamp | null>(null)
-  const [time, setTime] = useState(startTime)
-  const [playing, setPlaying] = useState(false)
+  const startClockTime = React.useRef<DOMHighResTimeStamp | null>(null)
+  const [time, setTime] = React.useState(startTime)
+  const [playing, setPlaying] = React.useState(false)
 
-  useEffect(() => {
+  React.useEffect(() => {
     let request = -1
 
     function tick(now: DOMHighResTimeStamp) {
@@ -59,8 +59,8 @@ export default function useStopwatch(options?: StopwatchArguments): Stopwatch {
     return () => window.cancelAnimationFrame(request)
   }, [playing, endTime])
 
-  const start = useCallback(() => setPlaying(true), [])
-  const stop = useCallback(() => {
+  const start = React.useCallback(() => setPlaying(true), [])
+  const stop = React.useCallback(() => {
     startClockTime.current = null
     setPlaying(false)
     setTime(startTime)

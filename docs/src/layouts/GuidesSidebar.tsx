@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import path from "path"
 import kebabCase from "lodash.kebabcase"

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import * as React from "react"
 import { triangleArea, Vector2 } from "../../math"
 import { Stroked } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
@@ -36,7 +36,7 @@ export interface ParametricProps extends Stroked {
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
-const ParametricFunction: React.VFC<ParametricProps> = ({
+export const ParametricFunction: React.VFC<ParametricProps> = ({
   xy,
   t,
   color,
@@ -51,7 +51,7 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
   const [tMin, tMax] = t
   const areaThreshold = -0.1 / (scaleX(1) * scaleY(1))
 
-  const svgPath = useMemo(() => {
+  const svgPath = React.useMemo(() => {
     let pathDescriptor = "M "
 
     function smartSmooth(
@@ -103,5 +103,3 @@ const ParametricFunction: React.VFC<ParametricProps> = ({
     />
   )
 }
-
-export default ParametricFunction

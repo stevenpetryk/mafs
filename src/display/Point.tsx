@@ -1,19 +1,19 @@
-import React from "react"
+import * as React from "react"
 import { useScaleContext } from "../view/ScaleContext"
-import { theme } from "./Theme"
+import { Theme } from "./Theme"
 
 export interface PointProps {
   x: number
   y: number
-  color: string
+  color?: string
   opacity?: number
   svgCircleProps?: React.SVGProps<SVGCircleElement>
 }
 
-const Point: React.VFC<PointProps> = ({
+export const Point: React.VFC<PointProps> = ({
   x,
   y,
-  color = theme.foreground,
+  color = Theme.foreground,
   opacity = 1,
   svgCircleProps = {},
 }) => {
@@ -29,5 +29,3 @@ const Point: React.VFC<PointProps> = ({
     />
   )
 }
-
-export default Point

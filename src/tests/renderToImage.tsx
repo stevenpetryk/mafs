@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import ReactDOMServer from "react-dom/server"
 import fs from "fs"
 import path from "path"

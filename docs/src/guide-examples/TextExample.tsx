@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 // prettier-ignore
 import { Mafs, CartesianCoordinates, Text, useMovablePoint } from "mafs"
 

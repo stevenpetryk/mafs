@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import * as React from "react"
 import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
 import PaneManager from "./PaneManager"
 import MapContext from "./MapContext"
@@ -24,7 +24,7 @@ export interface MafsViewProps {
   ssr?: boolean
 }
 
-const MafsView: React.FC<MafsViewProps> = ({
+export const MafsView: React.FC<MafsViewProps> = ({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
@@ -33,18 +33,18 @@ const MafsView: React.FC<MafsViewProps> = ({
   children,
   ssr = false,
 }) => {
-  const [visible, setVisible] = useState(ssr ? true : false)
+  const [visible, setVisible] = React.useState(ssr ? true : false)
   const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
 
   const { ref, width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>()
 
-  useEffect(() => {
+  React.useEffect(() => {
     setVisible(true)
   }, [visible])
 
   const [xMinDefault, xMaxDefault] = xAxisExtent
   const [yMinDefault, yMaxDefault] = yAxisExtent
-  const [offset, setOffset] = useState<Vector2>([0, 0])
+  const [offset, setOffset] = React.useState<Vector2>([0, 0])
   const [xMin, yMin] = vec.add([xMinDefault, yMinDefault], offset)
   const [xMax, yMax] = vec.add([xMaxDefault, yMaxDefault], offset)
 
@@ -60,32 +60,35 @@ const MafsView: React.FC<MafsViewProps> = ({
     { enabled: pan }
   )
 
-  const mapX = useCallback(
+  const mapX = React.useCallback(
     (x: number) => round(((x - xMin) / (xMax - xMin)) * width),
     [xMin, xMax, width]
   )
 
-  const mapY = useCallback(
+  const mapY = React.useCallback(
     (y: number) => round(((y - yMax) / (yMin - yMax)) * height),
     [yMin, yMax, height]
   )
 
-  const scaleX = useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
-  const scaleY = useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
-  const unscaleX = useCallback((x: number) => round((x / width) * xSpan, 5), [xSpan, width])
-  const unscaleY = useCallback((y: number) => round((-y / height) * ySpan, 5), [ySpan, height])
-  const pixelMatrix = useMemo(
+  const scaleX = React.useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
+  const scaleY = React.useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
+  const unscaleX = React.useCallback((x: number) => round((x / width) * xSpan, 5), [xSpan, width])
+  const unscaleY = React.useCallback(
+    (y: number) => round((-y / height) * ySpan, 5),
+    [ySpan, height]
+  )
+  const pixelMatrix = React.useMemo(
     () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
     [scaleX, scaleY]
   )
-  const inversePixelMatrix = useMemo(
+  const inversePixelMatrix = React.useMemo(
     () => vec.matrixBuilder().scale(unscaleX(1), unscaleY(1)).get(),
     [unscaleX, unscaleY]
   )
 
   const cssScale = `scale(${scaleX(1)} ${scaleY(1)})`
 
-  const coordinateContext = useMemo<CoordinateContextShape>(
+  const coordinateContext = React.useMemo<CoordinateContextShape>(
     () => ({
       xMin,
       xMax,
@@ -97,7 +100,7 @@ const MafsView: React.FC<MafsViewProps> = ({
     [xMin, xMax, yMin, yMax, height, width]
   )
 
-  const scaleContext = useMemo<ScaleContextShape>(
+  const scaleContext = React.useMemo<ScaleContextShape>(
     () => ({
       scaleX,
       scaleY,
@@ -138,5 +141,3 @@ const MafsView: React.FC<MafsViewProps> = ({
     </div>
   )
 }
-
-export default MafsView

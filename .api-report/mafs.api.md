@@ -175,7 +175,7 @@ export interface PointAngleProps extends Stroked {
 // @public (undocumented)
 export interface PointProps {
     // (undocumented)
-    color: string;
+    color?: string;
     // (undocumented)
     opacity?: number;
     // (undocumented)

@@ -5,7 +5,7 @@ import { Theme } from "./Theme"
 export interface PointProps {
   x: number
   y: number
-  color: string
+  color?: string
   opacity?: number
   svgCircleProps?: React.SVGProps<SVGCircleElement>
 }

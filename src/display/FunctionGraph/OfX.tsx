@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import * as React from "react"
 import { round } from "../../math"
 import { usePaneContext } from "../../view/PaneManager"
 import { Stroked } from "../../display/Theme"
@@ -10,7 +10,7 @@ export interface OfXProps extends Stroked {
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
-const OfX: React.VFC<OfXProps> = ({
+export const OfX: React.VFC<OfXProps> = ({
   y,
   color,
   quality = "low",
@@ -39,7 +39,7 @@ const OfX: React.VFC<OfXProps> = ({
       break
   }
 
-  const getSegment = useCallback(
+  const getSegment = React.useCallback(
     (min: number, max: number) => {
       const dx = (max - min) / (500 * subsampling)
 
@@ -57,7 +57,7 @@ const OfX: React.VFC<OfXProps> = ({
     [y, yLowerBound, yUpperBound, subsampling]
   )
 
-  const d = useMemo(
+  const d = React.useMemo(
     () => `M ${panes.map(([min, max]) => getSegment(min, max)).join(" ")}`,
     [panes, getSegment]
   )
@@ -81,5 +81,3 @@ const OfX: React.VFC<OfXProps> = ({
     />
   )
 }
-
-export default OfX

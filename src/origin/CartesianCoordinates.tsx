@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import * as React from "react"
 import GridPattern from "./GridPattern"
 import { range, round } from "../math"
 import { usePaneContext } from "../view/PaneManager"
@@ -36,7 +36,7 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
   const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as AxisOptions
   const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as AxisOptions
 
-  const id = useMemo(() => `mafs-grid-${incrementer++}`, [])
+  const id = React.useMemo(() => `mafs-grid-${incrementer++}`, [])
 
   return (
     <>

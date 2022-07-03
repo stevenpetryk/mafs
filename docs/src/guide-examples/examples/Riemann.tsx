@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import * as React from "react"
 import {
   Mafs,
   useMovablePoint,
@@ -20,7 +20,8 @@ export default function RiemannSum() {
   const maxNumPartitions = 200
 
   // Inputs
-  const [numPartitions, setNumPartitions] = useState(40)
+  const [numPartitions, setNumPartitions] =
+    React.useState(40)
   const lift = useMovablePoint([0, -1], {
     constrain: "vertical",
   })

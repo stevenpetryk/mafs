@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import * as vec from "vec-la"
 import { useScaleContext } from "../view/ScaleContext"
 
@@ -14,7 +14,7 @@ export interface TextProps {
   svgTextProps?: React.SVGAttributes<SVGTextElement>
 }
 
-const Text: React.FC<TextProps> = ({
+export const Text: React.FC<TextProps> = ({
   children,
   x,
   y,

@@ -1,4 +1,3 @@
-import React from "react"
 import { Theme, VectorField } from ".."
 import renderToImage from "../tests/renderToImage"
 

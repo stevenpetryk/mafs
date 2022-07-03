@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import * as React from "react"
 import {
   Mafs,
   Point,
@@ -14,7 +14,7 @@ export default function AnimatedPoint() {
   // We declare `start` as a dependency of the
   // effect to make React happy, but Mafs
   // guarantees its identity will never change.
-  useEffect(() => start(), [start])
+  React.useEffect(() => start(), [start])
 
   return (
     <Mafs height={500}>

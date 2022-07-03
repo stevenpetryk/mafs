@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "eslint": "^7",
-    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.3.1",
     "jest-image-snapshot": "^4.5.1",

@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react"
+import * as React from "react"
 import * as vec from "vec-la"
-import { theme } from "../display/Theme"
+import { Theme } from "../display/Theme"
 import { Vector2 } from "../math"
-import MovablePoint from "./MovablePoint"
+import { MovablePoint } from "./MovablePoint"
 
 const identity = vec.matrixBuilder().get()
 
@@ -34,12 +34,12 @@ export interface UseMovablePoint {
   setPoint: (point: Vector2) => void
 }
 
-function useMovablePoint(
+export function useMovablePoint(
   initialPoint: Vector2,
-  { constrain, color = theme.pink, transform = identity }: UseMovablePointArguments = {}
+  { constrain, color = Theme.pink, transform = identity }: UseMovablePointArguments = {}
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
-  const [point, setPoint] = useState<Vector2>(initialPoint)
+  const [point, setPoint] = React.useState<Vector2>(initialPoint)
   const [x, y] = point
 
   const constraintFunction: ConstraintFunction = React.useMemo(() => {
@@ -54,7 +54,7 @@ function useMovablePoint(
     return ([x, y]) => [x, y]
   }, [constrain, initialX, initialY])
 
-  const element = useMemo(() => {
+  const element = React.useMemo(() => {
     return (
       <MovablePoint
         {...{ point, transform, color }}
@@ -73,5 +73,3 @@ function useMovablePoint(
     setPoint,
   }
 }
-
-export default useMovablePoint

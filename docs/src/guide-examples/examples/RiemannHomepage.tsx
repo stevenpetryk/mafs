@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import * as React from "react"
 import {
   Mafs,
   useMovablePoint,
@@ -32,8 +32,8 @@ export default function RiemannHomepage() {
   })
   const value = easeInOutCubic(time, 0, 1, duration)
 
-  useEffect(() => start(), [start])
-  useEffect(() => {
+  React.useEffect(() => start(), [start])
+  React.useEffect(() => {
     time === duration && setReady(true)
   }, [time, duration])
 
@@ -44,7 +44,7 @@ export default function RiemannHomepage() {
 
   const a = useMovablePoint([from, 0], { constrain })
   const b = useMovablePoint([to, 0], { constrain })
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = React.useState(false)
 
   // The function
   const fn = (x: number) =>

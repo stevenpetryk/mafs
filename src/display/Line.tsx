@@ -1,7 +1,7 @@
-import PointAngle from "./Line/PointAngle"
-import PointSlope from "./Line/PointSlope"
-import ThroughPoints from "./Line/ThroughPoints"
-import Segment from "./Line/Segment"
+import { PointAngle } from "./Line/PointAngle"
+import { PointSlope } from "./Line/PointSlope"
+import { ThroughPoints } from "./Line/ThroughPoints"
+import { Segment } from "./Line/Segment"
 
 export const Line = {
   PointAngle,

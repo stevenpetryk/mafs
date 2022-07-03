@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Mafs, CartesianCoordinates } from "mafs"
 
 export default function HelloFx() {

@@ -1,5 +1,5 @@
-import React from "react"
-import { theme, Filled } from "./Theme"
+import * as React from "react"
+import { Theme, Filled } from "./Theme"
 import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../math"
 
@@ -8,9 +8,9 @@ export interface PolygonProps extends Filled {
   svgPolygonProps?: React.SVGProps<SVGPolygonElement>
 }
 
-const Polygon: React.VFC<PolygonProps> = ({
+export const Polygon: React.VFC<PolygonProps> = ({
   points,
-  color = theme.foreground,
+  color = Theme.foreground,
   weight = 2,
   fillOpacity = 0.15,
   strokeOpacity = 1.0,
@@ -41,5 +41,3 @@ const Polygon: React.VFC<PolygonProps> = ({
     ></polygon>
   )
 }
-
-export default Polygon

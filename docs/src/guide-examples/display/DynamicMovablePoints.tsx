@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 // prettier-ignore
 import { Mafs, CartesianCoordinates, MovablePoint, Vector2, useMovablePoint, Line, Theme } from "mafs"
 import * as vec from "vec-la"

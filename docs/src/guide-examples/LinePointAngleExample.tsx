@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import * as React from "react"
 import {
   Mafs,
   Line,
@@ -10,7 +10,7 @@ import {
 export default function LinePointAngleExample() {
   const point = useMovablePoint([-1, -1])
   const { time: angle, start } = useStopwatch()
-  useEffect(() => start(), [start])
+  React.useEffect(() => start(), [start])
 
   return (
     <Mafs>

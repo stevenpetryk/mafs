@@ -1,6 +1,6 @@
-import React from "react"
+import * as React from "react"
 import * as vec from "vec-la"
-import { Stroked, theme } from "../../display/Theme"
+import { Stroked, Theme } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
 import { round, Vector2 } from "../../math"
 
@@ -9,10 +9,10 @@ export interface ThroughPointsProps extends Stroked {
   point2: Vector2
 }
 
-const ThroughPoints: React.VFC<ThroughPointsProps> = ({
+export const ThroughPoints: React.VFC<ThroughPointsProps> = ({
   point1,
   point2,
-  color = theme.foreground,
+  color = Theme.foreground,
   style = "solid",
   weight = 2,
   opacity = 1.0,
@@ -36,5 +36,3 @@ const ThroughPoints: React.VFC<ThroughPointsProps> = ({
     />
   )
 }
-
-export default ThroughPoints

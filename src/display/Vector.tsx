@@ -1,7 +1,7 @@
-import React, { useMemo } from "react"
+import * as React from "react"
 import { useScaleContext } from "../view/ScaleContext"
 import { Stroked } from "../display/Theme"
-import { theme } from "./Theme"
+import { Theme } from "./Theme"
 import * as vec from "vec-la"
 import { Vector2 } from "../math"
 
@@ -14,10 +14,10 @@ export interface VectorProps extends Stroked {
   svgLineProps?: React.SVGProps<SVGLineElement>
 }
 
-const Vector: React.VFC<VectorProps> = ({
+export const Vector: React.VFC<VectorProps> = ({
   tail = [0, 0],
   tip,
-  color = theme.foreground,
+  color = Theme.foreground,
   weight = 2,
   style = "solid",
   opacity = 1.0,
@@ -27,7 +27,7 @@ const Vector: React.VFC<VectorProps> = ({
   const pixelTail = vec.transform(tail, pixelMatrix)
   const pixelTip = vec.transform(tip, pixelMatrix)
 
-  const id = useMemo(() => `mafs-triangle-${incrementer++}`, [])
+  const id = React.useMemo(() => `mafs-triangle-${incrementer++}`, [])
 
   return (
     <>
@@ -62,5 +62,3 @@ const Vector: React.VFC<VectorProps> = ({
     </>
   )
 }
-
-export default Vector

@@ -55,6 +55,16 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      "docusaurus-plugin-react-docgen-typescript",
+      {
+        src: ["../src/**/*.{ts,tsx,js,jsx}"],
+        tsConfig: "./tsconfig.json",
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({

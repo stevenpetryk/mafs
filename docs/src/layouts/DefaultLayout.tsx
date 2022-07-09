@@ -39,6 +39,9 @@ const DefaultLayout: React.FC<{ title?: string }> = ({ children, title }) => (
           <a href="https://github.com/stevenpetryk/mafs">GitHub</a>
         </p>
         <p>
+          <a href="https://discord.gg/mafs">Discord</a>
+        </p>
+        <p>
           <a href="https://github.com/stevenpetryk/mafs/issues/new">Open an issue</a>
         </p>
       </div>
@@ -69,6 +72,11 @@ function Nav() {
           <Link to="/guides/get-started/installation/" className={aClass}>
             Guides
           </Link>
+        </li>
+        <li>
+          <a href="https://discord.gg/mafs" className={aClass} rel="noreferrer" target="_blank">
+            Discord <span aria-hidden="true">↗</span>
+          </a>
         </li>
         <li>
           <a

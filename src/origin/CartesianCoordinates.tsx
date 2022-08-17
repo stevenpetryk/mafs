@@ -38,6 +38,11 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
 
   const id = React.useMemo(() => `mafs-grid-${incrementer++}`, [])
 
+  const { xPaneRange, yPaneRange } = usePaneContext()
+  const { scaleX, scaleY } = useScaleContext()
+  const [minX, maxX] = xPaneRange.map(scaleX)
+  const [minY, maxY] = yPaneRange.map(scaleY)
+
   return (
     <>
       <defs>
@@ -50,8 +55,7 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
         />
       </defs>
 
-      {/* TODO don't hardcode the position and size of this  */}
-      <rect fill={`url(#${id})`} x={-10000000} y={-10000000} width={20000000} height={20000000} />
+      <rect fill={`url(#${id})`} x={minX} y={maxY} width={maxX - minX} height={-(maxY - minY)} />
 
       {xAxis.labels && <XLabels labelMaker={xAxis.labels} separation={xAxis.lines || 1} />}
       {yAxis.labels && <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />}

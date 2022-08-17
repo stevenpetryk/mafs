@@ -1,5 +1,6 @@
 import * as React from "react"
-import Highlight from "react-highlight.js"
+
+import hljs from "highlight.js"
 
 interface Props {
   source: string
@@ -26,13 +27,25 @@ const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) =
     source = source.trim()
   }
 
+  const codeRef = React.useRef<HTMLPreElement>(null)
+
+  React.useEffect(() => {
+    if (codeRef.current) {
+      hljs.highlightBlock(codeRef.current)
+    }
+  }, [source])
+
   return (
     <div className="w-auto overflow-hidden sm:text-base text-sm -m-6 md:m-0 md:rounded-lg">
       <div className="unround-mafs">{component}</div>
 
       <div>
         <div className="bg-gray-900 border-gray-800 border-t text-gray-100 p-3 sm:p-6 overflow-x-auto">
-          <Highlight language="tsx">{source}</Highlight>
+          <pre>
+            <code ref={codeRef} className="language-tsx">
+              {source}
+            </code>
+          </pre>
         </div>
         <span aria-hidden={true} className="syntax-badge">
           TSX

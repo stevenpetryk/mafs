@@ -9,6 +9,7 @@
     "dedent": "^0.7.0",
     "gatsby": "^4.0.0",
     "graphql": "^15.4.0",
+    "highlight.js": "^11.6.0",
     "js-easing-functions": "^1.0.3",
     "lodash.clamp": "^4.0.3",
     "lodash.kebabcase": "^4.1.1",

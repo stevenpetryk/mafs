@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.18.17",
-    "@parcel/packager-ts": "^2.0.0",
-    "@parcel/transformer-typescript-types": "^2.0.0",
+    "@parcel/packager-ts": "^2.7.0",
+    "@parcel/transformer-typescript-types": "^2.7.0",
     "@swc/core": "1.2.208",
     "@swc/jest": "^0.2.21",
     "@types/expect-puppeteer": "^4.4.7",
@@ -46,7 +46,7 @@
     "jest": "^27.3.1",
     "jest-image-snapshot": "^4.5.1",
     "jest-puppeteer": "^6.0.0",
-    "parcel": "^2.0.0",
+    "parcel": "^2.7.0",
     "prettier": "^2.4.1",
     "puppeteer": "^10.4.0",
     "react": "^17.0.0",
@@ -59,7 +59,7 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
-    "@swc/helpers": "^0.2.14",
+    "@swc/helpers": "^0.4.2",
     "@use-gesture/react": "^10",
     "tiny-invariant": "^1",
     "use-resize-observer": "^7 || ^8",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+- Fixes a bug where cartesian coordinate lines would flicker due to some floating point rounding errors.
+
 ## 0.6.0
 
 - `MovablePoint` can now be used directly, no longer is it hidden behind `useMovablePoint`. See the [Movable Points docs](https://mafs.dev/guides/interaction/movable-points/).

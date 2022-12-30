@@ -12,7 +12,7 @@ Development is done inside of the Gatsby documentation site, which directly
 imports Mafs components from `src/`. To start the development server, run:
 
 ```
-yarn start
+pnpm start
 ```
 
 Then visit [localhost:8000](http://localhost:8000).

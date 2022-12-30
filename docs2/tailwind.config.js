@@ -1,0 +1,20 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./helpers/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    fontFamily: {
+      display: ["Computer Modern Serif", "serif"],
+    },
+    extend: {
+      backgroundPosition: {
+        "left-nudge": "center left 8px",
+      },
+    },
+  },
+  plugins: [],
+}

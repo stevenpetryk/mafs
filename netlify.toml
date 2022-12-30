@@ -1,3 +1,0 @@
-[build]
-  publish = "docs/public"
-  command = "yarn install && yarn build:docs"

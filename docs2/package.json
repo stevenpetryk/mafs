@@ -1,0 +1,32 @@
+{
+  "name": "docs2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/font": "13.1.1",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "endent": "^2.1.0",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.1.1",
+    "highlight.js": "^11.7.0",
+    "lodash": "^4.17.21",
+    "next": "13.1.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20",
+    "tailwindcss": "^3.2.4"
+  }
+}

@@ -58,8 +58,8 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
-    "@use-gesture/react": "^10",
     "@swc/helpers": "^0.4.14",
+    "@use-gesture/react": "^10",
     "resize-observer-polyfill": "^1.5.1",
     "tiny-invariant": "^1",
     "use-resize-observer": "^7 || ^8",

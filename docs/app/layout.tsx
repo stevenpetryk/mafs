@@ -2,20 +2,9 @@ import Link from "next/link"
 import { MafsLogo } from "../components/MafsLogo"
 import "./globals.css"
 
-import favicon from "./favicon.svg"
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-
-      <head>
-        <link rel="icon" href={favicon} />
-      </head>
-
       <head />
       <body className="flex flex-col min-h-screen items-stretch">
         <header className="sm:flex sm:space-x-6 sm:space-y-0 space-y-6 items-center p-6 self-center w-full max-w-5xl">

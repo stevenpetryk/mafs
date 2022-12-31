@@ -4,7 +4,7 @@ import PaneManager from "./PaneManager"
 import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
 
-import { useGesture } from "@use-gesture/react"
+import { useDrag } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
 import { round, Interval } from "../math"
 import * as vec from "../vec"
@@ -51,11 +51,11 @@ export const MafsView: React.FC<MafsViewProps> = ({
   const xSpan = xMax - xMin
   const ySpan = yMax - yMin
 
-  const bind = useGesture(
-    {
-      onDrag: ({ offset: [mx, my] }) => {
-        setOffset([(-mx / width) * xSpan, (my / height) * ySpan])
-      },
+  const bind = useDrag(
+    ({ offset: [mx, my], event, type }) => {
+      // Prevent document scroll
+      if (type.includes("key")) event.preventDefault()
+      setOffset([(-mx / width) * xSpan, (my / height) * ySpan])
     },
     { enabled: pan }
   )
@@ -114,7 +114,13 @@ export const MafsView: React.FC<MafsViewProps> = ({
   )
 
   return (
-    <div className="MafsWrapper" style={{ width: desiredCssWidth }} ref={ref} {...bind()}>
+    <div
+      className="MafsWrapper"
+      style={{ width: desiredCssWidth }}
+      ref={ref}
+      tabIndex={pan ? 0 : -1}
+      {...bind()}
+    >
       <CoordinateContext.Provider value={coordinateContext}>
         <ScaleContext.Provider value={scaleContext}>
           <MapContext.Provider value={{ mapX, mapY }}>

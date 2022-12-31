@@ -4,6 +4,7 @@
 
 .unround-mafs .MafsView {
   @apply rounded-none;
+  @apply rounded-t-lg;
 }
 
 .homepage-mafs .MafsView {

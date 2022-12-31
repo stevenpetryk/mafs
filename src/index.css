@@ -38,6 +38,11 @@
   touch-action: none;
 }
 
+.MafsWrapper:focus-visible {
+  border-radius: 5px;
+  outline: 3px solid #58a6ff;
+}
+
 .MafsView .draggable {
   transition: r 0.2s ease, stroke-width 0.2s ease;
   stroke-width: 18px;

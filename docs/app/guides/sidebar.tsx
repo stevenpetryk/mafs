@@ -25,7 +25,7 @@ function GuidesSidebar() {
 
   return (
     <nav>
-      <details className="md:hidden space-y-4">
+      <details className="md:hidden space-y-4 border-0">
         <summary className="text-xl font-bold p-4 cursor-default">All guides</summary>
         <div className="p-4 pt-0 space-y-4">{sectionsElements}</div>
       </details>

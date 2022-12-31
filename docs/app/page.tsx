@@ -19,7 +19,7 @@ export default function Home() {
               <h1 className="text-4xl sm:text-5xl font-normal font-display">
                 React components for interactive math
               </h1>
-              <p className="text-lg sm:text-2xl text-black">
+              <p className="text-lg sm:text-2xl">
                 Build interactive, animated visualizations with declarative code.
               </p>
             </div>

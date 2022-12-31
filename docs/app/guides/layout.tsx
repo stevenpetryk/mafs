@@ -18,7 +18,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
             rounded-md
             flex-shrink-0
 
-            bg-gray-200 border md:bg-transparent md:border-none
+            bg-gray-200 dark:bg-gray-800 dark:border-gray-700 border md:bg-transparent md:border-none
             md:w-56 mb-12
 
             md:pb-12 md:pr-4
@@ -60,8 +60,12 @@ function NavButton({
   return (
     <Link
       href={href}
-      className="py-3 px-6 text-slate-800 no-underline rounded-lg font-semibold bg-slate-50 border-2 border-transparent
-      hover:bg-slate-100 hover:border-slate-200"
+      className={`
+        py-3 px-6
+        no-underline rounded-lg font-semibold border-2 border-transparent
+        bg-gray-50 text-gray-800 hover:bg-gray-100 hover:border-gray-200
+        dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:border-gray-700
+      `}
     >
       <div className="flex items-center gap-4 leading-tight">
         {dir === "prev" && (

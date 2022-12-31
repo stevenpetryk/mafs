@@ -21,7 +21,7 @@ const Code: React.FC<CodeProps> = ({ language, source }) => {
   }, [source])
 
   return (
-    <div className="bg-gray-900 text-gray-100 overflow-hidden text-sm -m-6 md:m-0 sm:text-base md:rounded-lg">
+    <div className="bg-gray-900 dark:bg-slate-800 dark:shadow-md text-gray-100 overflow-hidden text-sm -m-6 md:m-0 sm:text-base md:rounded-lg">
       <span aria-hidden={true} className="syntax-badge">
         {language.toUpperCase()}
       </span>

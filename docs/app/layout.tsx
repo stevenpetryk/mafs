@@ -6,7 +6,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head />
-      <body className="flex flex-col min-h-screen items-stretch">
+      <body className="flex flex-col min-h-screen items-stretch dark:bg-gray-900">
         <header className="sm:flex sm:space-x-6 sm:space-y-0 space-y-6 items-center p-6 self-center w-full max-w-5xl">
           <div className="flex-shrink-0 flex justify-center md:block md:w-56 mx-auto lg:mx-0">
             <Logo />
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Spacer */}
         <div className="my-auto" />
 
-        <footer className="bg-gray-100 border-t py-8 mt-24">
+        <footer className="bg-gray-100 dark:text-slate-500 dark:bg-transparent dark:border-t-0 border-t py-8 mt-24">
           <div className="max-w-5xl px-6 mx-auto space-y-2">
             <p>
               &copy; {new Date().getFullYear()} Steven Petryk. Follow{" "}
@@ -59,7 +59,7 @@ function Nav() {
     block px-3 py-2
     rounded
     bg-transparent
-    transition-colors hover:bg-gray-200
+    transition-colors hover:bg-gray-200 dark:hover:bg-gray-800
   `
 
   return (

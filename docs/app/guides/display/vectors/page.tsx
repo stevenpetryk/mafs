@@ -7,10 +7,11 @@ import VectorExampleSource from "!raw-loader!guide-examples/display/vectors/Vect
 function Vectors() {
   return (
     <>
+      <p>Vectors are a handy line-and-arrow shape for visualizing direction and magnitude.</p>
+
       <p>
-        Vectors are a handy line-and-arrow shape for visualizing direction and magnitude. To do
-        actual vector math (linear algebra), we recommend utilizing the <code>vec-la</code> package,
-        as in this example:
+        Mafs ships with a small selection of common linear algebra functions (for both vectors and
+        matrices), exposing them as <code>vec</code>. Those utilities are used extensively here.
       </p>
 
       <CodeAndExample component={<VectorExample />} source={VectorExampleSource} />

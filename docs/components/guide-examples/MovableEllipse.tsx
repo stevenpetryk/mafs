@@ -23,7 +23,10 @@ export default function MovableEllipse() {
     transform: translation,
     // Constrain this point to only move in a circle
     constrain: (position) =>
-      vec.scale(vec.norm(position), rotationHintRadius),
+      vec.scale(
+        vec.normalize(position),
+        rotationHintRadius
+      ),
   })
   const angle = Math.PI / 2 - Math.atan2(...rotate.point)
   const rotation = vec.matrixBuilder().rotate(angle).get()
@@ -31,11 +34,11 @@ export default function MovableEllipse() {
   // Lastly, these two points are rotated and translated
   // according to the outer two points.
   const width = useMovablePoint([2, 0], {
-    transform: vec.composeTransform(translation, rotation),
+    transform: vec.matrixMult(translation, rotation),
     constrain: "horizontal",
   })
   const height = useMovablePoint([0, 1], {
-    transform: vec.composeTransform(translation, rotation),
+    transform: vec.matrixMult(translation, rotation),
     constrain: "vertical",
   })
 

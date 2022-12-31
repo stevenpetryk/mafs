@@ -28,28 +28,23 @@ function Page() {
 
       <CodeAndExample component={<Plain />} source={PlainSource} />
 
-      <h2>Companion packages</h2>
-
       <p>
         Mafs is useful on its own, but can be made even better by using a few third-party libraries
         and assets.
       </p>
 
-      <h3>Vector math</h3>
+      <h2>Vector math</h2>
 
       <p>
-        <a href="https://www.npmjs.com/package/vec-la">vec-la</a> is a tiny package to do vector
-        math. It implements vectors using arrays, which is the same as what Mafs uses. In fact, Mafs
-        uses the package internally for things like mapping from the Cartesian coordinate space to
-        the pixel coordinate space.
+        Mafs ships with a tiny set of linear algebra functions. You can import everything under
+        `vec`.
       </p>
 
       <Code
-        language="bash"
+        language="tsx"
         source={endent`
-          yarn add vec-la
-          # or, if using NPM
-          npm install --save vec-la
+          import { vec } from "mafs"
+          vec.add([1, 2], [2, 3]) // [3, 5]
         `}
       />
 

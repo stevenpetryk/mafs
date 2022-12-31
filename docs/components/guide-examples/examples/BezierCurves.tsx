@@ -35,10 +35,6 @@ function xyFromBernsteinPolynomial(
   ].reduce(vec.add, [0, 0])
 }
 
-function lerp(vec1: Vector2, vec2: Vector2, t: number) {
-  return vec.add(vec.scale(vec1, 1 - t), vec.scale(vec2, t))
-}
-
 function inPairs<T>(arr: T[]) {
   const pairs: [T, T][] = []
   for (let i = 0; i < arr.length - 1; i++) {
@@ -58,14 +54,14 @@ export default function BezierCurves() {
   const c1 = useMovablePoint([-2, -3])
   const c2 = useMovablePoint([2, 3])
 
-  const lerp1 = lerp(p1.point, c1.point, t)
-  const lerp2 = lerp(c1.point, c2.point, t)
-  const lerp3 = lerp(c2.point, p2.point, t)
+  const lerp1 = vec.lerp(p1.point, c1.point, t)
+  const lerp2 = vec.lerp(c1.point, c2.point, t)
+  const lerp3 = vec.lerp(c2.point, p2.point, t)
 
-  const lerp12 = lerp(lerp1, lerp2, t)
-  const lerp23 = lerp(lerp2, lerp3, t)
+  const lerp12 = vec.lerp(lerp1, lerp2, t)
+  const lerp23 = vec.lerp(lerp2, lerp3, t)
 
-  const lerpBezier = lerp(lerp12, lerp23, t)
+  const lerpBezier = vec.lerp(lerp12, lerp23, t)
 
   const duration = 2
   const { time, start } = useStopwatch({

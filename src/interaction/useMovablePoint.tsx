@@ -11,8 +11,8 @@ export interface UseMovablePointArguments {
   color?: string
 
   /**
-   * Transform the point's movement and constraints by a transformation matrix. You can use `vec-la`
-   * to build up such a matrix.
+   * Transform the point's movement and constraints by a transformation matrix. You can use the
+   * `vec` export to build up such a matrix.
    */
   transform?: vec.Matrix
 

@@ -30,7 +30,7 @@ export default function DynamicMovablePoints() {
           if (i === 0 || i === numPointsInBetween)
             return null
 
-          const point = vec.towards(
+          const point = vec.lerp(
             startPoint.point,
             endPoint.point,
             i / numPointsInBetween

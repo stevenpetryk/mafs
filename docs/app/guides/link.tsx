@@ -4,9 +4,9 @@ import Link from "next/link"
 import { useSelectedLayoutSegments } from "next/navigation"
 
 type GuideLinkProps = React.PropsWithChildren<{
-    sectionTitle: string
-    guideTitle: string
-  }>
+  sectionTitle: string
+  guideTitle: string
+}>
 
 export function GuideLink({ sectionTitle, guideTitle, children }: GuideLinkProps) {
   const segments = useSelectedLayoutSegments()

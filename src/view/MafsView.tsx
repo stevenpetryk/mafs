@@ -40,7 +40,7 @@ export const MafsView: React.FC<MafsViewProps> = ({
 
   React.useEffect(() => {
     setVisible(true)
-  }, [visible])
+  }, [])
 
   const [xMinDefault, xMaxDefault] = xAxisExtent
   const [yMinDefault, yMaxDefault] = yAxisExtent
@@ -114,12 +114,7 @@ export const MafsView: React.FC<MafsViewProps> = ({
   )
 
   return (
-    <div
-      className="MafsWrapper overflow-hidden w-auto"
-      style={{ width: desiredCssWidth }}
-      ref={ref}
-      {...bind()}
-    >
+    <div className="MafsWrapper" style={{ width: desiredCssWidth }} ref={ref} {...bind()}>
       <CoordinateContext.Provider value={coordinateContext}>
         <ScaleContext.Provider value={scaleContext}>
           <MapContext.Provider value={{ mapX, mapY }}>

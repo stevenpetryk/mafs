@@ -1,0 +1,131 @@
+@tailwind base;
+
+@layer base {
+  @import "./syntax-highlighting.css";
+  @import "./fonts/cmun/cmun-serif.css";
+  @import "mafs/index.css";
+  @import "./mafs-usage.css";
+
+  *,
+  *:before,
+  *:after {
+    position: relative;
+  }
+
+  body {
+    @apply text-gray-700;
+    @apply antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold;
+    @apply text-gray-900;
+  }
+
+  h1 .font-display,
+  h2 .font-display,
+  h3 .font-display,
+  h4 .font-display,
+  h5 .font-display,
+  h6 .font-display {
+    @apply font-normal;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+
+  p code,
+  ul code {
+    @apply rounded-md bg-gray-200 py-1 px-2 text-sm;
+  }
+
+  :focus {
+    outline-color: rgba(66, 153, 225, 0.5);
+    outline-width: 3px;
+  }
+
+  .prose {
+    @apply text-gray-800;
+    @apply leading-7;
+  }
+
+  .prose > h2,
+  .prose > h3,
+  .prose > h4 {
+    margin-top: 3rem !important;
+  }
+
+  .prose a {
+    @apply text-blue-700 underline;
+  }
+
+  .prose a:hover {
+    @apply text-blue-900 no-underline;
+  }
+
+  .prose ul {
+    @apply list-disc pl-8;
+  }
+  .prose ul > * + * {
+    margin-top: 0.5em;
+  }
+}
+
+@tailwind components;
+
+@layer components {
+  .outline-offset-6 {
+    outline-offset: 6px;
+  }
+
+  .active-sidebar-link:after {
+    display: block;
+    content: "";
+    position: absolute;
+    right: calc(100% + 0.5em);
+    top: 50%;
+    transform: translateY(-50%);
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    @apply bg-indigo-400;
+  }
+
+  .syntax-badge {
+    @apply absolute text-gray-400 font-bold bg-gray-800 top-0 right-0 px-3 tracking-wider text-xs rounded-bl-md;
+  }
+
+  footer a {
+    @apply underline;
+  }
+
+  .footer a:hover {
+    @apply no-underline;
+  }
+
+  a.button {
+    @apply outline-none rounded-md py-4 px-6 no-underline bg-blue-600 text-white;
+  }
+
+  a.button:hover {
+    @apply text-white bg-blue-500;
+  }
+
+  a.button:focus {
+    @apply ring;
+  }
+}
+
+@tailwind utilities;

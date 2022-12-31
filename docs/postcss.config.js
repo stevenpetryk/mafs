@@ -1,3 +1,6 @@
-module.exports = () => ({
-  plugins: [require("postcss-import"), require("tailwindcss")],
-})
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}

@@ -1,0 +1,16 @@
+.MafsView {
+  @apply rounded-md font-display;
+}
+
+.unround-mafs .MafsView {
+  @apply rounded-none;
+}
+
+.homepage-mafs .MafsView {
+  --mafs-bg: transparent;
+  --mafs-fg: black;
+
+  --mafs-origin-color: rgba(0, 0, 0, 0.25);
+  --mafs-line-color: transparent;
+  --grid-line-subdivision-color: transparent;
+}

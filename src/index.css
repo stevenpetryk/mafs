@@ -52,11 +52,28 @@
   cursor: grabbing;
 }
 
-.MafsView .draggable:focus,
-.MafsView circle.draggable:hover,
+.MafsView circle.draggable:hover {
+  r: 15;
+  stroke-width: 10;
+}
+
 .MafsView circle.draggable.dragging {
-  r: 15px;
+  r: 17.5;
   stroke-width: 0;
+}
+
+@supports selector(:focus-visible) {
+  .MafsView circle.draggable:focus-visible {
+    r: 15;
+    stroke-width: 10;
+  }
+}
+
+@supports not selector(:focus-visible) {
+  .MafsView circle.draggable:focus {
+    r: 15;
+    stroke-width: 10;
+  }
 }
 
 .MafsView .shadow {

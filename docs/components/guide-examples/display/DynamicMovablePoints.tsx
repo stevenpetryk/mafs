@@ -15,6 +15,31 @@ export default function DynamicMovablePoints() {
     endPoint.setPoint(vec.add(endPoint.point, shiftBy))
   }
 
+  const betweenPoints = new Array(
+    Math.round(numPointsInBetween)
+  )
+    .fill(0)
+    .map((_, i) => {
+      if (i === 0 || i === numPointsInBetween) return null
+
+      const point = vec.lerp(
+        startPoint.point,
+        endPoint.point,
+        i / numPointsInBetween
+      )
+
+      return (
+        <MovablePoint
+          key={i}
+          point={point}
+          color={Theme.blue}
+          onMove={(newPoint) => {
+            shift(vec.sub(newPoint, point))
+          }}
+        />
+      )
+    })
+
   return (
     <Mafs>
       <CartesianCoordinates />
@@ -24,30 +49,8 @@ export default function DynamicMovablePoints() {
         point2={endPoint.point}
       />
 
-      {new Array(Math.round(numPointsInBetween))
-        .fill(0)
-        .map((_, i) => {
-          if (i === 0 || i === numPointsInBetween)
-            return null
-
-          const point = vec.lerp(
-            startPoint.point,
-            endPoint.point,
-            i / numPointsInBetween
-          )
-          return (
-            <MovablePoint
-              key={i}
-              point={point}
-              color={Theme.blue}
-              onMove={(newPoint) => {
-                shift(vec.sub(newPoint, point))
-              }}
-            />
-          )
-        })}
-
       {startPoint.element}
+      {betweenPoints}
       {endPoint.element}
     </Mafs>
   )

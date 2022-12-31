@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2
+
+- When `pan` is enabled on a `Mafs` view, keyboard users can now focus on the view itself and use the arrow keys to pan.
+
 ## 0.7.1
 
 - `MovablePoint` will no longer get stuck in its dragging state.

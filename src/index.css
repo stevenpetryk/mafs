@@ -38,9 +38,18 @@
   touch-action: none;
 }
 
-.MafsWrapper:focus-visible {
-  border-radius: 5px;
-  outline: 3px solid #58a6ff;
+@supports selector(:focus-visible) {
+  .MafsWrapper:focus-visible {
+    border-radius: 5px;
+    outline: 3px solid #58a6ff;
+  }
+}
+
+@supports not selector(:focus-visible) {
+  .MafsWrapper:focus {
+    border-radius: 5px;
+    outline: 3px solid #58a6ff;
+  }
 }
 
 .MafsView .draggable {

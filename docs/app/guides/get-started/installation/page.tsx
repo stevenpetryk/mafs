@@ -37,7 +37,7 @@ function Page() {
 
       <p>
         Mafs ships with a tiny set of linear algebra functions. You can import everything under
-        `vec`.
+        <code>vec</code>.
       </p>
 
       <Code

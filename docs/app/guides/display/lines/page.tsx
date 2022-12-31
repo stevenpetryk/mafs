@@ -1,7 +1,5 @@
 import * as React from "react"
 
-
-
 import CodeAndExample from "components/CodeAndExample"
 
 import LineSegmentExample from "guide-examples/LineSegmentExample"
@@ -12,11 +10,6 @@ import LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
 import LinePointSlopeExampleSource from "!raw-loader!guide-examples/LinePointSlopeExample"
 import LinePointAngleExample from "guide-examples/LinePointAngleExample"
 import LinePointAngleExampleSource from "!raw-loader!guide-examples/LinePointAngleExample"
-
-export const frontmatter: Guide = {
-  title: "Lines",
-  order: 10,
-}
 
 const Lines: React.VFC = () => {
   return (

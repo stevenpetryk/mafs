@@ -1,14 +1,8 @@
 import * as React from "react"
 
-
-
 import CodeAndExample from "components/CodeAndExample"
 import TextExample from "guide-examples/TextExample"
 import TextExampleSource from "!raw-loader!guide-examples/TextExample"
-export const frontmatter: Guide = {
-  title: "Text",
-  order: 60,
-}
 
 const Text: React.VFC = () => (
   <>

@@ -1,6 +1,6 @@
-    "use client"
+"use client"
 
-    import Code from "../../../../components/Code"
+import Code from "../../../../components/Code"
 import endent from "endent"
 import CodeAndExample from "../../../../components/CodeAndExample"
 import Plain from "../../../../components/guide-examples/hello-fx/plain"
@@ -8,7 +8,7 @@ import PlainSource from "!raw-loader!../../../../components/guide-examples/hello
 
 function Page() {
   return (
-    <div>
+    <>
       <p>Install the package from NPM:</p>
 
       <Code
@@ -70,9 +70,8 @@ function Page() {
             }
         `}
       />
-    </div>
+    </>
   )
 }
 
 export default Page
-

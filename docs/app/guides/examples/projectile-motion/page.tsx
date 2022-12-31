@@ -2,9 +2,9 @@
 
 import * as React from "react"
 
-// import CodeAndExample from "components/CodeAndExample"
-// import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
-// import ProjectileMotionSource from "!raw-loader!guide-examples/examples/ProjectileMotion.tsx"
+import CodeAndExample from "components/CodeAndExample"
+import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
+import ProjectileMotionSource from "!raw-loader!guide-examples/examples/ProjectileMotion.tsx"
 
 function ProjectilePage() {
   return (
@@ -15,7 +15,7 @@ function ProjectilePage() {
         the animation.
       </p>
 
-      {/* <CodeAndExample source={ProjectileMotionSource} component={<ProjectileMotion />} /> */}
+      <CodeAndExample source={ProjectileMotionSource} component={<ProjectileMotion />} />
     </>
   )
 }

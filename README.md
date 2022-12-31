@@ -8,10 +8,11 @@ Mafs is a set of opinionated React components for creating math visualizations.
 
 ## Development
 
-Development is done inside of the Gatsby documentation site, which directly
+Development is done inside of the Next.js documentation site, which directly
 imports Mafs components from `src/`. To start the development server, run:
 
 ```
+pnpm install
 pnpm start
 ```
 

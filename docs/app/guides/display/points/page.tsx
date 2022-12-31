@@ -1,6 +1,6 @@
-    "use client"
+"use client"
 
-    import CodeAndExample from "components/CodeAndExample"
+import CodeAndExample from "components/CodeAndExample"
 
 import SimplePoint from "guide-examples/display/SimplePoint"
 import SimplePointSource from "!raw-loader!guide-examples/display/SimplePoint"
@@ -20,4 +20,3 @@ function Points() {
 }
 
 export default Points
-

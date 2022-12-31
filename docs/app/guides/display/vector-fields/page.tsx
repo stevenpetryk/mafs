@@ -1,6 +1,6 @@
-    "use client"
+"use client"
 
-    import CodeAndExample from "components/CodeAndExample"
+import CodeAndExample from "components/CodeAndExample"
 
 import VectorFieldExample from "guide-examples/VectorFieldExample"
 import VectorFieldExampleSource from "!raw-loader!guide-examples/VectorFieldExample"
@@ -21,4 +21,3 @@ function Vectors() {
 }
 
 export default Vectors
-

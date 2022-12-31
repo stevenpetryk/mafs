@@ -1,6 +1,6 @@
-    "use client"
+"use client"
 
-    import CodeAndExample from "components/CodeAndExample"
+import CodeAndExample from "components/CodeAndExample"
 
 import LineSegmentExample from "guide-examples/LineSegmentExample"
 import LineSegmentExampleSource from "!raw-loader!guide-examples/LineSegmentExample"
@@ -39,4 +39,3 @@ function Lines() {
 }
 
 export default Lines
-

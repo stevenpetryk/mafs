@@ -1,6 +1,6 @@
-    "use client"
+"use client"
 
-    import CodeAndExample from "components/CodeAndExample"
+import CodeAndExample from "components/CodeAndExample"
 
 import TextExample from "guide-examples/TextExample"
 import TextExampleSource from "!raw-loader!guide-examples/TextExample"
@@ -30,4 +30,3 @@ function Text() {
 }
 
 export default Text
-

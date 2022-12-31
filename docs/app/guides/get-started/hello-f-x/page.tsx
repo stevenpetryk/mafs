@@ -1,3 +1,5 @@
+"use client"
+
 import CodeAndExample from "../../../../components/CodeAndExample"
 
 import Plain from "../../../../components/guide-examples/hello-fx/plain"
@@ -11,7 +13,7 @@ import SinePiSource from "!raw-loader!../../../../components/guide-examples/hell
 import Draggable from "../../../../components/guide-examples/hello-fx/draggable"
 import DraggableSource from "!raw-loader!../../../../components/guide-examples/hello-fx/draggable"
 
-async function Page() {
+function Page() {
   return (
     <>
       <p>

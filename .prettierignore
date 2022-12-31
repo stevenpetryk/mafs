@@ -3,6 +3,5 @@ dist
 .api-report
 
 docs/.cache
-docs/package.json
-docs/package-lock.json
+docs/.next
 docs/public

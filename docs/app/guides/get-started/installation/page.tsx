@@ -1,12 +1,14 @@
-import Code from "../../../../components/Code"
+    "use client"
+
+    import Code from "../../../../components/Code"
 import endent from "endent"
 import CodeAndExample from "../../../../components/CodeAndExample"
 import Plain from "../../../../components/guide-examples/hello-fx/plain"
 import PlainSource from "!raw-loader!../../../../components/guide-examples/hello-fx/plain"
 
-async function Page() {
+function Page() {
   return (
-    <>
+    <div>
       <p>Install the package from NPM:</p>
 
       <Code
@@ -44,11 +46,11 @@ async function Page() {
 
       <Code
         language="bash"
-        source={`
-    yarn add vec-la
-    # or, if using NPM
-    npm install --save vec-la
-  `}
+        source={endent`
+          yarn add vec-la
+          # or, if using NPM
+          npm install --save vec-la
+        `}
       />
 
       <h3>Fancy math font</h3>
@@ -62,14 +64,15 @@ async function Page() {
 
       <Code
         language="css"
-        source={`
-    .MafsView {
-      font-family: "Computer Modern Serif", serif;
-    }
-`}
+        source={endent`
+            .MafsView {
+              font-family: "Computer Modern Serif", serif;
+            }
+        `}
       />
-    </>
+    </div>
   )
 }
 
 export default Page
+

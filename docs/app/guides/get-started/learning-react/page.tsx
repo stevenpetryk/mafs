@@ -1,3 +1,5 @@
+"use client"
+
 const REACT_DOCS = "https://reactjs.org"
 const REACT_GET_STARTED = "https://reactjs.org/docs/getting-started.html"
 const REACT_CRA = "https://reactjs.org/docs/create-a-new-react-app.html"

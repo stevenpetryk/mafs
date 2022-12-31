@@ -1,4 +1,7 @@
-import CodeAndExample from "components/CodeAndExample"
+    "use client"
+
+    import CodeAndExample from "components/CodeAndExample"
+
 import Sine from "guide-examples/hello-fx/sine"
 import SineSource from "!raw-loader!guide-examples/hello-fx/sine.tsx"
 import Parametric from "guide-examples/Parametric"
@@ -21,3 +24,4 @@ function Functions() {
 }
 
 export default Functions
+

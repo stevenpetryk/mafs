@@ -10,8 +10,8 @@ import {
 } from "mafs"
 
 export default function SimplePoint() {
-  const a = [2, 0]
-  const b = [-2, 0]
+  const a = [2, 0] as [number, number]
+  const b = [-2, 0] as [number, number]
   const c = useMovablePoint([0, 2])
 
   return (

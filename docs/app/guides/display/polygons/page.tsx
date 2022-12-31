@@ -1,6 +1,6 @@
-import * as React from "react"
+    "use client"
 
-import CodeAndExample from "components/CodeAndExample"
+    import CodeAndExample from "components/CodeAndExample"
 
 import PolygonExample from "guide-examples/PolygonExample"
 import PolygonExampleSource from "!raw-loader!guide-examples/PolygonExample"
@@ -27,3 +27,4 @@ function Polygons() {
 }
 
 export default Polygons
+

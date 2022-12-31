@@ -1,7 +1,5 @@
-"use client"
 import Link from "next/link"
 
-import { CartesianCoordinates, Mafs } from "mafs"
 import RiemannHomepage from "../components/RiemannHomepage"
 
 export default function Home() {

@@ -76,7 +76,6 @@ export default function ProjectileMotion() {
               xy={positionAtTime}
               t={[0, timeOfFlight]}
               opacity={0.4}
-              samples={timeOfFlight * 50}
               style="dashed"
             />
             <Point

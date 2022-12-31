@@ -1,6 +1,6 @@
-import * as React from "react"
+    "use client"
 
-import CodeAndExample from "components/CodeAndExample"
+    import CodeAndExample from "components/CodeAndExample"
 
 import LineSegmentExample from "guide-examples/LineSegmentExample"
 import LineSegmentExampleSource from "!raw-loader!guide-examples/LineSegmentExample"
@@ -11,7 +11,7 @@ import LinePointSlopeExampleSource from "!raw-loader!guide-examples/LinePointSlo
 import LinePointAngleExample from "guide-examples/LinePointAngleExample"
 import LinePointAngleExampleSource from "!raw-loader!guide-examples/LinePointAngleExample"
 
-const Lines: React.VFC = () => {
+function Lines() {
   return (
     <>
       <p>There are a few components for lines, depending on how you want to construct them.</p>
@@ -39,3 +39,4 @@ const Lines: React.VFC = () => {
 }
 
 export default Lines
+

@@ -1,6 +1,6 @@
 "use client"
 import GuidesSidebar from "./sidebar"
-import { getDocContext, Guides } from "./guides"
+import { getDocContext } from "./guides"
 import { useSelectedLayoutSegments } from "next/navigation"
 import Link from "next/link"
 import fancyFx from "../../helpers/fancyFx"

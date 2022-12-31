@@ -1,7 +1,5 @@
 "use client"
 
-import * as React from "react"
-
 import CodeAndExample from "components/CodeAndExample"
 import VectorExample from "guide-examples/display/vectors/VectorExample"
 import VectorExampleSource from "!raw-loader!guide-examples/display/vectors/VectorExample"

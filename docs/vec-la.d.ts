@@ -1,1 +1,1 @@
-/// <reference path="../src/typings/vec-la.d.ts" />
+import "../src/typings/vec-la.d.ts"

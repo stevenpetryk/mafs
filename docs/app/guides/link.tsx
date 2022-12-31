@@ -3,11 +3,10 @@
 import Link from "next/link"
 import { useSelectedLayoutSegments } from "next/navigation"
 
-interface GuideLinkProps
-  extends React.PropsWithChildren<{
+type GuideLinkProps = React.PropsWithChildren<{
     sectionTitle: string
     guideTitle: string
-  }> {}
+  }>
 
 export function GuideLink({ sectionTitle, guideTitle, children }: GuideLinkProps) {
   const segments = useSelectedLayoutSegments()

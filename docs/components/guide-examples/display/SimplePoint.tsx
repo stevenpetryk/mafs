@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { Mafs, Point, CartesianCoordinates } from "mafs"
 
 export default function SimplePoint() {

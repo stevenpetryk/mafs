@@ -1,7 +1,5 @@
 "use client"
 
-import * as React from "react"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import PointsAlongFunction from "guide-examples/display/PointsAlongFunction"

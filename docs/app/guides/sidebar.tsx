@@ -1,10 +1,6 @@
-import * as React from "react"
-import Link from "next/link"
-import { useSelectedLayoutSegments } from "next/navigation"
 import fancyFx from "../../helpers/fancyFx"
 
 import { Guides } from "./guides"
-import path from "path"
 import kebabCase from "lodash/kebabCase"
 import { GuideLink } from "./link"
 

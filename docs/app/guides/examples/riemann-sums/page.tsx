@@ -1,7 +1,5 @@
 "use client"
 
-import * as React from "react"
-
 import CodeAndExample from "components/CodeAndExample"
 import Riemann from "guide-examples/examples/Riemann"
 import RiemannSource from "!raw-loader!guide-examples/examples/Riemann.tsx"

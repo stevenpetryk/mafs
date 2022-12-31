@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 // prettier-ignore
 import { Mafs, FunctionGraph, Point, CartesianCoordinates, useMovablePoint } from "mafs"
 import range from "lodash/range"

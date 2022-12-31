@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 // prettier-ignore
 import { Mafs, CartesianCoordinates, Text, useMovablePoint } from "mafs"
 

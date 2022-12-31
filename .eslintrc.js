@@ -16,7 +16,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["docs/src/guide-examples/**/*.tsx"],
+      files: ["docs/**/*.tsx"],
       rules: {
         "@typescript-eslint/explicit-module-boundary-types": "off",
       },

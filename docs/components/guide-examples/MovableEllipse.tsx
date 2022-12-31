@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 // prettier-ignore
 import { Mafs, Ellipse, Circle, CartesianCoordinates, useMovablePoint, Theme, } from "mafs"
 import * as vec from "vec-la"

@@ -45,9 +45,9 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
 
   const pickup = React.useRef<vec.Vector2>([0, 0])
 
-  const bind = useDrag(({ event, down, movement: pixelMovement, first }) => {
+  const bind = useDrag(({ event, last, movement: pixelMovement, first }) => {
     event?.stopPropagation()
-    setDragging(down)
+    setDragging(!last)
 
     if (first) pickup.current = vec.transform(point, transform)
     if (vec.mag(pixelMovement) === 0) return

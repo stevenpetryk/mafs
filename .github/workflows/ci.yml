@@ -1,80 +1,100 @@
 name: Node.js CI
 
-on: push
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn build
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+          node-version: 16
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 16.x
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn lint
-
-  check-format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+          version: 7
+          run_install: false
+      - id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
         with:
-          node-version: 16.x
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn format:check
-
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn build:docs
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - run: pnpm install
+      - run: pnpm build
 
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn test
-        env:
-          CI: true
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
-      - name: Archive visual diffs
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+          node-version: 16
+      - uses: pnpm/action-setup@v2
         with:
-          name: visual-diffs
-          path: src/**/__diff_output__/**/*.png
+          version: 7
+          run_install: false
+      - id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - run: pnpm install
+      - run: pnpm test
 
-  types:
+  check-format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: "yarn"
-      - run: yarn install
-      - run: yarn build
-      - run: yarn types
+          node-version: 16
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      - id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - run: pnpm install
+      - run: pnpm format:check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      - id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - run: pnpm install
+      - run: pnpm lint

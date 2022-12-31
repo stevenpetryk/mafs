@@ -16,7 +16,7 @@ const Code: React.FC<CodeProps> = ({ language, source }) => {
 
   React.useEffect(() => {
     if (codeRef.current) {
-      hljs.highlightBlock(codeRef.current)
+      hljs.highlightElement(codeRef.current)
     }
   }, [source])
 

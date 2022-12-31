@@ -1,8 +1,8 @@
 "use client"
 
 import Code from "../../../../components/Code"
-import endent from "endent"
 import CodeAndExample from "../../../../components/CodeAndExample"
+
 import Plain from "../../../../components/guide-examples/hello-fx/plain"
 import PlainSource from "!raw-loader!../../../../components/guide-examples/hello-fx/plain"
 
@@ -13,7 +13,7 @@ function Page() {
 
       <Code
         language="bash"
-        source={endent`
+        source={`
           yarn add mafs
           # or, if using NPM
           npm install --save mafs
@@ -42,13 +42,13 @@ function Page() {
 
       <Code
         language="tsx"
-        source={endent`
+        source={`
           import { vec } from "mafs"
           vec.add([1, 2], [2, 3]) // [3, 5]
         `}
       />
 
-      <h3>Fancy math font</h3>
+      <h2>Fancy math font</h2>
 
       <p>
         The font in use on this site—Computer Modern Serif—does not ship with Mafs to avoid
@@ -59,10 +59,10 @@ function Page() {
 
       <Code
         language="css"
-        source={endent`
-            .MafsView {
-              font-family: "Computer Modern Serif", serif;
-            }
+        source={`
+          .MafsView {
+            font-family: "Computer Modern Serif", serif;
+          }
         `}
       />
     </>

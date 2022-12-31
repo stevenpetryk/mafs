@@ -33,7 +33,7 @@ const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) =
 
   React.useEffect(() => {
     if (codeRef.current) {
-      hljs.highlightBlock(codeRef.current)
+      hljs.highlightElement(codeRef.current)
     }
   }, [source])
 

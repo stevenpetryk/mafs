@@ -2,6 +2,8 @@ import * as React from "react"
 import { Filled, Theme } from "./Theme"
 import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../vec"
+import { useTransformContext } from "./Group"
+import * as vec from "../vec"
 
 export interface EllipseProps extends Filled {
   center: Vector2
@@ -22,13 +24,16 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   svgEllipseProps = {},
 }) => {
   const { cssScale } = useScaleContext()
+  const transform = useTransformContext()
+
+  const trueCenter = vec.transform(center, transform)
 
   const rotate = `rotate(${(angle * 180) / Math.PI} ${center[0]} ${center[1]})`
 
   return (
     <ellipse
-      cx={center[0]}
-      cy={center[1]}
+      cx={trueCenter[0]}
+      cy={trueCenter[1]}
       rx={radius[0]}
       ry={radius[1]}
       strokeWidth={weight}

@@ -201,7 +201,7 @@ export function matrixBuilder(m: Matrix | null = null) {
   const _m = m || matrixCreate()
 
   return {
-    add: (m: Matrix) => matrixBuilder(matrixMult(m, _m)),
+    mult: (m: Matrix) => matrixBuilder(matrixMult(m, _m)),
     translate: (x: number, y: number) => matrixBuilder(matrixMult([1, 0, x, 0, 1, y, 0, 0, 1], _m)),
     rotate: (a: number) =>
       matrixBuilder(

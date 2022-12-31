@@ -1,11 +1,15 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, FunctionGraph, Point, CartesianCoordinates, useMovablePoint } from "mafs"
+import { Mafs, FunctionGraph, Point, CartesianCoordinates, useMovablePoint, Group } from "mafs"
 import range from "lodash/range"
+import * as React from "react"
 
 export default function PointsAlongFunction() {
-  const fn = (x: number) => (x / 2) ** 2
+  const [angle, setAngle] = React.useState(0)
+  const angleRadians = angle * (Math.PI / 180)
+
+  const fn = (x: number) => Math.sin(x / 2) ** 2
   const sep = useMovablePoint([1, 0], {
     constrain: "horizontal",
   })
@@ -18,14 +22,25 @@ export default function PointsAlongFunction() {
       : []
 
   return (
-    <Mafs height={500} yAxisExtent={[-1.3, 4.7]}>
-      <CartesianCoordinates />
+    <>
+      <Mafs height={500} yAxisExtent={[-1.3, 4.7]}>
+        <CartesianCoordinates />
 
-      <FunctionGraph.OfX y={fn} opacity={0.25} />
-      {points.map((x, index) => (
-        <Point x={x} y={fn(x)} key={index} />
-      ))}
-      {sep.element}
-    </Mafs>
+        <Group rotate={angleRadians} translate={[1, 0]}>
+          <FunctionGraph.OfX y={fn} opacity={0.25} />
+        </Group>
+        {points.map((x, index) => (
+          <Point x={x} y={fn(x)} key={index} />
+        ))}
+        {sep.element}
+      </Mafs>
+      <input
+        type="range"
+        min={0}
+        max={180}
+        value={angle}
+        onChange={(e) => setAngle(+e.target.value)}
+      />
+    </>
   )
 }

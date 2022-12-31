@@ -1,32 +1,10 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec } from "mafs"
+import { Mafs, Group, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec } from "mafs"
 import clamp from "lodash/clamp"
 
 export default function SnapPoint() {
-  const gridMotion = useMovablePoint([-2, 1], {
-    // Constrain this point to whole numbers inside of a rectangle
-    constrain: ([x, y]) => [
-      clamp(Math.round(x), -5, -1),
-      clamp(Math.round(y), -2, 2),
-    ],
-  })
-
-  const radius = 2
-  const shift = vec.matrixBuilder().translate(3, 0).get()
-  const radialMotion = useMovablePoint([0, radius], {
-    // Constrain this point to specific angles from the center
-    constrain: (point) => {
-      const angle = Math.atan2(point[1], point[0])
-      const snap = Math.PI / 16
-      const roundedAngle = Math.round(angle / snap) * snap
-      return vec.rotate([radius, 0], roundedAngle)
-    },
-    // (More on transforms in the next section)
-    transform: shift,
-  })
-
   return (
     <Mafs
       height={200}
@@ -35,29 +13,65 @@ export default function SnapPoint() {
     >
       <CartesianCoordinates xAxis={{ labels: false }} />
 
-      <Vector tail={[-3, 0]} tip={gridMotion.point} />
+      <Group translate={[-3, 0]}>
+        <Grid />
+      </Group>
+
+      <Group translate={[3, 0]}>
+        <Radial />
+      </Group>
+    </Mafs>
+  )
+}
+
+function Grid() {
+  const gridMotion = useMovablePoint([1, 1], {
+    // Constrain this point to whole numbers inside of a rectangle
+    constrain: ([x, y]) => [
+      clamp(Math.round(x), -2, 2),
+      clamp(Math.round(y), -2, 2),
+    ],
+  })
+
+  return (
+    <>
+      <Vector tail={[0, 0]} tip={gridMotion.point} />
 
       <Polygon
         // prettier-ignore
-        points={[[-5, -2], [-1, -2], [-1, 2], [-5, 2]]}
+        points={[[-2, -2], [2, -2], [2, 2], [-2, 2]]}
         fillOpacity={0}
         strokeOpacity={0.5}
         strokeStyle="dashed"
       />
+      {gridMotion.element}
+    </>
+  )
+}
+
+function Radial() {
+  const radius = 2
+  const radialMotion = useMovablePoint([0, radius], {
+    // Constrain this point to specific angles from the center
+    constrain: (point) => {
+      const angle = Math.atan2(point[1], point[0])
+      const snap = Math.PI / 16
+      const roundedAngle = Math.round(angle / snap) * snap
+      return vec.rotate([radius, 0], roundedAngle)
+    },
+  })
+
+  return (
+    <>
       <Circle
-        center={vec.transform([0, 0], shift)}
+        center={[0, 0]}
         radius={radius}
         fillOpacity={0}
         strokeOpacity={0.5}
         strokeStyle="dashed"
       />
-      <Vector
-        tail={vec.transform([0, 0], shift)}
-        tip={vec.transform(radialMotion.point, shift)}
-      />
-
-      {gridMotion.element}
+      <Vector tail={[0, 0]} tip={radialMotion.point} />
       {radialMotion.element}
-    </Mafs>
+    </>
   )
 }

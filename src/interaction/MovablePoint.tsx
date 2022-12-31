@@ -1,6 +1,7 @@
 import { useDrag } from "@use-gesture/react"
 import * as React from "react"
 import invariant from "tiny-invariant"
+import { useTransformContext } from "../display/Group"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
 import * as vec from "../vec"
@@ -14,11 +15,6 @@ export interface MovablePointProps {
   /** A callback that is called as the user moves the point. */
   onMove: (point: vec.Vector2) => void
   /**
-   * Transform the point's movement and constraints by a transformation matrix. You can use the
-   * `vec` export to build up such a matrix.
-   */
-  transform?: vec.Matrix
-  /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
    *
    * In mapped movement mode, you must provide a function that maps the user's attempted position
@@ -28,20 +24,24 @@ export interface MovablePointProps {
   color?: string
 }
 
-const identity = vec.matrixBuilder().get()
-
 export const MovablePoint: React.VFC<MovablePointProps> = ({
   point,
   onMove,
   constrain = (point) => point,
   color = Theme.pink,
-  transform = identity,
 }) => {
   const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
+
+  const transform = useTransformContext()
   const inverseTransform = React.useMemo(() => getInverseTransform(transform), [transform])
 
+  const combinedTransform = React.useMemo(
+    () => vec.matrixMult(pixelMatrix, transform),
+    [pixelMatrix, transform]
+  )
+
   const [dragging, setDragging] = React.useState(false)
-  const [displayX, displayY] = vec.transform(vec.transform(point, transform), pixelMatrix)
+  const [displayX, displayY] = vec.transform(point, combinedTransform)
 
   const pickup = React.useRef<vec.Vector2>([0, 0])
 
@@ -71,9 +71,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
           vec.transform(vec.add(vec.transform(point, transform), testMovement), inverseTransform)
         )
 
-        const succeeds = vec.dist(testPoint, point) > min
-
-        if (succeeds) {
+        if (vec.dist(testPoint, point) > min) {
           onMove(testPoint)
           break
         }

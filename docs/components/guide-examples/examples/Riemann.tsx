@@ -10,7 +10,7 @@ import {
   CartesianCoordinates,
 } from "mafs"
 
-import sumBy from "lodash/sumby"
+import sumBy from "lodash/sumBy"
 import range from "lodash/range"
 
 interface Partition {

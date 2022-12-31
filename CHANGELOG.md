@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+- `vec` is now exposed as an export from `mafs`, inlining the previously separate `vec-la` package and making it type-safe.
+
 ## 0.6.1
 
 - Fixes a bug where cartesian coordinate lines would flicker due to some floating point rounding errors.

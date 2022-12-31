@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1
+
+- `MovablePoint` will no longer get stuck in its dragging state.
+
 ## 0.7.0
 
 - `vec` is now exposed as an export from `mafs`, inlining the previously separate `vec-la` package and making it type-safe.

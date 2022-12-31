@@ -28,7 +28,7 @@ export default function MovableEllipse() {
         rotationHintRadius
       ),
   })
-  const angle = Math.PI / 2 - Math.atan2(...rotate.point)
+  const angle = Math.atan2(rotate.point[1], rotate.point[0])
   const rotation = vec.matrixBuilder().rotate(angle).get()
 
   // Lastly, these two points are rotated and translated

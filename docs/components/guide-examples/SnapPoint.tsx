@@ -18,7 +18,7 @@ export default function SnapPoint() {
   const radialMotion = useMovablePoint([0, radius], {
     // Constrain this point to specific angles from the center
     constrain: (point) => {
-      const angle = Math.PI / 2 - Math.atan2(...point)
+      const angle = Math.atan2(point[1], point[0])
       const snap = Math.PI / 16
       const roundedAngle = Math.round(angle / snap) * snap
       return vec.rotate([radius, 0], roundedAngle)

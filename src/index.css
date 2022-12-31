@@ -62,15 +62,19 @@
   stroke-width: 0;
 }
 
+.MafsView .draggable-hitbox:focus {
+  outline: 0;
+}
+
 @supports selector(:focus-visible) {
-  .MafsView circle.draggable:focus-visible {
+  .MafsView .draggable-hitbox:focus-visible circle {
     r: 15;
     stroke-width: 10;
   }
 }
 
 @supports not selector(:focus-visible) {
-  .MafsView circle.draggable:focus {
+  .MafsView .draggable-hitbox:focus-visible circle {
     r: 15;
     stroke-width: 10;
   }

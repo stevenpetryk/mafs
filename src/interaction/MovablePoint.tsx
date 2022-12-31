@@ -45,70 +45,54 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
 
   const pickup = React.useRef<vec.Vector2>([0, 0])
 
-  const bind = useDrag(({ event, last, movement: pixelMovement, first }) => {
+  const bind = useDrag((state) => {
+    const { type, event } = state
     event?.stopPropagation()
-    setDragging(!last)
 
-    if (first) pickup.current = vec.transform(point, transform)
-    if (vec.mag(pixelMovement) === 0) return
+    const isKeyboard = type.includes("key")
+    if (isKeyboard) {
+      event?.preventDefault()
+      const { direction: yDownDirection, altKey, metaKey, shiftKey } = state
 
-    const movement = vec.transform(pixelMovement, inversePixelMatrix)
-    const newPoint = constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform))
+      const direction = [yDownDirection[0], -yDownDirection[1]] as vec.Vector2
+      const span = Math.abs(direction[0]) ? xSpan : ySpan
 
-    onMove(newPoint)
+      let divisions = 50
+      if (altKey || metaKey) divisions = 200
+      if (shiftKey) divisions = 10
+
+      const min = span / (divisions * 2)
+      const tests = range(span / divisions, span / 2, span / divisions)
+
+      for (const dx of tests) {
+        // Transform the test back into the point's coordinate system
+        const testMovement = vec.scale(direction, dx)
+        const testPoint = constrain(
+          vec.transform(vec.add(vec.transform(point, transform), testMovement), inverseTransform)
+        )
+
+        const succeeds = vec.dist(testPoint, point) > min
+
+        if (succeeds) {
+          onMove(testPoint)
+          break
+        }
+      }
+    } else {
+      const { last, movement: pixelMovement, first } = state
+
+      setDragging(!last)
+
+      if (first) pickup.current = vec.transform(point, transform)
+      if (vec.mag(pixelMovement) === 0) return
+
+      const movement = vec.transform(pixelMovement, inversePixelMatrix)
+      onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
+    }
   })
 
-  function handleKeyDown(event: React.KeyboardEvent) {
-    const small = event.altKey || event.metaKey || event.shiftKey
-
-    let span: number
-    let testDir: vec.Vector2
-
-    switch (event.key) {
-      case "ArrowLeft":
-        span = xSpan
-        testDir = [-1, 0]
-        event.preventDefault()
-        break
-      case "ArrowRight":
-        span = xSpan
-        testDir = [1, 0]
-        event.preventDefault()
-        break
-      case "ArrowUp":
-        span = ySpan
-        testDir = [0, 1]
-        event.preventDefault()
-        break
-      case "ArrowDown":
-        span = ySpan
-        testDir = [0, -1]
-        event.preventDefault()
-        break
-      default:
-        return
-    }
-
-    const divisions = small ? 200 : 50
-    const min = span / (divisions * 2)
-    const tests = range(span / divisions, span / 2, span / divisions)
-
-    for (const dx of tests) {
-      // Transform the test back into the point's coordinate system
-      const testMovement = vec.scale(testDir, dx)
-      const testPoint = constrain(
-        vec.transform(vec.add(vec.transform(point, transform), testMovement), inverseTransform)
-      )
-
-      if (vec.dist(testPoint, point) > min) {
-        onMove(testPoint)
-        break
-      }
-    }
-  }
-
   return (
-    <g {...bind()} className="draggable-hitbox">
+    <g {...bind()} className="draggable-hitbox" tabIndex={0}>
       <circle cx={displayX} cy={displayY} r={30} fill="transparent"></circle>
       <circle
         cx={displayX}
@@ -118,8 +102,6 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
         stroke={color}
         strokeOpacity={0.25}
         className={`draggable ${dragging ? "dragging" : ""}`}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
       ></circle>
     </g>
   )

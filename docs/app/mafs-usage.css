@@ -14,3 +14,14 @@
   --mafs-line-color: transparent;
   --grid-line-subdivision-color: transparent;
 }
+
+@media (prefers-color-scheme: dark) {
+  .homepage-mafs .MafsView {
+    --mafs-bg: transparent;
+    --mafs-fg: white;
+
+    --mafs-origin-color: rgba(255, 255, 255, 0.25);
+    --mafs-line-color: transparent;
+    --grid-line-subdivision-color: transparent;
+  }
+}

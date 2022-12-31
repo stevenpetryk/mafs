@@ -28,7 +28,7 @@ const Code: React.FC<CodeProps> = ({ language, source }) => {
       <div className="p-3 sm:p-6 overflow-x-auto">
         <pre>
           <code ref={codeRef} className={`language-${language}`}>
-            {endent(source)}
+            {endent(source as any)}
           </code>
         </pre>
       </div>

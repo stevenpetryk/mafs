@@ -33,12 +33,14 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           <div className="prose space-y-6">{children}</div>
 
           {/* A little next/prev button set  (but only if those links exist) */}
-          <div className="flex gap-4">
+          <div className="hidden sm:flex gap-4">
             {previous && <NavButton dir="prev" href={previous.url} {...previous} />}
-
             <div className="ml-auto" />
-
             {next && <NavButton dir="next" href={next.url} {...next} />}
+          </div>
+          <div className="flex sm:hidden flex-col gap-4">
+            {next && <NavButton dir="next" href={next.url} {...next} />}
+            {previous && <NavButton dir="prev" href={previous.url} {...previous} />}
           </div>
         </main>
       </div>
@@ -67,16 +69,20 @@ function NavButton({
         dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:border-gray-700
       `}
     >
-      <div className="flex items-center gap-4 leading-tight">
+      <div className="flex items-center justify-between sm:gap-4 leading-tight">
         {dir === "prev" && (
           <div className="text-lg" aria-hidden="true">
             ←
           </div>
         )}
 
-        <div className="flex flex-col">
-          <div className="text-sm font-normal">{sectionTitle}</div>
-          <div className="min-w-[10ch]">{fancyFx(guideTitle)}</div>
+        <div className="flex flex-col overflow-hidden">
+          <div className="text-sm font-normal text-ellipsis  overflow-hidden whitespace-nowrap">
+            {sectionTitle}
+          </div>
+          <div className="min-w-[10ch] text-ellipsis  overflow-hidden whitespace-nowrap">
+            {fancyFx(guideTitle)}
+          </div>
         </div>
 
         {dir === "next" && (

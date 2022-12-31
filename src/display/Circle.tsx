@@ -1,6 +1,6 @@
 import { Filled } from "./Theme"
 import { Ellipse } from "./Ellipse"
-import { Vector2 } from "../math"
+import { Vector2 } from "../vec"
 import type * as React from "react"
 
 export interface CircleProps extends Filled {

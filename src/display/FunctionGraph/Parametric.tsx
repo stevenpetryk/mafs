@@ -1,10 +1,11 @@
 import * as React from "react"
-import { triangleArea, Vector2 } from "../../math"
+import { triangleArea } from "../../math"
+import * as vec from "../../vec"
 import { Stroked } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
 
 export interface ParametricProps extends Stroked {
-  xy: (t: number) => Vector2
+  xy: (t: number) => vec.Vector2
   t: [number, number]
   color?: string
   style?: "solid" | "dashed"

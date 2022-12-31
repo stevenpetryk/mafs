@@ -1,8 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, CartesianCoordinates, MovablePoint, Vector2, useMovablePoint, Line, Theme } from "mafs"
-import * as vec from "vec-la"
+import { Mafs, CartesianCoordinates, MovablePoint, Vector2, useMovablePoint, Line, Theme, vec } from "mafs"
 
 export default function DynamicMovablePoints() {
   const startPoint = useMovablePoint([-3, -1])

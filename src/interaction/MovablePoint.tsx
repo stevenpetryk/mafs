@@ -2,17 +2,17 @@ import { useDrag } from "@use-gesture/react"
 import * as React from "react"
 import invariant from "tiny-invariant"
 import { Theme } from "../display/Theme"
-import * as vec from "vec-la"
-import { matrixInvert, range, Vector2 } from "../math"
+import { range } from "../math"
+import * as vec from "../vec"
 import { useScaleContext } from "../view/ScaleContext"
 
-export type ConstraintFunction = (position: Vector2) => Vector2
+export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
 export interface MovablePointProps {
   /** The current position (`[x, y]`) of the point. */
-  point: Vector2
+  point: vec.Vector2
   /** A callback that is called as the user moves the point. */
-  onMove: (point: Vector2) => void
+  onMove: (point: vec.Vector2) => void
   /**
    * Transform the point's movement and constraints by a transformation matrix. You can use `vec-la`
    * to build up such a matrix.
@@ -43,7 +43,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
   const [dragging, setDragging] = React.useState(false)
   const [displayX, displayY] = vec.transform(vec.transform(point, transform), pixelMatrix)
 
-  const pickup = React.useRef<Vector2>([0, 0])
+  const pickup = React.useRef<vec.Vector2>([0, 0])
 
   const bind = useDrag(({ event, down, movement: pixelMovement, first }) => {
     event?.stopPropagation()
@@ -62,7 +62,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
     const small = event.altKey || event.metaKey || event.shiftKey
 
     let span: number
-    let testDir: Vector2
+    let testDir: vec.Vector2
 
     switch (event.key) {
       case "ArrowLeft":
@@ -126,7 +126,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
 }
 
 function getInverseTransform(transform: vec.Matrix) {
-  const invert = matrixInvert(transform)
+  const invert = vec.matrixInvert(transform)
   invariant(
     invert !== null,
     "Could not invert transform matrix. Your movable point's transformation matrix might be degenerative (mapping 2D space to a line)."

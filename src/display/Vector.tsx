@@ -2,15 +2,14 @@ import * as React from "react"
 import { useScaleContext } from "../view/ScaleContext"
 import { Stroked } from "../display/Theme"
 import { Theme } from "./Theme"
-import * as vec from "vec-la"
-import { Vector2 } from "../math"
+import * as vec from "../vec"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0
 
 export interface VectorProps extends Stroked {
-  tail?: Vector2
-  tip: Vector2
+  tail?: vec.Vector2
+  tip: vec.Vector2
   svgLineProps?: React.SVGProps<SVGLineElement>
 }
 

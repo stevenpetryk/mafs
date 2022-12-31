@@ -1,8 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, CartesianCoordinates, useMovablePoint, Vector } from "mafs"
-import * as vec from "vec-la"
+import { Mafs, CartesianCoordinates, useMovablePoint, Vector, vec } from "mafs"
 
 export default function VectorExample() {
   const tip = useMovablePoint([0.4, 0.6])

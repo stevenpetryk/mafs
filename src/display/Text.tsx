@@ -1,6 +1,6 @@
 import * as React from "react"
-import * as vec from "vec-la"
 import { useScaleContext } from "../view/ScaleContext"
+import * as vec from "../vec"
 
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"
 
@@ -46,7 +46,7 @@ export const Text: React.FC<TextProps> = ({
     yOffset = -1
   }
 
-  const [pixelX, pixelY] = vec.scale(vec.norm([xOffset, yOffset]), attachDistance)
+  const [pixelX, pixelY] = vec.scale(vec.normalize([xOffset, yOffset]), attachDistance)
 
   return (
     <text

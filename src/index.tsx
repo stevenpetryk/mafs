@@ -56,4 +56,9 @@ export type {
 export { useStopwatch } from "./animation/useStopwatch"
 export type { Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
 
-export type { Interval, Vector2 } from "./math"
+export type { Interval } from "./math"
+
+import * as vec from "./vec"
+import type { Vector2, Matrix } from "./vec"
+export { vec }
+export type { Vector2, Matrix }

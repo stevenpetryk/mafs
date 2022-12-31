@@ -3,11 +3,11 @@ import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
 import PaneManager from "./PaneManager"
 import MapContext from "./MapContext"
 import useResizeObserver from "use-resize-observer"
-import * as vec from "vec-la"
 
 import { useGesture } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
-import { round, Interval, Vector2 } from "../math"
+import { round, Interval } from "../math"
+import * as vec from "../vec"
 
 export interface MafsViewProps {
   width?: number | string
@@ -44,7 +44,7 @@ export const MafsView: React.FC<MafsViewProps> = ({
 
   const [xMinDefault, xMaxDefault] = xAxisExtent
   const [yMinDefault, yMaxDefault] = yAxisExtent
-  const [offset, setOffset] = React.useState<Vector2>([0, 0])
+  const [offset, setOffset] = React.useState<vec.Vector2>([0, 0])
   const [xMin, yMin] = vec.add([xMinDefault, yMinDefault], offset)
   const [xMax, yMax] = vec.add([xMaxDefault, yMaxDefault], offset)
 

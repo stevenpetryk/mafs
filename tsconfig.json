@@ -10,6 +10,5 @@
     "checkJs": true,
     "allowJs": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/tests/**/*", "src/**/*.test.*"]
+  "include": ["src/**/*"]
 }

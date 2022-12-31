@@ -11,8 +11,8 @@ import {
   useMovablePoint,
   useStopwatch,
   Vector2,
+  vec,
 } from "mafs"
-import * as vec from "vec-la"
 import { easeInOutCubic } from "js-easing-functions"
 
 /**

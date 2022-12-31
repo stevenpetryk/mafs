@@ -1,7 +1,7 @@
 import * as React from "react"
-import ReactDOMServer from "react-dom/server"
-import fs from "fs"
-import path from "path"
+import * as ReactDOMServer from "react-dom/server"
+import * as fs from "fs"
+import * as path from "path"
 
 import { Mafs, CartesianCoordinates } from ".."
 

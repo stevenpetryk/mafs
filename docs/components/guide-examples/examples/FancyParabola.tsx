@@ -5,8 +5,8 @@ import {
   FunctionGraph,
   Mafs,
   useMovablePoint,
+  vec,
 } from "mafs"
-import * as vec from "vec-la"
 
 export default function FancyParabola() {
   const a = useMovablePoint([-1, 0], {

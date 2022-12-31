@@ -1,12 +1,11 @@
 import * as React from "react"
-import * as vec from "vec-la"
 import { Theme } from "../display/Theme"
-import { Vector2 } from "../math"
+import * as vec from "../vec"
 import { MovablePoint } from "./MovablePoint"
 
 const identity = vec.matrixBuilder().get()
 
-export type ConstraintFunction = (position: Vector2) => Vector2
+export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
 export interface UseMovablePointArguments {
   color?: string
@@ -29,17 +28,17 @@ export interface UseMovablePointArguments {
 export interface UseMovablePoint {
   x: number
   y: number
-  point: Vector2
+  point: vec.Vector2
   element: React.ReactElement
-  setPoint: (point: Vector2) => void
+  setPoint: (point: vec.Vector2) => void
 }
 
 export function useMovablePoint(
-  initialPoint: Vector2,
+  initialPoint: vec.Vector2,
   { constrain, color = Theme.pink, transform = identity }: UseMovablePointArguments = {}
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
-  const [point, setPoint] = React.useState<Vector2>(initialPoint)
+  const [point, setPoint] = React.useState<vec.Vector2>(initialPoint)
   const [x, y] = point
 
   const constraintFunction: ConstraintFunction = React.useMemo(() => {

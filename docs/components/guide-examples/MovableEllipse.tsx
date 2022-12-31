@@ -1,8 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Ellipse, Circle, CartesianCoordinates, useMovablePoint, Theme, } from "mafs"
-import * as vec from "vec-la"
+import { Mafs, Ellipse, Circle, CartesianCoordinates, useMovablePoint, Theme, vec } from "mafs"
 
 export default function MovableEllipse() {
   const rotationHintRadius = 3

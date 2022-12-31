@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Theme, Filled } from "./Theme"
 import { useScaleContext } from "../view/ScaleContext"
-import { Vector2 } from "../math"
+import { Vector2 } from "../vec"
 
 export interface PolygonProps extends Filled {
   points: Vector2[]

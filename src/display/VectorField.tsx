@@ -1,7 +1,7 @@
 import * as React from "react"
-import * as vec from "vec-la"
 
-import { clamp, Vector2 } from "../math"
+import { clamp } from "../math"
+import * as vec from "../vec"
 import { usePaneContext } from "../view/PaneManager"
 import { useScaleContext } from "../view/ScaleContext"
 import { Theme } from "./Theme"
@@ -36,10 +36,10 @@ export const VectorField: React.VFC<VectorFieldProps> = ({
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
       for (let y = Math.floor(yMin); y <= Math.ceil(yMax); y += step) {
-        const tail: Vector2 = [x, y]
+        const tail: vec.Vector2 = [x, y]
         const trueOffset = xy(x, y)
         const trueMag = vec.mag(trueOffset)
-        const scaledOffset = vec.scale(vec.norm(trueOffset), Math.min(trueMag, step * 0.75))
+        const scaledOffset = vec.scale(vec.normalize(trueOffset), Math.min(trueMag, step * 0.75))
         const tip = vec.add(tail, scaledOffset)
 
         const pixelTail = vec.transform(tail, pixelMatrix)
@@ -47,7 +47,7 @@ export const VectorField: React.VFC<VectorFieldProps> = ({
         const pixelSize = vec.mag(pixelTipOffset)
         const pixelTip = vec.transform(tip, pixelMatrix)
 
-        const arrowVector = vec.scale(vec.norm(pixelTipOffset), Math.min(pixelSize, 5))
+        const arrowVector = vec.scale(vec.normalize(pixelTipOffset), Math.min(pixelSize, 5))
         const left = vec.add(pixelTip, vec.rotate(arrowVector, (5 / 6) * Math.PI))
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 

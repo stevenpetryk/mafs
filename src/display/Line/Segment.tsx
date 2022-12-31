@@ -1,12 +1,12 @@
 import * as React from "react"
-import * as vec from "vec-la"
 import { Stroked, Theme } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
-import { round, Vector2 } from "../../math"
+import { round } from "../../math"
+import * as vec from "../../vec"
 
 export interface SegmentProps extends Stroked {
-  point1: Vector2
-  point2: Vector2
+  point1: vec.Vector2
+  point2: vec.Vector2
 }
 
 export const Segment: React.VFC<SegmentProps> = ({

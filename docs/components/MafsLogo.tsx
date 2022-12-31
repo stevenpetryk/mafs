@@ -15,10 +15,10 @@ export function MafsLogo() {
       <path
         d="M10 1L1 37.165 10 74M228 1l9 36.165L228 74m-12-64l-18 54.752"
         className="stroke-[#112245] dark:stroke-gray-50"
-        stroke-opacity=".25"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeOpacity=".25"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

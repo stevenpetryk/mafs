@@ -26,7 +26,7 @@ export default function PointsAlongFunction() {
       <Mafs height={500} yAxisExtent={[-1.3, 4.7]}>
         <CartesianCoordinates />
 
-        <Group rotate={angleRadians} translate={[1, 0]}>
+        <Group rotate={angleRadians}>
           <FunctionGraph.OfX y={fn} opacity={0.25} />
         </Group>
         {points.map((x, index) => (
@@ -37,7 +37,7 @@ export default function PointsAlongFunction() {
       <input
         type="range"
         min={0}
-        max={180}
+        max={360}
         value={angle}
         onChange={(e) => setAngle(+e.target.value)}
       />

@@ -17,11 +17,14 @@ export function GuideLink({ sectionTitle, guideTitle, children }: GuideLinkProps
       <Link
         href={`/guides/${sectionTitle}/${guideTitle}`}
         className={`
-          block
+          block hover:underline
           hover:text-blue-700 focus:text-blue-700
-          hover:underline
-          dark:text-slate-300 dark:focus:text-indigo-300 dark:hover:text-indigo-300
-          ${active ? "text-blue-700 dark:text-indigo-300 font-bold active-sidebar-link" : ""}`}
+          dark:text-slate-300 dark:focus:text-blue-300 dark:hover:text-blue-300
+          ${
+            active
+              ? "text-blue-700 dark:text-blue-400 dark:focus:text-blue-400 dark:hover:text-blue-400 font-bold active-sidebar-link"
+              : ""
+          }`}
       >
         {children}
       </Link>

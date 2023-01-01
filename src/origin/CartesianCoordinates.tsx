@@ -66,7 +66,6 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
           x2={10000000}
           y1={0}
           y2={0}
-          className="transform-y-to-center"
           style={{ stroke: "var(--mafs-origin-color)" }}
         />
       )}
@@ -77,7 +76,6 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
           x2={0}
           y1={-10000000}
           y2={10000000}
-          className="transform-x-to-center"
           style={{ stroke: "var(--mafs-origin-color)" }}
         />
       )}
@@ -99,7 +97,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
   )
 
   return (
-    <g className="shadow">
+    <g className="mafs-shadow">
       {xs
         .filter((x) => Math.abs(scaleX(x) - scaleX(0)) > 1)
         .map((x) => (
@@ -120,7 +118,7 @@ const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
   )
 
   return (
-    <g className="shadow">
+    <g className="mafs-shadow">
       {ys
         .filter((y) => Math.abs(scaleY(y) - scaleY(0)) > 1)
         .map((y) => (

@@ -115,10 +115,10 @@ export const MafsView: React.FC<MafsViewProps> = ({
 
   return (
     <div
-      className="MafsWrapper"
+      className="MafsView"
       style={{ width: desiredCssWidth }}
-      ref={ref}
       tabIndex={pan ? 0 : -1}
+      ref={ref}
       {...bind()}
     >
       <CoordinateContext.Provider value={coordinateContext}>
@@ -131,7 +131,6 @@ export const MafsView: React.FC<MafsViewProps> = ({
                 viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
                 preserveAspectRatio="xMidYMin"
                 style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
-                className="MafsView"
               >
                 {visible && children}
               </svg>

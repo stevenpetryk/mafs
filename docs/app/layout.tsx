@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
         </header>
 
-        <main>{children}</main>
+        <div>{children}</div>
 
         {/* Spacer */}
         <div className="my-auto" />

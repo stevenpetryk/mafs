@@ -27,7 +27,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           <GuidesSidebar />
         </div>
 
-        <main className="space-y-6 flex-grow md:w-0">
+        <main id="main" className="space-y-6 flex-grow md:w-0">
           <h1>{fancyFx(current.guideTitle)}</h1>
 
           <div className="prose space-y-6">{children}</div>

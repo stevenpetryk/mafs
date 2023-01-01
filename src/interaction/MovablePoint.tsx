@@ -91,18 +91,29 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
     }
   })
 
+  const ringSize = 15
+
   return (
-    <g {...bind()} className="draggable-hitbox" tabIndex={0}>
-      <circle cx={displayX} cy={displayY} r={30} fill="transparent"></circle>
+    <g
+      {...bind()}
+      style={
+        {
+          "--movable-point-color": color,
+          "--movable-point-ring-size": `${ringSize}px`,
+        } as React.CSSProperties
+      }
+      className={`mafs-movable-point ${dragging ? "mafs-movable-point-dragging" : ""}`}
+      tabIndex={0}
+    >
+      <circle className="mafs-movable-point-hitbox" r={30} cx={displayX} cy={displayY}></circle>
       <circle
+        className="mafs-movable-point-focus"
+        r={ringSize + 1}
         cx={displayX}
         cy={displayY}
-        r={6}
-        fill={color}
-        stroke={color}
-        strokeOpacity={0.25}
-        className={`draggable ${dragging ? "dragging" : ""}`}
       ></circle>
+      <circle className="mafs-movable-point-ring" r={ringSize} cx={displayX} cy={displayY}></circle>
+      <circle className="mafs-movable-point-point" r={6} cx={displayX} cy={displayY}></circle>
     </g>
   )
 }

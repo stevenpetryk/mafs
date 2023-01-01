@@ -59,7 +59,7 @@ export const Text: React.FC<TextProps> = ({
         stroke: color || "var(--mafs-bg)",
         fill: color || "var(--mafs-fg)",
       }}
-      className="shadow"
+      className="mafs-shadow"
       {...svgTextProps}
     >
       {children}

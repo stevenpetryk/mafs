@@ -6,6 +6,8 @@
   user-select: none;
   font-family: inherit;
   font-variant-numeric: tabular-nums;
+  touch-action: none;
+  outline: 0;
 
   --mafs-bg: black;
   --mafs-fg: white;
@@ -33,70 +35,84 @@
   stroke: var(--mafs-fg);
 }
 
-.MafsWrapper,
-.MafsView .draggable-hitbox {
-  touch-action: none;
+.MafsView:focus-visible {
+  border-radius: 5px;
+  outline: 3px solid #58a6ff;
 }
 
-@supports selector(:focus-visible) {
-  .MafsWrapper:focus-visible {
+@supports not selector(:focus-visible) {
+  .MafsView:focus {
     border-radius: 5px;
     outline: 3px solid #58a6ff;
   }
 }
 
-@supports not selector(:focus-visible) {
-  .MafsWrapper:focus {
-    border-radius: 5px;
-    outline: 3px solid #58a6ff;
-  }
-}
-
-.MafsView .draggable {
-  transition: r 0.2s ease, stroke-width 0.2s ease;
-  stroke-width: 18px;
-  cursor: grab;
-  outline: 0 !important;
-  touch-action: none;
-
-  color: hsl(0, 100%, 47%);
-}
-
-.MafsView .draggable:active {
-  cursor: grabbing;
-}
-
-.MafsView circle.draggable:hover {
-  r: 15;
-  stroke-width: 10;
-}
-
-.MafsView circle.draggable.dragging {
-  r: 17.5;
-  stroke-width: 0;
-}
-
-.MafsView .draggable-hitbox:focus {
-  outline: 0;
-}
-
-@supports selector(:focus-visible) {
-  .MafsView .draggable-hitbox:focus-visible circle {
-    r: 15;
-    stroke-width: 10;
-  }
-}
-
-@supports not selector(:focus-visible) {
-  .MafsView .draggable-hitbox:focus-visible circle {
-    r: 15;
-    stroke-width: 10;
-  }
-}
-
-.MafsView .shadow {
+.mafs-shadow {
   paint-order: stroke;
   stroke-width: 3px;
   stroke: var(--mafs-bg);
   stroke-opacity: 0.75;
+}
+
+.mafs-movable-point {
+  cursor: grab;
+}
+
+.mafs-movable-point-dragging {
+  cursor: grabbing;
+}
+
+.mafs-movable-point:focus {
+  outline: 0;
+}
+
+.mafs-movable-point * {
+  fill: none;
+  stroke: none;
+}
+
+.mafs-movable-point-hitbox {
+  fill: transparent;
+}
+
+.mafs-movable-point-focus {
+  stroke: var(--movable-point-color);
+  stroke-width: 2;
+  stroke-opacity: 0;
+  fill: none;
+  transition: stroke-opacity 0.2s ease;
+}
+
+.mafs-movable-point-ring {
+  fill: var(--movable-point-color);
+  fill-opacity: 0.25;
+  stroke: none;
+  transition: r 0.2s ease;
+}
+
+.mafs-movable-point-point {
+  fill: var(--movable-point-color);
+  transition: r 0.2s ease;
+}
+
+/* Hover */
+
+.mafs-movable-point:hover .mafs-movable-point-point,
+.mafs-movable-point:focus-visible .mafs-movable-point-point {
+  r: calc(var(--movable-point-ring-size) - 2px);
+}
+
+.mafs-movable-point:hover .mafs-movable-point-ring,
+.mafs-movable-point:focus-visible .mafs-movable-point-ring {
+  r: calc(var(--movable-point-ring-size) + 3px);
+}
+
+.mafs-movable-point.mafs-movable-point-dragging .mafs-movable-point-ring {
+  r: var(--movable-point-ring-size);
+}
+
+/* Focus */
+
+.mafs-movable-point:focus-visible .mafs-movable-point-focus {
+  stroke-opacity: 1;
 }

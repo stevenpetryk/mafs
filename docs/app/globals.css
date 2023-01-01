@@ -91,7 +91,6 @@
   }
 
   .active-sidebar-link:after {
-    display: block;
     content: "";
     position: absolute;
     right: calc(100% + 0.5em);
@@ -100,7 +99,7 @@
     height: 5px;
     width: 5px;
     border-radius: 50%;
-    @apply bg-indigo-400 dark:bg-indigo-200;
+    background: currentColor;
   }
 
   .syntax-badge {
@@ -116,15 +115,11 @@
   }
 
   a.button {
-    @apply outline-none rounded-md py-4 px-6 no-underline bg-blue-600 text-white;
+    @apply rounded-md py-4 px-6 no-underline bg-blue-600 text-white;
   }
 
   a.button:hover {
     @apply text-white bg-blue-500;
-  }
-
-  a.button:focus {
-    @apply ring;
   }
 }
 

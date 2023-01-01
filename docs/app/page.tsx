@@ -5,14 +5,7 @@ import RiemannHomepage from "../components/RiemannHomepage"
 export default function Home() {
   return (
     <main>
-      <div className="grid overflow-hidden">
-        <div
-          className="homepage-mafs unround-mafs -mt-24 sm:mt-0"
-          style={{ gridArea: "1 / 1 / 1 / 1" }}
-        >
-          <RiemannHomepage />
-        </div>
-
+      <div className="grid isolate">
         <div className="text-center pointer-events-none" style={{ gridArea: "1 / 1 / 1 / 1" }}>
           <div className="pointer-events-auto max-w-5xl mx-auto space-y-12 mt-12 sm:mt-24">
             <div className="space-y-4 px-6">
@@ -33,6 +26,10 @@ export default function Home() {
               </Link>
             </p>
           </div>
+        </div>
+
+        <div className="homepage-mafs unround-mafs -mt-24 sm:mt-0 col-start-1 row-start-1 -z-10">
+          <RiemannHomepage />
         </div>
       </div>
     </main>

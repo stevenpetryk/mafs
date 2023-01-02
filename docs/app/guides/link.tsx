@@ -6,11 +6,12 @@ import { useSelectedLayoutSegments } from "next/navigation"
 type GuideLinkProps = React.PropsWithChildren<{
   sectionTitle: string
   guideTitle: string
+  guideSlug: string
 }>
 
-export function GuideLink({ sectionTitle, guideTitle, children }: GuideLinkProps) {
+export function GuideLink({ sectionTitle, guideTitle, guideSlug, children }: GuideLinkProps) {
   const segments = useSelectedLayoutSegments()
-  const active = segments[0] === sectionTitle && segments[1] === guideTitle
+  const active = segments[0] === sectionTitle && segments[1] === guideSlug
 
   return (
     <li>

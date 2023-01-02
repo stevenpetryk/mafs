@@ -19,6 +19,7 @@ function GuidesSidebar() {
             <GuideLink
               sectionTitle={kebabCase(section.title)}
               guideTitle={kebabCase(guide.title)}
+              guideSlug={guide.slug}
               key={index}
             >
               {IconElement && <IconElement className="opacity-50" />}
@@ -64,14 +65,14 @@ function SkipLink() {
     <a
       href="#main"
       className={`
-          absolute opacity-0 pointer-events-none
-          focus:pointer-events-auto
-          top-0 left-0 right-0 text-center
-          px-4 py-2 text-sm font-semibold
-          bg-gray-50 dark:bg-slate-800
-          focus:opacity-100
-          z-10
-        `}
+        absolute opacity-0 pointer-events-none
+        focus:pointer-events-auto
+        top-0 left-0 right-0 text-center
+        px-4 py-2 text-sm font-semibold
+        bg-gray-50 dark:bg-slate-800
+        focus:opacity-100
+        z-10
+      `}
     >
       Skip to main content
     </a>

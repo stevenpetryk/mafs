@@ -11,6 +11,7 @@ import {
   TextIcon,
   MoveIcon,
   PlayIcon,
+  EnterFullScreenIcon,
 } from "@radix-ui/react-icons"
 
 type Section = {
@@ -37,9 +38,10 @@ export const Guides: Section[] = [
       { title: "Polygons", icon: SquareIcon, slug: "polygons" },
       { title: "Ellipses & circles", icon: CircleIcon, slug: "ellipses-circles" },
       { title: "Graphs", icon: GridIcon, slug: "graphs" },
+      { title: "Text", icon: TextIcon, slug: "text" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { title: "Vector fields", icon: DoubleArrowRightIcon, slug: "vector-fields" },
-      { title: "Text", icon: TextIcon, slug: "text" },
+      { title: "Viewbox", icon: EnterFullScreenIcon, slug: "viewbox" },
     ],
   },
   {
@@ -66,8 +68,8 @@ export const Guides: Section[] = [
 ]
 
 export function getDocContext(
-  sectionTitle: string,
-  guideTitle: string
+  sectionSlug: string,
+  guideSlug: string
 ): {
   current: {
     sectionTitle: string
@@ -87,9 +89,9 @@ export function getDocContext(
     url: string
   } | null
 } {
-  const sectionIndex = Guides.findIndex((section) => kebabCase(section.title) === sectionTitle)
+  const sectionIndex = Guides.findIndex((section) => kebabCase(section.title) === sectionSlug)
   const section = Guides[sectionIndex]
-  const guideIndex = section.guides.findIndex((guide) => kebabCase(guide.title) === guideTitle)
+  const guideIndex = section.guides.findIndex((guide) => guide.slug === guideSlug)
   const guide = section.guides[guideIndex]
 
   // Sections contain guides. We want to find the next and previous guides, given that we may need

@@ -1,12 +1,4 @@
 import kebabCase from "lodash/kebabCase"
-
-type Section = {
-  title: string
-  guides: Guide[]
-}
-
-type Guide = { title: string; slug: string; icon?: typeof GearIcon }
-
 import {
   BorderSolidIcon,
   DotFilledIcon,
@@ -20,7 +12,14 @@ import {
   MoveIcon,
   PlayIcon,
 } from "@radix-ui/react-icons"
-// Rewrite Guides but where each guide is an object with a title and a slug.
+
+type Section = {
+  title: string
+  guides: Guide[]
+}
+
+type Guide = { title: string; slug: string; icon?: typeof BorderSolidIcon }
+
 export const Guides: Section[] = [
   {
     title: "Get Started",

@@ -3,7 +3,6 @@
 import * as React from "react"
 
 import hljs from "highlight.js"
-import styles from "./CodeAndExample.module.css"
 
 interface Props {
   source: string

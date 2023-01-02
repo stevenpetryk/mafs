@@ -28,7 +28,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="homepage-mafs -mt-24 sm:mt-0 col-start-1 row-start-1 -z-10">
+        <div
+          className="homepage-mafs -mt-24 sm:mt-0 col-start-1 row-start-1 touch-none"
+          style={{
+            clipPath: "polygon(0% 68%, 85% 68%, 100% 0%, 100% 100%, 0% 100%)",
+          }}
+        >
           <RiemannHomepage />
         </div>
       </div>

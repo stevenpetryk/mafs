@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.0
+
+- Added the [`Transform` component](https://mafs.dev/guides/utility/transform)
+- Added the [`viewBox` prop](https://mafs.dev/guides/display/viewbox)
+
+### Breaking changes
+
+- `xAxisExtent` and `yAxisExtent` have been replaced with [`viewBox`](https://mafs.dev/guides/display/viewbox).
+
 ## 0.7.2
 
 - When `pan` is enabled on a `Mafs` view, keyboard users can now focus on the view itself and use the arrow keys to pan.

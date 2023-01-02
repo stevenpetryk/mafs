@@ -38,6 +38,7 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   const [a, c, tx, b, d, ty] = transform
   const cssTransform = `
     matrix(${a}, ${b}, ${c}, ${d}, ${tx}, ${ty})
+    rotate(${angle * (180 / Math.PI)})
   `
 
   return (

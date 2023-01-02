@@ -16,19 +16,21 @@
     "@types/react-dom": "18.0.10",
     "@vercel/analytics": "^0.1.6",
     "endent": "^2.1.0",
-    "highlight.js": "^11.7.0",
+    "hast-to-hyperscript": "^10.0.1",
     "js-easing-functions": "^1.0.3",
     "lodash": "^4.17.21",
     "mafs": "link:../src",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "refractor": "^4.8.0",
     "typescript": "4.9.4"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
+    "postcss-nested": "^6.0.0",
     "raw-loader": "^4.0.2",
     "tailwindcss": "^3.2.4"
   }

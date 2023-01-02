@@ -2,33 +2,33 @@
 
 // prettier-ignore
 import { Mafs, CartesianCoordinates, MovablePoint, Vector2, useMovablePoint, Line, Theme, vec } from "mafs"
+import range from "lodash/range"
 
 export default function DynamicMovablePoints() {
-  const startPoint = useMovablePoint([-3, -1])
-  const endPoint = useMovablePoint([3, 1])
-
-  const length = vec.dist(startPoint.point, endPoint.point)
-  const numPointsInBetween = length
+  const start = useMovablePoint([-3, -1])
+  const end = useMovablePoint([3, 1])
 
   function shift(shiftBy: Vector2) {
-    startPoint.setPoint(vec.add(startPoint.point, shiftBy))
-    endPoint.setPoint(vec.add(endPoint.point, shiftBy))
+    start.setPoint(vec.add(start.point, shiftBy))
+    end.setPoint(vec.add(end.point, shiftBy))
   }
 
-  const betweenPoints = new Array(
-    Math.round(numPointsInBetween)
+  const length = vec.dist(start.point, end.point)
+  const betweenPoints = range(1, length - 0.5, 1).map((t) =>
+    vec.lerp(start.point, end.point, t / length)
   )
-    .fill(0)
-    .map((_, i) => {
-      if (i === 0 || i === numPointsInBetween) return null
 
-      const point = vec.lerp(
-        startPoint.point,
-        endPoint.point,
-        i / numPointsInBetween
-      )
+  return (
+    <Mafs>
+      <CartesianCoordinates />
 
-      return (
+      <Line.Segment
+        point1={start.point}
+        point2={end.point}
+      />
+
+      {start.element}
+      {betweenPoints.map((point, i) => (
         <MovablePoint
           key={i}
           point={point}
@@ -37,21 +37,8 @@ export default function DynamicMovablePoints() {
             shift(vec.sub(newPoint, point))
           }}
         />
-      )
-    })
-
-  return (
-    <Mafs>
-      <CartesianCoordinates />
-
-      <Line.Segment
-        point1={startPoint.point}
-        point2={endPoint.point}
-      />
-
-      {startPoint.element}
-      {betweenPoints}
-      {endPoint.element}
+      ))}
+      {end.element}
     </Mafs>
   )
 }

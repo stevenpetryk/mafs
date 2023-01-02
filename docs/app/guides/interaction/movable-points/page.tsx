@@ -8,8 +8,6 @@ import DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
 import DynamicMovablePointsSource from "!raw-loader!guide-examples/display/DynamicMovablePoints"
 import SnapPoint from "guide-examples/SnapPoint"
 import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
-import MovableEllipse from "guide-examples/MovableEllipse"
-import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
 import { Advanced } from "components/Advanced"
 import Code from "components/Code"
 import Link from "next/link"
@@ -49,10 +47,10 @@ function Stopwatch() {
       <Code
         language="tsx"
         source={`
-    useMovablePoint([0, 0], {
-      constrain: ([x, y]) => [Math.round(x), Math.round(y)]
-    })
-  `}
+          useMovablePoint([0, 0], {
+            constrain: ([x, y]) => [Math.round(x), Math.round(y)]
+          })
+        `}
       />
 
       <p>

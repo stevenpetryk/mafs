@@ -3,7 +3,6 @@
 import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
 import SimpleTransformExampleSource from "!raw-loader!guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
-import WIP from "components/WIP"
 import Code from "components/Code"
 
 export default function Page() {

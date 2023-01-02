@@ -28,13 +28,13 @@ export default function Page() {
       <Code
         language="tsx"
         source={`
-            <Transform
-              translate={...}
-              scale={...}
-              rotate={...}
-              shear={...}
-              matrix={...}
-            />
+          <Transform
+            translate={...}
+            scale={...}
+            rotate={...}
+            shear={...}
+            matrix={...}
+          />
         `}
       />
 

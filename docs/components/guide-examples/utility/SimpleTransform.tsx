@@ -4,8 +4,8 @@
 import { Mafs, CartesianCoordinates, Transform, useMovablePoint, Theme, Text, Polygon, Circle, vec, } from "mafs"
 
 export default function SimpleTransformExample() {
-  const t = useMovablePoint([-2, -2])
-  const s = useMovablePoint([4, 4], { color: Theme.blue })
+  const t = useMovablePoint([-4, -2])
+  const s = useMovablePoint([8, 4], { color: Theme.blue })
   const r = useMovablePoint([1, 0], {
     color: Theme.green,
     constrain: (p) => vec.normalize(p),
@@ -13,7 +13,7 @@ export default function SimpleTransformExample() {
   const angle = Math.atan2(r.point[1], r.point[0])
 
   return (
-    <Mafs height={200}>
+    <Mafs height={400} viewBox={{ x: [-8, 8], y: [-3, 3] }}>
       <CartesianCoordinates />
 
       <Transform translate={t.point}>

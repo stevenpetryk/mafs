@@ -72,6 +72,7 @@ importers:
   docs:
     specifiers:
       '@next/font': 13.1.1
+      '@radix-ui/react-icons': ^1.1.1
       '@types/lodash': ^4.14.191
       '@types/node': '16'
       '@types/react': 18.0.26
@@ -91,6 +92,7 @@ importers:
       typescript: 4.9.4
     dependencies:
       '@next/font': 13.1.1
+      '@radix-ui/react-icons': 1.1.1_react@18.2.0
       '@types/node': 16.18.11
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.10
@@ -1808,6 +1810,14 @@ packages:
       chrome-trace-event: 1.0.3
       nullthrows: 1.1.1
     dev: true
+
+  /@radix-ui/react-icons/1.1.1_react@18.2.0:
+    resolution: {integrity: sha512-xc3wQC59rsFylVbSusQCrrM+6695ppF730Q6yqzhRdqDcRNWIm2R6ngpzBoSOQMcwnq4p805F+Gr7xo4fmtN1A==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@rushstack/node-core-library/3.53.3:
     resolution: {integrity: sha512-H0+T5koi5MFhJUd5ND3dI3bwLhvlABetARl78L3lWftJVQEPyzcgTStvTTRiIM5mCltyTM8VYm6BuCtNUuxD0Q==}

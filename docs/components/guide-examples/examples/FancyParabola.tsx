@@ -4,6 +4,7 @@ import {
   CartesianCoordinates,
   FunctionGraph,
   Mafs,
+  Transform,
   useMovablePoint,
   vec,
 } from "mafs"
@@ -18,10 +19,6 @@ export default function FancyParabola() {
 
   const k = useMovablePoint([0, -1], {
     constrain: "vertical",
-    transform: vec
-      .matrixBuilder()
-      .translate((a.x + b.x) / 2, 0)
-      .get(),
   })
 
   const mid = (a.x + b.x) / 2
@@ -36,7 +33,9 @@ export default function FancyParabola() {
       />
       {a.element}
       {b.element}
-      {k.element}
+      <Transform translate={[(a.x + b.x) / 2, 0]}>
+        {k.element}
+      </Transform>
     </Mafs>
   )
 }

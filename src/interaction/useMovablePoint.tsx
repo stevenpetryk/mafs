@@ -3,18 +3,10 @@ import { Theme } from "../display/Theme"
 import * as vec from "../vec"
 import { MovablePoint } from "./MovablePoint"
 
-const identity = vec.matrixBuilder().get()
-
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
 export interface UseMovablePointArguments {
   color?: string
-
-  /**
-   * Transform the point's movement and constraints by a transformation matrix. You can use the
-   * `vec` export to build up such a matrix.
-   */
-  transform?: vec.Matrix
 
   /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
@@ -35,7 +27,7 @@ export interface UseMovablePoint {
 
 export function useMovablePoint(
   initialPoint: vec.Vector2,
-  { constrain, color = Theme.pink, transform = identity }: UseMovablePointArguments = {}
+  { constrain, color = Theme.pink }: UseMovablePointArguments = {}
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
   const [point, setPoint] = React.useState<vec.Vector2>(initialPoint)
@@ -56,13 +48,13 @@ export function useMovablePoint(
   const element = React.useMemo(() => {
     return (
       <MovablePoint
-        {...{ point, transform, color }}
+        {...{ point, color }}
         constrain={constraintFunction}
         point={point}
         onMove={setPoint}
       />
     )
-  }, [point, transform, color, constraintFunction])
+  }, [point, color, constraintFunction])
 
   return {
     x,

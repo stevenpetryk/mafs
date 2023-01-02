@@ -62,6 +62,10 @@ export function normalize(v: Vector2): Vector2 {
   return [v[0] / magnitude, v[1] / magnitude]
 }
 
+export function withMag(v: Vector2, m: number): Vector2 {
+  return scale(normalize(v), m)
+}
+
 /**
  * Scale a vector by a scalar
  */
@@ -208,6 +212,8 @@ export function matrixBuilder(m: Matrix | null = null) {
         matrixMult([Math.cos(a), -Math.sin(a), 0, Math.sin(a), Math.cos(a), 0, 0, 0, 1], _m)
       ),
     scale: (x: number, y: number) => matrixBuilder(matrixMult([x, 0, 0, 0, y, 0, 0, 0, 1], _m)),
+    skew: (x: number, y: number) =>
+      matrixBuilder(matrixMult([1, Math.tan(x), 0, Math.tan(y), 1, 0, 0, 0, 1], _m)),
     shear: (x: number, y: number) => matrixBuilder(matrixMult([1, x, 0, y, 1, 0, 0, 0, 1], _m)),
     get: (): Matrix => [..._m],
   }

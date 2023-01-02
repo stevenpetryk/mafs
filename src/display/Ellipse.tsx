@@ -2,7 +2,7 @@ import * as React from "react"
 import { Filled, Theme } from "./Theme"
 import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../vec"
-import { useTransformContext } from "./Group"
+import { useTransformContext } from "./Transform"
 import * as vec from "../vec"
 
 export interface EllipseProps extends Filled {
@@ -23,22 +23,32 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   fillOpacity = 0.15,
   svgEllipseProps = {},
 }) => {
-  const { cssScale } = useScaleContext()
-  const transform = useTransformContext()
+  const { pixelMatrix } = useScaleContext()
+  const contextTransform = useTransformContext()
 
-  const trueCenter = vec.transform(center, transform)
+  const transform = vec
+    .matrixBuilder()
+    .translate(...center)
+    .mult(contextTransform)
+    .scale(1, -1)
+    .mult(pixelMatrix)
+    .scale(1, -1)
+    .get()
 
-  const rotate = `rotate(${(angle * 180) / Math.PI} ${center[0]} ${center[1]})`
+  const [a, c, tx, b, d, ty] = transform
+  const cssTransform = `
+    matrix(${a}, ${b}, ${c}, ${d}, ${tx}, ${ty})
+  `
 
   return (
     <ellipse
-      cx={trueCenter[0]}
-      cy={trueCenter[1]}
+      cx={0}
+      cy={0}
       rx={radius[0]}
       ry={radius[1]}
       strokeWidth={weight}
       strokeDasharray={strokeStyle === "dashed" ? "4,3" : undefined}
-      transform={`${cssScale} ${rotate}`}
+      transform={cssTransform}
       {...svgEllipseProps}
       style={{
         stroke: color,

@@ -4,7 +4,7 @@ import { usePaneContext } from "../../view/PaneManager"
 import { Stroked } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
 import { useCoordinateContext } from "../../view/CoordinateContext"
-import { useTransformContext } from "../Group"
+import { useTransformContext } from "../Transform"
 import * as vec from "../../vec"
 
 export interface OfXProps extends Stroked {

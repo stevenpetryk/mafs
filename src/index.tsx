@@ -63,4 +63,4 @@ import type { Vector2, Matrix } from "./vec"
 export { vec }
 export type { Vector2, Matrix }
 
-export { Group, type GroupProps } from "./display/Group"
+export { Transform, type TransformProps } from "./display/Transform"

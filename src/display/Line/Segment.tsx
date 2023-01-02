@@ -3,7 +3,7 @@ import { Stroked, Theme } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
 import { round } from "../../math"
 import * as vec from "../../vec"
-import { useTransformContext } from "../Group"
+import { useTransformContext } from "../Transform"
 
 export interface SegmentProps extends Stroked {
   point1: vec.Vector2

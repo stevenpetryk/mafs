@@ -1,7 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Group, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec } from "mafs"
+import { Mafs, Transform, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec, Theme } from "mafs"
 import clamp from "lodash/clamp"
 
 export default function SnapPoint() {
@@ -9,17 +9,19 @@ export default function SnapPoint() {
     <Mafs
       height={200}
       xAxisExtent={[-8.5, 8.5]}
-      yAxisExtent={[-3, 3]}
+      yAxisExtent={[-2.5, 2.5]}
     >
-      <CartesianCoordinates xAxis={{ labels: false }} />
+      <CartesianCoordinates
+        xAxis={{ labels: false, axis: false }}
+      />
 
-      <Group translate={[-3, 0]}>
+      <Transform translate={[-3, 0]}>
         <Grid />
-      </Group>
+      </Transform>
 
-      <Group translate={[3, 0]}>
+      <Transform translate={[3, 0]}>
         <Radial />
-      </Group>
+      </Transform>
     </Mafs>
   )
 }
@@ -40,9 +42,7 @@ function Grid() {
       <Polygon
         // prettier-ignore
         points={[[-2, -2], [2, -2], [2, 2], [-2, 2]]}
-        fillOpacity={0}
-        strokeOpacity={0.5}
-        strokeStyle="dashed"
+        color={Theme.blue}
       />
       {gridMotion.element}
     </>
@@ -66,9 +66,8 @@ function Radial() {
       <Circle
         center={[0, 0]}
         radius={radius}
+        color={Theme.blue}
         fillOpacity={0}
-        strokeOpacity={0.5}
-        strokeStyle="dashed"
       />
       <Vector tail={[0, 0]} tip={radialMotion.point} />
       {radialMotion.element}

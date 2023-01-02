@@ -1,8 +1,8 @@
 import * as React from "react"
 import * as vec from "../vec"
 
-export type GroupProps = React.PropsWithChildren<{
-  transform?: vec.Matrix
+export type TransformProps = React.PropsWithChildren<{
+  matrix?: vec.Matrix
   translate?: vec.Vector2
   scale?: number | vec.Vector2
   rotate?: number
@@ -14,15 +14,15 @@ export function useTransformContext() {
   return React.useContext(TransformContext)
 }
 
-export function Group(props: GroupProps) {
+export function Transform(props: TransformProps) {
   const existingTransform = React.useContext(TransformContext)
 
   let builder = vec.matrixBuilder(existingTransform)
 
   // Destructure props so that we can iterate over transforms in prop-order
-  const { transform, children, ...transforms } = props
+  const { matrix, children, ...transforms } = props
 
-  if (transform) builder = builder.mult(transform)
+  if (matrix) builder = builder.mult(matrix)
 
   for (const [name, value] of Object.entries(transforms)) {
     if (value == null) continue

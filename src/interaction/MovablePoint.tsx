@@ -1,7 +1,7 @@
 import { useDrag } from "@use-gesture/react"
 import * as React from "react"
 import invariant from "tiny-invariant"
-import { useTransformContext } from "../display/Group"
+import { useTransformContext } from "../display/Transform"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
 import * as vec from "../vec"

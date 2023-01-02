@@ -26,7 +26,7 @@ export default function RiemannHomepage() {
   const from = -0.25
   const to = 1.55
 
-  const xAxisExtent: [number, number] = [-0.4, 1.7]
+  const xBounds: [number, number] = [-0.4, 1.7]
 
   const duration = 2
   const { time, start } = useStopwatch({
@@ -39,10 +39,7 @@ export default function RiemannHomepage() {
     time === duration && setReady(true)
   }, [time, duration])
 
-  const constrain: ConstraintFunction = ([x]) => [
-    Math.min(Math.max(xAxisExtent[0], x), xAxisExtent[1]),
-    0,
-  ]
+  const constrain: ConstraintFunction = ([x]) => [Math.min(Math.max(xBounds[0], x), xBounds[1]), 0]
 
   const a = useMovablePoint([from, 0], { constrain })
   const b = useMovablePoint([to, 0], { constrain })
@@ -70,7 +67,12 @@ export default function RiemannHomepage() {
   })
 
   return (
-    <Mafs height={650} xAxisExtent={xAxisExtent} yAxisExtent={[-0.9, 4.5]} pan={false}>
+    <Mafs
+      height={650}
+      viewBox={{ x: xBounds, y: [-0.9, 4.5], padding: 0 }}
+      preserveAspectRatio={false}
+      pan={false}
+    >
       <CartesianCoordinates
         yAxis={{
           axis: false,

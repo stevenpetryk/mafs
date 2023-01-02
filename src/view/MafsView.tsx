@@ -6,15 +6,16 @@ import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
 import ScaleContext, { ScaleContextShape } from "./ScaleContext"
-import { round, Interval } from "../math"
+import { round } from "../math"
 import * as vec from "../vec"
 
 export interface MafsViewProps {
   width?: number | string
   height?: number
   pan?: boolean
-  xAxisExtent?: Interval
-  yAxisExtent?: Interval
+  viewBox?: { x?: vec.Vector2; y?: vec.Vector2; padding?: number }
+  preserveAspectRatio?: "contain" | false
+
   /**
    * Enable rendering on the server side. If false, an empty view will still be rendered, with
    * nothing in it.
@@ -28,8 +29,8 @@ export const MafsView: React.FC<MafsViewProps> = ({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
-  xAxisExtent = [-5.5, 5.5],
-  yAxisExtent = [-3.5, 3.5],
+  viewBox = { x: [-3, 3], y: [-3, 3] },
+  preserveAspectRatio = "contain",
   children,
   ssr = false,
 }) => {
@@ -42,11 +43,38 @@ export const MafsView: React.FC<MafsViewProps> = ({
     setVisible(true)
   }, [])
 
-  const [xMinDefault, xMaxDefault] = xAxisExtent
-  const [yMinDefault, yMaxDefault] = yAxisExtent
+  const aspect = width / height
+
   const [offset, setOffset] = React.useState<vec.Vector2>([0, 0])
-  const [xMin, yMin] = vec.add([xMinDefault, yMinDefault], offset)
-  const [xMax, yMax] = vec.add([xMaxDefault, yMaxDefault], offset)
+
+  const padding = viewBox?.padding ?? 0.5
+  const aoi = {
+    xMin: (viewBox?.x?.[0] ?? 0) - padding + offset[0],
+    xMax: (viewBox?.x?.[1] ?? 0) + padding + offset[0],
+    yMin: (viewBox?.y?.[0] ?? 0) - padding + offset[1],
+    yMax: (viewBox?.y?.[1] ?? 0) + padding + offset[1],
+  }
+
+  // Default behavior for `preserveAspectRatio == false`
+  let xMin = aoi.xMin
+  let xMax = aoi.xMax
+  let yMin = aoi.yMin
+  let yMax = aoi.yMax
+
+  if (preserveAspectRatio === "contain") {
+    const aoiAspect = (aoi.xMax - aoi.xMin) / (aoi.yMax - aoi.yMin)
+    if (aoiAspect > aspect) {
+      const yCenter = (aoi.yMax + aoi.yMin) / 2
+      const ySpan = (aoi.xMax - aoi.xMin) / aspect / 2
+      yMin = yCenter - ySpan
+      yMax = yCenter + ySpan
+    } else {
+      const xCenter = (aoi.xMax + aoi.xMin) / 2
+      const xSpan = ((aoi.yMax - aoi.yMin) * aspect) / 2
+      xMin = xCenter - xSpan
+      xMax = xCenter + xSpan
+    }
+  }
 
   const xSpan = xMax - xMin
   const ySpan = yMax - yMin

@@ -14,7 +14,7 @@ export default function SimplePoint() {
   const c = useMovablePoint([0, 2])
 
   return (
-    <Mafs height={500}>
+    <Mafs height={300}>
       <CartesianCoordinates />
       <Polygon
         points={[[c.x, -c.y], a, b]}

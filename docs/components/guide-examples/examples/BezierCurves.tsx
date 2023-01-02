@@ -104,7 +104,7 @@ export default function BezierCurves() {
 
   return (
     <>
-      <Mafs>
+      <Mafs viewBox={{ x: [-5, 5], y: [-4, 4] }}>
         <CartesianCoordinates
           xAxis={{ labels: false, axis: false }}
           yAxis={{ labels: false, axis: false }}

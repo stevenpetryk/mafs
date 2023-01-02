@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-
 import hljs from "highlight.js"
 
 interface Props {
@@ -39,9 +38,9 @@ const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) =
 
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
-      <div className={`unround-mafs focus:z-10`}>{component}</div>
+      <div className={`unround-mafs z-10`}>{component}</div>
 
-      <div className="-z-10">
+      <div>
         <div
           className={`
             bg-gray-900 dark:bg-black

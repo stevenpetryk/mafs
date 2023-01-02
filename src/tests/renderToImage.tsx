@@ -34,14 +34,7 @@ export default async function renderToImage(
       </head>
 
       <body>
-        <Mafs
-          ssr={true}
-          width={500}
-          height={500}
-          xAxisExtent={[-0.5, 10.5]}
-          yAxisExtent={[-0.5, 10.5]}
-          pan={false}
-        >
+        <Mafs ssr={true} width={500} height={500} viewBox={{ x: [0, 10], y: [0, 10] }} pan={false}>
           {coordinates ? <CartesianCoordinates /> : null}
           {children}
         </Mafs>

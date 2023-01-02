@@ -23,17 +23,6 @@ export interface ParametricProps extends Stroked {
    */
   minimumSamplingDepth?: number
 
-  /**
-   * @deprecated
-   *
-   * This prop used to represent number of samples used to render the function. It is now ignored.
-   *
-   * The algorithm that renders parametric functions now dynamically increases the
-   * number of samples based on the roughness of the function. In some pathological cases, you may
-   * still need to increase the sampling depth manually—but to do so, see `minimumSamplingDepth`.
-   */
-  samples?: never
-
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 

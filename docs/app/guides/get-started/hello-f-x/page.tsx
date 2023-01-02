@@ -63,6 +63,7 @@ function Page() {
         <li>Label the x-axis in terms of π</li>
         <li>Zoom the x-axis out a bit</li>
         <li>Zoom the y-axis in a bit</li>
+        <li>Tell Mafs to let us squish the viewport</li>
       </ul>
 
       <CodeAndExample component={<SinePi />} source={SinePiSource} />

@@ -1,19 +1,14 @@
 "use client"
-import * as React from "react"
+
 import GuidesSidebar from "./sidebar"
 import { getDocContext } from "./guides"
 import { useSelectedLayoutSegments } from "next/navigation"
 import Link from "next/link"
 import fancyFx from "../../helpers/fancyFx"
+import ScrollTop from "components/ScrollTop"
 
 export default function GuidesLayout({ children }: { children: React.ReactNode }) {
   const [sectionTitleKebab, guideTitleKebab] = useSelectedLayoutSegments()
-
-  // A little hack to scroll to the top until https://github.com/vercel/next.js/issues/42492 is fixed
-  React.useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [sectionTitleKebab, guideTitleKebab])
-
   const { current, next, previous } = getDocContext(sectionTitleKebab, guideTitleKebab)
 
   return (
@@ -50,6 +45,8 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           </div>
         </main>
       </div>
+
+      <ScrollTop />
     </>
   )
 }

@@ -50,8 +50,10 @@ export default function ProjectileMotion() {
   return (
     <>
       <Mafs
-        xAxisExtent={[1.25 - xSpan, 1.25 + xSpan]}
-        yAxisExtent={[1.25 - ySpan, 1.25 + ySpan]}
+        viewBox={{
+          x: [1 - xSpan, 1 + xSpan],
+          y: [1 - ySpan, 1 + ySpan],
+        }}
       >
         <Polygon
           points={[
@@ -108,14 +110,14 @@ export default function ProjectileMotion() {
       {/* These classnames are part of the Mafs docs website—they won't work for you. */}
       <div className="p-4 bg-black border-t border-gray-900 space-x-4">
         <button
-          className="bg-gray-200 font-bold px-4 py-1 rounded-sm"
+          className="bg-gray-200 text-black font-bold px-4 py-1 rounded-sm"
           onClick={start}
           disabled={yVelocity <= 0}
         >
           Start
         </button>
         <button
-          className="bg-gray-200 font-bold px-4 py-1 rounded-sm"
+          className="bg-gray-200 text-black font-bold px-4 py-1 rounded-sm"
           onClick={stop}
         >
           Reset

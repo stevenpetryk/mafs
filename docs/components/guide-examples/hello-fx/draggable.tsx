@@ -16,8 +16,8 @@ export default function HelloFx() {
   return (
     <Mafs
       height={300}
-      yAxisExtent={[-2.5, 2.5]}
-      xAxisExtent={[-15, 15]}
+      viewBox={{ x: [-10, 10], y: [-2, 2] }}
+      preserveAspectRatio={false}
     >
       <CartesianCoordinates
         subdivisions={4}

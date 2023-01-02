@@ -6,11 +6,7 @@ import clamp from "lodash/clamp"
 
 export default function SnapPoint() {
   return (
-    <Mafs
-      height={200}
-      xAxisExtent={[-8.5, 8.5]}
-      yAxisExtent={[-2.5, 2.5]}
-    >
+    <Mafs height={200} viewBox={{ x: [-8, 8], y: [-2, 2] }}>
       <CartesianCoordinates
         xAxis={{ labels: false, axis: false }}
       />

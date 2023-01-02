@@ -18,7 +18,10 @@ export default function PointsAlongFunction() {
       : []
 
   return (
-    <Mafs height={500} yAxisExtent={[-1.3, 4.7]}>
+    <Mafs
+      height={300}
+      viewBox={{ x: [0, 0], y: [-1.3, 4.7] }}
+    >
       <CartesianCoordinates />
 
       <FunctionGraph.OfX y={fn} opacity={0.25} />

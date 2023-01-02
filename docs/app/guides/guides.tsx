@@ -26,7 +26,7 @@ export const Guides: Section[] = [
     title: "Get Started",
     guides: [
       { title: "Installation", slug: "installation" },
-      { title: "Hello f(x)", slug: "hello-fx" },
+      { title: "Hello f(x)", slug: "hello-f-x" },
       { title: "Learning React", slug: "learning-react" },
     ],
   },

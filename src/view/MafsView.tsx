@@ -13,7 +13,7 @@ export interface MafsViewProps {
   width?: number | string
   height?: number
   pan?: boolean
-  viewBox?: { x: vec.Vector2; y: vec.Vector2; padding?: number }
+  viewBox?: { x?: vec.Vector2; y?: vec.Vector2; padding?: number }
   preserveAspectRatio?: "contain" | false
 
   /**
@@ -29,7 +29,7 @@ export const MafsView: React.FC<MafsViewProps> = ({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
-  viewBox,
+  viewBox = { x: [-3, 3], y: [-3, 3] },
   preserveAspectRatio = "contain",
   children,
   ssr = false,
@@ -49,10 +49,10 @@ export const MafsView: React.FC<MafsViewProps> = ({
 
   const padding = viewBox?.padding ?? 0.5
   const aoi = {
-    xMin: (viewBox?.x?.[0] ?? -3) - padding + offset[0],
-    xMax: (viewBox?.x?.[1] ?? 3) + padding + offset[0],
-    yMin: (viewBox?.y?.[0] ?? -3) - padding + offset[1],
-    yMax: (viewBox?.y?.[1] ?? 3) + padding + offset[1],
+    xMin: (viewBox?.x?.[0] ?? 0) - padding + offset[0],
+    xMax: (viewBox?.x?.[1] ?? 0) + padding + offset[0],
+    yMin: (viewBox?.y?.[0] ?? 0) - padding + offset[1],
+    yMax: (viewBox?.y?.[1] ?? 0) + padding + offset[1],
   }
 
   // Default behavior for `preserveAspectRatio == false`

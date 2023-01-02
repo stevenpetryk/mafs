@@ -6,6 +6,7 @@ export type TransformProps = React.PropsWithChildren<{
   translate?: vec.Vector2
   scale?: number | vec.Vector2
   rotate?: number
+  shear?: vec.Vector2
 }>
 
 const TransformContext = React.createContext<vec.Matrix>(vec.matrixBuilder().get())
@@ -30,12 +31,13 @@ export function Transform(props: TransformProps) {
       case "translate":
         builder = builder.translate(...(value as vec.Vector2))
         break
-
       case "scale":
         if (typeof value === "number") builder = builder.scale(value, value)
         else builder = builder.scale(...(value as vec.Vector2))
         break
-
+      case "shear":
+        builder = builder.shear(...(value as vec.Vector2))
+        break
       case "rotate":
         builder = builder.rotate(value as number)
         break

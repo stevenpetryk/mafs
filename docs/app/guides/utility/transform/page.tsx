@@ -39,7 +39,6 @@ export default function Page() {
               translate={...}
               scale={...}
               rotate={...}
-              skew={...}
               shear={...}
               matrix={...}
             />

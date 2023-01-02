@@ -49,8 +49,23 @@ function Stopwatch() {
       <Code
         language="tsx"
         source={`
+    useMovablePoint([0, 0], {
+      constrain: ([x, y]) => [Math.round(x), Math.round(y)]
+    })
+  `}
+      />
+
+      <p>
+        Another common use case is to constrain motion to be circular—<code>vec.withMag</code> comes
+        in handy there.
+      </p>
+
+      <Code
+        language="tsx"
+        source={`
           useMovablePoint([0, 0], {
-            constrain: ([x, y]) => [Math.round(x), Math.round(y)]
+            // Constrain \`point\` to move in a circle of radius 1
+            constrain: (point) => vec.withMag(point, 1)
           })
         `}
       />

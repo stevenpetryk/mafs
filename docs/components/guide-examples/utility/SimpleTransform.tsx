@@ -20,12 +20,7 @@ export default function SimpleTransformExample() {
         rotate={Math.atan2(r.point[1], r.point[0])}
         translate={t.point}
       >
-        {/* prettier-ignore */}
-        <Polygon points={[[0, 0], [1, 0], [1, 1], [0, 1]]} />
-        <Circle center={[0.5, 0.5]} radius={0.5} />
-        <Text x={0.5} y={0.5} transformBehavior="all">
-          Hello world!
-        </Text>
+        <HelloBox />
       </Transform>
 
       <Transform
@@ -37,5 +32,18 @@ export default function SimpleTransformExample() {
       {t.element}
       <Transform translate={t.point}>{r.element}</Transform>
     </Mafs>
+  )
+}
+
+function HelloBox() {
+  return (
+    <>
+      {/* prettier-ignore */}
+      <Polygon points={[[0, 0], [1, 0], [1, 1], [0, 1]]} />
+      <Circle center={[0.5, 0.5]} radius={0.5} />
+      <Text x={0.5} y={0.5} transformBehavior="all">
+        Hello world!
+      </Text>
+    </>
   )
 }

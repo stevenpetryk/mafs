@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Stroked, Theme } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
 import { round } from "../../math"

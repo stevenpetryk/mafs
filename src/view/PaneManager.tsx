@@ -1,8 +1,6 @@
 import * as React from "react"
 import { useCoordinateContext } from "./CoordinateContext"
 import { range, Interval } from "../math"
-import { useTransformContext } from "../display/Transform"
-import * as vec from "../vec"
 
 interface PaneContextShape {
   xPanes: Interval[]

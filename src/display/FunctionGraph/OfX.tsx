@@ -3,9 +3,6 @@ import { round } from "../../math"
 import { usePaneContext } from "../../view/PaneManager"
 import { Stroked } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
-import { useCoordinateContext } from "../../view/CoordinateContext"
-import { useTransformContext } from "../Transform"
-import * as vec from "../../vec"
 
 export interface OfXProps extends Stroked {
   y: (x: number) => number
@@ -24,17 +21,6 @@ export const OfX: React.VFC<OfXProps> = ({
 }) => {
   const { cssScale } = useScaleContext()
   const { xPanes: panes, yPaneRange } = usePaneContext()
-
-  const transform = useTransformContext()
-  const inverse = vec.matrixInvert(transform)!
-  const { xMin, xMax, yMin, yMax } = useCoordinateContext()
-
-  const xMinPoint = vec.transform([xMin, 0], inverse)
-  const xMaxPoint = vec.transform([xMax, 0], inverse)
-  const yMinPoint = vec.transform([0, yMin], inverse)
-  const yMaxPoint = vec.transform([0, yMax], inverse)
-
-  console.log([xMinPoint[0], xMaxPoint[0]], [yMinPoint[1], yMaxPoint[1]])
 
   // Ignore points that are very high or low
   const yUpperBound = yPaneRange[1]

@@ -39,6 +39,11 @@ function Stopwatch() {
       </p>
 
       <p>
+        Mafs may call <code>constrain</code> more than once when the user moves a point using the
+        arrow keys, so it should be side-effect free.
+      </p>
+
+      <p>
         To demonstrate this, imagine constraining a point to "snap" to the nearest whole number
         point. We take where the user is trying to move to, and round it to the nearest whole
         number.

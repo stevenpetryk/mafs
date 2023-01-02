@@ -1,3 +1,4 @@
+import { AnalyticsWrapper } from "components/analytics"
 import Link from "next/link"
 import { MafsLogo } from "../components/MafsLogo"
 import "./globals.css"
@@ -41,6 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
           </div>
         </footer>
+
+        <AnalyticsWrapper />
       </body>
     </html>
   )

@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import {
   Mafs,
   VectorField,
@@ -8,7 +7,7 @@ import {
   useMovablePoint,
 } from "mafs"
 
-const VectorFieldExample: React.VFC = () => {
+function VectorFieldExample() {
   const a = useMovablePoint([0.6, 0.6])
 
   return (

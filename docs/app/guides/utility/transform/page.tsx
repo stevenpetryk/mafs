@@ -53,9 +53,20 @@ export default function Page() {
       <h3>Nesting</h3>
 
       <p>
-        Nesting is supported. Keep in mind that transformations will be applied in the order they
-        are nested, with the root-most transformations being applied first.
+        Nesting is supported. Transformations will be applied <em>inside out</em>, so the innermost{" "}
+        <code>Transform</code> will be applied first.
       </p>
+
+      <Code
+        language="tsx"
+        source={`
+          <Transform translate={[10, 10]}>
+            <Transform rotate={Math.PI / 2}>
+              {/* Things in here will be rotated, _then_ translated */}
+            </Transform>
+          </Transform>
+        `}
+      />
 
       <h3>Prop order matters</h3>
 

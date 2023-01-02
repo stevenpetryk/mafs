@@ -10,27 +10,25 @@ export default function SimpleTransformExample() {
     color: Theme.green,
     constrain: (p) => vec.normalize(p),
   })
+  const angle = Math.atan2(r.point[1], r.point[0])
 
   return (
     <Mafs height={200}>
       <CartesianCoordinates />
 
-      <Transform
-        scale={s.point}
-        rotate={Math.atan2(r.point[1], r.point[0])}
-        translate={t.point}
-      >
-        <HelloBox />
+      <Transform translate={t.point}>
+        <Transform rotate={angle}>
+          <Transform scale={s.point}>
+            <HelloBox />
+          </Transform>
+
+          {s.element}
+        </Transform>
+
+        {r.element}
       </Transform>
 
-      <Transform
-        rotate={Math.atan2(r.point[1], r.point[0])}
-        translate={t.point}
-      >
-        {s.element}
-      </Transform>
       {t.element}
-      <Transform translate={t.point}>{r.element}</Transform>
     </Mafs>
   )
 }
@@ -41,7 +39,7 @@ function HelloBox() {
       {/* prettier-ignore */}
       <Polygon points={[[0, 0], [1, 0], [1, 1], [0, 1]]} />
       <Circle center={[0.5, 0.5]} radius={0.5} />
-      <Text x={0.5} y={0.5} transformBehavior="all">
+      <Text x={0.5} y={0.5}>
         Hello world!
       </Text>
     </>

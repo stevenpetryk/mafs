@@ -7,7 +7,7 @@ export default function MovableEllipse() {
   const hintRadius = 3
 
   // This center point translates everything else.
-  const center = useMovablePoint([0, 0], {
+  const translate = useMovablePoint([0, 0], {
     color: Theme.orange,
   })
 
@@ -32,34 +32,33 @@ export default function MovableEllipse() {
     <Mafs height={500}>
       <CartesianCoordinates />
 
-      {/*
-       * Display a little hint that the
-       * point is meant to move radially
-       */}
-      <Circle
-        center={center.point}
-        radius={hintRadius}
-        strokeStyle="dashed"
-        strokeOpacity={0.3}
-        fillOpacity={0}
-      />
+      <Transform translate={translate.point}>
+        <Transform rotate={angle}>
+          {/*
+           * Display a little hint that the
+           * point is meant to move radially
+           */}
+          <Circle
+            center={[0, 0]}
+            radius={hintRadius}
+            strokeStyle="dashed"
+            strokeOpacity={0.3}
+            fillOpacity={0}
+          />
 
-      <Ellipse
-        center={center.point}
-        radius={[Math.abs(width.x), Math.abs(height.y)]}
-        angle={angle}
-      />
+          <Ellipse
+            center={[0, 0]}
+            radius={[Math.abs(width.x), Math.abs(height.y)]}
+          />
 
-      {center.element}
+          {width.element}
+          {height.element}
+        </Transform>
 
-      <Transform rotate={angle} translate={center.point}>
-        {width.element}
-        {height.element}
-      </Transform>
-
-      <Transform translate={center.point}>
         {rotate.element}
       </Transform>
+
+      {translate.element}
     </Mafs>
   )
 }

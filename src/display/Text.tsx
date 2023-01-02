@@ -12,7 +12,6 @@ export interface TextProps {
   attachDistance?: number
   size?: number
   color?: string
-  transformBehavior?: "all" | "anchor-only"
   svgTextProps?: React.SVGAttributes<SVGTextElement>
 }
 
@@ -25,7 +24,6 @@ export const Text: React.FC<TextProps> = ({
   svgTextProps = {},
   attach,
   attachDistance = 0,
-  transformBehavior = "anchor-only",
 }) => {
   const { pixelMatrix } = useScaleContext()
   const transformContext = useTransformContext()

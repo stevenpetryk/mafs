@@ -18,7 +18,7 @@ export function useTransformContext() {
 export function Transform(props: TransformProps) {
   const existingTransform = React.useContext(TransformContext)
 
-  let builder = vec.matrixBuilder(existingTransform)
+  let builder = vec.matrixBuilder()
 
   // Destructure props so that we can iterate over transforms in prop-order
   const { matrix, children, ...transforms } = props
@@ -43,6 +43,8 @@ export function Transform(props: TransformProps) {
         break
     }
   }
+
+  builder = builder.mult(existingTransform)
 
   const newTransform = builder.get()
 

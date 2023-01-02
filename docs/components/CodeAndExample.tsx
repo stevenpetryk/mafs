@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import hljs from "highlight.js"
+import { HighlightedCode } from "./Code"
 
 interface Props {
   source: string
@@ -9,7 +9,7 @@ interface Props {
   clean?: boolean
 }
 
-const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) => {
+function CodeAndExample({ source, component, clean = true }: Props) {
   if (clean) {
     const remove = [
       /\s+height=\{[^}]*\}/g,
@@ -25,16 +25,12 @@ const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) =
       source = source.replace(regex, "")
     })
 
+    source = source.replaceAll(/import \{(.|\n)*?\} from "mafs"/gm, (match) => {
+      return match.replaceAll(/\s+/g, " ").replace(", }", " }")
+    })
+
     source = source.trim()
   }
-
-  const codeRef = React.useRef<HTMLPreElement>(null)
-
-  React.useEffect(() => {
-    if (codeRef.current) {
-      hljs.highlightElement(codeRef.current)
-    }
-  }, [source])
 
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
@@ -47,11 +43,13 @@ const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) =
             border-gray-900 border-t text-gray-100
             p-3 sm:p-6 max-h-[500px] overflow-x-auto
             md:rounded-b-lg
+
+            refractor-highlight
           `}
         >
           <pre>
-            <code ref={codeRef} className="language-tsx">
-              {source}
+            <code className="language-tsx">
+              <HighlightedCode source={source} language="tsx" />
             </code>
           </pre>
         </div>

@@ -1,62 +1,101 @@
-.hljs {
-  display: block;
-  overflow-x: auto;
-}
-.hljs-comment,
-.hljs-quote {
-  color: #7c8492;
-  font-style: italic;
-}
-.hljs-doctag,
-.hljs-formula,
-.hljs-keyword {
-  color: #f97583;
-}
-.hljs-deletion,
-.hljs-name,
-.hljs-section,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #79b8ff;
-}
-.hljs-literal {
-  color: #56b6c2;
-}
-.hljs-addition,
-.hljs-meta-string,
-.hljs-regexp,
-.hljs-string {
-  color: #9ecbff;
-}
-.hljs-attribute,
-.hljs-attr,
-.hljs-built_in,
-.hljs-class,
-.hljs-title {
-  color: #b392f0;
-}
-.hljs-number,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-pseudo,
-.hljs-template-variable,
-.hljs-type,
-.hljs-variable {
-  color: #f97583;
-}
-.hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-symbol {
-  color: #61aeee;
-}
-.hljs-emphasis {
-  font-style: italic;
-}
-.hljs-strong {
-  font-weight: 700;
-}
-.hljs-link {
-  text-decoration: underline;
+.refractor-highlight {
+  .token.comment,
+  .token.prolog,
+  .token.cdata {
+    color: #7c8492;
+  }
+
+  .token.doctype,
+  .token.punctuation,
+  .token.entity {
+    color: white;
+  }
+  .token.class-name {
+    color: #7ee787;
+  }
+
+  .token.attr-name {
+    color: #79c0ff;
+  }
+
+  .token.boolean,
+  .token.constant,
+  .token.number,
+  .token.atrule {
+    color: #b392f0;
+  }
+
+  .token.keyword {
+    color: #f97583;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.symbol,
+  .token.deleted,
+  .token.important {
+    color: hsl(355, 65%, 65%);
+  }
+
+  .token.selector,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted,
+  .token.regex,
+  .token.attr-value,
+  .token.attr-value > .token.punctuation {
+    color: #9ecbff;
+  }
+
+  .token.variable,
+  .token.operator,
+  .token.function {
+    color: #d2a8ff;
+  }
+
+  .token.url {
+    color: hsl(187, 47%, 55%);
+  }
+
+  /* CSS overrides */
+  .language-css .token.selector {
+    color: hsl(355, 65%, 65%);
+  }
+
+  .language-css .token.property {
+    color: hsl(220, 14%, 71%);
+  }
+
+  .language-css .token.function,
+  .language-css .token.url > .token.function {
+    color: hsl(187, 47%, 55%);
+  }
+
+  .language-css .token.url > .token.string.url {
+    color: hsl(95, 38%, 62%);
+  }
+
+  .language-css .token.important,
+  .language-css .token.atrule .token.rule {
+    color: hsl(286, 60%, 67%);
+  }
+
+  /* General */
+  .token.bold {
+    font-weight: bold;
+  }
+
+  .token.comment,
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.entity {
+    cursor: help;
+  }
+
+  .token.namespace {
+    opacity: 0.8;
+  }
 }

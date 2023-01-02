@@ -11,6 +11,8 @@ import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import MovableEllipse from "guide-examples/MovableEllipse"
 import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
 import { Advanced } from "components/Advanced"
+import Code from "components/Code"
+import Link from "next/link"
 
 function Stopwatch() {
   return (
@@ -39,50 +41,58 @@ function Stopwatch() {
       </p>
 
       <p>
-        The simplest example of this is, in fact, constraining movement horizontally and vertically.
-        When you pass <code>"horizontal"</code> or <code>"vertical"</code>, Mafs is internally using
-        functions like this to constrain the point:
+        To demonstrate this, imagine constraining a point to "snap" to the nearest whole number
+        point. We take where the user is trying to move to, and round it to the nearest whole
+        number.
       </p>
 
-      <ul>
-        <li>
-          Horizontal constraint: <code>{`([newX, _]) => [newX, y]`}</code>
-        </li>
-        <li>
-          Vertical constraint: <code>{`([_, newY]) => [x, newY]`}</code>
-        </li>
-      </ul>
+      <Code
+        language="tsx"
+        source={`
+    useMovablePoint([0, 0], {
+      constrain: ([x, y]) => [Math.round(x), Math.round(y)]
+    })
+  `}
+      />
 
       <p>
-        You can also round point positions to make points move discretely rather than continuously.
-        The following example plays with that idea both for linear positions and angles.
+        Another common use case is to constrain motion to be circular—<code>vec.withMag</code> comes
+        in handy there.
+      </p>
+
+      <Code
+        language="tsx"
+        source={`
+          useMovablePoint([0, 0], {
+            // Constrain \`point\` to move in a circle of radius 1
+            constrain: (point) => vec.withMag(point, 1)
+          })
+        `}
+      />
+
+      <p>
+        You can also constrain a point to follow a straight line by setting <code>constrain</code>{" "}
+        to <code>"horizontal"</code> or <code>"vertical"</code>.
+      </p>
+
+      <h2>Transformations and constraints</h2>
+
+      <p>
+        When wrapping a Movable Point in a <Link href="/guides/utility/transform">Transform</Link>,
+        the point will be transformed too. However, your <code>constrain</code> function will be
+        passed the <em>untransformed</em> point, and its return value will be transformed{" "}
+        <em>back</em> into the currently applied transform. In other words, Mafs takes care of the
+        math for you.
+      </p>
+
+      <p>
+        Let's see a more complex example where we combine more interesting constraint functions with
+        transforms. On the left, we have a point that can only move in whole-number increments
+        within a square, and on the right, a point that can only move in π/16 increments in a
+        circle.
       </p>
 
       <CodeAndExample component={<SnapPoint />} source={SnapPointSource} />
-
-      <h2>Transforms</h2>
-
-      <p>
-        Transforms are a way to separate a point's visual location from its mathematical one. This
-        is great if you want to define a point's position in terms of other points.
-      </p>
-
-      <p>
-        When transforming a point, its constraints are also transformed—your <code>constraint</code>{" "}
-        function, if any, will receive the point's <em>actual</em> position, not its visual one.
-        This means that if you rotate a point using a transformation, and you've constrained the
-        point horizontally (for example), the horizontal constraint will be rotated, too.
-      </p>
-
-      <p>
-        This next example exploits this behavior to great effect. The center (orange) point is used
-        to translate the other 3 points, so they "follow" the center point. Then, the outer (blue)
-        point, which rotates the ellipse, applies a rotation to the width and height points. All
-        along the way, every point can be treated as if it hasn't moved at all, keeping the math
-        easy for us and letting Mafs do all the linear algebra.
-      </p>
-
-      <CodeAndExample component={<MovableEllipse />} source={MovableEllipseSource} />
 
       <h2 className="flex flex-col gap-1">
         <div>

@@ -26,6 +26,10 @@ export const Guides: Section[] = [
     ],
   },
   {
+    title: "Utility",
+    guides: ["Transform"],
+  },
+  {
     title: "Interaction",
     guides: ["Movable points"],
   },

@@ -1,20 +1,56 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec } from "mafs"
+import { Mafs, Transform, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec, Theme } from "mafs"
 import clamp from "lodash/clamp"
 
 export default function SnapPoint() {
-  const gridMotion = useMovablePoint([-2, 1], {
+  return (
+    <Mafs
+      height={200}
+      xAxisExtent={[-8.5, 8.5]}
+      yAxisExtent={[-2.5, 2.5]}
+    >
+      <CartesianCoordinates
+        xAxis={{ labels: false, axis: false }}
+      />
+
+      <Transform translate={[-3, 0]}>
+        <Grid />
+      </Transform>
+
+      <Transform translate={[3, 0]}>
+        <Radial />
+      </Transform>
+    </Mafs>
+  )
+}
+
+function Grid() {
+  const gridMotion = useMovablePoint([1, 1], {
     // Constrain this point to whole numbers inside of a rectangle
     constrain: ([x, y]) => [
-      clamp(Math.round(x), -5, -1),
+      clamp(Math.round(x), -2, 2),
       clamp(Math.round(y), -2, 2),
     ],
   })
 
+  return (
+    <>
+      <Vector tail={[0, 0]} tip={gridMotion.point} />
+
+      <Polygon
+        // prettier-ignore
+        points={[[-2, -2], [2, -2], [2, 2], [-2, 2]]}
+        color={Theme.blue}
+      />
+      {gridMotion.element}
+    </>
+  )
+}
+
+function Radial() {
   const radius = 2
-  const shift = vec.matrixBuilder().translate(3, 0).get()
   const radialMotion = useMovablePoint([0, radius], {
     // Constrain this point to specific angles from the center
     constrain: (point) => {
@@ -23,41 +59,18 @@ export default function SnapPoint() {
       const roundedAngle = Math.round(angle / snap) * snap
       return vec.rotate([radius, 0], roundedAngle)
     },
-    // (More on transforms in the next section)
-    transform: shift,
   })
 
   return (
-    <Mafs
-      height={200}
-      xAxisExtent={[-8.5, 8.5]}
-      yAxisExtent={[-3, 3]}
-    >
-      <CartesianCoordinates xAxis={{ labels: false }} />
-
-      <Vector tail={[-3, 0]} tip={gridMotion.point} />
-
-      <Polygon
-        // prettier-ignore
-        points={[[-5, -2], [-1, -2], [-1, 2], [-5, 2]]}
-        fillOpacity={0}
-        strokeOpacity={0.5}
-        strokeStyle="dashed"
-      />
+    <>
       <Circle
-        center={vec.transform([0, 0], shift)}
+        center={[0, 0]}
         radius={radius}
+        color={Theme.blue}
         fillOpacity={0}
-        strokeOpacity={0.5}
-        strokeStyle="dashed"
       />
-      <Vector
-        tail={vec.transform([0, 0], shift)}
-        tip={vec.transform(radialMotion.point, shift)}
-      />
-
-      {gridMotion.element}
+      <Vector tail={[0, 0]} tip={radialMotion.point} />
       {radialMotion.element}
-    </Mafs>
+    </>
   )
 }

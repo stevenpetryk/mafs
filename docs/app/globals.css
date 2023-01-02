@@ -67,6 +67,10 @@
     margin-top: 3rem !important;
   }
 
+  .prose ul {
+    @apply space-y-0;
+  }
+
   .prose a {
     @apply text-blue-700 dark:text-blue-400 underline;
   }

@@ -62,3 +62,5 @@ import * as vec from "./vec"
 import type { Vector2, Matrix } from "./vec"
 export { vec }
 export type { Vector2, Matrix }
+
+export { Transform, type TransformProps } from "./display/Transform"

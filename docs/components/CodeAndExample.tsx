@@ -38,11 +38,11 @@ const CodeAndExample: React.VFC<Props> = ({ source, component, clean = true }) =
   }, [source])
 
   return (
-    <div className="w-auto sm:text-base text-sm -m-6 md:m-0 md:rounded-lg dark:shadow-xl">
-      <div className="unround-mafs relative z-10">{component}</div>
+    <div className="w-auto sm:text-base text-sm -m-6 md:m-0 md:rounded-lg dark:shadow-xl overflow-hidden">
+      <div className="unround-mafs focus:z-10">{component}</div>
 
       <div>
-        <div className="bg-gray-900 dark:bg-black border-gray-800 border-t text-gray-100 p-3 sm:p-6 overflow-x-auto">
+        <div className="bg-gray-900 dark:bg-black border-gray-800 border-t text-gray-100 p-3 sm:p-6 max-h-[500px] overflow-x-auto">
           <pre>
             <code ref={codeRef} className="language-tsx">
               {source}

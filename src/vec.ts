@@ -62,6 +62,10 @@ export function normalize(v: Vector2): Vector2 {
   return [v[0] / magnitude, v[1] / magnitude]
 }
 
+export function withMag(v: Vector2, m: number): Vector2 {
+  return scale(normalize(v), m)
+}
+
 /**
  * Scale a vector by a scalar
  */
@@ -201,7 +205,7 @@ export function matrixBuilder(m: Matrix | null = null) {
   const _m = m || matrixCreate()
 
   return {
-    add: (m: Matrix) => matrixBuilder(matrixMult(m, _m)),
+    mult: (m: Matrix) => matrixBuilder(matrixMult(m, _m)),
     translate: (x: number, y: number) => matrixBuilder(matrixMult([1, 0, x, 0, 1, y, 0, 0, 1], _m)),
     rotate: (a: number) =>
       matrixBuilder(

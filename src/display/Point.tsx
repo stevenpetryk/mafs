@@ -1,6 +1,8 @@
 import * as React from "react"
 import { useScaleContext } from "../view/ScaleContext"
+import { useTransformContext } from "./Transform"
 import { Theme } from "./Theme"
+import * as vec from "../vec"
 
 export interface PointProps {
   x: number
@@ -17,12 +19,15 @@ export const Point: React.VFC<PointProps> = ({
   opacity = 1,
   svgCircleProps = {},
 }) => {
-  const { scaleX, scaleY } = useScaleContext()
+  const { pixelMatrix } = useScaleContext()
+  const transform = useTransformContext()
+
+  const [cx, cy] = vec.transform([x, y], vec.matrixMult(pixelMatrix, transform))
 
   return (
     <circle
-      cx={scaleX(x)}
-      cy={scaleY(y)}
+      cx={cx}
+      cy={cy}
       r={6}
       {...svgCircleProps}
       style={{ fill: color, opacity, ...svgCircleProps.style }}

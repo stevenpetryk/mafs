@@ -28,11 +28,6 @@ function Page() {
 
       <CodeAndExample component={<Plain />} source={PlainSource} />
 
-      <p>
-        Mafs is useful on its own, but can be made even better by using a few third-party libraries
-        and assets.
-      </p>
-
       <h2>Vector math</h2>
 
       <p>

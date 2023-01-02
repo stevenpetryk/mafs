@@ -49,8 +49,8 @@ function Page() {
       <CodeAndExample component={<Sine />} source={SineSource} />
 
       <p>
-        Nice! We've passed a plain old JavaScript function, and Mafs evaluated it at many points
-        along our coordinate plane.
+        We've passed a plain JavaScript function, and Mafs evaluated it and plotted it across the
+        coordinate plane.
       </p>
 
       <p>
@@ -77,7 +77,7 @@ function Page() {
       <h2>Making things interactive</h2>
 
       <p>
-        If you imagine holding what you've just build in your hands, it would feel only natural to
+        If you imagine holding what you've just built in your hands, it would feel only natural to
         slide the wave back and forth to adjust the phase. Let's add a movable point and hook it up
         to our function.
       </p>

@@ -16,7 +16,7 @@ pnpm install
 pnpm start
 ```
 
-Then visit [localhost:8000](http://localhost:8000).
+Then visit [localhost:3000](http://localhost:3000).
 
 ## Tests
 

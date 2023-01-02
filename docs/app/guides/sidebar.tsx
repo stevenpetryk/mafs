@@ -12,15 +12,20 @@ function GuidesSidebar() {
       <h2 className="text-lg font-semibold">{section.title}</h2>
 
       <ul>
-        {section.guides.map((guideTitle, index) => (
-          <GuideLink
-            sectionTitle={kebabCase(section.title)}
-            guideTitle={kebabCase(guideTitle)}
-            key={index}
-          >
-            {fancyFx(guideTitle)}
-          </GuideLink>
-        ))}
+        {section.guides.map((guide, index) => {
+          const IconElement = guide.icon
+
+          return (
+            <GuideLink
+              sectionTitle={kebabCase(section.title)}
+              guideTitle={kebabCase(guide.title)}
+              key={index}
+            >
+              {IconElement && <IconElement className="opacity-50" />}
+              {fancyFx(guide.title)}
+            </GuideLink>
+          )
+        })}
       </ul>
     </div>
   ))

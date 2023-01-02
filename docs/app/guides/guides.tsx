@@ -5,41 +5,64 @@ type Section = {
   guides: Guide[]
 }
 
-type Guide = string
+type Guide = { title: string; slug: string; icon?: typeof GearIcon }
 
+import {
+  BorderSolidIcon,
+  DotFilledIcon,
+  GridIcon,
+  SquareIcon,
+  CircleIcon,
+  ArrowTopRightIcon,
+  DoubleArrowRightIcon,
+  RotateCounterClockwiseIcon,
+  TextIcon,
+  MoveIcon,
+  PlayIcon,
+} from "@radix-ui/react-icons"
+// Rewrite Guides but where each guide is an object with a title and a slug.
 export const Guides: Section[] = [
   {
     title: "Get Started",
-    guides: ["Installation", "Hello f(x)", "Learning React"],
+    guides: [
+      { title: "Installation", slug: "installation" },
+      { title: "Hello f(x)", slug: "hello-fx" },
+      { title: "Learning React", slug: "learning-react" },
+    ],
   },
   {
     title: "Display",
     guides: [
-      "Points",
-      "Lines",
-      "Polygons",
-      "Ellipses & circles",
-      "Graphs",
-      "Vectors",
-      "Vector fields",
-      "Text",
+      { title: "Points", icon: DotFilledIcon, slug: "points" },
+      { title: "Lines", icon: BorderSolidIcon, slug: "lines" },
+      { title: "Polygons", icon: SquareIcon, slug: "polygons" },
+      { title: "Ellipses & circles", icon: CircleIcon, slug: "ellipses-circles" },
+      { title: "Graphs", icon: GridIcon, slug: "graphs" },
+      { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
+      { title: "Vector fields", icon: DoubleArrowRightIcon, slug: "vector-fields" },
+      { title: "Text", icon: TextIcon, slug: "text" },
     ],
   },
   {
     title: "Utility",
-    guides: ["Transform"],
+    guides: [{ title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" }],
   },
   {
     title: "Interaction",
-    guides: ["Movable points"],
+    guides: [{ title: "Movable points", icon: MoveIcon, slug: "movable-points" }],
   },
   {
     title: "Animation",
-    guides: ["Stopwatch"],
+    guides: [{ title: "Stopwatch", icon: PlayIcon, slug: "stopwatch" }],
   },
   {
     title: "Examples",
-    guides: ["Bézier curves", "Riemann sums", "Fancy parabola", "Projectile motion"],
+    guides: [
+      { title: "Bézier curves", slug: "bezier-curves" },
+      { title: "Riemann sums", slug: "riemann-sums" },
+      { title: "Fancy parabola", slug: "fancy-parabola" },
+      { title: "Projectile motion", slug: "projectile-motion" },
+    ],
   },
 ]
 
@@ -67,7 +90,7 @@ export function getDocContext(
 } {
   const sectionIndex = Guides.findIndex((section) => kebabCase(section.title) === sectionTitle)
   const section = Guides[sectionIndex]
-  const guideIndex = section.guides.findIndex((guide) => kebabCase(guide) === guideTitle)
+  const guideIndex = section.guides.findIndex((guide) => kebabCase(guide.title) === guideTitle)
   const guide = section.guides[guideIndex]
 
   // Sections contain guides. We want to find the next and previous guides, given that we may need
@@ -96,21 +119,21 @@ export function getDocContext(
   return {
     current: {
       sectionTitle: section.title,
-      guideTitle: guide,
-      url: `/guides/${kebabCase(section.title)}/${kebabCase(guide)}`,
+      guideTitle: guide.title,
+      url: `/guides/${kebabCase(section.title)}/${kebabCase(guide.slug)}`,
     },
     previous: prevGuide
       ? {
           sectionTitle: prevSection.title,
-          guideTitle: prevGuide,
-          url: `/guides/${kebabCase(prevSection.title)}/${kebabCase(prevGuide)}`,
+          guideTitle: prevGuide.title,
+          url: `/guides/${kebabCase(prevSection.title)}/${kebabCase(prevGuide.slug)}`,
         }
       : null,
     next: nextGuide
       ? {
           sectionTitle: nextSection.title,
-          guideTitle: nextGuide,
-          url: `/guides/${kebabCase(nextSection.title)}/${kebabCase(nextGuide)}`,
+          guideTitle: nextGuide.title,
+          url: `/guides/${kebabCase(nextSection.title)}/${kebabCase(nextGuide.slug)}`,
         }
       : null,
   }

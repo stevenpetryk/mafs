@@ -15,7 +15,7 @@ export default function fancyFx(title: string): React.ReactNode {
   const splitByFx = title.split("f(x)")
 
   return (
-    <>
+    <span>
       {splitByFx
         .slice(0, -1)
         .map((piece, index) => [
@@ -27,6 +27,6 @@ export default function fancyFx(title: string): React.ReactNode {
         ])
         .concat([splitByFx[splitByFx.length - 1]])
         .flat()}
-    </>
+    </span>
   )
 }

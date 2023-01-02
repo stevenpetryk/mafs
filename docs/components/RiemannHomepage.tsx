@@ -71,7 +71,7 @@ export default function RiemannHomepage() {
       height={650}
       viewBox={{ x: xBounds, y: [-0.9, 4.5], padding: 0 }}
       preserveAspectRatio={false}
-      // pan={false}
+      pan={false}
     >
       <CartesianCoordinates
         yAxis={{

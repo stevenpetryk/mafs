@@ -14,11 +14,6 @@ export default function Page() {
         collectively. This is where <code>Transform</code> comes in handy.
       </p>
 
-      <p>
-        Wrapping elements in <code>Transform</code> will apply those transformations, in order, to
-        the underlying Mafs elements.
-      </p>
-
       <CodeAndExample
         component={<SimpleTransformExample />}
         source={SimpleTransformExampleSource}

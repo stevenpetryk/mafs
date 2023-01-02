@@ -28,8 +28,7 @@ export default function Page() {
 
       <p>
         <code>Transform</code> supports many transformation convenience props, but they all boil
-        down to matrix multiplication. You can pass your own matrix via the <code>matrix</code> prop
-        and it will be combined with any other transformations you define.
+        down to matrix multiplication.
       </p>
 
       <Code
@@ -44,6 +43,19 @@ export default function Page() {
             />
         `}
       />
+
+      <p>
+        You can pass your own matrix via the <code>matrix</code> prop and it will be combined with
+        any other transformations you define. Use <code>vec.matrixBuilder()</code> to construct such
+        a matrix if needed.
+      </p>
+
+      <h3>Nesting</h3>
+
+      <p>
+        Nesting is supported. Keep in mind that transformations will be applied in the order they
+        are nested, with the root-most transformations being applied first.
+      </p>
 
       <h3>Prop order matters</h3>
 

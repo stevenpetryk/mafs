@@ -87,7 +87,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
       const movement = vec.transform(pixelMovement, inversePixelMatrix)
       onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
     }
-  })
+  }, {enabled: dragging})
 
   const ringSize = 15
 

@@ -58,9 +58,10 @@ export type { Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
 
 export type { Interval } from "./math"
 
-import * as vec from "./vec"
-import type { Vector2, Matrix } from "./vec"
-export { vec }
-export type { Vector2, Matrix }
+export type { Vector2, Matrix } from "./vec"
+
+// Some wonk here because Parcel doesn't understand the export * as syntax
+import * as vecLib from "./vec"
+export const vec = vecLib
 
 export { Transform, type TransformProps } from "./display/Transform"

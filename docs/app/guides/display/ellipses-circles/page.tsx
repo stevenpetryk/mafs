@@ -8,16 +8,31 @@ import MovableCircleSource from "!raw-loader!guide-examples/MovableCircle"
 import WIP from "components/WIP"
 import Link from "next/link"
 
+import { Circle, Ellipse } from "mafs"
+import { PropTable } from "components/PropTable"
+
 export default function Page() {
   return (
     <>
-      <p>
-        Ellipses take a center vector, radius vector, and an angle. Note that if the coordinate
-        plane is not square (if the aspect ratio is "squished"), ellipses undergo a sort of
-        funny-looking shear, which can make visualizations confusing.
-      </p>
+      <h2>Circles</h2>
+
+      <p>Circles take a center vector and a radius.</p>
+
+      <CodeAndExample component={<MovableCircle />} source={MovableCircleSource} />
+
+      <h3>Props</h3>
+
+      <PropTable info={Circle.__docgenInfo} />
+
+      <h2>Ellipses</h2>
+
+      <p>Ellipses take a center vector, radius vector, and an angle.</p>
 
       <CodeAndExample component={<MovableEllipse />} source={MovableEllipseSource} />
+
+      <h3>Props</h3>
+
+      <PropTable info={Ellipse.__docgenInfo} />
 
       <WIP>
         <p>
@@ -26,15 +41,6 @@ export default function Page() {
           <Link href="/guides/display/function-graphs/">parametric function</Link>.
         </p>
       </WIP>
-
-      <h2>Circles</h2>
-
-      <p>
-        Circles have the same interface as Ellipses, but take a single value for their radius and
-        don't take an angle.
-      </p>
-
-      <CodeAndExample component={<MovableCircle />} source={MovableCircleSource} />
     </>
   )
 }

@@ -4,6 +4,7 @@ import { Vector2 } from "../vec"
 import type * as React from "react"
 
 export interface CircleProps extends Filled {
+  /** The center of the circle */
   center: Vector2
   radius: number
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>

@@ -11,6 +11,7 @@
   "dependencies": {
     "@next/font": "13.1.1",
     "@radix-ui/react-icons": "^1.1.1",
+    "@radix-ui/react-tooltip": "^1.0.2",
     "@types/node": "16",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
@@ -31,6 +32,8 @@
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "raw-loader": "^4.0.2",
-    "tailwindcss": "^3.2.4"
+    "react-docgen-typescript-plugin": "^1.0.2",
+    "tailwindcss": "^3.2.4",
+    "webpack": "^5.75.0"
   }
 }

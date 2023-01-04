@@ -1,3 +1,5 @@
+"use client"
+import * as Tooltip from "@radix-ui/react-tooltip"
 import { AnalyticsWrapper } from "components/analytics"
 import Link from "next/link"
 import { MafsLogo } from "../components/MafsLogo"
@@ -20,7 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
         </header>
 
-        <div>{children}</div>
+        <div>
+          <Tooltip.Provider>{children}</Tooltip.Provider>
+        </div>
 
         {/* Spacer */}
         <div className="my-auto" />

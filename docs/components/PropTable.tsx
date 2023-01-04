@@ -1,17 +1,31 @@
 "use client"
 import * as React from "react"
 
-// import { parseMarkdown } from "@app/uikit-next/src/helpers/markdown"
-// import { DocgenProp, useDocgen } from "@app/uikit-next/src/hooks/useDocgen"
 import { InfoCircledIcon } from "@radix-ui/react-icons"
-
-// import styles from "./Props.module.css"
-
 import * as Tooltip from "@radix-ui/react-tooltip"
+
+export interface Docgen {
+  filePath: string
+  displayName: string
+  props: Record<string, DocgenProp>
+  description?: string
+}
+
+export interface DocgenProp {
+  defaultValue: any
+  description: string | null | undefined
+  name: string
+  required: boolean
+  type: DocgenPropType
+}
+
+export type DocgenPropType =
+  | { name: "enum" | "boolean"; raw: string; value: Array<{ value: string }> }
+  | { name: string }
 
 const styles: any = {}
 
-export function PropTable({ info }: { info: any }) {
+export function PropTable({ info }: { info: Docgen }) {
   const props = info.props
 
   return (
@@ -86,13 +100,13 @@ function PropName({ prop }: { prop: DocgenProp }) {
 
 function DefaultPropValue({ prop }: { prop: DocgenProp }) {
   let value = prop.defaultValue?.value
-  if (value == null) return "—"
+  if (value == null) return <>—</>
 
   if (typeof value === "boolean") {
     value = value === true ? "true" : "false"
   }
 
-  return value ? <code>{value ?? "—"}</code> : "—"
+  return value ? <code>{value ?? "—"}</code> : <>—</>
 }
 
 function FunctionPropType({ type }: { type: string }) {

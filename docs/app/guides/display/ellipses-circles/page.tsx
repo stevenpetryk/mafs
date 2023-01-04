@@ -22,7 +22,7 @@ export default function Page() {
 
       <h3>Props</h3>
 
-      <PropTable info={Circle.__docgenInfo} />
+      <PropTable info={(Circle as any).__docgenInfo} />
 
       <h2>Ellipses</h2>
 
@@ -32,7 +32,7 @@ export default function Page() {
 
       <h3>Props</h3>
 
-      <PropTable info={Ellipse.__docgenInfo} />
+      <PropTable info={(Ellipse as any).__docgenInfo} />
 
       <WIP>
         <p>

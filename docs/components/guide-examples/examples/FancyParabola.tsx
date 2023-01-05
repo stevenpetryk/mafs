@@ -6,7 +6,6 @@ import {
   Mafs,
   Transform,
   useMovablePoint,
-  vec,
 } from "mafs"
 
 export default function FancyParabola() {

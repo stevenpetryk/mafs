@@ -4,6 +4,8 @@ import CodeAndExample from "components/CodeAndExample"
 
 import VectorFieldExample from "guide-examples/VectorFieldExample"
 import VectorFieldExampleSource from "!raw-loader!guide-examples/VectorFieldExample"
+import { PropTable } from "components/PropTable"
+import { VectorField } from "mafs"
 
 function Vectors() {
   return (
@@ -16,6 +18,8 @@ function Vectors() {
       </p>
 
       <CodeAndExample component={<VectorFieldExample />} source={VectorFieldExampleSource} />
+
+      <PropTable of={VectorField} />
     </>
   )
 }

@@ -4,6 +4,8 @@ import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
 import SimpleTransformExampleSource from "!raw-loader!guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
 import Code from "components/Code"
+import { PropTable } from "components/PropTable"
+import { Transform } from "mafs"
 
 export default function Page() {
   return (
@@ -18,25 +20,14 @@ export default function Page() {
         source={SimpleTransformExampleSource}
       />
 
+      <PropTable of={Transform} />
+
       <h2>Transformation types</h2>
 
       <p>
         <code>Transform</code> supports many transformation convenience props, but they all boil
         down to matrix multiplication.
       </p>
-
-      <Code
-        language="tsx"
-        source={`
-          <Transform
-            translate={...}
-            scale={...}
-            rotate={...}
-            shear={...}
-            matrix={...}
-          />
-        `}
-      />
 
       <p>
         You can pass your own matrix via the <code>matrix</code> prop and it will be combined with

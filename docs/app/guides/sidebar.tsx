@@ -11,7 +11,7 @@ function GuidesSidebar() {
     <div key={index}>
       <h2 className="text-lg font-semibold">{section.title}</h2>
 
-      <ul>
+      <ul className="flex flex-col gap-[1px]">
         {section.guides.map((guide, index) => {
           const IconElement = guide.icon
 

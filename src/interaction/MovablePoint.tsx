@@ -10,15 +10,15 @@ import { useScaleContext } from "../view/ScaleContext"
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
 export interface MovablePointProps {
-  /** The current position (`[x, y]`) of the point. */
+  /** The current position `[x, y]` of the point. */
   point: vec.Vector2
   /** A callback that is called as the user moves the point. */
   onMove: (point: vec.Vector2) => void
   /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
    *
-   * In mapped movement mode, you must provide a function that maps the user's attempted position
-   * (x, y) to the position the point should "snap" to.
+   * In mapped movement mode, you must provide a function that maps the user's mouse position
+   * `[x, y]` to the position the point should "snap" to.
    */
   constrain?: ConstraintFunction
   color?: string

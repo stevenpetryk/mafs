@@ -61,7 +61,6 @@ export type { Interval } from "./math"
 export type { Vector2, Matrix } from "./vec"
 
 // Some wonk here because Parcel doesn't understand the export * as syntax
-import * as vecLib from "./vec"
-export const vec = vecLib
+export { vec } from "./vec"
 
 export { Transform, type TransformProps } from "./display/Transform"

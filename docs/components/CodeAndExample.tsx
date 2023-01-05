@@ -3,6 +3,9 @@
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 import { HighlightedCode } from "./Code"
+import { StackBlitzIcon } from "./icons"
+
+import sdk from "@stackblitz/sdk"
 
 interface Props {
   source: string
@@ -50,50 +53,88 @@ function CodeAndExample({
       <div className="relative">
         <div
           className={`
-            bg-gray-900 dark:bg-black
-            border-gray-900 border-t text-gray-100
+          bg-gray-900 dark:bg-black
+          border-gray-900 border-t text-gray-100
+          md:rounded-b-lg
+        `}
+        >
+          <div
+            className={`
             p-3 sm:p-6
-            md:rounded-b-lg
             refractor-highlight
             ${collapsible ? "pb-12 sm:pb-12" : ""}
             ${expanded ? "overflow-auto" : "max-h-[200px] overflow-hidden"}
           `}
-        >
-          <pre className={`transition ${expanded ? "" : "opacity-40"}`}>
-            <code className="language-tsx">
-              <HighlightedCode source={source} language="tsx" />
-            </code>
-          </pre>
-        </div>
+          >
+            <pre className={`transition ${expanded ? "" : "opacity-40"}`}>
+              <code className="language-tsx">
+                <HighlightedCode source={source} language="tsx" />
+              </code>
+            </pre>
+          </div>
 
-        <div
-          className="flex items-center justify-center absolute bottom-5 left-0 right-0"
-          aria-hidden="true"
-        >
-          {collapsible && (
-            <button
-              type="button"
-              onClick={() => setExpanded(!expanded)}
-              className={`
+          <div
+            className="sticky flex text-sm items-center justify-center gap-4 bottom-0 left-0 p-4 right-0"
+            aria-hidden="true"
+          >
+            {collapsible && (
+              <button
+                type="button"
+                onClick={() => setExpanded(!expanded)}
+                className={`
                 bg-white text-black
                 hover:bg-gray-200 focus:bg-gray-200
-                font-semibold text-sm
+                font-semibold
                 flex gap-2 items-center
                 shadow-xl
                 px-4 py-2 rounded-full`}
-            >
-              <span>Show {expanded ? "less" : "all"}</span>
-              {expanded ? <MinusIcon /> : <PlusIcon />}
-            </button>
-          )}
-        </div>
+              >
+                <span>Show {expanded ? "less" : "all"}</span>
+                {expanded ? <MinusIcon /> : <PlusIcon />}
+              </button>
+            )}
 
+            <button
+              type="button"
+              onClick={() => openPlayground(source)}
+              className="absolute right-5 flex gap-2 items-center bg-white bg-opacity-10 px-4 py-2 rounded-full"
+            >
+              <StackBlitzIcon />
+              <span>Open in StackBlitz</span>
+            </button>
+          </div>
+        </div>
         <span aria-hidden={true} className="syntax-badge">
           TSX
         </span>
       </div>
     </div>
   )
+}
+
+function openPlayground(source: string) {
+  const functionName = source.match(/function ([A-z]+)/)?.[1]
+
+  sdk.openProject({
+    title: "Mafs Playground",
+    description: "",
+    template: "create-react-app",
+    dependencies: {
+      mafs: "latest",
+      typescript: "4.9.4",
+    },
+    files: {
+      "src/index.js": `
+        import {createRoot} from "react-dom/client"
+        ${source.includes("* as React") ? "" : 'import * as React from "react"'}
+
+        ${source}
+
+        createRoot(document.getElementById("root")).render(<${functionName} />)
+      `,
+      "public/index.html": "<div id='root'></div>",
+    },
+  })
 }
 
 export default CodeAndExample

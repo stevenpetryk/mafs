@@ -65,6 +65,7 @@
     "react-dom": ">=16.8"
   },
   "dependencies": {
+    "@react-hook/resize-observer": "^1.2.6",
     "@swc/helpers": "^0.4.14",
     "@use-gesture/react": "^10.2.23",
     "computer-modern": "^0.1.2",

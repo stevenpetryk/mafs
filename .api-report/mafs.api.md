@@ -177,6 +177,9 @@ export interface MovablePointProps {
 }
 
 // @public
+export function normal(v: Vector2): Vector2;
+
+// @public
 export function normalize(v: Vector2): Vector2;
 
 // @public (undocumented)
@@ -344,6 +347,9 @@ export interface ThroughPointsProps extends Stroked {
 // @public (undocumented)
 export function Transform(props: TransformProps): JSX.Element;
 
+// @public
+export function transform(v: Vector2, m: Matrix): Vector2;
+
 // @public (undocumented)
 export type TransformProps = React_2.PropsWithChildren<{
     matrix?: Matrix;
@@ -385,8 +391,12 @@ export const vec: {
     add: typeof add;
     sub: typeof sub;
     mag: typeof mag;
-    normalize: typeof normalize;
+    normal: typeof normal;
     lerp: typeof lerp;
+    normalize: typeof normalize;
+    withMag: typeof withMag;
+    scale: typeof scale;
+    transform: typeof transform;
     matrixCreate: typeof matrixCreate;
     matrixMult: typeof matrixMult;
     rotate: typeof rotate;
@@ -431,6 +441,9 @@ export interface VectorProps extends Stroked {
     // (undocumented)
     tip: Vector2;
 }
+
+// @public (undocumented)
+export function withMag(v: Vector2, m: number): Vector2;
 
 // (No @packageDocumentation comment for this package)
 

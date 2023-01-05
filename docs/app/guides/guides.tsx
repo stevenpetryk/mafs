@@ -12,7 +12,6 @@ import {
   TextIcon,
   CursorArrowIcon,
   PlayIcon,
-  EnterFullScreenIcon,
 } from "@radix-ui/react-icons"
 import { FunctionIcon, EllipseIcon } from "components/icons"
 
@@ -21,7 +20,11 @@ type Section = {
   guides: Guide[]
 }
 
-type Guide = { title: string; slug: string; icon?: React.VoidFunctionComponent }
+type Guide = {
+  title: string
+  slug: string
+  icon?: React.FunctionComponent<any>
+}
 
 export const Guides: Section[] = [
   {
@@ -46,7 +49,6 @@ export const Guides: Section[] = [
       { title: "Text", icon: TextIcon, slug: "text" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { title: "Vector fields", icon: DoubleArrowRightIcon, slug: "vector-fields" },
-      { title: "Viewbox", icon: EnterFullScreenIcon, slug: "viewbox" },
     ],
   },
   {

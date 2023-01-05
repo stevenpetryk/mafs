@@ -8,7 +8,7 @@ const nextConfig = {
   },
   transpilePackages: ["mafs"],
   webpack(config) {
-    if (Number(process.env.DOCGEN) === 1) {
+    if (process.env.NODE_ENV === "production" || Number(process.env.DOCGEN) === 1) {
       config.plugins.push(
         new ReactDocgenTypescriptPlugin({
           tsConfigPath: path.join(__dirname, "../tsconfig.json"),

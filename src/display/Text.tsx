@@ -5,7 +5,7 @@ import { useTransformContext } from "./Transform"
 
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"
 
-export interface TextProps {
+export type TextProps = React.PropsWithChildren<{
   x: number
   y: number
   attach?: CardinalDirection
@@ -13,9 +13,9 @@ export interface TextProps {
   size?: number
   color?: string
   svgTextProps?: React.SVGAttributes<SVGTextElement>
-}
+}>
 
-export const Text: React.FC<TextProps> = ({
+export function Text({
   children,
   x,
   y,
@@ -24,7 +24,7 @@ export const Text: React.FC<TextProps> = ({
   svgTextProps = {},
   attach,
   attachDistance = 0,
-}) => {
+}: TextProps) {
   const { pixelMatrix } = useScaleContext()
   const transformContext = useTransformContext()
 

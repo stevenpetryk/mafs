@@ -9,7 +9,7 @@ import ScaleContext, { ScaleContextShape } from "./ScaleContext"
 import { round } from "../math"
 import * as vec from "../vec"
 
-export interface MafsViewProps {
+export type MafsViewProps = React.PropsWithChildren<{
   width?: number | "auto"
   height?: number
   /** Whether to enable panning with the mouse and keyboard */
@@ -32,9 +32,9 @@ export interface MafsViewProps {
    * Note that server-side rendering complicated graphs can really bloat your HTML.
    */
   ssr?: boolean
-}
+}>
 
-export const MafsView: React.FC<MafsViewProps> = ({
+export function MafsView({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
@@ -42,7 +42,7 @@ export const MafsView: React.FC<MafsViewProps> = ({
   preserveAspectRatio = "contain",
   children,
   ssr = false,
-}) => {
+}: MafsViewProps) {
   const [visible, setVisible] = React.useState(ssr ? true : false)
   const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
 

@@ -1,5 +1,13 @@
 # Changelog
 
+# 0.8.2
+
+- Ensures that `React.PropsWithChildren` is used for components that accept children, for React 18 compatibility reasons.
+
+# 0.8.1
+
+- Fixes a bug involving the ESM build.
+
 ## 0.8.0
 
 - Added the [`Transform` component](https://mafs.dev/guides/utility/transform)

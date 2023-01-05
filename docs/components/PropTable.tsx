@@ -69,7 +69,7 @@ export function PropTable({ of: component, displayName }: { of: unknown; display
                 <td className="py-2 pr-4 align-baseline">
                   <PropName prop={prop} />
                 </td>
-                <td className="py-2 pr-4 w-max align-baseline">
+                <td className="py-2 pr-4 w-max min-w-[35ch] align-baseline">
                   <PropType prop={prop} />
                 </td>
                 <td className="py-2 align-baseline text-gray-600 dark:text-slate-400 w-max max-w-lg">

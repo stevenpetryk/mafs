@@ -118,23 +118,21 @@ export const Line: {
 };
 
 // @public (undocumented)
-export const Mafs: React_2.FC<MafsViewProps>;
+export function Mafs({ width: desiredWidth, height, pan, viewBox, preserveAspectRatio, children, ssr, }: MafsViewProps): JSX.Element;
 
 // @public (undocumented)
-export interface MafsViewProps {
-    // (undocumented)
+export type MafsViewProps = React_2.PropsWithChildren<{
+    width?: number | "auto";
     height?: number;
     pan?: boolean;
-    preserveAspectRatio?: "contain" | false;
-    ssr?: boolean;
     viewBox?: {
         x?: Vector2;
         y?: Vector2;
         padding?: number;
     };
-    // (undocumented)
-    width?: number | "auto";
-}
+    preserveAspectRatio?: "contain" | false;
+    ssr?: boolean;
+}>;
 
 // @public
 export function mag(v: Vector2): number;
@@ -298,26 +296,19 @@ export interface Stroked {
 export function sub(v: Vector2, v2: Vector2): Vector2;
 
 // @public (undocumented)
-const Text_2: React_2.FC<TextProps>;
+function Text_2({ children, x, y, color, size, svgTextProps, attach, attachDistance, }: TextProps): JSX.Element;
 export { Text_2 as Text }
 
 // @public (undocumented)
-export interface TextProps {
-    // (undocumented)
-    attach?: CardinalDirection;
-    // (undocumented)
-    attachDistance?: number;
-    // (undocumented)
-    color?: string;
-    // (undocumented)
-    size?: number;
-    // (undocumented)
-    svgTextProps?: React_2.SVGAttributes<SVGTextElement>;
-    // (undocumented)
+export type TextProps = React_2.PropsWithChildren<{
     x: number;
-    // (undocumented)
     y: number;
-}
+    attach?: CardinalDirection;
+    attachDistance?: number;
+    size?: number;
+    color?: string;
+    svgTextProps?: React_2.SVGAttributes<SVGTextElement>;
+}>;
 
 // @public (undocumented)
 export const Theme: {

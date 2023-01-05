@@ -1,9 +1,10 @@
-import { Mafs } from "mafs"
+import { Mafs, Text } from "mafs"
 
 export default function Example() {
   return (
-    <Mafs height={300}>
-      {/* Put cool stuff in here! */}
+    <Mafs height={200}>
+      {/* prettier-ignore */}
+      <Text x={0} y={0}>I love math!</Text>
     </Mafs>
   )
 }

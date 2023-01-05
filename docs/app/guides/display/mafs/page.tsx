@@ -22,11 +22,7 @@ function MafsPage() {
         components. On its own, it renders a blank canvas.
       </p>
 
-      <CodeAndExample
-        component={<PlainMafsExample />}
-        source={PlainMafsExampleSource}
-        clean={false}
-      />
+      <CodeAndExample component={<PlainMafsExample />} source={PlainMafsExampleSource} />
       <PropTable of={Mafs} displayName="Mafs" />
 
       <h2>Sizing</h2>

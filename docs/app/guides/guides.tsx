@@ -10,18 +10,18 @@ import {
   DoubleArrowRightIcon,
   RotateCounterClockwiseIcon,
   TextIcon,
-  MoveIcon,
   CursorArrowIcon,
   PlayIcon,
   EnterFullScreenIcon,
 } from "@radix-ui/react-icons"
+import { FunctionIcon, EllipseIcon } from "components/icons"
 
 type Section = {
   title: string
   guides: Guide[]
 }
 
-type Guide = { title: string; slug: string; icon?: typeof BorderSolidIcon }
+type Guide = { title: string; slug: string; icon?: React.VoidFunctionComponent }
 
 export const Guides: Section[] = [
   {
@@ -41,8 +41,8 @@ export const Guides: Section[] = [
       { title: "Lines", icon: BorderSolidIcon, slug: "lines" },
       { title: "Polygons", icon: SquareIcon, slug: "polygons" },
       { title: "Circles", icon: CircleIcon, slug: "circles" },
-      { title: "Ellipses", icon: CircleIcon, slug: "ellipses" },
-      { title: "Graphs", icon: GridIcon, slug: "graphs" },
+      { title: "Ellipses", icon: EllipseIcon, slug: "ellipses" },
+      { title: "Graphs", icon: FunctionIcon, slug: "graphs" },
       { title: "Text", icon: TextIcon, slug: "text" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { title: "Vector fields", icon: DoubleArrowRightIcon, slug: "vector-fields" },

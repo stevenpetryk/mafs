@@ -217,7 +217,6 @@ export function matrixBuilder(m: Matrix | null = null) {
   }
 }
 
-// Gather all exported functions here
 export const vec = {
   add,
   sub,

@@ -8,3 +8,4 @@ build
 .api-report/temp
 __diff_output__
 .parcel-cache
+.idea

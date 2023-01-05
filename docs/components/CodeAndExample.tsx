@@ -56,6 +56,7 @@ function CodeAndExample({
             md:rounded-b-lg
             refractor-highlight
             overflow-clip
+            overflow-x-scroll 
             ${collapsible ? "pb-12 sm:pb-12" : ""}
             ${expanded ? "" : "max-h-[200px]"}
           `}

@@ -216,3 +216,25 @@ export function matrixBuilder(m: Matrix | null = null) {
     get: (): Matrix => [..._m],
   }
 }
+
+export const vec = {
+  add,
+  sub,
+  mag,
+  normal,
+  lerp,
+  normalize,
+  withMag,
+  scale,
+  transform,
+  matrixCreate,
+  matrixMult,
+  rotate,
+  rotateAbout,
+  midpoint,
+  dist,
+  dot,
+  det,
+  matrixInvert,
+  matrixBuilder,
+}

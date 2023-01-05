@@ -120,7 +120,7 @@ function PropType({ prop }: { prop: DocgenProp }) {
   }
 
   return (
-    <div className="flex flex-col gap-1 w-max max-w-xl">
+    <div className="flex flex-col gap-1">
       {prop.description && (
         <p className="text-gray-800 dark:text-slate-200 markdown">
           <ReactMarkdown>{prop.description}</ReactMarkdown>

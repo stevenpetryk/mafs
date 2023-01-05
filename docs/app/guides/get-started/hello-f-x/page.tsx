@@ -30,14 +30,14 @@ function Page() {
         nothing too interesting on it.
       </p>
 
-      <CodeAndExample component={<Plain />} source={PlainSource} />
+      <CodeAndExample collapsible={false} component={<Plain />} source={PlainSource} />
 
       <p>
         <code>CartesianCoordinates</code> is pretty customizable. Let's make our graph a little bit
         more sophisticated-looking by adding some subdivisions.
       </p>
 
-      <CodeAndExample component={<Subdivions />} source={SubdivionsSource} />
+      <CodeAndExample collapsible={false} component={<Subdivions />} source={SubdivionsSource} />
 
       <h2>Plotting a function</h2>
 
@@ -46,7 +46,7 @@ function Page() {
         <code>Math.sin(x)</code>.
       </p>
 
-      <CodeAndExample component={<Sine />} source={SineSource} />
+      <CodeAndExample collapsible={false} component={<Sine />} source={SineSource} />
 
       <p>
         We've passed a plain JavaScript function, and Mafs evaluated it and plotted it across the
@@ -66,7 +66,7 @@ function Page() {
         <li>Tell Mafs to let us squish the viewport</li>
       </ul>
 
-      <CodeAndExample component={<SinePi />} source={SinePiSource} />
+      <CodeAndExample collapsible={false} component={<SinePi />} source={SinePiSource} />
 
       <p>
         At this point, it's worth noting that you haven't <em>instructed</em> the library to do
@@ -82,7 +82,7 @@ function Page() {
         to our function.
       </p>
 
-      <CodeAndExample component={<Draggable />} source={DraggableSource} />
+      <CodeAndExample collapsible={false} component={<Draggable />} source={DraggableSource} />
 
       <p>
         There are a few noteworthy things here: one is how we declared our point. We start centered

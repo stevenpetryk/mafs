@@ -26,12 +26,21 @@ export type DocgenPropType =
 const styles: any = {}
 
 export function PropTable({ info }: { info: Docgen }) {
+  if (process.env.NODE_ENV === "development" && info == null)
+    return (
+      <div className="text-sm">
+        <p className="text-gray-500 dark:text-gray-400">
+          Props are not loaded by default in development to keep hot reloading fast. Set{" "}
+          <code>DOCGEN=1</code> to compile with type data.
+        </p>
+      </div>
+    )
   const props = info.props
 
   return (
     <div className="text-sm">
       <table className="w-full">
-        <thead className="text-left border-b dark:border-slate-700 dark:text-slate-400">
+        <thead className="sr-only text-left border-b dark:border-slate-700 dark:text-slate-400">
           <tr>
             <th className="font-normal py-2 pr-4">Name</th>
             <th className="font-normal py-2 pr-4">Type</th>
@@ -44,7 +53,7 @@ export function PropTable({ info }: { info: Docgen }) {
               <td className="py-2 pr-4 border-b dark:border-slate-800">
                 <PropName prop={prop} />
               </td>
-              <td className="py-2 pr-4 border-b dark:border-slate-800 dark:text-slate-400">
+              <td className="py-2 pr-4 border-b dark:border-slate-800">
                 <PropType prop={prop} />
               </td>
               <td className="py-2 border-b dark:border-slate-800 dark:text-slate-400">
@@ -59,43 +68,8 @@ export function PropTable({ info }: { info: Docgen }) {
 }
 
 function PropName({ prop }: { prop: DocgenProp }) {
-  const { description } = prop
-
-  const formattedName = <code className={styles.nameCell}>{prop.name}</code>
-
-  const asteriskSize = 14
-  // const requiredAsterisk = prop.required ? (
-  //   <AsteriskIcon
-  //     aria-label={`${prop.name} required`}
-  //     color="var(--status-danger)"
-  //     width={asteriskSize}
-  //     height={asteriskSize}
-  //   />
-  // ) : null;
-  const requiredAsterisk = null
-
-  return description == null || description === "" ? (
-    <span className="bg-blue-800 px-1 rounded-md">{formattedName}</span>
-  ) : (
-    <Tooltip.Root>
-      <Tooltip.Trigger asChild>
-        <button className="flex gap-2 items-center">
-          <span className="bg-blue-800 px-1 rounded-md">{formattedName}</span>
-          <span className="opacity-50">
-            <InfoCircledIcon />
-          </span>
-          {requiredAsterisk}
-        </button>
-      </Tooltip.Trigger>
-
-      <Tooltip.Portal>
-        <Tooltip.Content>
-          {description}
-          <Tooltip.Arrow />
-        </Tooltip.Content>
-      </Tooltip.Portal>
-    </Tooltip.Root>
-  )
+  const formattedName = <code>{prop.name}</code>
+  return <span className="bg-blue-800 px-1 rounded-md">{formattedName}</span>
 }
 
 function DefaultPropValue({ prop }: { prop: DocgenProp }) {
@@ -127,15 +101,23 @@ function FunctionPropType({ type }: { type: string }) {
 function PropType({ prop }: { prop: DocgenProp }) {
   const { type } = prop
 
+  let typeNode: React.ReactNode
   if (isFunctionType(type.name) != null) {
-    return <FunctionPropType type={type.name} />
+    typeNode = <FunctionPropType type={type.name} />
   } else if (type.name.startsWith("{")) {
-    return <code>object</code>
+    typeNode = <code>object</code>
   } else if ("value" in type) {
-    return <EnumerablePropType values={type.value} raw={type.raw} />
+    typeNode = <EnumerablePropType values={type.value} raw={type.raw} />
   } else {
-    return <code>{type.name}</code>
+    typeNode = <code>{type.name}</code>
   }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="text-slate-400">{typeNode}</div>
+      {prop.description && <p className="text-slate-200">{prop.description}</p>}
+    </div>
+  )
 }
 
 function isFunctionType(value: string) {

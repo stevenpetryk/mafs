@@ -6,7 +6,6 @@ import { useTransformContext } from "./Transform"
 import * as vec from "../vec"
 
 export interface EllipseProps extends Filled {
-  /** The center of the ellipse */
   center: Vector2
   radius: Vector2
   angle?: number

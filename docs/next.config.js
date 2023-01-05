@@ -8,12 +8,15 @@ const nextConfig = {
   },
   transpilePackages: ["mafs"],
   webpack(config) {
-    config.plugins.push(
-      new ReactDocgenTypescriptPlugin({
-        tsConfigPath: path.join(__dirname, "../tsconfig.json"),
-        include: [path.join(__dirname, "../src/**/*.tsx")],
-      })
-    )
+    if (Number(process.env.DOCGEN) === 1) {
+      config.plugins.push(
+        new ReactDocgenTypescriptPlugin({
+          tsConfigPath: path.join(__dirname, "../tsconfig.json"),
+          include: [path.join(__dirname, "../src/**/*.tsx")],
+          shouldRemoveUndefinedFromOptional: true,
+        })
+      )
+    }
 
     return config
   },

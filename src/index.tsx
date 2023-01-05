@@ -1,7 +1,7 @@
 export { MafsView as Mafs } from "./view/MafsView"
 export type { MafsViewProps } from "./view/MafsView"
 
-export { default as CartesianCoordinates, autoPi as labelPi } from "./origin/CartesianCoordinates"
+export { CartesianCoordinates, autoPi as labelPi } from "./origin/CartesianCoordinates"
 export type {
   CartesianCoordinatesProps,
   AxisOptions,

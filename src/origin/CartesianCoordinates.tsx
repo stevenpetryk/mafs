@@ -23,16 +23,16 @@ const defaultAxisOptions: Partial<AxisOptions> = {
 }
 
 export interface CartesianCoordinatesProps {
-  xAxis?: Partial<AxisOptions>
-  yAxis?: Partial<AxisOptions>
+  xAxis?: Partial<AxisOptions> | false
+  yAxis?: Partial<AxisOptions> | false
   subdivisions?: number | false
 }
 
-const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
+export function CartesianCoordinates({
   xAxis: xAxisOverrides,
   yAxis: yAxisOverrides,
   subdivisions = false,
-}) => {
+}: CartesianCoordinatesProps) {
   const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as AxisOptions
   const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as AxisOptions
 
@@ -48,19 +48,23 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
       <defs>
         <GridPattern
           id={id}
-          xLines={xAxis.lines}
-          yLines={yAxis.lines}
-          xSubdivisions={xAxis.subdivisions}
-          ySubdivisions={yAxis.subdivisions}
+          xLines={xAxisOverrides != false ? xAxis.lines : false}
+          yLines={yAxisOverrides != false ? yAxis.lines : false}
+          xSubdivisions={xAxisOverrides != false ? xAxis.subdivisions : false}
+          ySubdivisions={yAxisOverrides != false ? yAxis.subdivisions : false}
         />
       </defs>
 
       <rect fill={`url(#${id})`} x={minX} y={maxY} width={maxX - minX} height={-(maxY - minY)} />
 
-      {xAxis.labels && <XLabels labelMaker={xAxis.labels} separation={xAxis.lines || 1} />}
-      {yAxis.labels && <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />}
+      {xAxisOverrides !== false && xAxis.labels && (
+        <XLabels labelMaker={xAxis.labels} separation={xAxis.lines || 1} />
+      )}
+      {yAxisOverrides !== false && yAxis.labels && (
+        <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />
+      )}
 
-      {xAxis.axis && (
+      {xAxisOverrides !== false && xAxis.axis && (
         <line
           x1={-10000000}
           x2={10000000}
@@ -70,7 +74,7 @@ const CartesianCoordinates: React.VFC<CartesianCoordinatesProps> = ({
         />
       )}
 
-      {yAxis.axis && (
+      {yAxisOverrides !== false && yAxis.axis && (
         <line
           x1={0}
           x2={0}
@@ -140,5 +144,3 @@ export function autoPi(x: number): string {
   if (Math.abs(-Math.PI - x) < 0.001) return "-π"
   return `${round(x / Math.PI, 5)}π`
 }
-
-export default React.memo(CartesianCoordinates)

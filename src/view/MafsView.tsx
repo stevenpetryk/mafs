@@ -10,10 +10,19 @@ import { round } from "../math"
 import * as vec from "../vec"
 
 export interface MafsViewProps {
-  width?: number | string
+  width?: number | "auto"
   height?: number
+  /** Whether to enable panning with the mouse and keyboard */
   pan?: boolean
+  /**
+   * A way to declare the "area of interest" of your visualizations. Mafs will center and zoom to
+   * this area.
+   */
   viewBox?: { x?: vec.Vector2; y?: vec.Vector2; padding?: number }
+  /**
+   * Whether to squish the graph to fill the Mafs viewport or to preserve the aspect ratio of the
+   * coordinate space.
+   */
   preserveAspectRatio?: "contain" | false
 
   /**

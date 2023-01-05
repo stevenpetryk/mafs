@@ -1,5 +1,6 @@
 import kebabCase from "lodash/kebabCase"
 import {
+  CardStackIcon,
   BorderSolidIcon,
   DotFilledIcon,
   GridIcon,
@@ -10,6 +11,7 @@ import {
   RotateCounterClockwiseIcon,
   TextIcon,
   MoveIcon,
+  CursorArrowIcon,
   PlayIcon,
   EnterFullScreenIcon,
 } from "@radix-ui/react-icons"
@@ -33,6 +35,8 @@ export const Guides: Section[] = [
   {
     title: "Display",
     guides: [
+      { title: "Mafs", icon: CardStackIcon, slug: "mafs" },
+      { title: "Coordinates", icon: GridIcon, slug: "coordinates" },
       { title: "Points", icon: DotFilledIcon, slug: "points" },
       { title: "Lines", icon: BorderSolidIcon, slug: "lines" },
       { title: "Polygons", icon: SquareIcon, slug: "polygons" },
@@ -51,7 +55,7 @@ export const Guides: Section[] = [
   },
   {
     title: "Interaction",
-    guides: [{ title: "Movable points", icon: MoveIcon, slug: "movable-points" }],
+    guides: [{ title: "Movable points", icon: CursorArrowIcon, slug: "movable-points" }],
   },
   {
     title: "Animation",

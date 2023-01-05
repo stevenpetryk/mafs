@@ -1,4 +1,3 @@
-"use client"
 import * as React from "react"
 import ReactMarkdown from "react-markdown"
 
@@ -45,7 +44,7 @@ export function PropTable({ of: component, displayName }: { of: unknown; display
       <header className="flex gap-4 items-baseline py-4">
         <h2 className="text-base">Props</h2>
 
-        <code className="font-medium mr-1 text-sm text-indigo-600 dark:text-indigo-300">
+        <code className="font-medium mr-1 text-sm text-purple-600 dark:text-purple-300">
           <span className="opacity-50">{"<"}</span>
           {typeof displayName === "string" ? displayName : docgenInfo.displayName}
           <span className="opacity-50">{" ... />"}</span>
@@ -112,7 +111,7 @@ function PropType({ prop }: { prop: DocgenProp }) {
   if (isFunctionType(type.name) != null) {
     typeNode = <FunctionPropType type={type.name} />
   } else if (type.name.startsWith("{")) {
-    typeNode = <code>object</code>
+    typeNode = <code>{type.name}</code>
   } else if ("value" in type) {
     typeNode = <EnumerablePropType values={type.value} raw={type.raw} />
   } else {

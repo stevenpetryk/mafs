@@ -126,8 +126,9 @@
     @apply text-white bg-blue-500;
   }
 
-  .prose .markdown code {
-    @apply p-0 bg-transparent px-1 text-blue-700 dark:text-blue-400;
+  .prose p code,
+  .prose ul code {
+    @apply p-0 px-1 bg-transparent text-blue-700 dark:text-blue-300;
   }
   .prose .markdown {
     @apply space-y-3;

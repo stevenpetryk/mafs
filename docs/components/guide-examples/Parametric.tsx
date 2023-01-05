@@ -9,7 +9,7 @@ import {
 
 export default function Parametric() {
   return (
-    <Mafs height={300} viewBox={{ x: [-4, 4], y: [-4, 4] }}>
+    <Mafs height={300} viewBox={{ x: [-3, 3], y: [-3, 3] }}>
       <CartesianCoordinates />
       <FunctionGraph.Parametric
         xy={(t) => [

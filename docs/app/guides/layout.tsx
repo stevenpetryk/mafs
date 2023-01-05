@@ -34,11 +34,12 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           <div className="prose space-y-6">{children}</div>
 
           {/* A little next/prev button set  (but only if those links exist) */}
-          <div className="hidden sm:flex gap-4">
+          <div className="hidden sm:flex gap-4 pt-6">
             {previous && <NavButton dir="prev" href={previous.url} {...previous} />}
             <div className="ml-auto" />
             {next && <NavButton dir="next" href={next.url} {...next} />}
           </div>
+
           <div className="flex sm:hidden flex-col gap-4">
             {next && <NavButton dir="next" href={next.url} {...next} />}
             {previous && <NavButton dir="prev" href={previous.url} {...previous} />}
@@ -69,7 +70,7 @@ function NavButton({
         py-3 px-6
         no-underline rounded-lg font-semibold border-2 border-transparent
         bg-gray-50 text-gray-800 hover:bg-gray-100 hover:border-gray-200
-        dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:border-gray-700
+        dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800 dark:hover:border-slate-700
       `}
     >
       <div className="flex items-center justify-between sm:gap-4 leading-tight">

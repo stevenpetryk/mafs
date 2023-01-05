@@ -14,7 +14,7 @@ export default function LinePointSlopeExample() {
   })
 
   return (
-    <Mafs>
+    <Mafs height={200} viewBox={{ y: [-1, 1] }}>
       <CartesianCoordinates />
       <Line.PointSlope
         point={point.point}

@@ -1,6 +1,8 @@
 "use client"
 
 import CodeAndExample from "components/CodeAndExample"
+import { PropTable } from "components/PropTable"
+import { Line } from "mafs"
 
 import LineSegmentExample from "guide-examples/LineSegmentExample"
 import LineSegmentExampleSource from "!raw-loader!guide-examples/LineSegmentExample"
@@ -19,6 +21,7 @@ function Lines() {
       <h2>Line segment</h2>
 
       <CodeAndExample component={<LineSegmentExample />} source={LineSegmentExampleSource} />
+      <PropTable of={Line.Segment} displayName="Line.Segment" />
 
       <h2>Line through two points</h2>
 
@@ -26,14 +29,17 @@ function Lines() {
         component={<LineThroughPointsExample />}
         source={LineThroughPointsExampleSource}
       />
+      <PropTable of={Line.ThroughPoints} displayName="Line.ThroughPoints" />
 
       <h2>Point and slope</h2>
 
       <CodeAndExample component={<LinePointSlopeExample />} source={LinePointSlopeExampleSource} />
+      <PropTable of={Line.PointSlope} displayName="Line.PointSlope" />
 
       <h2>Point and angle</h2>
 
       <CodeAndExample component={<LinePointAngleExample />} source={LinePointAngleExampleSource} />
+      <PropTable of={Line.PointAngle} displayName="Line.PointAngle" />
     </>
   )
 }

@@ -18,9 +18,7 @@ export default function Page() {
 
       <CodeAndExample component={<MovableEllipse />} source={MovableEllipseSource} />
 
-      <h2>Props</h2>
-
-      <PropTable info={(Ellipse as any).__docgenInfo} />
+      <PropTable of={Ellipse} />
 
       <WIP>
         <p>

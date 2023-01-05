@@ -125,6 +125,13 @@
   a.button:hover {
     @apply text-white bg-blue-500;
   }
+
+  .prose .markdown code {
+    @apply p-0 bg-transparent px-1 text-blue-700 dark:text-blue-400;
+  }
+  .prose .markdown {
+    @apply space-y-3;
+  }
 }
 
 @tailwind utilities;

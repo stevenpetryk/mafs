@@ -39,7 +39,7 @@ function CodeAndExample({
     source = source.trim()
   }
 
-  const collapsible = collapsibleProp && source.split("\n").length > 16
+  const collapsible = collapsibleProp && source.split("\n").length > 10
   const [expandedState, setExpanded] = React.useState(false)
   const expanded = collapsible ? expandedState : true
 

@@ -16,7 +16,7 @@ export default function MovableCircle() {
   const r = vec.mag(pointOnCircle.point)
 
   return (
-    <Mafs height={500}>
+    <Mafs height={200} viewBox={{ y: [-2, 2] }}>
       <CartesianCoordinates />
       <Circle center={[0, 0]} radius={r} />
       {pointOnCircle.element}

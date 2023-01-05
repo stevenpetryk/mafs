@@ -29,7 +29,7 @@ export default function MovableEllipse() {
   })
 
   return (
-    <Mafs height={500} viewBox={{ x: [-4, 4], y: [-4, 4] }}>
+    <Mafs height={400} viewBox={{ x: [-3, 3], y: [-3, 3] }}>
       <CartesianCoordinates />
 
       <Transform translate={translate.point}>

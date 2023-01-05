@@ -1,5 +1,8 @@
 "use client"
 
+import { Vector } from "mafs"
+import { PropTable } from "components/PropTable"
+
 import CodeAndExample from "components/CodeAndExample"
 import VectorExample from "guide-examples/display/vectors/VectorExample"
 import VectorExampleSource from "!raw-loader!guide-examples/display/vectors/VectorExample"
@@ -15,6 +18,8 @@ function Vectors() {
       </p>
 
       <CodeAndExample component={<VectorExample />} source={VectorExampleSource} />
+
+      <PropTable of={Vector} />
     </>
   )
 }

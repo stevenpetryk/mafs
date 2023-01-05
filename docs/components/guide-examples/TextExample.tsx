@@ -7,7 +7,7 @@ export default function VectorExample() {
   const point = useMovablePoint([1, 1])
 
   return (
-    <Mafs>
+    <Mafs height={200} viewBox={{ y: [0, 2] }}>
       <CartesianCoordinates />
       <Text
         x={point.x}

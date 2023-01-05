@@ -1,8 +1,6 @@
 "use client"
 import * as React from "react"
-
-import { InfoCircledIcon } from "@radix-ui/react-icons"
-import * as Tooltip from "@radix-ui/react-tooltip"
+import ReactMarkdown from "react-markdown"
 
 export interface Docgen {
   filePath: string
@@ -12,6 +10,7 @@ export interface Docgen {
 }
 
 export interface DocgenProp {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultValue: any
   description: string | null | undefined
   name: string
@@ -23,53 +22,72 @@ export type DocgenPropType =
   | { name: "enum" | "boolean"; raw: string; value: Array<{ value: string }> }
   | { name: string }
 
-const styles: any = {}
+export function PropTable({ of: component, displayName }: { of: unknown; displayName?: string }) {
+  const docgenInfo = (component as { __docgenInfo: Docgen })?.__docgenInfo
 
-export function PropTable({ info }: { info: Docgen }) {
-  if (process.env.NODE_ENV === "development" && info == null)
+  if (process.env.NODE_ENV === "development" && docgenInfo == null) {
     return (
-      <div className="text-sm">
-        <p className="text-gray-500 dark:text-gray-400">
-          Props are not loaded by default in development to keep hot reloading fast. Set{" "}
-          <code>DOCGEN=1</code> to compile with type data.
-        </p>
-      </div>
+      <p className="text-sm">
+        Props are not loaded by default in development to keep hot reloading fast. Set{" "}
+        <code>DOCGEN=1</code> to compile with type data.
+      </p>
     )
-  const props = info.props
+  }
+
+  if (docgenInfo == null || docgenInfo.props == null) {
+    throw new Error("Non-docgen object passed to PropTable")
+  }
+
+  const props = docgenInfo.props
 
   return (
-    <div className="text-sm">
-      <table className="w-full">
-        <thead className="sr-only text-left border-b dark:border-slate-700 dark:text-slate-400">
-          <tr>
-            <th className="font-normal py-2 pr-4">Name</th>
-            <th className="font-normal py-2 pr-4">Type</th>
-            <th className="font-normal py-2 pr-4">Default</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.values(props).map((prop, index) => (
-            <tr key={index}>
-              <td className="py-2 pr-4 border-b dark:border-slate-800">
-                <PropName prop={prop} />
-              </td>
-              <td className="py-2 pr-4 border-b dark:border-slate-800">
-                <PropType prop={prop} />
-              </td>
-              <td className="py-2 border-b dark:border-slate-800 dark:text-slate-400">
-                <DefaultPropValue prop={prop} />
-              </td>
+    <div>
+      <header className="flex gap-4 items-baseline py-4">
+        <h2 className="text-base">Props</h2>
+
+        <code className="font-medium mr-1 text-sm text-indigo-600 dark:text-indigo-300">
+          <span className="opacity-50">{"<"}</span>
+          {typeof displayName === "string" ? displayName : docgenInfo.displayName}
+          <span className="opacity-50">{" ... />"}</span>
+        </code>
+      </header>
+
+      <div className="overflow-x-auto text-sm">
+        <table className="w-full relative">
+          <thead className="text-left border-t border-b border-gray-300 dark:dark:border-slate-700 dark:text-slate-400">
+            <tr>
+              <th className="font-normal py-1 pr-4">Name</th>
+              <th className="font-normal py-1 pr-4">Description</th>
+              <th className="font-normal py-1 pr-4">Default</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Object.values(props).map((prop, index) => (
+              <tr
+                key={index}
+                className="relative border-b border-gray-300 dark:border-slate-800 border-opacity-50"
+              >
+                <td className="py-2 pr-4 align-baseline">
+                  <PropName prop={prop} />
+                </td>
+                <td className="py-2 pr-4 w-max align-baseline">
+                  <PropType prop={prop} />
+                </td>
+                <td className="py-2 align-baseline text-gray-600 dark:text-slate-400 w-max max-w-lg">
+                  <DefaultPropValue prop={prop} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
 
 function PropName({ prop }: { prop: DocgenProp }) {
   const formattedName = <code>{prop.name}</code>
-  return <span className="bg-blue-800 px-1 rounded-md">{formattedName}</span>
+  return <span className="font-semibold p-1 rounded-md">{formattedName}</span>
 }
 
 function DefaultPropValue({ prop }: { prop: DocgenProp }) {
@@ -80,22 +98,11 @@ function DefaultPropValue({ prop }: { prop: DocgenProp }) {
     value = value === true ? "true" : "false"
   }
 
-  return value ? <code>{value ?? "—"}</code> : <>—</>
+  return value ? <code className="w-max max-w-lg whitespace-nowrap">{value}</code> : <>—</>
 }
 
 function FunctionPropType({ type }: { type: string }) {
-  return (
-    // <TooltipContainer
-    //   allowOverflow
-    //   aria-label={type}
-    //   className={styles.functionCellTooltipWrapper}
-    //   tooltipContentClassName={styles.functionCellTooltipContainer}
-    //   tooltipClassName={styles.functionCellTooltipContainer}
-    //   text={<code style={{ whiteSpace: "nowrap" }}>{type}</code>}
-    // >
-    <code className={styles.functionCellTooltipContent}>{type}</code>
-    // </TooltipContainer>
-  )
+  return <code>{type}</code>
 }
 
 function PropType({ prop }: { prop: DocgenProp }) {
@@ -113,9 +120,13 @@ function PropType({ prop }: { prop: DocgenProp }) {
   }
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="text-slate-400">{typeNode}</div>
-      {prop.description && <p className="text-slate-200">{prop.description}</p>}
+    <div className="flex flex-col gap-1 w-max max-w-xl">
+      {prop.description && (
+        <p className="text-gray-800 dark:text-slate-200 markdown">
+          <ReactMarkdown>{prop.description}</ReactMarkdown>
+        </p>
+      )}
+      <div className="text-gray-600 dark:text-slate-400">{typeNode}</div>
     </div>
   )
 }
@@ -141,7 +152,7 @@ function EnumerablePropType({
 
   function formatValues(values: Array<{ value: string }>) {
     return values.map(({ value }) => (
-      <li key={value} className={styles.enumerablePropTypeItem}>
+      <li key={value}>
         {isFunctionType(value) != null ? <FunctionPropType type={value} /> : <code>{value}</code>}
       </li>
     ))
@@ -170,5 +181,5 @@ function EnumerablePropType({
     listContents = formatValues(values)
   }
 
-  return <ul className={styles.enumerablePropTypeWrapper}>{listContents}</ul>
+  return <ul>{listContents}</ul>
 }

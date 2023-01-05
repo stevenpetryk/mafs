@@ -16,6 +16,8 @@ const nextConfig = {
           shouldRemoveUndefinedFromOptional: true,
         })
       )
+
+      config.ignoreWarnings = [() => true]
     }
 
     return config

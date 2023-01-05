@@ -1,9 +1,7 @@
-import * as Tooltip from "@radix-ui/react-tooltip"
 import { AnalyticsWrapper } from "components/analytics"
 import Link from "next/link"
 import { MafsLogo } from "../components/MafsLogo"
 import "./globals.css"
-import Providers from "./providers"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,9 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
         </header>
 
-        <div>
-          <Providers>{children}</Providers>
-        </div>
+        <div>{children}</div>
 
         {/* Spacer */}
         <div className="my-auto" />

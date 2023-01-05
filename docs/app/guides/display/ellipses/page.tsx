@@ -3,12 +3,10 @@ import CodeAndExample from "components/CodeAndExample"
 
 import MovableEllipse from "guide-examples/MovableEllipse"
 import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
-import MovableCircle from "guide-examples/MovableCircle"
-import MovableCircleSource from "!raw-loader!guide-examples/MovableCircle"
 import WIP from "components/WIP"
 import Link from "next/link"
 
-import { Circle, Ellipse } from "mafs"
+import { Ellipse } from "mafs"
 import { PropTable } from "components/PropTable"
 
 export default function Page() {

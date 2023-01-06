@@ -3,6 +3,7 @@ import katex from "katex"
 import { vec, Vector2 } from "../vec"
 import { useScaleContext } from "../view/ScaleContext"
 import { useTransformContext } from "./Transform"
+import { Theme } from "./Theme"
 
 interface LatexProps {
   tex: string
@@ -48,6 +49,7 @@ export function LaTeX({ at: center, tex, macros }: LatexProps) {
           alignItems: "center",
           justifyContent: "center",
           position: "fixed",
+          color: Theme.foreground,
         }}
       >
         <span ref={ref} />

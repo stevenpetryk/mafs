@@ -15,6 +15,7 @@ import {
 import {
   FunctionIcon,
   EllipseIcon,
+  LatexIcon,
   LinesIcon,
   CustomComponentsIcon,
   TransformContextsIcon,
@@ -59,7 +60,7 @@ export const Guides: Section[] = [
       { title: "Ellipses", icon: EllipseIcon, slug: "ellipses" },
       { title: "Plots", icon: FunctionIcon, slug: "plots" },
       { title: "Text", icon: TextIcon, slug: "text" },
-      { title: "LaTeX", icon: TextIcon, slug: "latex" },
+      { title: "LaTeX", icon: LatexIcon, slug: "latex" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { separator: true },
       { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },

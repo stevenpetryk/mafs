@@ -1,5 +1,17 @@
 # Changelog
 
+# 0.9.0
+
+- Mafs now ships with the Computer Modern typeface, and makes it easy to use in your own project. It just requires a change to your CSS:
+
+  ```diff
+  -@import "mafs/build/index.css";
+  +@import "mafs/core.css";
+  +@import "mafs/font.css"; /* optional */
+  ```
+
+  `"mafs/build/index.css"` is still included in the package to avoid breaking things. It will be removed in a future release.
+
 # 0.8.2
 
 - Ensures that `React.PropsWithChildren` is used for components that accept children, for React 18 compatibility reasons.

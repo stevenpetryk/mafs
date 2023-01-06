@@ -5,7 +5,7 @@ import * as path from "path"
 
 import { Mafs, CartesianCoordinates } from ".."
 
-const css = fs.readFileSync(path.join(process.cwd(), "src/index.css")).toString()
+const css = fs.readFileSync(path.join(process.cwd(), "core.css")).toString()
 
 export default async function renderToImage(
   children: React.ReactChild,

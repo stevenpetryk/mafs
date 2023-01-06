@@ -8,6 +8,8 @@ import {
   Transform,
 } from "mafs"
 
+const x = "\\x"
+
 import { round } from "mafs/math"
 
 export default function LatexExample() {
@@ -20,7 +22,10 @@ export default function LatexExample() {
 
   return (
     <Mafs>
-      <CartesianCoordinates xAxis={{labels: false}} yAxis={{labels: false}} />
+      <CartesianCoordinates
+        xAxis={{ labels: false }}
+        yAxis={{ labels: false }}
+      />
       <Transform translate={[-0.7, 0]}>
         <LaTeX
           at={l.point}
@@ -51,12 +56,12 @@ export default function LatexExample() {
         tex={String.raw`
           % \f is defined as #1f(#2) using the macro
           \f\relax{x} = \int_{-\infty}^\infty
-            \f\hat\xi\,e^{2 \pi i \xi x}
-            \,d\xi
+            \f\hat${x}i\,e^{2 \pi i ${x}i x}
+            \,d${x}i
         `}
         macros={{
-          "\\f": "#1f(#2)"
-      }}
+          "\\f": "#1f(#2)",
+        }}
       />
     </Mafs>
   )

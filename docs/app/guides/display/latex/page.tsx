@@ -1,3 +1,4 @@
+"use client"
 import CodeAndExample from "components/CodeAndExample"
 
 import LatexExample from "components/guide-examples/display/Latex"

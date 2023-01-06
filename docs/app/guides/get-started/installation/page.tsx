@@ -37,7 +37,7 @@ function Page() {
       <h2>Fancy math font</h2>
 
       <p>
-        The font in use on this site (Computer Modern Serif) can be used with Mafs by importing
+        The font in use on this site (Computer Modern Serif) can be used with Mafs by importing{" "}
         <code>mafs/font.css</code>. It will import the appropriate font files and set Mafs'
         font-family.
       </p>

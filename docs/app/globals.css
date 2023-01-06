@@ -2,8 +2,8 @@
 
 @layer base {
   @import "./syntax-highlighting.css";
-  @import "./fonts/cmun/cmun-serif.css";
-  @import "mafs/index.css";
+  @import "../../core.css";
+  @import "../../font.css";
   @import "./mafs-usage.css";
 
   *,

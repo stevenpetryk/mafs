@@ -9,7 +9,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ["Computer Modern Serif", "serif"],
+      display: ["CMU Serif", "serif"],
     },
     extend: {
       backgroundPosition: {

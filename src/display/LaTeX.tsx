@@ -47,6 +47,7 @@ export function LaTeX({ at: center, tex, macros }: LatexProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          position: "fixed",
         }}
       >
         <span ref={ref} />

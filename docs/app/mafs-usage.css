@@ -1,5 +1,5 @@
 .MafsView {
-  @apply rounded-md font-display;
+  @apply rounded-md;
 }
 
 .unround-mafs .MafsView {

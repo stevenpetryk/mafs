@@ -1,5 +1,7 @@
 @tailwind base;
 
+@import "katex/dist/katex.min.css";
+
 @layer base {
   @import "./syntax-highlighting.css";
   @import "../../core.css";

@@ -1,5 +1,6 @@
 .MafsView {
   @apply rounded-md;
+  font-family: KaTeX_Main;
 }
 
 .unround-mafs .MafsView {

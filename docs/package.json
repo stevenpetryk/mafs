@@ -15,7 +15,6 @@
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
     "@vercel/analytics": "^0.1.6",
-    "computer-modern": "^0.1.2",
     "endent": "^2.1.0",
     "hast-to-hyperscript": "^10.0.1",
     "js-easing-functions": "^1.0.3",

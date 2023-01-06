@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "start": "cd docs && pnpm dev",
-    "build": "rm -rf build && parcel build && cp src/core.css build/index.css",
+    "build": "rm -rf build && parcel build && cp core.css build/index.css",
     "build:docs": "cd docs && pnpm gatsby build",
     "test": "jest",
     "test:watch": "jest --watch",

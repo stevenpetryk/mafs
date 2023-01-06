@@ -7,9 +7,10 @@ import { useTransformContext } from "./Transform"
 interface LatexProps {
   tex: string
   at: Vector2
+  macros?: Record<string, string>
 }
 
-export function LaTeX({ at: center, tex }: LatexProps) {
+export function LaTeX({ at: center, tex, macros }: LatexProps) {
   const ref = React.useRef<HTMLSpanElement>(null)
   const { pixelMatrix } = useScaleContext()
   const transformContext = useTransformContext()
@@ -23,7 +24,7 @@ export function LaTeX({ at: center, tex }: LatexProps) {
   React.useEffect(() => {
     if (!ref.current) return
     const start = performance.now()
-    katex.render(tex, ref.current)
+    katex.render(tex, ref.current, { macros })
     const durationMs = performance.now() - start
     console.log(`Rendered LaTeX in ${durationMs}ms`)
   }, [tex])
@@ -31,9 +32,22 @@ export function LaTeX({ at: center, tex }: LatexProps) {
   const pixelCenter = vec.add(vec.transform(center, transform), [-width / 2, -height / 2])
 
   return (
-    <foreignObject x={pixelCenter[0]} y={pixelCenter[1]} width={width} height={height}>
+    <foreignObject
+      x={pixelCenter[0]}
+      y={pixelCenter[1]}
+      width={width}
+      height={height}
+      pointerEvents="none"
+    >
       <div
-        style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center" }}
+        style={{
+          fontSize: "1.3em",
+          width,
+          height,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         <span ref={ref} />
       </div>

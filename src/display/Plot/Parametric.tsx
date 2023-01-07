@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as vec from "../../vec"
-import { Stroked } from "../../display/Theme"
+import { Stroked } from "../Theme"
 import { useScaleContext } from "../../view/ScaleContext"
 
 export interface ParametricProps extends Stroked {

@@ -1,4 +1,4 @@
-import { FunctionGraph, Theme } from ".."
+import { Plot, Theme } from ".."
 import renderToImage from "../tests/renderToImage"
 
 describe("<FunctionGraph.OfX />", () => {
@@ -6,10 +6,10 @@ describe("<FunctionGraph.OfX />", () => {
     expect(
       await renderToImage(
         <>
-          <FunctionGraph.OfX y={(x) => (x - 5) ** 2} />
-          <FunctionGraph.OfX y={(x) => 5 - Math.sin(x)} style="dashed" weight={5} />
-          <FunctionGraph.OfX y={(x) => 5 - (x - 5) ** 2} color="red" />
-          <FunctionGraph.OfX y={(x) => 5 + Math.sin(x)} color="var(--mafs-blue)" />
+          <Plot.OfX y={(x) => (x - 5) ** 2} />
+          <Plot.OfX y={(x) => 5 - Math.sin(x)} style="dashed" weight={5} />
+          <Plot.OfX y={(x) => 5 - (x - 5) ** 2} color="red" />
+          <Plot.OfX y={(x) => 5 + Math.sin(x)} color="var(--mafs-blue)" />
         </>
       )
     ).toMatchImageSnapshot()
@@ -22,13 +22,13 @@ describe("<FunctionGraph.Parametric />", () => {
       await renderToImage(
         <>
           {/* Good defaults test */}
-          <FunctionGraph.Parametric
+          <Plot.Parametric
             t={[0, 4 * Math.PI]}
             xy={(t) => [7 + (t * Math.cos(t)) / 5, 3 + (t * Math.sin(t)) / 5]}
           />
 
           {/* Styles and sample rate */}
-          <FunctionGraph.Parametric
+          <Plot.Parametric
             t={[0, 2 * Math.PI]}
             xy={(t) => [3 - (t * Math.cos(t)) / 3, 6 - (t * Math.sin(t)) / 3]}
             style="dashed"
@@ -37,7 +37,7 @@ describe("<FunctionGraph.Parametric />", () => {
           />
 
           {/* When `t` is a backwards range (higher to lower) */}
-          <FunctionGraph.Parametric t={[5, 0]} xy={(t) => [t, 2 + Math.sin(t)]} color={Theme.red} />
+          <Plot.Parametric t={[5, 0]} xy={(t) => [t, 2 + Math.sin(t)]} color={Theme.red} />
         </>
       )
     ).toMatchImageSnapshot()

@@ -3,7 +3,7 @@
 import {
   Mafs,
   CartesianCoordinates,
-  FunctionGraph,
+  Plot,
   labelPi,
   useMovablePoint,
 } from "mafs"
@@ -23,7 +23,7 @@ export default function HelloFx() {
         subdivisions={4}
         xAxis={{ lines: Math.PI, labels: labelPi }}
       />
-      <FunctionGraph.OfX y={(x) => Math.sin(x - phase.x)} />
+      <Plot.OfX y={(x) => Math.sin(x - phase.x)} />
       {phase.element}
     </Mafs>
   )

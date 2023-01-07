@@ -4,7 +4,7 @@ import * as React from "react"
 import {
   Mafs,
   useMovablePoint,
-  FunctionGraph,
+  Plot,
   Polygon,
   CartesianCoordinates,
   useStopwatch,
@@ -82,7 +82,7 @@ export default function RiemannHomepage() {
         xAxis={{ axis: true, labels: false }}
       />
 
-      <FunctionGraph.OfX y={fn} color="#358CF1" />
+      <Plot.OfX y={fn} color="#358CF1" />
 
       {partitions.map((partition, index) => (
         <Polygon

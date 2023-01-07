@@ -1,8 +1,8 @@
 import * as React from "react"
-import { round } from "../../math"
-import { usePaneContext } from "../../view/PaneManager"
-import { Stroked } from "../../display/Theme"
-import { useScaleContext } from "../../view/ScaleContext"
+import { round } from "../../../math"
+import { usePaneContext } from "../../../view/PaneManager"
+import { Stroked } from "../../Theme"
+import { useScaleContext } from "../../../view/ScaleContext"
 
 export interface OfXProps extends Stroked {
   y: (x: number) => number

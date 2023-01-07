@@ -3,7 +3,7 @@
 import * as React from "react"
 import {
   CartesianCoordinates,
-  FunctionGraph,
+  Plot,
   Line,
   Mafs,
   Point,
@@ -126,7 +126,7 @@ export default function BezierCurves() {
         {drawPoints([lerp12, lerp23], Theme.yellow)}
 
         {/* Quadratic bezier lerp  */}
-        <FunctionGraph.Parametric
+        <Plot.Parametric
           t={[0, t]}
           weight={3}
           xy={(t) =>
@@ -140,7 +140,7 @@ export default function BezierCurves() {
           }
         />
         {/* Show remaining bezier with dashed line  */}
-        <FunctionGraph.Parametric
+        <Plot.Parametric
           // Iterate backwards so that dashes don't move
           t={[1, t]}
           weight={3}

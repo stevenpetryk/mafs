@@ -8,8 +8,8 @@ export type {
   LabelMaker,
 } from "./origin/CartesianCoordinates"
 
-export { FunctionGraph } from "./display/FunctionGraph"
-export type { OfXProps, ParametricProps } from "./display/FunctionGraph"
+export { Plot } from "./display/Plot"
+export type { OfXProps, ParametricProps } from "./display/Plot"
 
 export { Line } from "./display/Line"
 export type {

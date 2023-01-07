@@ -1,5 +1,4 @@
 import * as React from "react"
-import { triangleArea } from "../../math"
 import * as vec from "../../vec"
 import { Stroked } from "../../display/Theme"
 import { useScaleContext } from "../../view/ScaleContext"
@@ -9,8 +8,9 @@ export interface ParametricProps extends Stroked {
   t: [number, number]
   color?: string
   style?: "solid" | "dashed"
+
   /**
-   * How deep the interpolation algorithm will go in terms of subdividing the function to find
+   * How deep the sampling algorithm will go in terms of subdividing the function to find
    * points that minimize the jaggedness of the function. Defaults to 8.
    *
    * Most functions will not need to override this. It's mainly to support functions that are
@@ -39,7 +39,7 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
   const { cssScale, scaleX, scaleY } = useScaleContext()
 
   const [tMin, tMax] = t
-  const areaThreshold = -0.1 / (scaleX(1) * scaleY(1))
+  const errorThreshold = 1 / (scaleX(1) * scaleY(-1))
 
   const svgPath = React.useMemo(() => {
     let pathDescriptor = "M "
@@ -54,25 +54,27 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
       const mid = (min + max) / 2
 
       const xyMin = xy(min)
-      const xyMid = xy(mid)
       const xyMax = xy(max)
 
-      const area = triangleArea(xyMin, xyMid, xyMax)
+      // Error term
+      const xyMid = xy(mid)
+      const xyLerpMid = vec.lerp(xyMin, xyMax, 0.5)
+      const error = vec.squareDist(xyMid, xyLerpMid)
 
-      if (depth < minimumSamplingDepth || area > areaThreshold) {
+      if (depth < 20 && (depth < minimumSamplingDepth || error > errorThreshold)) {
         smartSmooth(min, mid, true, false, depth + 1)
         smartSmooth(mid, max, false, true, depth + 1)
       } else {
-        if (pushLeft) pathDescriptor += `${xyMin[0]} ${xyMin[1]} L `
-        pathDescriptor += `${xyMid[0]} ${xyMid[1]} L `
-        if (pushRight) pathDescriptor += `${xyMax[0]} ${xyMax[1]} L `
+        if (isFinite(xyMin) && pushLeft) pathDescriptor += `${xyMin[0]} ${xyMin[1]} L `
+        if (isFinite(xyMid)) pathDescriptor += `${xyMid[0]} ${xyMid[1]} L `
+        if (isFinite(xyMax) && pushRight) pathDescriptor += `${xyMax[0]} ${xyMax[1]} L `
       }
     }
 
     smartSmooth(tMin, tMax, true, true)
 
     return pathDescriptor.substring(0, pathDescriptor.length - 3)
-  }, [tMin, tMax, xy, areaThreshold, minimumSamplingDepth])
+  }, [tMin, tMax, xy, errorThreshold, minimumSamplingDepth])
 
   return (
     <path
@@ -92,4 +94,8 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
       }}
     />
   )
+}
+
+function isFinite(v: vec.Vector2) {
+  return Number.isFinite(v[0]) && Number.isFinite(v[1])
 }

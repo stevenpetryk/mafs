@@ -133,7 +133,14 @@ export function midpoint(v: Vector2, v2: Vector2): Vector2 {
  * Gets the distance between two vectors
  */
 export function dist(v: Vector2, v2: Vector2): number {
-  return Math.sqrt(Math.pow(v2[0] - v[0], 2) + Math.pow(v2[1] - v[1], 2))
+  return Math.sqrt(squareDist(v, v2))
+}
+
+/**
+ * Get the square distance between two vectors
+ */
+export function squareDist(v: Vector2, v2: Vector2): number {
+  return Math.pow(v2[0] - v[0], 2) + Math.pow(v2[1] - v[1], 2)
 }
 
 /**

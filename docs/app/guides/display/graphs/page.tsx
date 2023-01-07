@@ -12,9 +12,9 @@ import { FunctionGraph } from "mafs"
 function Functions() {
   return (
     <>
-      <h2>
+      {/* <h2>
         Functions of <em className="font-display">x</em>
-      </h2>
+      </h2> */}
 
       <CodeAndExample component={<Sine />} source={SineSource} />
       <PropTable of={FunctionGraph.OfX} displayName="FunctionGraph.OfX" />

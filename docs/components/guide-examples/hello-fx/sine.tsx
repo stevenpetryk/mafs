@@ -4,13 +4,22 @@ import {
   Mafs,
   CartesianCoordinates,
   FunctionGraph,
+  Theme,
 } from "mafs"
 
 export default function HelloFx() {
   return (
-    <Mafs height={300}>
-      <CartesianCoordinates subdivisions={4} />
-      <FunctionGraph.OfX y={(x) => Math.sin(x)} />
-    </Mafs>
+    <div>
+      <Mafs height={300} viewBox={{ y: [-5, 5] }}>
+        <CartesianCoordinates subdivisions={2} />
+        <FunctionGraph.Parametric
+          xy={(t) => [t, Math.tan(t)]}
+          t={[-10, 10]}
+          minimumSamplingDepth={12}
+          color={Theme.blue}
+          weight={1}
+        />
+      </Mafs>
+    </div>
   )
 }

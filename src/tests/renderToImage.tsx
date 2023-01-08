@@ -3,13 +3,21 @@ import * as ReactDOMServer from "react-dom/server"
 import * as fs from "fs"
 import * as path from "path"
 
-import { Mafs, CartesianCoordinates } from ".."
+import { Mafs, CartesianCoordinates, MafsViewProps } from ".."
 
 const css = fs.readFileSync(path.join(process.cwd(), "core.css")).toString()
 
 export default async function renderToImage(
   children: React.ReactChild,
-  { coordinates = true } = {}
+  {
+    coordinates = true,
+    viewBox = { x: [0, 10], y: [0, 10] },
+    preserveAspectRatio = true,
+  }: {
+    coordinates?: boolean
+    viewBox?: MafsViewProps["viewBox"]
+    preserveAspectRatio?: boolean
+  } = {}
 ): Promise<Buffer | string | void> {
   const output = ReactDOMServer.renderToString(
     <>
@@ -34,7 +42,14 @@ export default async function renderToImage(
       </head>
 
       <body>
-        <Mafs ssr={true} width={500} height={500} viewBox={{ x: [0, 10], y: [0, 10] }} pan={false}>
+        <Mafs
+          ssr={true}
+          width={500}
+          height={500}
+          viewBox={viewBox}
+          preserveAspectRatio={preserveAspectRatio ? "contain" : false}
+          pan={false}
+        >
           {coordinates ? <CartesianCoordinates /> : null}
           {children}
         </Mafs>

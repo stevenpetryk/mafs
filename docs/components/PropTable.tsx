@@ -21,7 +21,12 @@ export type DocgenPropType =
   | { name: "enum" | "boolean"; raw: string; value: Array<{ value: string }> }
   | { name: string }
 
-export function PropTable({ of: component, displayName }: { of: unknown; displayName?: string }) {
+interface PropTableProps {
+  of: { displayName: string } | unknown
+  displayName?: string
+}
+
+export function PropTable({ of: component, displayName: displayNameOverride }: PropTableProps) {
   const docgenInfo = (component as { __docgenInfo: Docgen })?.__docgenInfo
 
   if (process.env.NODE_ENV === "development" && docgenInfo == null) {
@@ -36,6 +41,10 @@ export function PropTable({ of: component, displayName }: { of: unknown; display
   if (docgenInfo == null || docgenInfo.props == null) {
     throw new Error("Non-docgen object passed to PropTable")
   }
+
+  const displayName =
+    // eslint-disable-next-line
+    displayNameOverride ?? (component as any)?.displayName ?? docgenInfo.displayName
 
   const props = docgenInfo.props
 

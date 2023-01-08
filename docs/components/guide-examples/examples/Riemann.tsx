@@ -4,7 +4,7 @@ import * as React from "react"
 import {
   Mafs,
   useMovablePoint,
-  FunctionGraph,
+  Plot,
   Polygon,
   Text,
   CartesianCoordinates,
@@ -71,7 +71,7 @@ export default function RiemannSum() {
       >
         <CartesianCoordinates subdivisions={2} />
 
-        <FunctionGraph.OfX y={wave} color="#358CF1" />
+        <Plot.OfX y={wave} color="#358CF1" />
 
         {partitions.map((partition, index) => (
           <Polygon

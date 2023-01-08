@@ -1,14 +1,12 @@
-import * as React from "react"
-
-import { clamp } from "../math"
-import * as vec from "../vec"
-import { usePaneContext } from "../view/PaneManager"
-import { useScaleContext } from "../view/ScaleContext"
-import { Theme } from "./Theme"
+import { clamp } from "../../math"
+import * as vec from "../../vec"
+import { usePaneContext } from "../../view/PaneManager"
+import { useScaleContext } from "../../view/ScaleContext"
+import { Theme } from "../Theme"
 
 export interface VectorFieldProps {
-  xy: (x: number, y: number) => [number, number]
-  xyOpacity?: (x: number, y: number) => number
+  xy: (point: vec.Vector2) => vec.Vector2
+  xyOpacity?: (point: vec.Vector2) => number
   step: number
   opacityStep?: number
   color?: string
@@ -16,13 +14,13 @@ export interface VectorFieldProps {
 
 const xyOpacityDefault = () => 1
 
-export const VectorField: React.VFC<VectorFieldProps> = ({
+export function VectorField({
   xy,
   step = 1,
   xyOpacity = xyOpacityDefault,
   opacityStep = xyOpacity === xyOpacityDefault ? 1 : 0.2,
   color = Theme.foreground,
-}) => {
+}: VectorFieldProps) {
   const { pixelMatrix } = useScaleContext()
   const { xPanes, yPanes } = usePaneContext()
 
@@ -37,7 +35,7 @@ export const VectorField: React.VFC<VectorFieldProps> = ({
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
       for (let y = Math.floor(yMin); y <= Math.ceil(yMax); y += step) {
         const tail: vec.Vector2 = [x, y]
-        const trueOffset = xy(x, y)
+        const trueOffset = xy([x, y])
         const trueMag = vec.mag(trueOffset)
         const scaledOffset = vec.scale(vec.normalize(trueOffset), Math.min(trueMag, step * 0.75))
         const tip = vec.add(tail, scaledOffset)
@@ -51,7 +49,7 @@ export const VectorField: React.VFC<VectorFieldProps> = ({
         const left = vec.add(pixelTip, vec.rotate(arrowVector, (5 / 6) * Math.PI))
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 
-        const trueOpacity = xyOpacity(x, y)
+        const trueOpacity = xyOpacity([x, y])
         const layer = findClosetLayer(layers, trueOpacity)
         layer.d +=
           ` M ${pixelTail[0]} ${pixelTail[1]}` +

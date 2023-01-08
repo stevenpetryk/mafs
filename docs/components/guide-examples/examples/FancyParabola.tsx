@@ -2,7 +2,7 @@
 
 import {
   CartesianCoordinates,
-  FunctionGraph,
+  Plot,
   Mafs,
   Transform,
   useMovablePoint,
@@ -27,9 +27,7 @@ export default function FancyParabola() {
     <Mafs>
       <CartesianCoordinates subdivisions={2} />
 
-      <FunctionGraph.OfX
-        y={(x) => (k.y * fn(x)) / fn(mid)}
-      />
+      <Plot.OfX y={(x) => (k.y * fn(x)) / fn(mid)} />
       {a.element}
       {b.element}
       <Transform translate={[(a.x + b.x) / 2, 0]}>

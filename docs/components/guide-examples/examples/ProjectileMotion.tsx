@@ -7,7 +7,7 @@ import {
   useStopwatch,
   Point,
   useMovablePoint,
-  FunctionGraph,
+  Plot,
   Vector,
   Polygon,
 } from "mafs"
@@ -74,7 +74,7 @@ export default function ProjectileMotion() {
 
         {yVelocity > 0 && (
           <>
-            <FunctionGraph.Parametric
+            <Plot.Parametric
               xy={positionAtTime}
               t={[0, timeOfFlight]}
               opacity={0.4}

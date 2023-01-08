@@ -45,7 +45,7 @@ export const Guides: Section[] = [
       { title: "Polygons", icon: SquareIcon, slug: "polygons" },
       { title: "Circles", icon: CircleIcon, slug: "circles" },
       { title: "Ellipses", icon: EllipseIcon, slug: "ellipses" },
-      { title: "Graphs", icon: FunctionIcon, slug: "graphs" },
+      { title: "Plots", icon: FunctionIcon, slug: "plots" },
       { title: "Text", icon: TextIcon, slug: "text" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { title: "Vector fields", icon: DoubleArrowRightIcon, slug: "vector-fields" },

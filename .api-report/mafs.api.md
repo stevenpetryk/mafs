@@ -92,12 +92,6 @@ export interface Filled {
 }
 
 // @public (undocumented)
-export const FunctionGraph: {
-    OfX: VFC<OfXProps>;
-    Parametric: VFC<ParametricProps>;
-};
-
-// @public (undocumented)
 export type Interval = [min: number, max: number];
 
 // @public (undocumented)
@@ -181,9 +175,10 @@ export function normal(v: Vector2): Vector2;
 export function normalize(v: Vector2): Vector2;
 
 // @public (undocumented)
-export interface OfXProps extends Stroked {
-    // (undocumented)
-    quality?: "low" | "medium" | "high";
+export function OfX({ y, ...props }: OfXProps): JSX.Element;
+
+// @public (undocumented)
+export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     // (undocumented)
@@ -191,19 +186,36 @@ export interface OfXProps extends Stroked {
 }
 
 // @public (undocumented)
-export interface ParametricProps extends Stroked {
-    // (undocumented)
-    color?: string;
-    minimumSamplingDepth?: number;
-    // (undocumented)
-    style?: "solid" | "dashed";
+export function OfY({ x, ...props }: OfYProps): JSX.Element;
+
+// @public (undocumented)
+export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     // (undocumented)
-    t: [number, number];
+    x: (y: number) => number;
+}
+
+// @public (undocumented)
+export function Parametric({ xy, t, color, style, weight, opacity, maxSamplingDepth, minSamplingDepth, svgPathProps, }: ParametricProps): JSX.Element;
+
+// @public (undocumented)
+export interface ParametricProps extends Stroked {
+    maxSamplingDepth?: number;
+    minSamplingDepth?: number;
     // (undocumented)
+    svgPathProps?: React_2.SVGProps<SVGPathElement>;
+    t: Vector2;
     xy: (t: number) => Vector2;
 }
+
+// @public (undocumented)
+export const Plot: {
+    OfX: typeof OfX;
+    OfY: typeof OfY;
+    Parametric: typeof Parametric;
+    VectorField: typeof VectorField;
+};
 
 // @public (undocumented)
 export const Point: React_2.VFC<PointProps>;
@@ -407,7 +419,7 @@ export const Vector: React_2.VFC<VectorProps>;
 export type Vector2 = [x: number, y: number];
 
 // @public (undocumented)
-export const VectorField: React_2.VFC<VectorFieldProps>;
+export function VectorField({ xy, step, xyOpacity, opacityStep, color, }: VectorFieldProps): JSX.Element;
 
 // @public (undocumented)
 export interface VectorFieldProps {
@@ -418,9 +430,9 @@ export interface VectorFieldProps {
     // (undocumented)
     step: number;
     // (undocumented)
-    xy: (x: number, y: number) => [number, number];
+    xy: (point: Vector2) => Vector2;
     // (undocumented)
-    xyOpacity?: (x: number, y: number) => number;
+    xyOpacity?: (point: Vector2) => number;
 }
 
 // @public (undocumented)

@@ -6,16 +6,18 @@ import endent from "endent"
 import { toH } from "hast-to-hyperscript"
 
 import { refractor } from "refractor"
-import tsx from "refractor/lang/tsx"
 import bash from "refractor/lang/bash"
 import css from "refractor/lang/css"
+import diff from "refractor/lang/diff"
+import tsx from "refractor/lang/tsx"
 
 refractor.register(bash)
 refractor.register(css)
+refractor.register(diff)
 refractor.register(tsx)
 
 interface CodeProps {
-  language: "tsx" | "css" | "bash"
+  language: "tsx" | "css" | "bash" | "diff"
   source: string
 }
 

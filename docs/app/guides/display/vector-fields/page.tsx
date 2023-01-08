@@ -1,25 +1,29 @@
-"use client"
+import Link from "next/link"
+import endent from "endent"
 
-import CodeAndExample from "components/CodeAndExample"
-
-import VectorFieldExample from "guide-examples/VectorFieldExample"
-import VectorFieldExampleSource from "!raw-loader!guide-examples/VectorFieldExample"
-import { PropTable } from "components/PropTable"
-import { VectorField } from "mafs"
+import Code from "components/Code"
 
 function Vectors() {
   return (
     <>
       <p>
-        Vector fields take a function that is passed a point{" "}
-        <span className="font-display italic">(x, y)</span> and returns a vector at that point.
-        Vectors are then artificially scaled down (for legibility) and plotted on the coordinate
-        plane. You must also pass a <code>step</code> to indicate how dense the vector field is.
+        Vector fields now live in the <Link href="/guides/display/plots">Plot</Link> namespace.
       </p>
 
-      <CodeAndExample component={<VectorFieldExample />} source={VectorFieldExampleSource} />
+      <Code
+        language="diff"
+        source={endent`
+          -import { VectorField } from "mafs"
+          +import { Plot } from "mafs"
 
-      <PropTable of={VectorField} />
+          -<VectorField ... />
+          +<Plot.VectorField ... />
+        `}
+      />
+
+      <p>
+        <Link href="/guides/display/plots">View the Plot docs →</Link>
+      </p>
     </>
   )
 }

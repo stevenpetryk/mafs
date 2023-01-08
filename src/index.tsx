@@ -8,8 +8,8 @@ export type {
   LabelMaker,
 } from "./origin/CartesianCoordinates"
 
-export { FunctionGraph } from "./display/FunctionGraph"
-export type { OfXProps, ParametricProps } from "./display/FunctionGraph"
+export { Plot } from "./display/Plot"
+export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"
 
 export { Line } from "./display/Line"
 export type {
@@ -33,9 +33,6 @@ export type { PointProps } from "./display/Point"
 
 export { Vector } from "./display/Vector"
 export type { VectorProps } from "./display/Vector"
-
-export { VectorField } from "./display/VectorField"
-export type { VectorFieldProps } from "./display/VectorField"
 
 export { Text } from "./display/Text"
 export type { TextProps, CardinalDirection } from "./display/Text"

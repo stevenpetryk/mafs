@@ -128,10 +128,21 @@
 
   .prose p code,
   .prose ul code {
-    @apply p-0 px-1 bg-transparent text-blue-700 dark:text-blue-300;
+    @apply p-0 bg-transparent text-blue-700 dark:text-blue-300;
   }
   .prose .markdown {
     @apply space-y-3;
+  }
+
+  /* Less spacing after headings */
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    @apply my-2;
+    + p,
+    + ul {
+      margin-top: 0.5em !important;
+    }
   }
 }
 

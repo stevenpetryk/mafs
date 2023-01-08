@@ -9,7 +9,7 @@ export type {
 } from "./origin/CartesianCoordinates"
 
 export { Plot } from "./display/Plot"
-export type { OfXProps, ParametricProps } from "./display/Plot"
+export type { OfXProps, OfYProps, ParametricProps } from "./display/Plot"
 
 export { Line } from "./display/Line"
 export type {

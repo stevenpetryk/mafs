@@ -92,12 +92,6 @@ export interface Filled {
 }
 
 // @public (undocumented)
-export const FunctionGraph: {
-    OfX: VFC<OfXProps>;
-    Parametric: VFC<ParametricProps>;
-};
-
-// @public (undocumented)
 export type Interval = [min: number, max: number];
 
 // @public (undocumented)
@@ -181,13 +175,25 @@ export function normal(v: Vector2): Vector2;
 export function normalize(v: Vector2): Vector2;
 
 // @public (undocumented)
-export interface OfXProps extends Stroked {
-    // (undocumented)
-    quality?: "low" | "medium" | "high";
+export function OfX({ y, ...props }: OfXProps): JSX.Element;
+
+// @public (undocumented)
+export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     // (undocumented)
     y: (x: number) => number;
+}
+
+// @public (undocumented)
+export function OfY({ x, ...props }: OfYProps): JSX.Element;
+
+// @public (undocumented)
+export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
+    // (undocumented)
+    svgPathProps?: React_2.SVGProps<SVGPathElement>;
+    // (undocumented)
+    x: (y: number) => number;
 }
 
 // @public (undocumented)
@@ -199,11 +205,16 @@ export interface ParametricProps extends Stroked {
     style?: "solid" | "dashed";
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
-    // (undocumented)
     t: [number, number];
-    // (undocumented)
     xy: (t: number) => Vector2;
 }
+
+// @public (undocumented)
+export const Plot: {
+    OfX: typeof OfX;
+    OfY: typeof OfY;
+    Parametric: VFC<ParametricProps>;
+};
 
 // @public (undocumented)
 export const Point: React_2.VFC<PointProps>;

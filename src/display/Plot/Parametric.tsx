@@ -69,7 +69,7 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
       const xyLerpMid = vec.lerp(xyMin, xyMax, t)
       const error = vec.squareDist(xyMid, xyLerpMid)
 
-      if (error > errorThreshold && depth < maxSamplingDepth) {
+      if (depth < maxSamplingDepth && error > errorThreshold) {
         smartSmooth(min, mid, true, false, depth + 1)
         smartSmooth(mid, max, false, true, depth + 1)
       } else {

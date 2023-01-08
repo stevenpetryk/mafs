@@ -73,7 +73,7 @@ export { Transform, type TransformProps } from "./display/Transform"
  * +<Plot.VectorField />
  * ```
  */
-export const VectorField = () => null
+export const VectorField = null
 
 /**
  * @deprecated ❌ `FunctionGraph` is now `Plot`.

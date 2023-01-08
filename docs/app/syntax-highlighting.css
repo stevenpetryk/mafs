@@ -81,6 +81,10 @@
     color: hsl(286, 60%, 67%);
   }
 
+  .language-diff .token.inserted {
+    color: #4bbb65;
+  }
+
   /* General */
   .token.bold {
     font-weight: bold;

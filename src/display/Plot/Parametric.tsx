@@ -7,7 +7,7 @@ export interface ParametricProps extends Stroked {
   /** A function that takes a `t` value and returns a point. */
   xy: (t: number, reuseVec: vec.Vector2) => vec.Vector2
   /** The domain `t` between which to evaluate `xy`. */
-  t: [number, number]
+  t: vec.Vector2
   /** The minimum recursive depth of the sampling algorithm. */
   minSamplingDepth?: number
   /** The maximum recursive depth of the sampling algorithm. */

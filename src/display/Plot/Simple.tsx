@@ -12,6 +12,8 @@ export function OfX({ y, ...props }: OfXProps) {
     xPaneRange: [xMin, xMax],
   } = usePaneContext()
 
+  console.log([xMin, xMax])
+
   return <ParametricFunction xy={(x) => [x, y(x)]} t={[xMin, xMax]} {...props} />
 }
 

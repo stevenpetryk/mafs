@@ -47,7 +47,7 @@ function Functions() {
 
       <p>
         To force more subdivisions (and therefore improve quality), the{" "}
-        <code>maxSamplingDepth</code>
+        <code>minSamplingDepth</code>
         prop can be tuned. By default, it's set to <code>10</code>, which means Mafs will never
         generate more than 2¹⁰ = 1024 points for a given evaluation window. This number can be
         increased to force improved quality at an exponential cost to performance.

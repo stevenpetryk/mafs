@@ -8,14 +8,10 @@ export interface ParametricProps extends Stroked {
   xy: (t: number) => vec.Vector2
   /** The domain `t` between which to evaluate `xy`. */
   t: [number, number]
-  color?: string
-  style?: "solid" | "dashed"
-
-  /**
-   * The maximum recursive depth of the sampling algorithm.
-   */
-  maxSamplingDepth?: number
+  /** The minimum recursive depth of the sampling algorithm. */
   minSamplingDepth?: number
+  /** The maximum recursive depth of the sampling algorithm. */
+  maxSamplingDepth?: number
 
   svgPathProps?: React.SVGProps<SVGPathElement>
 }

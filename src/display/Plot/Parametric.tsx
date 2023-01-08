@@ -5,7 +5,7 @@ import { useScaleContext } from "../../view/ScaleContext"
 
 export interface ParametricProps extends Stroked {
   /** A function that takes a `t` value and returns a point. */
-  xy: (t: number) => vec.Vector2
+  xy: (t: number, reuseVec: vec.Vector2) => vec.Vector2
   /** The domain `t` between which to evaluate `xy`. */
   t: [number, number]
   /** The minimum recursive depth of the sampling algorithm. */
@@ -51,13 +51,21 @@ export const Parametric: React.VFC<ParametricProps> = ({
         return
       }
 
-      const xyMin = xy(min)
-      const xyMid = xy(mid)
-      const xyMax = xy(max)
+      let xyMinX = 0
+      let xyMinY = 0
+      let xyMidX = 0
+      let xyMidY = 0
+      let xyMaxX = 0
+      let xyMaxY = 0
+
+      const reuseVector: vec.Vector2 = [0, 0]
+      ;[xyMinX, xyMinY] = xy(min, reuseVector) ?? reuseVector
+      ;[xyMidX, xyMidY] = xy(mid, reuseVector) ?? reuseVector
+      ;[xyMaxX, xyMaxY] = xy(max, reuseVector) ?? reuseVector
 
       if (depth < maxSamplingDepth) {
-        const xyLerpMid = vec.lerp(xyMin, xyMax, t)
-        const error = vec.squareDist(xyMid, xyLerpMid)
+        const xyLerpMid = vec.lerp([xyMinX, xyMinY], [xyMaxX, xyMaxY], t)
+        const error = vec.squareDist([xyMidX, xyMidY], xyLerpMid)
         if (error > errorThreshold) {
           smartSmooth(min, mid, true, false, depth + 1)
           smartSmooth(mid, max, false, true, depth + 1)
@@ -65,9 +73,13 @@ export const Parametric: React.VFC<ParametricProps> = ({
         }
       }
 
-      if (pushLeft && isFinite(xyMin)) pathDescriptor += `${xyMin[0]} ${xyMin[1]} L `
-      if (isFinite(xyMid)) pathDescriptor += `${xyMid[0]} ${xyMid[1]} L `
-      if (pushRight && isFinite(xyMax)) pathDescriptor += `${xyMax[0]} ${xyMax[1]} L `
+      if (pushLeft && Number.isFinite(xyMinX) && Number.isFinite(xyMinY)) {
+        pathDescriptor += `${xyMinX} ${xyMinY} L `
+      }
+      if (Number.isFinite(xyMidX) && Number.isFinite(xyMidY))
+        pathDescriptor += `${xyMidX} ${xyMidY} L `
+      if (pushRight && Number.isFinite(xyMaxX) && Number.isFinite(xyMaxY))
+        pathDescriptor += `${xyMaxX} ${xyMaxY} L `
     }
 
     smartSmooth(tMin, tMax, true, true)
@@ -93,8 +105,4 @@ export const Parametric: React.VFC<ParametricProps> = ({
       }}
     />
   )
-}
-
-function isFinite(v: vec.Vector2) {
-  return Number.isFinite(v[0]) && Number.isFinite(v[1])
 }

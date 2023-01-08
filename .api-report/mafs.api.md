@@ -198,17 +198,12 @@ export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
 
 // @public (undocumented)
 export interface ParametricProps extends Stroked {
-    // (undocumented)
-    color?: string;
     maxSamplingDepth?: number;
-    // (undocumented)
     minSamplingDepth?: number;
-    // (undocumented)
-    style?: "solid" | "dashed";
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     t: [number, number];
-    xy: (t: number) => Vector2;
+    xy: (t: number, reuseVec: Vector2) => Vector2;
 }
 
 // @public (undocumented)

@@ -14,10 +14,8 @@ export default function SineStressTest() {
     >
       <CartesianCoordinates />
       <Plot.OfX y={(x) => fn(x) + 1.5} />
-      <Plot.OfX
-        y={(x) => fn(x) - 1.5}
-        maxSamplingDepth={15}
-      />
+      {/* prettier-ignore */}
+      <Plot.OfX y={(x) => fn(x) - 1.5} minSamplingDepth={15} />
     </Mafs>
   )
 }

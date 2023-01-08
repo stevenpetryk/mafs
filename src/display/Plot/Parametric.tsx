@@ -37,8 +37,6 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
   const errorThreshold = 0.1 / (scaleX(1) * scaleY(-1))
 
   const svgPath = React.useMemo(() => {
-    let maxDepth = 0
-    let numPoints = 0
     let pathDescriptor = "M "
 
     function smartSmooth(
@@ -48,11 +46,7 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
       pushRight: boolean,
       depth = 0
     ) {
-      maxDepth = Math.max(maxDepth, depth)
-
-      // Generate random t value near 0.5
-      const t = (Math.random() - 0.5) * 0.2 + 0.5
-
+      const t = 0.5
       const mid = min + (max - min) * t
 
       if (depth < minSamplingDepth) {
@@ -62,37 +56,25 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
       }
 
       const xyMin = xy(min)
+      const xyMid = xy(mid)
       const xyMax = xy(max)
 
-      // Error term
-      const xyMid = xy(mid)
-      const xyLerpMid = vec.lerp(xyMin, xyMax, t)
-      const error = vec.squareDist(xyMid, xyLerpMid)
-
-      if (depth < maxSamplingDepth && error > errorThreshold) {
-        smartSmooth(min, mid, true, false, depth + 1)
-        smartSmooth(mid, max, false, true, depth + 1)
-      } else {
-        if (isFinite(xyMin) && pushLeft) {
-          numPoints++
-          pathDescriptor += `${xyMin[0]} ${xyMin[1]} L `
-        }
-        if (isFinite(xyMid)) {
-          numPoints++
-          pathDescriptor += `${xyMid[0]} ${xyMid[1]} L `
-        }
-        if (isFinite(xyMax) && pushRight) {
-          numPoints++
-          pathDescriptor += `${xyMax[0]} ${xyMax[1]} L `
+      if (depth < maxSamplingDepth) {
+        const xyLerpMid = vec.lerp(xyMin, xyMax, t)
+        const error = vec.squareDist(xyMid, xyLerpMid)
+        if (error > errorThreshold) {
+          smartSmooth(min, mid, true, false, depth + 1)
+          smartSmooth(mid, max, false, true, depth + 1)
+          return
         }
       }
+
+      if (pushLeft && isFinite(xyMin)) pathDescriptor += `${xyMin[0]} ${xyMin[1]} L `
+      if (isFinite(xyMid)) pathDescriptor += `${xyMid[0]} ${xyMid[1]} L `
+      if (pushRight && isFinite(xyMax)) pathDescriptor += `${xyMax[0]} ${xyMax[1]} L `
     }
 
-    const start = performance.now()
     smartSmooth(tMin, tMax, true, true)
-    const duration = performance.now() - start
-
-    // console.log(`${duration.toFixed(1)}ms`, maxDepth, numPoints)
 
     return pathDescriptor.substring(0, pathDescriptor.length - 3)
   }, [tMin, tMax, xy, errorThreshold, minSamplingDepth, maxSamplingDepth])

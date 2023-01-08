@@ -15,6 +15,7 @@ export interface ParametricProps extends Stroked {
    * The maximum recursive depth of the sampling algorithm.
    */
   maxSamplingDepth?: number
+  minSamplingDepth?: number
 
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
@@ -27,6 +28,7 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
   weight = 2,
   opacity = 1.0,
   maxSamplingDepth = 10,
+  minSamplingDepth = 6,
   svgPathProps = {},
 }) => {
   const { cssScale, scaleX, scaleY } = useScaleContext()
@@ -61,7 +63,7 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
       const xyLerpMid = vec.lerp(xyMin, xyMax, t)
       const error = vec.squareDist(xyMid, xyLerpMid)
 
-      if ((error > errorThreshold && depth < maxSamplingDepth) || depth < 6) {
+      if ((error > errorThreshold && depth < maxSamplingDepth) || depth < minSamplingDepth) {
         smartSmooth(min, mid, true, false, depth + 1)
         smartSmooth(mid, max, false, true, depth + 1)
       } else {
@@ -87,7 +89,7 @@ export const ParametricFunction: React.VFC<ParametricProps> = ({
     // console.log(`${duration.toFixed(1)}ms`, maxDepth, numPoints)
 
     return pathDescriptor.substring(0, pathDescriptor.length - 3)
-  }, [tMin, tMax, xy, errorThreshold, maxSamplingDepth])
+  }, [tMin, tMax, xy, errorThreshold, minSamplingDepth, maxSamplingDepth])
 
   return (
     <path

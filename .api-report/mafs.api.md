@@ -91,6 +91,12 @@ export interface Filled {
     weight?: number;
 }
 
+// @public @deprecated (undocumented)
+export const FunctionGraph: {
+    OfX: null;
+    Parametric: null;
+};
+
 // @public (undocumented)
 export type Interval = [min: number, max: number];
 
@@ -197,6 +203,9 @@ export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
 }
 
 // @public (undocumented)
+export function Parametric({ xy, t, color, style, weight, opacity, maxSamplingDepth, minSamplingDepth, svgPathProps, }: ParametricProps): JSX.Element;
+
+// @public (undocumented)
 export interface ParametricProps extends Stroked {
     maxSamplingDepth?: number;
     minSamplingDepth?: number;
@@ -210,7 +219,8 @@ export interface ParametricProps extends Stroked {
 export const Plot: {
     OfX: typeof OfX;
     OfY: typeof OfY;
-    Parametric: VFC<ParametricProps>;
+    Parametric: typeof Parametric;
+    _VectorField1: typeof _VectorField1;
 };
 
 // @public (undocumented)
@@ -414,8 +424,11 @@ export const Vector: React_2.VFC<VectorProps>;
 // @public
 export type Vector2 = [x: number, y: number];
 
+// @public @deprecated (undocumented)
+export const VectorField: () => null;
+
 // @public (undocumented)
-export const VectorField: React_2.VFC<VectorFieldProps>;
+export function _VectorField1({ xy, step, xyOpacity, opacityStep, color, }: VectorFieldProps): JSX.Element;
 
 // @public (undocumented)
 export interface VectorFieldProps {

@@ -16,7 +16,7 @@ export interface ParametricProps extends Stroked {
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
-export const Parametric: React.VFC<ParametricProps> = ({
+export function Parametric({
   xy,
   t,
   color,
@@ -26,7 +26,7 @@ export const Parametric: React.VFC<ParametricProps> = ({
   maxSamplingDepth = 14,
   minSamplingDepth = 6,
   svgPathProps = {},
-}) => {
+}: ParametricProps) {
   const { cssScale, scaleX, scaleY } = useScaleContext()
 
   const [tMin, tMax] = t

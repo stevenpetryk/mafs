@@ -1,5 +1,5 @@
 import { OfX, OfY } from "./Plot/Simple"
-import { ParametricFunction as Parametric } from "./Plot/Parametric"
+import { Parametric } from "./Plot/Parametric"
 
 export const Plot = {
   OfX,

@@ -1,7 +1,7 @@
 import { Plot, Theme } from ".."
 import renderToImage from "../tests/renderToImage"
 
-describe("<FunctionGraph.OfX />", () => {
+describe("<Plot.OfX />", () => {
   it("Renders", async () => {
     expect(
       await renderToImage(
@@ -16,7 +16,22 @@ describe("<FunctionGraph.OfX />", () => {
   })
 })
 
-describe("<FunctionGraph.Parametric />", () => {
+describe("<Plot.OfY />", () => {
+  it("Renders", async () => {
+    expect(
+      await renderToImage(
+        <>
+          <Plot.OfY x={(y) => (y - 5) ** 2} />
+          <Plot.OfY x={(y) => 5 - Math.sin(y)} style="dashed" weight={5} />
+          <Plot.OfY x={(y) => 5 - (y - 5) ** 2} color="red" />
+          <Plot.OfY x={(y) => 5 + Math.sin(y)} color="var(--mafs-blue)" />
+        </>
+      )
+    ).toMatchImageSnapshot()
+  })
+})
+
+describe("<Plot.Parametric />", () => {
   it("Renders", async () => {
     expect(
       await renderToImage(
@@ -40,6 +55,20 @@ describe("<FunctionGraph.Parametric />", () => {
           <Plot.Parametric t={[5, 0]} xy={(t) => [t, 2 + Math.sin(t)]} color={Theme.red} />
         </>
       )
+    ).toMatchImageSnapshot()
+  })
+})
+
+describe("<Plot.* /> edge cases", () => {
+  it("Math.sin(1/x)", async () => {
+    expect(
+      await renderToImage(<Plot.OfX y={(x) => Math.sin(1 / (x - 3)) + 3} maxSamplingDepth={15} />)
+    ).toMatchImageSnapshot()
+  })
+
+  it("Math.tan(x)", async () => {
+    expect(
+      await renderToImage(<Plot.OfX y={(x) => Math.tan(x - 3) + 3} maxSamplingDepth={15} />)
     ).toMatchImageSnapshot()
   })
 })

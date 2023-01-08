@@ -2,8 +2,9 @@
 
 import { CartesianCoordinates, Mafs, Plot } from "mafs"
 
-const fn = (x: number) => Math.sin(1 / x)
 export default function SineStressTest() {
+  const fn = (x: number) => Math.sin(1 / x)
+
   return (
     <Mafs
       height={300}

@@ -211,7 +211,7 @@ export interface ParametricProps extends Stroked {
     minSamplingDepth?: number;
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
-    t: [number, number];
+    t: Vector2;
     xy: (t: number, reuseVec: Vector2) => Vector2;
 }
 
@@ -425,7 +425,7 @@ export const Vector: React_2.VFC<VectorProps>;
 export type Vector2 = [x: number, y: number];
 
 // @public @deprecated (undocumented)
-export const VectorField: () => null;
+export const VectorField: null;
 
 // @public (undocumented)
 export function _VectorField1({ xy, step, xyOpacity, opacityStep, color, }: VectorFieldProps): JSX.Element;
@@ -439,9 +439,9 @@ export interface VectorFieldProps {
     // (undocumented)
     step: number;
     // (undocumented)
-    xy: (x: number, y: number) => [number, number];
+    xy: (point: Vector2) => Vector2;
     // (undocumented)
-    xyOpacity?: (x: number, y: number) => number;
+    xyOpacity?: (point: Vector2) => number;
 }
 
 // @public (undocumented)

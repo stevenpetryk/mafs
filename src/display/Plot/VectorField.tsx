@@ -88,8 +88,6 @@ export function VectorField({
   )
 }
 
-VectorField.displayName = "Plot.VectorField"
-
 interface Layer {
   d: string
   opacity: number

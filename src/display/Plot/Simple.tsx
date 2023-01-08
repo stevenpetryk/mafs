@@ -1,6 +1,7 @@
 import * as React from "react"
 import { usePaneContext } from "../../view/PaneManager"
 import { Parametric, ParametricProps } from "./Parametric"
+import * as vec from "../../vec"
 
 export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
   y: (x: number) => number
@@ -12,17 +13,18 @@ export function OfX({ y, ...props }: OfXProps) {
     xPaneRange: [xMin, xMax],
   } = usePaneContext()
 
-  return (
-    <Parametric
-      xy={(x, v) => {
-        v[0] = x
-        v[1] = y(x)
-        return v
-      }}
-      t={[xMin, xMax]}
-      {...props}
-    />
+  const xy = React.useCallback<ParametricProps["xy"]>(
+    (x, v) => {
+      v[0] = x
+      v[1] = y(x)
+      return v
+    },
+    [y]
   )
+
+  const t = React.useMemo<vec.Vector2>(() => [xMin, xMax], [xMin, xMax])
+
+  return <Parametric xy={xy} t={t} {...props} />
 }
 
 export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
@@ -35,15 +37,16 @@ export function OfY({ x, ...props }: OfYProps) {
     yPaneRange: [yMin, yMax],
   } = usePaneContext()
 
-  return (
-    <Parametric
-      xy={(y, v) => {
-        v[0] = x(y)
-        v[1] = y
-        return v
-      }}
-      t={[yMin, yMax]}
-      {...props}
-    />
+  const xy = React.useCallback<ParametricProps["xy"]>(
+    (y, v) => {
+      v[0] = x(y)
+      v[1] = y
+      return v
+    },
+    [x]
   )
+
+  const t = React.useMemo<vec.Vector2>(() => [yMin, yMax], [yMin, yMax])
+
+  return <Parametric xy={xy} t={t} {...props} />
 }

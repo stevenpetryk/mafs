@@ -13,15 +13,7 @@ export function OfX({ y, ...props }: OfXProps) {
     xPaneRange: [xMin, xMax],
   } = usePaneContext()
 
-  const xy = React.useCallback<ParametricProps["xy"]>(
-    (x, v) => {
-      v[0] = x
-      v[1] = y(x)
-      return v
-    },
-    [y]
-  )
-
+  const xy = React.useCallback<ParametricProps["xy"]>((x) => [x, y(x)], [y])
   const t = React.useMemo<vec.Vector2>(() => [xMin, xMax], [xMin, xMax])
 
   return <Parametric xy={xy} t={t} {...props} />
@@ -37,15 +29,7 @@ export function OfY({ x, ...props }: OfYProps) {
     yPaneRange: [yMin, yMax],
   } = usePaneContext()
 
-  const xy = React.useCallback<ParametricProps["xy"]>(
-    (y, v) => {
-      v[0] = x(y)
-      v[1] = y
-      return v
-    },
-    [x]
-  )
-
+  const xy = React.useCallback<ParametricProps["xy"]>((y) => [x(y), y], [x])
   const t = React.useMemo<vec.Vector2>(() => [yMin, yMax], [yMin, yMax])
 
   return <Parametric xy={xy} t={t} {...props} />

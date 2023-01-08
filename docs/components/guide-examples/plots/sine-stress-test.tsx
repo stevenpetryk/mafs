@@ -9,7 +9,7 @@ export default function SineStressTest() {
     <Mafs
       height={300}
       // prettier-ignore
-      viewBox={{ x: [-0.25, 0.25], y: [-3.5, 3.5], padding: 0 }}
+      viewBox={{ x: [-1/32, 1/32], y: [-3.5, 3.5], padding: 0 }}
       preserveAspectRatio={false}
     >
       <CartesianCoordinates />

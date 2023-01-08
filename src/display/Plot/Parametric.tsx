@@ -5,7 +5,7 @@ import { useScaleContext } from "../../view/ScaleContext"
 
 export interface ParametricProps extends Stroked {
   /** A function that takes a `t` value and returns a point. */
-  xy: (t: number, reuseVec: vec.Vector2) => vec.Vector2
+  xy: (t: number) => vec.Vector2
   /** The domain `t` between which to evaluate `xy`. */
   t: vec.Vector2
   /** The minimum recursive depth of the sampling algorithm. */
@@ -24,7 +24,7 @@ export function Parametric({
   weight = 2,
   opacity = 1.0,
   maxSamplingDepth = 14,
-  minSamplingDepth = 10,
+  minSamplingDepth = 8,
   svgPathProps = {},
 }: ParametricProps) {
   const { cssScale, scaleX, scaleY } = useScaleContext()
@@ -51,17 +51,9 @@ export function Parametric({
         return
       }
 
-      let xyMinX = 0
-      let xyMinY = 0
-      let xyMidX = 0
-      let xyMidY = 0
-      let xyMaxX = 0
-      let xyMaxY = 0
-
-      const reuseVector: vec.Vector2 = [0, 0]
-      ;[xyMinX, xyMinY] = xy(min, reuseVector) ?? reuseVector
-      ;[xyMidX, xyMidY] = xy(mid, reuseVector) ?? reuseVector
-      ;[xyMaxX, xyMaxY] = xy(max, reuseVector) ?? reuseVector
+      const [xyMinX, xyMinY] = xy(min)
+      const [xyMidX, xyMidY] = xy(mid)
+      const [xyMaxX, xyMaxY] = xy(max)
 
       if (depth < maxSamplingDepth) {
         const xyLerpMid = vec.lerp([xyMinX, xyMinY], [xyMaxX, xyMaxY], t)

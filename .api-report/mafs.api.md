@@ -200,7 +200,9 @@ export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
 export interface ParametricProps extends Stroked {
     // (undocumented)
     color?: string;
-    minimumSamplingDepth?: number;
+    maxSamplingDepth?: number;
+    // (undocumented)
+    minSamplingDepth?: number;
     // (undocumented)
     style?: "solid" | "dashed";
     // (undocumented)

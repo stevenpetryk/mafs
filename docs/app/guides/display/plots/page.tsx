@@ -29,12 +29,12 @@ function Functions() {
         Functions of <em className="font-display">x</em> and <em className="font-display">y</em>
       </h2>
       <CodeAndExample component={<OfXAndY />} source={OfXAndYSource} />
-      <PropTable of={Plot.OfX} displayName="Plot.OfX" />
-      <PropTable of={Plot.OfY} displayName="Plot.OfY" />
+      <PropTable of={Plot.OfX} />
+      <PropTable of={Plot.OfY} />
 
       <h2>Parametric functions</h2>
       <CodeAndExample component={<TwistyBoi />} source={TwistyBoiSource} />
-      <PropTable of={Plot.Parametric} displayName="Plot.Parametric" />
+      <PropTable of={Plot.Parametric} />
 
       <h2>Vector fields</h2>
 

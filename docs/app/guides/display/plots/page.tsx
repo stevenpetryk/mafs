@@ -36,28 +36,31 @@ function Functions() {
       <h2>Render quality</h2>
 
       <p>
-        These <code>Plot</code> components are not a computer algebra system (CAS). They use
-        numerical methods for evaluating a function and attempting to plot it accurately—which works
-        well for most functions is far from perfect. Plots evaluate functions by recursively
-        subdividing the domain until an estimated error threshold is met (or the recursion limit
-        limit is reached).
+        These <code>Plot</code> components are <strong>not</strong> a computer algebra system (CAS).
+        They use numerical methods for evaluating a function and attempting to plot it accurately.
+        This works well for most functions, but it's far from perfect.
+      </p>
+
+      <p>
+        Mafs samples functions by by recursively subdividing the domain until an estimated error
+        threshold is met (or the recursion limit limit is reached).
       </p>
 
       <h3>Sampling depth</h3>
 
       <p>
         To force more subdivisions (and therefore improve quality), the{" "}
-        <code>minSamplingDepth</code>
-        prop can be tuned. By default, it's set to <code>10</code>, which means Mafs will never
-        generate more than 2¹⁰ = 1024 points for a given evaluation window. This number can be
-        increased to force improved quality at an exponential cost to performance.
+        <code>minSamplingDepth</code> and <code>maxSamplingDepth</code>
+        props can be tuned. Increasing <code>minSamplingDepth</code> can help when you want to
+        ensure more subdivisions and improve accuracy, and lowering <code>maxSamplingDepth</code>{" "}
+        can help improve performance. These two props should be tuned to meet your needs.
       </p>
 
       <p>
-        Here's an example of a common "stress test" function for plotters, sin(1/x). The top
-        function has the default sampling depth, while the bottom has the sampling depth increased
-        to <code>13</code>. Neither approach is perfect, but the bottom render is indistinguishable
-        from a perfect plot.
+        Here's an example of a common "stress test" function for plotters, sin(1/x). The top plot
+        has the default sampling depths, while the bottom has <code>minSamplingDepth</code>{" "}
+        increased to <code>15</code>. Neither approach is perfect, but the bottom render is
+        indistinguishable from a perfect plot.
       </p>
 
       <CodeAndExample component={<SineStressTest />} source={SineStressTestSource} />

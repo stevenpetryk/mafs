@@ -24,7 +24,7 @@ export function Parametric({
   weight = 2,
   opacity = 1.0,
   maxSamplingDepth = 14,
-  minSamplingDepth = 6,
+  minSamplingDepth = 10,
   svgPathProps = {},
 }: ParametricProps) {
   const { cssScale, scaleX, scaleY } = useScaleContext()

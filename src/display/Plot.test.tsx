@@ -60,15 +60,22 @@ describe("<Plot.Parametric />", () => {
 })
 
 describe("<Plot.* /> edge cases", () => {
-  it("Math.sin(1/x)", async () => {
+  test("Math.sin(1/x)", async () => {
     expect(
-      await renderToImage(<Plot.OfX y={(x) => Math.sin(1 / (x - 3)) + 3} maxSamplingDepth={15} />)
+      await renderToImage(<Plot.OfX y={(x) => Math.sin(1 / x)} minSamplingDepth={14} />, {
+        viewBox: { x: [-0.125, 0.125], y: [-1, 1] },
+        preserveAspectRatio: false,
+      })
     ).toMatchImageSnapshot()
   })
 
-  it("Math.tan(x)", async () => {
+  test("Math.tan(x)", async () => {
     expect(
-      await renderToImage(<Plot.OfX y={(x) => Math.tan(x - 3) + 3} maxSamplingDepth={15} />)
+      await renderToImage(<Plot.OfX y={(x) => Math.tan(x)} minSamplingDepth={15} />, {
+        viewBox: { x: [-10, 10], y: [-500, 500] },
+        preserveAspectRatio: false,
+        coordinates: false,
+      })
     ).toMatchImageSnapshot()
   })
 })

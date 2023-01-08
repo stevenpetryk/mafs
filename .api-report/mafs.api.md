@@ -206,7 +206,7 @@ export interface ParametricProps extends Stroked {
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     t: Vector2;
-    xy: (t: number, reuseVec: Vector2) => Vector2;
+    xy: (t: number) => Vector2;
 }
 
 // @public (undocumented)

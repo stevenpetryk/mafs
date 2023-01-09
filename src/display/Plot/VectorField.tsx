@@ -63,6 +63,8 @@ export function VectorField({
   }
 
   const dataUri = React.useMemo(() => {
+    if (xyOpacity === xyOpacityDefault) return ""
+
     const width = 100
     const height = 100
 

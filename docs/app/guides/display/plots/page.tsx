@@ -20,7 +20,7 @@ import { Plot } from "mafs"
 function Functions() {
   return (
     <>
-      {/* <p>
+      <p>
         Mafs supports numerically plotting a number of function types by passing in plain JavaScript
         functions.
       </p>
@@ -43,10 +43,10 @@ function Functions() {
         vector at that point. Vectors are then artificially scaled down (for legibility) and plotted
         on the coordinate plane. You must also pass a <code>step</code> to indicate how dense the
         vector field is.
-      </p> */}
+      </p>
 
       <CodeAndExample component={<VectorFieldExample />} source={VectorFieldExampleSource} />
-      {/* <PropTable of={Plot.VectorField} />
+      <PropTable of={Plot.VectorField} />
 
       <h2>Render quality</h2>
 
@@ -87,7 +87,7 @@ function Functions() {
       <p>
         Vector field rendering quality can be tuned with the <code>step</code> prop. This declares
         the spacing between arrows, so lowering it will decrease performance.
-      </p> */}
+      </p>
     </>
   )
 }

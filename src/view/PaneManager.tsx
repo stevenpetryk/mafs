@@ -21,7 +21,7 @@ export function usePaneContext(): PaneContextShape {
   return React.useContext(PaneContext)
 }
 
-const PaneManager: React.FC = ({ children }) => {
+function PaneManager({ children }: React.PropsWithChildren) {
   const { xMin, xMax, yMin, yMax } = useCoordinateContext()
 
   const base = 2

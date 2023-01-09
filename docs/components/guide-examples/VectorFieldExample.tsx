@@ -19,7 +19,7 @@ function VectorFieldExample() {
           y - a.y - (x - a.x),
           -(x - a.x) - (y - a.y),
         ]}
-        step={0.5}
+        step={0.25}
         xyOpacity={([x, y]) =>
           vec.dist([x, y], a.point) / 5 - 0.1
         }

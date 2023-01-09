@@ -1,4 +1,4 @@
-import { clamp } from "../../math"
+import { clamp, round } from "../../math"
 import * as vec from "../../vec"
 import * as React from "react"
 import { usePaneContext } from "../../view/PaneManager"
@@ -9,7 +9,6 @@ export interface VectorFieldProps {
   xy: (point: vec.Vector2) => vec.Vector2
   xyOpacity?: (point: vec.Vector2) => number
   step: number
-  opacityStep?: number
   color?: string
 }
 
@@ -19,19 +18,15 @@ export function VectorField({
   xy,
   step = 1,
   xyOpacity = xyOpacityDefault,
-  opacityStep = xyOpacity === xyOpacityDefault ? 1 : 0.2,
   color = Theme.foreground,
 }: VectorFieldProps) {
+  const maskId = `mafs-vector-field-${React.useId()}`
+
   const { pixelMatrix, cssScale } = useScaleContext()
   const { xPanes, yPanes, xPaneRange, yPaneRange } = usePaneContext()
 
-  //Impose restrictions on opacityStep
-  opacityStep = Math.min(1, Math.max(0.01, opacityStep))
-  //Calculate granularity from step
-  //Create layers
-  let d = ""
-
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
+    let d = ""
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
       for (let y = Math.floor(yMin); y <= Math.ceil(yMax); y += step) {
         const tail: vec.Vector2 = [x, y]
@@ -50,18 +45,20 @@ export function VectorField({
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 
         d +=
-          ` M ${pixelTail[0]} ${pixelTail[1]}` +
-          ` L ${pixelTip[0]} ${pixelTip[1]} ` +
-          ` L ${left[0]} ${left[1]} ` +
-          ` L ${right[0]} ${right[1]} ` +
-          ` L ${pixelTip[0]} ${pixelTip[1]} `
+          ` M ${round(pixelTail[0], 1)} ${round(pixelTail[1], 1)}` +
+          ` L ${round(pixelTip[0], 1)} ${round(pixelTip[1], 1)} ` +
+          ` L ${round(left[0], 1)} ${round(left[1], 1)} ` +
+          ` L ${round(right[0], 1)} ${round(right[1], 1)} ` +
+          ` L ${round(pixelTip[0], 1)} ${round(pixelTip[1], 1)} `
       }
     }
+    return { d, uri: "" }
   }
 
+  const panes: { d: string; uri: string }[] = []
   for (const [xMin, xMax] of xPanes) {
     for (const [yMin, yMax] of yPanes) {
-      fieldForRegion(xMin, xMax, yMin, yMax)
+      panes.push(fieldForRegion(xMin, xMax, yMin, yMax))
     }
   }
 
@@ -98,33 +95,29 @@ export function VectorField({
 
   return (
     <>
-      <mask id="vector-field-mask">
-        <image
-          x={xPaneRange[0]}
-          y={-xPaneRange[1]}
-          transform={cssScale}
-          width={xPaneRange[1] - xPaneRange[0]}
-          height={yPaneRange[1] - yPaneRange[0]}
-          href={dataUri}
+      {xyOpacity !== xyOpacityDefault && (
+        <mask id={maskId}>
+          <image
+            x={xPaneRange[0]}
+            y={-xPaneRange[1]}
+            transform={cssScale}
+            width={xPaneRange[1] - xPaneRange[0]}
+            height={yPaneRange[1] - yPaneRange[0]}
+            href={dataUri}
+          />
+        </mask>
+      )}
+
+      {panes.map((pane, i) => (
+        <path
+          d={pane.d}
+          key={i}
+          style={{ stroke: color, fill: color }}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          mask={`url(#${maskId})`}
         />
-      </mask>
-
-      <path
-        d={d}
-        style={{ stroke: Theme.background, fill: Theme.background }}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        mask="url(#vector-field-mask)"
-      />
-
-      <path
-        d={d}
-        style={{ stroke: color, fill: color }}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        mask="url(#vector-field-mask)"
-      />
+      ))}
     </>
   )
 }

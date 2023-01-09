@@ -5,6 +5,7 @@ import {
   Plot,
   CartesianCoordinates,
   useMovablePoint,
+  vec,
 } from "mafs"
 
 function VectorFieldExample() {
@@ -20,7 +21,7 @@ function VectorFieldExample() {
         ]}
         step={0.5}
         xyOpacity={([x, y]) =>
-          (Math.abs(x) + Math.abs(y)) / 10
+          vec.dist([x, y], a.point) / 5 - 0.1
         }
       />
       {a.element}

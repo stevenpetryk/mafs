@@ -1,5 +1,6 @@
 import { clamp } from "../../math"
 import * as vec from "../../vec"
+import * as React from "react"
 import { usePaneContext } from "../../view/PaneManager"
 import { useScaleContext } from "../../view/ScaleContext"
 import { Theme } from "../Theme"
@@ -21,15 +22,14 @@ export function VectorField({
   opacityStep = xyOpacity === xyOpacityDefault ? 1 : 0.2,
   color = Theme.foreground,
 }: VectorFieldProps) {
-  const { pixelMatrix } = useScaleContext()
-  const { xPanes, yPanes } = usePaneContext()
+  const { pixelMatrix, cssScale } = useScaleContext()
+  const { xPanes, yPanes, xPaneRange, yPaneRange } = usePaneContext()
 
   //Impose restrictions on opacityStep
   opacityStep = Math.min(1, Math.max(0.01, opacityStep))
   //Calculate granularity from step
-  const opacityGrainularity = Math.ceil(1 / opacityStep)
   //Create layers
-  const layers = generateOpacityLayers(opacityGrainularity)
+  let d = ""
 
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
@@ -49,9 +49,7 @@ export function VectorField({
         const left = vec.add(pixelTip, vec.rotate(arrowVector, (5 / 6) * Math.PI))
         const right = vec.add(pixelTip, vec.rotate(arrowVector, -(5 / 6) * Math.PI))
 
-        const trueOpacity = xyOpacity([x, y])
-        const layer = findClosetLayer(layers, trueOpacity)
-        layer.d +=
+        d +=
           ` M ${pixelTail[0]} ${pixelTail[1]}` +
           ` L ${pixelTip[0]} ${pixelTip[1]} ` +
           ` L ${left[0]} ${left[1]} ` +
@@ -67,64 +65,66 @@ export function VectorField({
     }
   }
 
+  const dataUri = React.useMemo(() => {
+    const width = 100
+    const height = 100
+
+    const canvas = document.createElement("canvas")
+    canvas.width = width
+    canvas.height = height
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const imageData = ctx.createImageData(width, height)
+
+    const xStep = (xPaneRange[1] - xPaneRange[0]) / width
+    const yStep = (yPaneRange[1] - yPaneRange[0]) / height
+    for (let x = 0; x < width; x++) {
+      for (let y = 0; y < height; y++) {
+        const trueOpacity = xyOpacity([xPaneRange[0] + x * xStep, yPaneRange[0] + y * yStep])
+
+        const c = Math.round(clamp(0, 255, trueOpacity * 255))
+
+        imageData.data[(x + y * width) * 4 + 0] = c
+        imageData.data[(x + y * width) * 4 + 1] = c
+        imageData.data[(x + y * width) * 4 + 2] = c
+        imageData.data[(x + y * width) * 4 + 3] = 255
+      }
+    }
+
+    ctx.putImageData(imageData, 0, 0)
+    return canvas.toDataURL()
+  }, [xPaneRange, yPaneRange, xyOpacity])
+
   return (
     <>
-      {layers.map((layer, index) => (
-        <path
-          d={layer.d}
-          key={index}
-          style={{
-            stroke: color,
-            fill: color,
-            opacity: layer.opacity,
-            fillOpacity: layer.opacity,
-            strokeOpacity: layer.opacity,
-          }}
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      <mask id="vector-field-mask">
+        <image
+          x={xPaneRange[0]}
+          y={-xPaneRange[1]}
+          transform={cssScale}
+          width={xPaneRange[1] - xPaneRange[0]}
+          height={yPaneRange[1] - yPaneRange[0]}
+          href={dataUri}
         />
-      ))}
+      </mask>
+
+      <path
+        d={d}
+        style={{ stroke: Theme.background, fill: Theme.background }}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        mask="url(#vector-field-mask)"
+      />
+
+      <path
+        d={d}
+        style={{ stroke: color, fill: color }}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        mask="url(#vector-field-mask)"
+      />
     </>
   )
-}
-
-interface Layer {
-  d: string
-  opacity: number
-}
-
-/**
- * Generates a list of layers. Each layer will eventually be convereted to a <path>
- * with a certain opacity.
- *
- * The higher the opacityGrainularity, the more fidelity you get accross opacities,
- * however the more layers you have, the more lag you get.
- *
- * @param opacityGrainularity the granulity of the opacity layers
- * @returns a list of layers
- */
-function generateOpacityLayers(opacityGrainularity: number): Layer[] {
-  const layers: Layer[] = []
-  const step = 1 / opacityGrainularity
-  for (let i = 1; i > 0; i -= step) {
-    const layer: Layer = {
-      d: "",
-      opacity: i,
-    }
-    layers.push(layer)
-  }
-  return layers
-}
-
-/**
- * Takes in a pointOpacity (a number) and returns the layer it belongs to from layers.
- *
- * @param layers the layers to catagorize pointOpacity to.
- * @param pointOpacity the opacity to categorize to a layer.
- * @return the layer that this opacity value belongs to.
- */
-function findClosetLayer(layers: Layer[], pointOpacity: number): Layer {
-  pointOpacity = clamp(pointOpacity, 0, 1)
-  const index = layers.length - 1 - Math.round(pointOpacity * (layers.length - 1))
-  return layers[index]
 }

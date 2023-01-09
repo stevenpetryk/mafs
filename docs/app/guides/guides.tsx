@@ -23,6 +23,7 @@ type Section = {
 type Guide = {
   title: string
   slug: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: React.FunctionComponent<any>
 }
 

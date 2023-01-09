@@ -1,4 +1,4 @@
-import { Mafs, CartesianCoordinates, labelPi } from "mafs"
+import { Mafs, CartesianCoordinates } from "mafs"
 
 export default function CartesianCoordinatesExample() {
   return (

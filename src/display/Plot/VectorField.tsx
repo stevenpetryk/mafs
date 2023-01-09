@@ -65,29 +65,30 @@ export function VectorField({
   const dataUri = React.useMemo(() => {
     if (xyOpacity === xyOpacityDefault) return ""
 
-    const width = 100
-    const height = 100
+    const width = 50
+    const height = 50
 
     const canvas = document.createElement("canvas")
     canvas.width = width
     canvas.height = height
     const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    if (!ctx) return ""
 
     const imageData = ctx.createImageData(width, height)
 
     const xStep = (xPaneRange[1] - xPaneRange[0]) / width
     const yStep = (yPaneRange[1] - yPaneRange[0]) / height
-    for (let x = 0; x < width; x++) {
-      for (let y = 0; y < height; y++) {
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
         const trueOpacity = xyOpacity([xPaneRange[0] + x * xStep, yPaneRange[0] + y * yStep])
 
-        const c = Math.round(clamp(0, 255, trueOpacity * 255))
+        const c = Math.round(clamp(trueOpacity, 0, 1) * 255)
 
-        imageData.data[(x + y * width) * 4 + 0] = c
-        imageData.data[(x + y * width) * 4 + 1] = c
-        imageData.data[(x + y * width) * 4 + 2] = c
-        imageData.data[(x + y * width) * 4 + 3] = 255
+        const i = (y * width + x) * 4
+        imageData.data[i + 0] = c
+        imageData.data[i + 1] = c
+        imageData.data[i + 2] = c
+        imageData.data[i + 3] = 255
       }
     }
 
@@ -101,7 +102,7 @@ export function VectorField({
         <mask id={maskId}>
           <image
             x={xPaneRange[0]}
-            y={-xPaneRange[1]}
+            y={yPaneRange[0]}
             transform={cssScale}
             width={xPaneRange[1] - xPaneRange[0]}
             height={yPaneRange[1] - yPaneRange[0]}

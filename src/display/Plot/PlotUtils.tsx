@@ -2,9 +2,9 @@ import * as vec from "../../vec"
 
 export function adaptiveSampling(
   xy: (t: number) => vec.Vector2,
-  minSamplingDepth = 8,
-  maxSamplingDepth = 20,
-  errorThreshold = 10e-3,
+  minSamplingDepth: number,
+  maxSamplingDepth: number,
+  errorThreshold: number,
   t: vec.Vector2
 ) {
   let result = "M "

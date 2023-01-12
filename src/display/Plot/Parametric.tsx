@@ -34,7 +34,7 @@ export function Parametric({
   const errorThreshold = 0.1 / (scaleX(1) * scaleY(-1))
 
   const svgPath = React.useMemo(
-    () => adaptiveSampling(xy, minSamplingDepth, maxSamplingDepth, errorThreshold, [tMin, tMax]),
+    () => adaptiveSampling(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
     [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax]
   )
 

@@ -55,9 +55,8 @@ function CodeAndExample({
             p-3 sm:p-6
             md:rounded-b-lg
             refractor-highlight
-            overflow-auto
             ${collapsible ? "pb-12 sm:pb-12" : ""}
-            ${expanded ? "" : "max-h-[200px]"}
+            ${expanded ? "overflow-auto" : "max-h-[200px] overflow-hidden"}
           `}
         >
           <pre className={`transition ${expanded ? "" : "opacity-40"}`}>

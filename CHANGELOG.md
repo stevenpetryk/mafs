@@ -1,6 +1,23 @@
 # Changelog
 
-# 0.9.0
+## 0.10.1
+
+- Fixes a bug where `Text` would have an ugly stroke when a custom color is set ([#85](https://github.com/stevenpetryk/mafs/issues/85)).
+
+## 0.10.0
+
+### Breaking changes
+
+- `VectorField` is now `Plot.VectorField`
+- `FunctionGraph` is now `Plot`
+- Several props from these components have changed. See the [documentation on Plots](https://mafs.dev/guides/display/plots) for the latest guidance.
+
+### Improvements
+
+- Mafs' numerical function sampling algorithm has been improved.
+- There is now a `Plot.OfY`. Both `Plot.OfX` and `Plot.OfY` use `Plot.Parametric` under the hood.
+
+## 0.9.0
 
 - Mafs now ships with the Computer Modern typeface, and makes it easy to use in your own project. It just requires a change to your CSS:
 
@@ -12,11 +29,11 @@
 
   `"mafs/build/index.css"` is still included in the package to avoid breaking things. It will be removed in a future release.
 
-# 0.8.2
+## 0.8.2
 
 - Ensures that `React.PropsWithChildren` is used for components that accept children, for React 18 compatibility reasons.
 
-# 0.8.1
+## 0.8.1
 
 - Fixes a bug involving the ESM build.
 

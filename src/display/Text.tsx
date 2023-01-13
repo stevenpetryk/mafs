@@ -63,7 +63,6 @@ export function Text({
       dominantBaseline={dominantBaseline}
       textAnchor={textAnchor}
       style={{
-        stroke: color || "var(--mafs-bg)",
         fill: color || "var(--mafs-fg)",
         vectorEffect: "non-scaling-stroke",
       }}

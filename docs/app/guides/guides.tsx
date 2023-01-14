@@ -1,7 +1,6 @@
 import kebabCase from "lodash/kebabCase"
 import {
   CardStackIcon,
-  BorderSolidIcon,
   DotFilledIcon,
   GridIcon,
   SquareIcon,
@@ -12,11 +11,11 @@ import {
   CursorArrowIcon,
   PlayIcon,
 } from "@radix-ui/react-icons"
-import { FunctionIcon, EllipseIcon } from "components/icons"
+import { FunctionIcon, EllipseIcon, LinesIcon } from "components/icons"
 
 type Section = {
   title: string
-  guides: Guide[]
+  guides: (Guide | Separator)[]
 }
 
 type Guide = {
@@ -24,7 +23,10 @@ type Guide = {
   slug: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: React.FunctionComponent<any>
+  separator?: false
 }
+
+type Separator = { separator: true }
 
 export const Guides: Section[] = [
   {
@@ -40,19 +42,18 @@ export const Guides: Section[] = [
     guides: [
       { title: "Mafs", icon: CardStackIcon, slug: "mafs" },
       { title: "Coordinates", icon: GridIcon, slug: "coordinates" },
+      { separator: true },
       { title: "Points", icon: DotFilledIcon, slug: "points" },
-      { title: "Lines", icon: BorderSolidIcon, slug: "lines" },
+      { title: "Lines", icon: LinesIcon, slug: "lines" },
       { title: "Polygons", icon: SquareIcon, slug: "polygons" },
       { title: "Circles", icon: CircleIcon, slug: "circles" },
       { title: "Ellipses", icon: EllipseIcon, slug: "ellipses" },
       { title: "Plots", icon: FunctionIcon, slug: "plots" },
       { title: "Text", icon: TextIcon, slug: "text" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
+      { separator: true },
+      { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },
     ],
-  },
-  {
-    title: "Utility",
-    guides: [{ title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" }],
   },
   {
     title: "Interaction",
@@ -78,6 +79,8 @@ export function getDocContext(
   guideSlug: string
 ): {
   current: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    icon?: React.FunctionComponent<any>
     sectionTitle: string
     guideTitle: string
     url: string
@@ -96,7 +99,7 @@ export function getDocContext(
   } | null
 } {
   const flatGuidesAndSections = Guides.flatMap((section) =>
-    section.guides.map((guide) => [section, guide] as const)
+    section.guides.filter(isGuide).map((guide) => [section, guide] as const)
   )
 
   const currentIndex = flatGuidesAndSections.findIndex(
@@ -109,6 +112,7 @@ export function getDocContext(
 
   return {
     current: {
+      icon: guide.icon,
       sectionTitle: section.title,
       guideTitle: guide.title,
       url: `/guides/${kebabCase(section.title)}/${guide.slug}`,
@@ -128,4 +132,8 @@ export function getDocContext(
         }
       : null,
   }
+}
+
+function isGuide(guide: Guide | Separator): guide is Guide {
+  return !guide.separator
 }

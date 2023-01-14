@@ -29,7 +29,12 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
         </div>
 
         <main id="main" className="space-y-6 flex-grow md:w-0">
-          <h1>{fancyFx(current.guideTitle)}</h1>
+          <h1 className="flex items-center gap-4">
+            {current.icon && (
+              <current.icon className="w-10 h-10 bg-blue-50 dark:bg-blue-900 p-2 rounded-lg text-blue-700 dark:text-blue-100" />
+            )}{" "}
+            {fancyFx(current.guideTitle)}
+          </h1>
 
           <div className="prose space-y-6">{children}</div>
 

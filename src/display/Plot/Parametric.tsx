@@ -2,6 +2,7 @@ import * as React from "react"
 import * as vec from "../../vec"
 import { Stroked } from "../Theme"
 import { useScaleContext } from "../../view/ScaleContext"
+import { adaptiveSampling } from "./PlotUtils"
 
 export interface ParametricProps extends Stroked {
   /** A function that takes a `t` value and returns a point. */
@@ -32,52 +33,10 @@ export function Parametric({
   const [tMin, tMax] = t
   const errorThreshold = 0.1 / (scaleX(1) * scaleY(-1))
 
-  const svgPath = React.useMemo(() => {
-    let pathDescriptor = "M "
-
-    function smartSmooth(
-      min: number,
-      max: number,
-      pushLeft: boolean,
-      pushRight: boolean,
-      depth = 0
-    ) {
-      const t = 0.5
-      const mid = min + (max - min) * t
-
-      if (depth < minSamplingDepth) {
-        smartSmooth(min, mid, true, false, depth + 1)
-        smartSmooth(mid, max, false, true, depth + 1)
-        return
-      }
-
-      const [xyMinX, xyMinY] = xy(min)
-      const [xyMidX, xyMidY] = xy(mid)
-      const [xyMaxX, xyMaxY] = xy(max)
-
-      if (depth < maxSamplingDepth) {
-        const xyLerpMid = vec.lerp([xyMinX, xyMinY], [xyMaxX, xyMaxY], t)
-        const error = vec.squareDist([xyMidX, xyMidY], xyLerpMid)
-        if (error > errorThreshold) {
-          smartSmooth(min, mid, true, false, depth + 1)
-          smartSmooth(mid, max, false, true, depth + 1)
-          return
-        }
-      }
-
-      if (pushLeft && Number.isFinite(xyMinX) && Number.isFinite(xyMinY)) {
-        pathDescriptor += `${xyMinX} ${xyMinY} L `
-      }
-      if (Number.isFinite(xyMidX) && Number.isFinite(xyMidY))
-        pathDescriptor += `${xyMidX} ${xyMidY} L `
-      if (pushRight && Number.isFinite(xyMaxX) && Number.isFinite(xyMaxY))
-        pathDescriptor += `${xyMaxX} ${xyMaxY} L `
-    }
-
-    smartSmooth(tMin, tMax, true, true)
-
-    return pathDescriptor.substring(0, pathDescriptor.length - 3)
-  }, [tMin, tMax, xy, errorThreshold, minSamplingDepth, maxSamplingDepth])
+  const svgPath = React.useMemo(
+    () => adaptiveSampling(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
+    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax]
+  )
 
   return (
     <path

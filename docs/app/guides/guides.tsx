@@ -95,52 +95,36 @@ export function getDocContext(
     url: string
   } | null
 } {
-  const sectionIndex = Guides.findIndex((section) => kebabCase(section.title) === sectionSlug)
-  const section = Guides[sectionIndex]
-  const guideIndex = section.guides.findIndex((guide) => guide.slug === guideSlug)
-  const guide = section.guides[guideIndex]
+  const flatGuidesAndSections = Guides.flatMap((section) =>
+    section.guides.map((guide) => [section, guide] as const)
+  )
 
-  // Sections contain guides. We want to find the next and previous guides, given that we may need
-  // to move to the next or previous section.
+  const currentIndex = flatGuidesAndSections.findIndex(
+    ([section, guide]) => kebabCase(section.title) === sectionSlug && guide.slug === guideSlug
+  )
 
-  let prevSectionIndex = sectionIndex
-  let nextSectionIndex = sectionIndex
-  let prevGuideIndex = guideIndex - 1
-  let nextGuideIndex = guideIndex + 1
-
-  if (prevGuideIndex < 0) {
-    prevSectionIndex--
-    prevGuideIndex = Guides[prevSectionIndex]?.guides.length - 1
-  }
-
-  if (nextGuideIndex >= section.guides.length) {
-    nextSectionIndex++
-    nextGuideIndex = 0
-  }
-
-  const prevSection = Guides[prevSectionIndex]
-  const nextSection = Guides[nextSectionIndex]
-  const prevGuide = prevSection?.guides[prevGuideIndex]
-  const nextGuide = nextSection?.guides[nextGuideIndex]
+  const [section, guide] = flatGuidesAndSections[currentIndex]
+  const [prevSection, prevGuide] = flatGuidesAndSections[currentIndex - 1] ?? [null, null]
+  const [nextSection, nextGuide] = flatGuidesAndSections[currentIndex + 1] ?? [null, null]
 
   return {
     current: {
       sectionTitle: section.title,
       guideTitle: guide.title,
-      url: `/guides/${kebabCase(section.title)}/${kebabCase(guide.slug)}`,
+      url: `/guides/${kebabCase(section.title)}/${guide.slug}`,
     },
     previous: prevGuide
       ? {
           sectionTitle: prevSection.title,
           guideTitle: prevGuide.title,
-          url: `/guides/${kebabCase(prevSection.title)}/${kebabCase(prevGuide.slug)}`,
+          url: `/guides/${kebabCase(prevSection.title)}/${prevGuide.slug}`,
         }
       : null,
     next: nextGuide
       ? {
           sectionTitle: nextSection.title,
           guideTitle: nextGuide.title,
-          url: `/guides/${kebabCase(nextSection.title)}/${kebabCase(nextGuide.slug)}`,
+          url: `/guides/${kebabCase(nextSection.title)}/${nextGuide.slug}`,
         }
       : null,
   }

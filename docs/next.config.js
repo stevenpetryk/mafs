@@ -22,6 +22,20 @@ const nextConfig = {
 
     return config
   },
+  async redirects() {
+    return [
+      {
+        source: "/guides/display/graphs",
+        destination: "/guides/display/plots",
+        permanent: false,
+      },
+      {
+        source: "/guides/display/vector-fields",
+        destination: "/guides/display/plots",
+        permanent: false,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

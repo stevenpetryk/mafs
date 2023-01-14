@@ -13,6 +13,15 @@ function GuidesSidebar() {
 
       <ul className="flex flex-col gap-[1px]">
         {section.guides.map((guide, index) => {
+          if (guide.separator) {
+            return (
+              <hr
+                key={index}
+                className="appearance-none my-1 border-t border-gray-200 dark:border-slate-800 "
+              />
+            )
+          }
+
           const IconElement = guide.icon
 
           return (

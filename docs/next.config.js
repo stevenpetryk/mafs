@@ -34,6 +34,11 @@ const nextConfig = {
         destination: "/guides/display/plots",
         permanent: false,
       },
+      {
+        source: "/guides/utility/transform",
+        destination: "/guides/display/transform",
+        permanent: false,
+      },
     ]
   },
 }

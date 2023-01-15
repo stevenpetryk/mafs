@@ -1,8 +1,7 @@
 import * as React from "react"
 import { Theme, Filled } from "./Theme"
-import { useScaleContext } from "../view/ScaleContext"
 import { Vector2 } from "../vec"
-import { useTransformContext } from "./Transform"
+import { useTransformContext } from "../context/TransformContext"
 import * as vec from "../vec"
 
 export interface PolygonProps extends Filled {
@@ -19,10 +18,11 @@ export const Polygon: React.VFC<PolygonProps> = ({
   strokeStyle = "solid",
   svgPolygonProps = {},
 }) => {
-  const { cssScale } = useScaleContext()
-  const transform = useTransformContext()
+  const { userTransform } = useTransformContext()
 
-  const scaledPoints = points.map((point) => vec.transform(point, transform).join(" ")).join(" ")
+  const scaledPoints = points
+    .map((point) => vec.transform(point, userTransform).join(" "))
+    .join(" ")
 
   return (
     <polygon
@@ -31,7 +31,6 @@ export const Polygon: React.VFC<PolygonProps> = ({
       fillOpacity={fillOpacity}
       strokeDasharray={strokeStyle === "dashed" ? "4,3" : undefined}
       strokeLinejoin="round"
-      transform={cssScale}
       {...svgPolygonProps}
       style={{
         fill: color,
@@ -39,6 +38,7 @@ export const Polygon: React.VFC<PolygonProps> = ({
         stroke: color,
         strokeOpacity,
         vectorEffect: "non-scaling-stroke",
+        transform: "var(--mafs-transform-to-px)",
         ...(svgPolygonProps.style || {}),
       }}
     ></polygon>

@@ -1,9 +1,9 @@
 import * as React from "react"
 import { Filled, Theme } from "./Theme"
-import { useScaleContext } from "../view/ScaleContext"
+import { useTransformContext } from "../context/TransformContext"
 import { Vector2 } from "../vec"
-import { useTransformContext } from "./Transform"
 import * as vec from "../vec"
+import * as math from "../math"
 
 export interface EllipseProps extends Filled {
   center: Vector2
@@ -23,21 +23,19 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   fillOpacity = 0.15,
   svgEllipseProps = {},
 }) => {
-  const { pixelMatrix } = useScaleContext()
-  const contextTransform = useTransformContext()
+  const { viewTransform: toPx, userTransform } = useTransformContext()
 
   const transform = vec
     .matrixBuilder()
     .translate(...center)
-    .mult(contextTransform)
+    .mult(userTransform)
     .scale(1, -1)
-    .mult(pixelMatrix)
+    .mult(toPx)
     .scale(1, -1)
     .get()
 
-  const [a, c, tx, b, d, ty] = transform
   const cssTransform = `
-    matrix(${a}, ${b}, ${c}, ${d}, ${tx}, ${ty})
+    ${math.matrixToCSSTransform(transform)}
     rotate(${angle * (180 / Math.PI)})
   `
 

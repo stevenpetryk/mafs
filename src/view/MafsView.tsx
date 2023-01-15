@@ -1,13 +1,14 @@
 import * as React from "react"
-import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
-import PaneManager from "./PaneManager"
-import MapContext from "./MapContext"
+import CoordinateContext, { CoordinateContextShape } from "../context/CoordinateContext"
+import PaneManager from "../context/PaneContext"
 import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
-import ScaleContext, { ScaleContextShape } from "./ScaleContext"
 import { round } from "../math"
 import * as vec from "../vec"
+import * as math from "../math"
+import { TransformContext } from "../context/TransformContext"
+import { SpanContext } from "../context/SpanContext"
 
 export type MafsViewProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -97,58 +98,21 @@ export function MafsView({
     { enabled: pan }
   )
 
-  const mapX = React.useCallback(
-    (x: number) => round(((x - xMin) / (xMax - xMin)) * width),
-    [xMin, xMax, width]
-  )
+  const viewTransform = React.useMemo(() => {
+    const scaleX = round((1 / xSpan) * width, 5)
+    const scaleY = round((-1 / ySpan) * height, 5)
+    return vec.matrixBuilder().scale(scaleX, scaleY).get()
+  }, [height, width, xSpan, ySpan])
 
-  const mapY = React.useCallback(
-    (y: number) => round(((y - yMax) / (yMin - yMax)) * height),
-    [yMin, yMax, height]
-  )
-
-  const scaleX = React.useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
-  const scaleY = React.useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
-  const unscaleX = React.useCallback((x: number) => round((x / width) * xSpan, 5), [xSpan, width])
-  const unscaleY = React.useCallback(
-    (y: number) => round((-y / height) * ySpan, 5),
-    [ySpan, height]
-  )
-  const pixelMatrix = React.useMemo(
-    () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
-    [scaleX, scaleY]
-  )
-  const inversePixelMatrix = React.useMemo(
-    () => vec.matrixBuilder().scale(unscaleX(1), unscaleY(1)).get(),
-    [unscaleX, unscaleY]
-  )
-
-  const cssScale = `scale(${scaleX(1)} ${scaleY(1)})`
+  const toPxCSS = math.matrixToCSSTransform(viewTransform)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
-    () => ({
-      xMin,
-      xMax,
-      yMin,
-      yMax,
-      height,
-      width,
-    }),
+    () => ({ xMin, xMax, yMin, yMax, height, width }),
     [xMin, xMax, yMin, yMax, height, width]
   )
 
-  const scaleContext = React.useMemo<ScaleContextShape>(
-    () => ({
-      scaleX,
-      scaleY,
-      pixelMatrix,
-      inversePixelMatrix,
-      cssScale,
-      xSpan,
-      ySpan,
-    }),
-    [scaleX, scaleY, xSpan, ySpan, pixelMatrix, inversePixelMatrix, cssScale]
-  )
+  const viewBoxX = round((xMin / (xMax - xMin)) * width)
+  const viewBoxY = round((yMax / (yMin - yMax)) * height)
 
   return (
     <div
@@ -159,21 +123,29 @@ export function MafsView({
       {...bind()}
     >
       <CoordinateContext.Provider value={coordinateContext}>
-        <ScaleContext.Provider value={scaleContext}>
-          <MapContext.Provider value={{ mapX, mapY }}>
+        <SpanContext.Provider value={{ xSpan, ySpan }}>
+          <TransformContext.Provider
+            value={{ userTransform: vec.identity, viewTransform: viewTransform }}
+          >
             <PaneManager>
               <svg
                 width={width}
                 height={height}
-                viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
+                viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
                 preserveAspectRatio="xMidYMin"
-                style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
+                style={{
+                  width: desiredCssWidth,
+                  touchAction: pan ? "none" : "auto",
+                  ...({
+                    "--mafs-transform-to-px": toPxCSS,
+                  } as React.CSSProperties),
+                }}
               >
                 {visible && children}
               </svg>
             </PaneManager>
-          </MapContext.Provider>
-        </ScaleContext.Provider>
+          </TransformContext.Provider>
+        </SpanContext.Provider>
       </CoordinateContext.Provider>
     </div>
   )

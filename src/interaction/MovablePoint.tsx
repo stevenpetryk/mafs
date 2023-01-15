@@ -1,11 +1,11 @@
 import { useDrag } from "@use-gesture/react"
 import * as React from "react"
 import invariant from "tiny-invariant"
-import { useTransformContext } from "../display/Transform"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
 import * as vec from "../vec"
-import { useScaleContext } from "../view/ScaleContext"
+import { useTransformContext } from "../context/TransformContext"
+import { useSpanContext } from "../context/SpanContext"
 
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
@@ -30,14 +30,16 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
   constrain = (point) => point,
   color = Theme.pink,
 }) => {
-  const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
+  const { viewTransform, userTransform } = useTransformContext()
+  const { xSpan, ySpan } = useSpanContext()
+  const inverseViewTransform = vec.matrixInvert(viewTransform)
+  invariant(inverseViewTransform, "The view transform must be invertible.")
 
-  const transform = useTransformContext()
-  const inverseTransform = React.useMemo(() => getInverseTransform(transform), [transform])
+  const inverseTransform = React.useMemo(() => getInverseTransform(userTransform), [userTransform])
 
   const combinedTransform = React.useMemo(
-    () => vec.matrixMult(pixelMatrix, transform),
-    [pixelMatrix, transform]
+    () => vec.matrixMult(viewTransform, userTransform),
+    [viewTransform, userTransform]
   )
 
   const [dragging, setDragging] = React.useState(false)
@@ -68,7 +70,10 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
         // Transform the test back into the point's coordinate system
         const testMovement = vec.scale(direction, dx)
         const testPoint = constrain(
-          vec.transform(vec.add(vec.transform(point, transform), testMovement), inverseTransform)
+          vec.transform(
+            vec.add(vec.transform(point, userTransform), testMovement),
+            inverseTransform
+          )
         )
 
         if (vec.dist(testPoint, point) > min) {
@@ -81,10 +86,10 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
 
       setDragging(!last)
 
-      if (first) pickup.current = vec.transform(point, transform)
+      if (first) pickup.current = vec.transform(point, userTransform)
       if (vec.mag(pixelMovement) === 0) return
 
-      const movement = vec.transform(pixelMovement, inversePixelMatrix)
+      const movement = vec.transform(pixelMovement, inverseViewTransform)
       onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
     }
   })

@@ -1,9 +1,8 @@
 import * as React from "react"
 import { Stroked, Theme } from "../../display/Theme"
-import { useScaleContext } from "../../view/ScaleContext"
+import { useTransformContext } from "../../context/TransformContext"
 import { round } from "../../math"
 import * as vec from "../../vec"
-import { useTransformContext } from "../Transform"
 
 export interface SegmentProps extends Stroked {
   point1: vec.Vector2
@@ -18,9 +17,8 @@ export const Segment: React.VFC<SegmentProps> = ({
   weight = 2,
   opacity = 1.0,
 }) => {
-  const { pixelMatrix } = useScaleContext()
-  const transformContext = useTransformContext()
-  const transform = vec.matrixMult(pixelMatrix, transformContext)
+  const { viewTransform: pixelMatrix, userTransform } = useTransformContext()
+  const transform = vec.matrixMult(pixelMatrix, userTransform)
 
   const scaledPoint1 = vec.transform(point1, transform)
   const scaledPoint2 = vec.transform(point2, transform)

@@ -1,8 +1,7 @@
 import { Stroked, Theme } from "../../display/Theme"
-import { useScaleContext } from "../../view/ScaleContext"
+import { useTransformContext } from "../../context/TransformContext"
 import { round } from "../../math"
 import * as vec from "../../vec"
-import { useTransformContext } from "../Transform"
 
 export interface ThroughPointsProps extends Stroked {
   point1: vec.Vector2
@@ -17,9 +16,8 @@ export function ThroughPoints({
   weight = 2,
   opacity = 1.0,
 }: ThroughPointsProps) {
-  const { pixelMatrix } = useScaleContext()
-  const transformContext = useTransformContext()
-  const transform = vec.matrixMult(pixelMatrix, transformContext)
+  const { viewTransform, userTransform } = useTransformContext()
+  const transform = vec.matrixMult(viewTransform, userTransform)
   const segment = vec.scale(vec.normalize(vec.sub(point2, point1)), 100000)
 
   const scaledPoint1 = vec.transform(vec.sub(point1, segment), transform)

@@ -16,7 +16,7 @@ export function useCoordinateContext(): CoordinateContextShape {
   const context = React.useContext(CoordinateContext)
   invariant(
     context,
-    "CoordinateContext is not loaded. Are you rendering a Mafs component outside of a MafsView?"
+    "CoordinateContext is not loaded. Are you rendering a Mafs component outside of Mafs?"
   )
 
   return context

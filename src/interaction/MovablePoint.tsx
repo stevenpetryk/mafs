@@ -1,11 +1,11 @@
 import { useDrag } from "@use-gesture/react"
 import * as React from "react"
 import invariant from "tiny-invariant"
-import { useTransformContext } from "../display/Transform"
+import { useUserTransform } from "../context/UserTransformContext"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
 import * as vec from "../vec"
-import { useViewportTransformContext } from "../context/ViewTransformContext"
+import { useViewTransform } from "../context/ViewTransformContext"
 
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
@@ -30,10 +30,10 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
   constrain = (point) => point,
   color = Theme.pink,
 }) => {
-  const { toPx: pixelMatrix, fromPx: inversePixelMatrix } = useViewportTransformContext()
+  const { toPx: pixelMatrix, fromPx: inversePixelMatrix } = useViewTransform()
   const [xSpan, ySpan] = vec.transform([1, 1], pixelMatrix)
 
-  const transform = useTransformContext()
+  const transform = useUserTransform()
   const inverseTransform = React.useMemo(() => getInverseTransform(transform), [transform])
 
   const combinedTransform = React.useMemo(

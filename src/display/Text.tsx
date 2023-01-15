@@ -1,7 +1,7 @@
 import * as React from "react"
-import { useViewportTransformContext } from "../context/ViewTransformContext"
+import { useViewTransform } from "../context/ViewTransformContext"
 import * as vec from "../vec"
-import { useTransformContext } from "./Transform"
+import { useUserTransform } from "../context/UserTransformContext"
 
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"
 
@@ -25,8 +25,8 @@ export function Text({
   attach,
   attachDistance = 0,
 }: TextProps) {
-  const { toPx: pixelMatrix } = useViewportTransformContext()
-  const transformContext = useTransformContext()
+  const { toPx: pixelMatrix } = useViewTransform()
+  const transformContext = useUserTransform()
 
   let xOffset = 0
   let textAnchor: React.SVGProps<SVGTextElement>["textAnchor"] = "middle"

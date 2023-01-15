@@ -3,23 +3,22 @@ import invariant from "tiny-invariant"
 
 import type { Matrix } from "../vec"
 
-export interface ViewportTransformContextShape {
+export interface ViewTransformContextShape {
   toPx: Matrix
   fromPx: Matrix
-  toPxCSS: string
-  fromPxCSS: string
 }
 
-const ScaleContext = React.createContext<ViewportTransformContextShape | null>(null)
+const ViewTransformContext = React.createContext<ViewTransformContextShape | null>(null)
+ViewTransformContext.displayName = "ViewTransformContext"
 
-export function useViewportTransformContext(): ViewportTransformContextShape {
-  const context = React.useContext(ScaleContext)
+export function useViewTransform(): ViewTransformContextShape {
+  const context = React.useContext(ViewTransformContext)
   invariant(
     context,
-    "ViewportTransformContext is not loaded. Are you rendering a Mafs component outside of a MafsView?"
+    "ViewTransformContext is not loaded. Are you rendering a Mafs component outside of a MafsView?"
   )
 
   return context
 }
 
-export default ScaleContext
+export default ViewTransformContext

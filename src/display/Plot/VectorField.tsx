@@ -1,7 +1,7 @@
 import { clamp } from "../../math"
 import * as vec from "../../vec"
 import { usePaneContext } from "../../context/PaneManager"
-import { useViewportTransformContext } from "../../context/ViewTransformContext"
+import { useViewTransform } from "../../context/ViewTransformContext"
 import { Theme } from "../Theme"
 
 export interface VectorFieldProps {
@@ -21,7 +21,7 @@ export function VectorField({
   opacityStep = xyOpacity === xyOpacityDefault ? 1 : 0.2,
   color = Theme.foreground,
 }: VectorFieldProps) {
-  const { toPx: pixelMatrix } = useViewportTransformContext()
+  const { toPx: pixelMatrix } = useViewTransform()
   const { xPanes, yPanes } = usePaneContext()
 
   //Impose restrictions on opacityStep

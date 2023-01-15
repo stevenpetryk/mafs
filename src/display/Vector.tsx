@@ -1,9 +1,9 @@
 import * as React from "react"
-import { useViewportTransformContext } from "../context/ViewTransformContext"
+import { useViewTransform } from "../context/ViewTransformContext"
 import { Stroked } from "../display/Theme"
 import { Theme } from "./Theme"
 import * as vec from "../vec"
-import { useTransformContext } from "./Transform"
+import { useUserTransform } from "../context/UserTransformContext"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0
@@ -23,8 +23,8 @@ export const Vector: React.VFC<VectorProps> = ({
   opacity = 1.0,
   svgLineProps = {},
 }) => {
-  const { toPx: pixelMatrix } = useViewportTransformContext()
-  const transform = vec.matrixMult(pixelMatrix, useTransformContext())
+  const { toPx: pixelMatrix } = useViewTransform()
+  const transform = vec.matrixMult(pixelMatrix, useUserTransform())
 
   const pixelTail = vec.transform(tail, transform)
   const pixelTip = vec.transform(tip, transform)

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { range, round } from "../math"
 import { usePaneContext } from "../context/PaneManager"
-import { useViewportTransformContext } from "../context/ViewTransformContext"
+import { useViewTransform } from "../context/ViewTransformContext"
 import * as vec from "../vec"
 
 export type LabelMaker = (value: number) => number | string
@@ -38,15 +38,13 @@ export function CartesianCoordinates({
 
   const id = React.useMemo(() => `mafs-grid-${incrementer++}`, [])
 
-  const { toPxCSS } = useViewportTransformContext()
-
   const { xPaneRange, yPaneRange } = usePaneContext()
   const [minX, maxX] = xPaneRange
   const [minY, maxY] = yPaneRange
 
   return (
     <g>
-      <g transform={toPxCSS}>
+      <g style={{ transform: "var(--mafs-transform-to-px)" }}>
         <defs>
           <GridPattern
             id={id}
@@ -65,9 +63,8 @@ export function CartesianCoordinates({
             x2={maxX}
             y1={0}
             y2={0}
-            style={{ stroke: "var(--mafs-origin-color)" }}
+            style={{ stroke: "var(--mafs-origin-color)", transform: "var(--mafs-transform-to-px)" }}
             vectorEffect="non-scaling-stroke"
-            transform={toPxCSS}
           />
         )}
 
@@ -77,9 +74,8 @@ export function CartesianCoordinates({
             x2={0}
             y1={minY}
             y2={maxY}
-            style={{ stroke: "var(--mafs-origin-color)" }}
+            style={{ stroke: "var(--mafs-origin-color)", transform: "var(--mafs-transform-to-px)" }}
             vectorEffect="non-scaling-stroke"
-            transform={toPxCSS}
           />
         )}
       </g>
@@ -99,7 +95,7 @@ export interface LabelsProps {
   labelMaker: LabelMaker
 }
 const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
-  const { toPx } = useViewportTransformContext()
+  const { toPx } = useViewTransform()
   const { xPanes } = usePaneContext()
   const xs = snappedRange(
     xPanes[0][0] - separation,
@@ -124,7 +120,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
   )
 }
 const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
-  const { toPx } = useViewportTransformContext()
+  const { toPx } = useViewTransform()
   const { yPanes } = usePaneContext()
   const ys = snappedRange(
     yPanes[0][0] - separation,

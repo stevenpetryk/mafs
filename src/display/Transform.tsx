@@ -1,5 +1,6 @@
 import * as React from "react"
 import * as vec from "../vec"
+import { UserTransformContext, useUserTransform } from "../context/UserTransformContext"
 
 export type TransformProps = React.PropsWithChildren<{
   matrix?: vec.Matrix
@@ -9,14 +10,8 @@ export type TransformProps = React.PropsWithChildren<{
   shear?: vec.Vector2
 }>
 
-const TransformContext = React.createContext<vec.Matrix>(vec.matrixBuilder().get())
-
-export function useTransformContext() {
-  return React.useContext(TransformContext)
-}
-
 export function Transform(props: TransformProps) {
-  const existingTransform = React.useContext(TransformContext)
+  const existingTransform = useUserTransform()
 
   let builder = vec.matrixBuilder()
 
@@ -48,5 +43,7 @@ export function Transform(props: TransformProps) {
 
   const newTransform = builder.get()
 
-  return <TransformContext.Provider value={newTransform}>{children}</TransformContext.Provider>
+  return (
+    <UserTransformContext.Provider value={newTransform}>{children}</UserTransformContext.Provider>
+  )
 }

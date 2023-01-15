@@ -4,10 +4,11 @@ import PaneManager from "../context/PaneManager"
 import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
-import ScaleContext, { ViewportTransformContextShape } from "../context/ViewTransformContext"
+import ViewTransformContext, { ViewTransformContextShape } from "../context/ViewTransformContext"
 import { round } from "../math"
 import * as vec from "../vec"
 import * as math from "../math"
+import invariant from "tiny-invariant"
 
 export type MafsViewProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -97,31 +98,15 @@ export function MafsView({
     { enabled: pan }
   )
 
-  const mapX = React.useCallback(
-    (x: number) => round(((x - xMin) / (xMax - xMin)) * width),
-    [xMin, xMax, width]
-  )
-
-  const mapY = React.useCallback(
-    (y: number) => round(((y - yMax) / (yMin - yMax)) * height),
-    [yMin, yMax, height]
-  )
-
   const scaleX = React.useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
   const scaleY = React.useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
-  const unscaleX = React.useCallback((x: number) => round((x / width) * xSpan, 5), [xSpan, width])
-  const unscaleY = React.useCallback(
-    (y: number) => round((-y / height) * ySpan, 5),
-    [ySpan, height]
-  )
+
   const toPx = React.useMemo(
     () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
     [scaleX, scaleY]
   )
-  const fromPx = React.useMemo(
-    () => vec.matrixBuilder().scale(unscaleX(1), unscaleY(1)).get(),
-    [unscaleX, unscaleY]
-  )
+  const fromPx = React.useMemo(() => vec.matrixInvert(toPx), [toPx])
+  invariant(fromPx, 'MafsView: "fromPx" matrix is not invertible. This is a bug.')
 
   const toPxCSS = math.matrixToCSSTransform(toPx)
   const fromPxCSS = math.matrixToCSSTransform(fromPx)
@@ -138,17 +123,16 @@ export function MafsView({
     [xMin, xMax, yMin, yMax, height, width]
   )
 
-  const scaleContext = React.useMemo<ViewportTransformContextShape>(
+  const scaleContext = React.useMemo<ViewTransformContextShape>(
     () => ({
       toPx,
       fromPx,
-      toPxCSS,
-      fromPxCSS,
-      xSpan,
-      ySpan,
     }),
-    [toPx, fromPx, toPxCSS, fromPxCSS, xSpan, ySpan]
+    [toPx, fromPx]
   )
+
+  const viewBoxX = round((xMin / (xMax - xMin)) * width)
+  const viewBoxY = round((yMax / (yMin - yMax)) * height)
 
   return (
     <div
@@ -159,19 +143,26 @@ export function MafsView({
       {...bind()}
     >
       <CoordinateContext.Provider value={coordinateContext}>
-        <ScaleContext.Provider value={scaleContext}>
+        <ViewTransformContext.Provider value={scaleContext}>
           <PaneManager>
             <svg
               width={width}
               height={height}
-              viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
+              viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
               preserveAspectRatio="xMidYMin"
-              style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
+              style={{
+                width: desiredCssWidth,
+                touchAction: pan ? "none" : "auto",
+                ...({
+                  "--mafs-transform-to-px": toPxCSS,
+                  "--mafs-transform-from-px": fromPxCSS,
+                } as React.CSSProperties),
+              }}
             >
               {visible && children}
             </svg>
           </PaneManager>
-        </ScaleContext.Provider>
+        </ViewTransformContext.Provider>
       </CoordinateContext.Provider>
     </div>
   )

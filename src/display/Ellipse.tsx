@@ -1,8 +1,7 @@
 import * as React from "react"
 import { Filled, Theme } from "./Theme"
-import { useViewTransform } from "../context/ViewTransformContext"
+import { useTransformContext } from "../context/TransformContext"
 import { Vector2 } from "../vec"
-import { useUserTransform } from "../context/UserTransformContext"
 import * as vec from "../vec"
 import * as math from "../math"
 
@@ -24,8 +23,7 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   fillOpacity = 0.15,
   svgEllipseProps = {},
 }) => {
-  const { toPx } = useViewTransform()
-  const userTransform = useUserTransform()
+  const { viewTransform: toPx, userTransform } = useTransformContext()
 
   const transform = vec
     .matrixBuilder()

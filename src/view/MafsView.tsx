@@ -1,13 +1,13 @@
 import * as React from "react"
 import CoordinateContext, { CoordinateContextShape } from "../context/CoordinateContext"
-import PaneManager from "../context/PaneManager"
+import PaneManager from "../context/PaneContext"
 import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
-import ViewTransformContext, { ViewTransformContextShape } from "../context/ViewTransformContext"
 import { round } from "../math"
 import * as vec from "../vec"
 import * as math from "../math"
+import { TransformContext } from "../context/TransformContext"
 import invariant from "tiny-invariant"
 
 export type MafsViewProps = React.PropsWithChildren<{
@@ -98,37 +98,17 @@ export function MafsView({
     { enabled: pan }
   )
 
-  const scaleX = React.useCallback((x: number) => round((x / xSpan) * width, 5), [xSpan, width])
-  const scaleY = React.useCallback((y: number) => round((-y / ySpan) * height, 5), [ySpan, height])
+  const viewTransform = React.useMemo(() => {
+    const scaleX = round((1 / xSpan) * width, 5)
+    const scaleY = round((-1 / ySpan) * height, 5)
+    return vec.matrixBuilder().scale(scaleX, scaleY).get()
+  }, [height, width, xSpan, ySpan])
 
-  const toPx = React.useMemo(
-    () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
-    [scaleX, scaleY]
-  )
-  const fromPx = React.useMemo(() => vec.matrixInvert(toPx), [toPx])
-  invariant(fromPx, 'MafsView: "fromPx" matrix is not invertible. This is a bug.')
-
-  const toPxCSS = math.matrixToCSSTransform(toPx)
-  const fromPxCSS = math.matrixToCSSTransform(fromPx)
+  const toPxCSS = math.matrixToCSSTransform(viewTransform)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
-    () => ({
-      xMin,
-      xMax,
-      yMin,
-      yMax,
-      height,
-      width,
-    }),
+    () => ({ xMin, xMax, yMin, yMax, height, width }),
     [xMin, xMax, yMin, yMax, height, width]
-  )
-
-  const scaleContext = React.useMemo<ViewTransformContextShape>(
-    () => ({
-      toPx,
-      fromPx,
-    }),
-    [toPx, fromPx]
   )
 
   const viewBoxX = round((xMin / (xMax - xMin)) * width)
@@ -143,7 +123,9 @@ export function MafsView({
       {...bind()}
     >
       <CoordinateContext.Provider value={coordinateContext}>
-        <ViewTransformContext.Provider value={scaleContext}>
+        <TransformContext.Provider
+          value={{ userTransform: vec.identity, viewTransform: viewTransform }}
+        >
           <PaneManager>
             <svg
               width={width}
@@ -155,14 +137,13 @@ export function MafsView({
                 touchAction: pan ? "none" : "auto",
                 ...({
                   "--mafs-transform-to-px": toPxCSS,
-                  "--mafs-transform-from-px": fromPxCSS,
                 } as React.CSSProperties),
               }}
             >
               {visible && children}
             </svg>
           </PaneManager>
-        </ViewTransformContext.Provider>
+        </TransformContext.Provider>
       </CoordinateContext.Provider>
     </div>
   )

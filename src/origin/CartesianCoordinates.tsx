@@ -1,7 +1,7 @@
 import * as React from "react"
 import { range, round } from "../math"
-import { usePaneContext } from "../context/PaneManager"
-import { useViewTransform } from "../context/ViewTransformContext"
+import { usePaneContext } from "../context/PaneContext"
+import { useTransformContext } from "../context/TransformContext"
 import * as vec from "../vec"
 
 export type LabelMaker = (value: number) => number | string
@@ -43,7 +43,7 @@ export function CartesianCoordinates({
   const [minY, maxY] = yPaneRange
 
   return (
-    <g>
+    <>
       <g style={{ transform: "var(--mafs-transform-to-px)" }}>
         <defs>
           <GridPattern
@@ -63,7 +63,7 @@ export function CartesianCoordinates({
             x2={maxX}
             y1={0}
             y2={0}
-            style={{ stroke: "var(--mafs-origin-color)", transform: "var(--mafs-transform-to-px)" }}
+            style={{ stroke: "var(--mafs-origin-color)" }}
             vectorEffect="non-scaling-stroke"
           />
         )}
@@ -74,7 +74,7 @@ export function CartesianCoordinates({
             x2={0}
             y1={minY}
             y2={maxY}
-            style={{ stroke: "var(--mafs-origin-color)", transform: "var(--mafs-transform-to-px)" }}
+            style={{ stroke: "var(--mafs-origin-color)" }}
             vectorEffect="non-scaling-stroke"
           />
         )}
@@ -86,7 +86,7 @@ export function CartesianCoordinates({
       {yAxisOverrides !== false && yAxis.labels && (
         <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />
       )}
-    </g>
+    </>
   )
 }
 
@@ -95,7 +95,7 @@ export interface LabelsProps {
   labelMaker: LabelMaker
 }
 const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
-  const { toPx } = useViewTransform()
+  const { viewTransform } = useTransformContext()
   const { xPanes } = usePaneContext()
   const xs = snappedRange(
     xPanes[0][0] - separation,
@@ -108,7 +108,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
       {xs.map((x) => (
         <text
           key={x}
-          x={vec.transform([x, 0], toPx)[0]}
+          x={vec.transform([x, 0], viewTransform)[0]}
           y={5}
           dominantBaseline="hanging"
           textAnchor="middle"
@@ -120,7 +120,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
   )
 }
 const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
-  const { toPx } = useViewTransform()
+  const { viewTransform: toPx } = useTransformContext()
   const { yPanes } = usePaneContext()
   const ys = snappedRange(
     yPanes[0][0] - separation,

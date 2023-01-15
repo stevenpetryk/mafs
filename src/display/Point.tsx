@@ -1,6 +1,5 @@
 import * as React from "react"
-import { useViewTransform } from "../context/ViewTransformContext"
-import { useUserTransform } from "../context/UserTransformContext"
+import { useTransformContext } from "../context/TransformContext"
 import { Theme } from "./Theme"
 import * as vec from "../vec"
 
@@ -19,8 +18,7 @@ export const Point: React.VFC<PointProps> = ({
   opacity = 1,
   svgCircleProps = {},
 }) => {
-  const { toPx: pixelMatrix } = useViewTransform()
-  const transform = useUserTransform()
+  const { viewTransform: pixelMatrix, userTransform: transform } = useTransformContext()
 
   const [cx, cy] = vec.transform([x, y], vec.matrixMult(pixelMatrix, transform))
 

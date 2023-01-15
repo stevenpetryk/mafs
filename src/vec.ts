@@ -224,6 +224,8 @@ export function matrixBuilder(m: Matrix | null = null) {
   }
 }
 
+export const identity = matrixBuilder().get()
+
 export const vec = {
   add,
   sub,
@@ -244,4 +246,5 @@ export const vec = {
   det,
   matrixInvert,
   matrixBuilder,
+  identity,
 }

@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as vec from "../../vec"
 import { Stroked } from "../Theme"
-import { useViewTransform } from "../../context/ViewTransformContext"
+import { useTransformContext } from "../../context/TransformContext"
 import { adaptiveSampling } from "./PlotUtils"
 
 export interface ParametricProps extends Stroked {
@@ -28,10 +28,10 @@ export function Parametric({
   minSamplingDepth = 8,
   svgPathProps = {},
 }: ParametricProps) {
-  const { toPx } = useViewTransform()
+  const { viewTransform } = useTransformContext()
 
   // Negative because the y-axis is flipped in the SVG coordinate system.
-  const pixelsPerSquare = -vec.det(toPx)
+  const pixelsPerSquare = -vec.det(viewTransform)
 
   const [tMin, tMax] = t
   const errorThreshold = 0.1 / pixelsPerSquare

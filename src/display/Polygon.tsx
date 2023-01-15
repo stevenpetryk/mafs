@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Theme, Filled } from "./Theme"
 import { Vector2 } from "../vec"
-import { useUserTransform } from "../context/UserTransformContext"
+import { useTransformContext } from "../context/TransformContext"
 import * as vec from "../vec"
 
 export interface PolygonProps extends Filled {
@@ -18,9 +18,11 @@ export const Polygon: React.VFC<PolygonProps> = ({
   strokeStyle = "solid",
   svgPolygonProps = {},
 }) => {
-  const transform = useUserTransform()
+  const { userTransform } = useTransformContext()
 
-  const scaledPoints = points.map((point) => vec.transform(point, transform).join(" ")).join(" ")
+  const scaledPoints = points
+    .map((point) => vec.transform(point, userTransform).join(" "))
+    .join(" ")
 
   return (
     <polygon

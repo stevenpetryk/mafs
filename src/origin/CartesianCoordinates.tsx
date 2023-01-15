@@ -3,6 +3,7 @@ import { range, round } from "../math"
 import { usePaneContext } from "../context/PaneContext"
 import { useTransformContext } from "../context/TransformContext"
 import * as vec from "../vec"
+import GridPattern from "./GridPattern"
 
 export type LabelMaker = (value: number) => number | string
 
@@ -42,22 +43,23 @@ export function CartesianCoordinates({
   const [minX, maxX] = xPaneRange
   const [minY, maxY] = yPaneRange
 
+  const { viewTransform } = useTransformContext()
+  const [minXPx, minYPx] = vec.transform([minX, maxY], viewTransform)
+  const [widthPx, heightPx] = vec.transform([maxX - minX, maxY - minY], viewTransform)
+
   return (
     <>
       <defs>
-        <g style={{ transform: "var(--mafs-transform-to-px)" }}>
-          <GridPattern
-            id={id}
-            xLines={xAxisOverrides != false ? xAxis.lines : false}
-            yLines={yAxisOverrides != false ? yAxis.lines : false}
-            xSubdivisions={xAxisOverrides != false ? xAxis.subdivisions : false}
-            ySubdivisions={yAxisOverrides != false ? yAxis.subdivisions : false}
-          />
-        </g>
+        <GridPattern
+          id={id}
+          xLines={xAxisOverrides != false ? xAxis.lines : false}
+          yLines={yAxisOverrides != false ? yAxis.lines : false}
+          xSubdivisions={xAxisOverrides != false ? xAxis.subdivisions : false}
+          ySubdivisions={yAxisOverrides != false ? yAxis.subdivisions : false}
+        />
       </defs>
+      <rect fill={`url(#${id})`} x={minXPx} y={minYPx} width={widthPx} height={-heightPx} />
       <g style={{ transform: "var(--mafs-transform-to-px)" }}>
-        <rect fill={`url(#${id})`} x={minX} y={minY} width={maxX - minX} height={maxY - minY} />
-
         {xAxisOverrides !== false && xAxis.axis && (
           <line
             x1={minX}
@@ -151,112 +153,4 @@ export function autoPi(x: number): string {
   if (Math.abs(Math.PI - x) < 0.001) return "π"
   if (Math.abs(-Math.PI - x) < 0.001) return "-π"
   return `${round(x / Math.PI, 5)}π`
-}
-
-interface GridPatternProps {
-  id: string
-  xLines: number | false
-  yLines: number | false
-  xSubdivisions: number | false
-  ySubdivisions: number | false
-}
-
-/**
- * @private
- *
- * Creates an SVG <pattern> that looks like a cartesian coordinate plane grid.
- *
- * This is a bit more complex than just rendering lines, but is way more performant, since the
- * browser handles making the pattern repeat for us.
- */
-const GridPattern: React.VFC<GridPatternProps> = ({
-  id,
-  xLines,
-  yLines,
-  xSubdivisions,
-  ySubdivisions,
-}) => {
-  const width = xLines || 1
-  const height = yLines || 1
-
-  let xs: number[] = []
-  if (xSubdivisions && xSubdivisions > 1) {
-    const pixelXDistance = width / xSubdivisions
-    xs = range(0, width + pixelXDistance * 1.1, pixelXDistance)
-  }
-
-  let ys: number[] = []
-  if (ySubdivisions && ySubdivisions > 1) {
-    const pixelYDistance = height / ySubdivisions
-    ys = range(0, height + pixelYDistance * 1.1, pixelYDistance)
-  }
-
-  return (
-    <pattern id={id} x="0" y="0" width={width} height={height} patternUnits="userSpaceOnUse">
-      {xs.map((x) => (
-        <line
-          key={x}
-          x1={x}
-          y1={0}
-          x2={x}
-          y2={height}
-          style={{
-            vectorEffect: "non-scaling-stroke",
-            stroke: "var(--grid-line-subdivision-color)",
-          }}
-        />
-      ))}
-      {ys.map((y) => (
-        <line
-          key={y}
-          y1={y}
-          x1={0}
-          y2={y}
-          x2={width}
-          style={{
-            vectorEffect: "non-scaling-stroke",
-            stroke: "var(--grid-line-subdivision-color)",
-          }}
-        />
-      ))}
-
-      {xLines && (
-        <>
-          <line
-            x1={0}
-            y1={0}
-            x2={0}
-            y2={height}
-            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
-          />
-          <line
-            x1={width}
-            y1={0}
-            x2={width}
-            y2={height}
-            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
-          />
-        </>
-      )}
-
-      {yLines && (
-        <>
-          <line
-            x1={0}
-            y1={0}
-            x2={width}
-            y2={0}
-            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
-          />
-          <line
-            x1={0}
-            y1={height}
-            x2={width}
-            y2={height}
-            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
-          />
-        </>
-      )}
-    </pattern>
-  )
 }

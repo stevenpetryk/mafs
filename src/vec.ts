@@ -1,3 +1,5 @@
+import { matrixToCSSTransform } from "./math"
+
 /**
  * @fileinfo
  *
@@ -224,6 +226,11 @@ export function matrixBuilder(m: Matrix | null = null) {
   }
 }
 
+/**
+ * Represent a matrix as a CSS transform `matrix(...)` string
+ */
+export const toCSS = matrixToCSSTransform
+
 export const identity = matrixBuilder().get()
 
 export const vec = {
@@ -246,5 +253,6 @@ export const vec = {
   det,
   matrixInvert,
   matrixBuilder,
+  toCSS,
   identity,
 }

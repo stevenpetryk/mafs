@@ -61,3 +61,6 @@ export type { Vector2, Matrix } from "./vec"
 export { vec } from "./vec"
 
 export { Transform, type TransformProps } from "./display/Transform"
+
+export { useTransformContext } from "./context/TransformContext"
+export { usePaneContext } from "./context/PaneContext"

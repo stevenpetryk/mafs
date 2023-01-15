@@ -1,0 +1,20 @@
+import { Mafs, CartesianCoordinates } from "mafs"
+
+function MyCustomCircle() {
+  return (
+    // prettier-ignore
+    <circle
+      cx={1} cy={0} r={3} fill="#f00a" stroke="white"
+      style={{ transform: "var(--mafs-transform-to-px)" }}
+    />
+  )
+}
+
+export default function Example() {
+  return (
+    <Mafs height={300} viewBox={{ y: [-3, 3] }}>
+      <CartesianCoordinates />
+      <MyCustomCircle />
+    </Mafs>
+  )
+}

@@ -11,7 +11,14 @@ import {
   CursorArrowIcon,
   PlayIcon,
 } from "@radix-ui/react-icons"
-import { FunctionIcon, EllipseIcon, LinesIcon } from "components/icons"
+
+import {
+  FunctionIcon,
+  EllipseIcon,
+  LinesIcon,
+  CustomComponentsIcon,
+  TransformContextsIcon,
+} from "components/icons"
 
 type Section = {
   title: string
@@ -20,6 +27,7 @@ type Section = {
 
 type Guide = {
   title: string
+  sidebarTitle?: string
   slug: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: React.FunctionComponent<any>
@@ -30,7 +38,7 @@ type Separator = { separator: true }
 
 export const Guides: Section[] = [
   {
-    title: "Get Started",
+    title: "Get started",
     guides: [
       { title: "Installation", slug: "installation" },
       { title: "Hello f(x)", slug: "hello-f-x" },
@@ -58,6 +66,19 @@ export const Guides: Section[] = [
   {
     title: "Interaction",
     guides: [{ title: "Movable points", icon: CursorArrowIcon, slug: "movable-points" }],
+  },
+  {
+    title: "Custom components",
+    guides: [
+      {
+        sidebarTitle: "Overview",
+        title: "Custom elements",
+        icon: CustomComponentsIcon,
+        slug: "overview",
+      },
+      { title: "Transform contexts", icon: TransformContextsIcon, slug: "contexts" },
+      { title: "CSS custom properties", icon: CustomComponentsIcon, slug: "with-css" },
+    ],
   },
   {
     title: "Animation",

@@ -92,6 +92,9 @@ export interface Filled {
 }
 
 // @public (undocumented)
+export const identity: Matrix;
+
+// @public (undocumented)
 export type Interval = [min: number, max: number];
 
 // @public (undocumented)
@@ -410,6 +413,7 @@ export const vec: {
     det: typeof det;
     matrixInvert: typeof matrixInvert;
     matrixBuilder: typeof matrixBuilder;
+    identity: Matrix;
 };
 
 // @public (undocumented)

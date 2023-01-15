@@ -11,7 +11,7 @@ import {
   CursorArrowIcon,
   PlayIcon,
 } from "@radix-ui/react-icons"
-import { FunctionIcon, EllipseIcon, LinesIcon, CustomComponentsIcon } from "components/icons"
+import { FunctionIcon, EllipseIcon, LinesIcon } from "components/icons"
 
 type Section = {
   title: string

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Theme, Filled } from "./Theme"
-import { useScaleContext } from "../view/ScaleContext"
+import { useViewportTransformContext } from "../context/ViewTransformContext"
 import { Vector2 } from "../vec"
 import { useTransformContext } from "./Transform"
 import * as vec from "../vec"
@@ -19,7 +19,7 @@ export const Polygon: React.VFC<PolygonProps> = ({
   strokeStyle = "solid",
   svgPolygonProps = {},
 }) => {
-  const { cssScale } = useScaleContext()
+  const { toPxCSS: cssScale } = useViewportTransformContext()
   const transform = useTransformContext()
 
   const scaledPoints = points.map((point) => vec.transform(point, transform).join(" ")).join(" ")

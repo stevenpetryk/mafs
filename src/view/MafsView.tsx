@@ -1,13 +1,13 @@
 import * as React from "react"
-import CoordinateContext, { CoordinateContextShape } from "./CoordinateContext"
-import PaneManager from "./PaneManager"
-import MapContext from "./MapContext"
+import CoordinateContext, { CoordinateContextShape } from "../context/CoordinateContext"
+import PaneManager from "../context/PaneManager"
 import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
-import ScaleContext, { ScaleContextShape } from "./ScaleContext"
+import ScaleContext, { ViewportTransformContextShape } from "../context/ViewTransformContext"
 import { round } from "../math"
 import * as vec from "../vec"
+import * as math from "../math"
 
 export type MafsViewProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -114,16 +114,17 @@ export function MafsView({
     (y: number) => round((-y / height) * ySpan, 5),
     [ySpan, height]
   )
-  const pixelMatrix = React.useMemo(
+  const toPx = React.useMemo(
     () => vec.matrixBuilder().scale(scaleX(1), scaleY(1)).get(),
     [scaleX, scaleY]
   )
-  const inversePixelMatrix = React.useMemo(
+  const fromPx = React.useMemo(
     () => vec.matrixBuilder().scale(unscaleX(1), unscaleY(1)).get(),
     [unscaleX, unscaleY]
   )
 
-  const cssScale = `scale(${scaleX(1)} ${scaleY(1)})`
+  const toPxCSS = math.matrixToCSSTransform(toPx)
+  const fromPxCSS = math.matrixToCSSTransform(fromPx)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
     () => ({
@@ -137,17 +138,16 @@ export function MafsView({
     [xMin, xMax, yMin, yMax, height, width]
   )
 
-  const scaleContext = React.useMemo<ScaleContextShape>(
+  const scaleContext = React.useMemo<ViewportTransformContextShape>(
     () => ({
-      scaleX,
-      scaleY,
-      pixelMatrix,
-      inversePixelMatrix,
-      cssScale,
+      toPx,
+      fromPx,
+      toPxCSS,
+      fromPxCSS,
       xSpan,
       ySpan,
     }),
-    [scaleX, scaleY, xSpan, ySpan, pixelMatrix, inversePixelMatrix, cssScale]
+    [toPx, fromPx, toPxCSS, fromPxCSS, xSpan, ySpan]
   )
 
   return (
@@ -160,19 +160,17 @@ export function MafsView({
     >
       <CoordinateContext.Provider value={coordinateContext}>
         <ScaleContext.Provider value={scaleContext}>
-          <MapContext.Provider value={{ mapX, mapY }}>
-            <PaneManager>
-              <svg
-                width={width}
-                height={height}
-                viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
-                preserveAspectRatio="xMidYMin"
-                style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
-              >
-                {visible && children}
-              </svg>
-            </PaneManager>
-          </MapContext.Provider>
+          <PaneManager>
+            <svg
+              width={width}
+              height={height}
+              viewBox={`${-mapX(0)} ${-mapY(0)} ${width} ${height}`}
+              preserveAspectRatio="xMidYMin"
+              style={{ width: desiredCssWidth, touchAction: pan ? "none" : "auto" }}
+            >
+              {visible && children}
+            </svg>
+          </PaneManager>
         </ScaleContext.Provider>
       </CoordinateContext.Provider>
     </div>

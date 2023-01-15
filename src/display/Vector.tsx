@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useScaleContext } from "../view/ScaleContext"
+import { useViewportTransformContext } from "../context/ViewTransformContext"
 import { Stroked } from "../display/Theme"
 import { Theme } from "./Theme"
 import * as vec from "../vec"
@@ -23,7 +23,7 @@ export const Vector: React.VFC<VectorProps> = ({
   opacity = 1.0,
   svgLineProps = {},
 }) => {
-  const { pixelMatrix } = useScaleContext()
+  const { toPx: pixelMatrix } = useViewportTransformContext()
   const transform = vec.matrixMult(pixelMatrix, useTransformContext())
 
   const pixelTail = vec.transform(tail, transform)

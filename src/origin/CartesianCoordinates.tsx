@@ -1,8 +1,8 @@
 import * as React from "react"
-import GridPattern from "./GridPattern"
 import { range, round } from "../math"
-import { usePaneContext } from "../view/PaneManager"
-import { useScaleContext } from "../view/ScaleContext"
+import { usePaneContext } from "../context/PaneManager"
+import { useViewportTransformContext } from "../context/ViewTransformContext"
+import * as vec from "../vec"
 
 export type LabelMaker = (value: number) => number | string
 
@@ -38,24 +38,51 @@ export function CartesianCoordinates({
 
   const id = React.useMemo(() => `mafs-grid-${incrementer++}`, [])
 
+  const { toPxCSS } = useViewportTransformContext()
+
   const { xPaneRange, yPaneRange } = usePaneContext()
-  const { scaleX, scaleY } = useScaleContext()
-  const [minX, maxX] = xPaneRange.map(scaleX)
-  const [minY, maxY] = yPaneRange.map(scaleY)
+  const [minX, maxX] = xPaneRange
+  const [minY, maxY] = yPaneRange
 
   return (
-    <>
-      <defs>
-        <GridPattern
-          id={id}
-          xLines={xAxisOverrides != false ? xAxis.lines : false}
-          yLines={yAxisOverrides != false ? yAxis.lines : false}
-          xSubdivisions={xAxisOverrides != false ? xAxis.subdivisions : false}
-          ySubdivisions={yAxisOverrides != false ? yAxis.subdivisions : false}
-        />
-      </defs>
+    <g>
+      <g transform={toPxCSS}>
+        <defs>
+          <GridPattern
+            id={id}
+            xLines={xAxisOverrides != false ? xAxis.lines : false}
+            yLines={yAxisOverrides != false ? yAxis.lines : false}
+            xSubdivisions={xAxisOverrides != false ? xAxis.subdivisions : false}
+            ySubdivisions={yAxisOverrides != false ? yAxis.subdivisions : false}
+          />
+        </defs>
 
-      <rect fill={`url(#${id})`} x={minX} y={maxY} width={maxX - minX} height={-(maxY - minY)} />
+        <rect fill={`url(#${id})`} x={minX} y={minY} width={maxX - minX} height={maxY - minY} />
+
+        {xAxisOverrides !== false && xAxis.axis && (
+          <line
+            x1={minX}
+            x2={maxX}
+            y1={0}
+            y2={0}
+            style={{ stroke: "var(--mafs-origin-color)" }}
+            vectorEffect="non-scaling-stroke"
+            transform={toPxCSS}
+          />
+        )}
+
+        {yAxisOverrides !== false && yAxis.axis && (
+          <line
+            x1={0}
+            x2={0}
+            y1={minY}
+            y2={maxY}
+            style={{ stroke: "var(--mafs-origin-color)" }}
+            vectorEffect="non-scaling-stroke"
+            transform={toPxCSS}
+          />
+        )}
+      </g>
 
       {xAxisOverrides !== false && xAxis.labels && (
         <XLabels labelMaker={xAxis.labels} separation={xAxis.lines || 1} />
@@ -63,27 +90,7 @@ export function CartesianCoordinates({
       {yAxisOverrides !== false && yAxis.labels && (
         <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />
       )}
-
-      {xAxisOverrides !== false && xAxis.axis && (
-        <line
-          x1={-10000000}
-          x2={10000000}
-          y1={0}
-          y2={0}
-          style={{ stroke: "var(--mafs-origin-color)" }}
-        />
-      )}
-
-      {yAxisOverrides !== false && yAxis.axis && (
-        <line
-          x1={0}
-          x2={0}
-          y1={-10000000}
-          y2={10000000}
-          style={{ stroke: "var(--mafs-origin-color)" }}
-        />
-      )}
-    </>
+    </g>
   )
 }
 
@@ -92,44 +99,46 @@ export interface LabelsProps {
   labelMaker: LabelMaker
 }
 const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
-  const { scaleX } = useScaleContext()
+  const { toPx } = useViewportTransformContext()
   const { xPanes } = usePaneContext()
   const xs = snappedRange(
     xPanes[0][0] - separation,
     xPanes[xPanes.length - 1][1] + separation,
     separation
-  )
+  ).filter((x) => x !== 0)
 
   return (
     <g className="mafs-shadow">
-      {xs
-        .filter((x) => Math.abs(scaleX(x) - scaleX(0)) > 1)
-        .map((x) => (
-          <text key={x} x={scaleX(x)} y={5} dominantBaseline="hanging" textAnchor="middle">
-            {labelMaker(x)}
-          </text>
-        ))}
+      {xs.map((x) => (
+        <text
+          key={x}
+          x={vec.transform([x, 0], toPx)[0]}
+          y={5}
+          dominantBaseline="hanging"
+          textAnchor="middle"
+        >
+          {labelMaker(x)}
+        </text>
+      ))}
     </g>
   )
 }
 const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
-  const { scaleY } = useScaleContext()
+  const { toPx } = useViewportTransformContext()
   const { yPanes } = usePaneContext()
   const ys = snappedRange(
     yPanes[0][0] - separation,
     yPanes[yPanes.length - 1][1] + separation,
     separation
-  )
+  ).filter((y) => y !== 0)
 
   return (
     <g className="mafs-shadow">
-      {ys
-        .filter((y) => Math.abs(scaleY(y) - scaleY(0)) > 1)
-        .map((y) => (
-          <text key={y} x={5} y={scaleY(y)} dominantBaseline="central">
-            {labelMaker(y)}
-          </text>
-        ))}
+      {ys.map((y) => (
+        <text key={y} x={5} y={vec.transform([0, y], toPx)[1]} dominantBaseline="central">
+          {labelMaker(y)}
+        </text>
+      ))}
     </g>
   )
 }
@@ -143,4 +152,112 @@ export function autoPi(x: number): string {
   if (Math.abs(Math.PI - x) < 0.001) return "π"
   if (Math.abs(-Math.PI - x) < 0.001) return "-π"
   return `${round(x / Math.PI, 5)}π`
+}
+
+interface GridPatternProps {
+  id: string
+  xLines: number | false
+  yLines: number | false
+  xSubdivisions: number | false
+  ySubdivisions: number | false
+}
+
+/**
+ * @private
+ *
+ * Creates an SVG <pattern> that looks like a cartesian coordinate plane grid.
+ *
+ * This is a bit more complex than just rendering lines, but is way more performant, since the
+ * browser handles making the pattern repeat for us.
+ */
+const GridPattern: React.VFC<GridPatternProps> = ({
+  id,
+  xLines,
+  yLines,
+  xSubdivisions,
+  ySubdivisions,
+}) => {
+  const width = xLines || 1
+  const height = yLines || 1
+
+  let xs: number[] = []
+  if (xSubdivisions && xSubdivisions > 1) {
+    const pixelXDistance = width / xSubdivisions
+    xs = range(0, width + pixelXDistance * 1.1, pixelXDistance)
+  }
+
+  let ys: number[] = []
+  if (ySubdivisions && ySubdivisions > 1) {
+    const pixelYDistance = height / ySubdivisions
+    ys = range(0, height + pixelYDistance * 1.1, pixelYDistance)
+  }
+
+  return (
+    <pattern id={id} x="0" y="0" width={width} height={height} patternUnits="userSpaceOnUse">
+      {xs.map((x) => (
+        <line
+          key={x}
+          x1={x}
+          y1={0}
+          x2={x}
+          y2={height}
+          style={{
+            vectorEffect: "non-scaling-stroke",
+            stroke: "var(--grid-line-subdivision-color)",
+          }}
+        />
+      ))}
+      {ys.map((y) => (
+        <line
+          key={y}
+          y1={y}
+          x1={0}
+          y2={y}
+          x2={width}
+          style={{
+            vectorEffect: "non-scaling-stroke",
+            stroke: "var(--grid-line-subdivision-color)",
+          }}
+        />
+      ))}
+
+      {xLines && (
+        <>
+          <line
+            x1={0}
+            y1={0}
+            x2={0}
+            y2={height}
+            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
+          />
+          <line
+            x1={width}
+            y1={0}
+            x2={width}
+            y2={height}
+            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
+          />
+        </>
+      )}
+
+      {yLines && (
+        <>
+          <line
+            x1={0}
+            y1={0}
+            x2={width}
+            y2={0}
+            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
+          />
+          <line
+            x1={0}
+            y1={height}
+            x2={width}
+            y2={height}
+            style={{ vectorEffect: "non-scaling-stroke", stroke: "var(--mafs-line-color)" }}
+          />
+        </>
+      )}
+    </pattern>
+  )
 }

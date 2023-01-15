@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as vec from "../../vec"
 import { Stroked } from "../Theme"
-import { useScaleContext } from "../../view/ScaleContext"
+import { useViewportTransformContext } from "../../context/ViewTransformContext"
 import { adaptiveSampling } from "./PlotUtils"
 
 export interface ParametricProps extends Stroked {
@@ -28,10 +28,13 @@ export function Parametric({
   minSamplingDepth = 8,
   svgPathProps = {},
 }: ParametricProps) {
-  const { cssScale, scaleX, scaleY } = useScaleContext()
+  const { toPx, toPxCSS } = useViewportTransformContext()
+
+  // Negative because the y-axis is flipped in the SVG coordinate system.
+  const pixelsPerSquare = -vec.det(toPx)
 
   const [tMin, tMax] = t
-  const errorThreshold = 0.1 / (scaleX(1) * scaleY(-1))
+  const errorThreshold = 0.1 / pixelsPerSquare
 
   const svgPath = React.useMemo(
     () => adaptiveSampling(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
@@ -46,7 +49,7 @@ export function Parametric({
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeDasharray={style === "dashed" ? "1,10" : undefined}
-      transform={cssScale}
+      transform={toPxCSS}
       {...svgPathProps}
       style={{
         stroke: color || "var(--mafs-fg)",

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Filled, Theme } from "./Theme"
-import { useScaleContext } from "../view/ScaleContext"
+import { useViewportTransformContext } from "../context/ViewTransformContext"
 import { Vector2 } from "../vec"
 import { useTransformContext } from "./Transform"
 import * as vec from "../vec"
@@ -23,7 +23,7 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   fillOpacity = 0.15,
   svgEllipseProps = {},
 }) => {
-  const { pixelMatrix } = useScaleContext()
+  const { toPx: pixelMatrix } = useViewportTransformContext()
   const contextTransform = useTransformContext()
 
   const transform = vec

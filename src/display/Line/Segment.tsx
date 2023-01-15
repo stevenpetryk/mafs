@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Stroked, Theme } from "../../display/Theme"
-import { useScaleContext } from "../../view/ScaleContext"
+import { useViewportTransformContext } from "../../context/ViewTransformContext"
 import { round } from "../../math"
 import * as vec from "../../vec"
 import { useTransformContext } from "../Transform"
@@ -18,7 +18,7 @@ export const Segment: React.VFC<SegmentProps> = ({
   weight = 2,
   opacity = 1.0,
 }) => {
-  const { pixelMatrix } = useScaleContext()
+  const { toPx: pixelMatrix } = useViewportTransformContext()
   const transformContext = useTransformContext()
   const transform = vec.matrixMult(pixelMatrix, transformContext)
 

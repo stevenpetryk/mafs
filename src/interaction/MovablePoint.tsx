@@ -5,7 +5,7 @@ import { useTransformContext } from "../display/Transform"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
 import * as vec from "../vec"
-import { useScaleContext } from "../view/ScaleContext"
+import { useViewportTransformContext } from "../context/ViewTransformContext"
 
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
@@ -30,7 +30,8 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
   constrain = (point) => point,
   color = Theme.pink,
 }) => {
-  const { xSpan, ySpan, pixelMatrix, inversePixelMatrix } = useScaleContext()
+  const { toPx: pixelMatrix, fromPx: inversePixelMatrix } = useViewportTransformContext()
+  const [xSpan, ySpan] = vec.transform([1, 1], pixelMatrix)
 
   const transform = useTransformContext()
   const inverseTransform = React.useMemo(() => getInverseTransform(transform), [transform])

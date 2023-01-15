@@ -1,5 +1,5 @@
 import * as React from "react"
-import { usePaneContext } from "../../view/PaneManager"
+import { usePaneContext } from "../../context/PaneManager"
 import { Parametric, ParametricProps } from "./Parametric"
 import * as vec from "../../vec"
 

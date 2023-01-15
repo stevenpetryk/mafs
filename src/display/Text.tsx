@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useScaleContext } from "../view/ScaleContext"
+import { useViewportTransformContext } from "../context/ViewTransformContext"
 import * as vec from "../vec"
 import { useTransformContext } from "./Transform"
 
@@ -25,7 +25,7 @@ export function Text({
   attach,
   attachDistance = 0,
 }: TextProps) {
-  const { pixelMatrix } = useScaleContext()
+  const { toPx: pixelMatrix } = useViewportTransformContext()
   const transformContext = useTransformContext()
 
   let xOffset = 0

@@ -1,5 +1,5 @@
 import { Stroked, Theme } from "../../display/Theme"
-import { useScaleContext } from "../../view/ScaleContext"
+import { useViewportTransformContext } from "../../context/ViewTransformContext"
 import { round } from "../../math"
 import * as vec from "../../vec"
 import { useTransformContext } from "../Transform"
@@ -17,7 +17,7 @@ export function ThroughPoints({
   weight = 2,
   opacity = 1.0,
 }: ThroughPointsProps) {
-  const { pixelMatrix } = useScaleContext()
+  const { toPx: pixelMatrix } = useViewportTransformContext()
   const transformContext = useTransformContext()
   const transform = vec.matrixMult(pixelMatrix, transformContext)
   const segment = vec.scale(vec.normalize(vec.sub(point2, point1)), 100000)

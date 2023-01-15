@@ -8,7 +8,6 @@ import { round } from "../math"
 import * as vec from "../vec"
 import * as math from "../math"
 import { TransformContext } from "../context/TransformContext"
-import invariant from "tiny-invariant"
 import { SpanContext } from "../context/SpanContext"
 
 export type MafsViewProps = React.PropsWithChildren<{

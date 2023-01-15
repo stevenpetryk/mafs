@@ -53,7 +53,6 @@ export const Guides: Section[] = [
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { separator: true },
       { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },
-      // { title: "Custom components", icon: CustomComponentsIcon, slug: "custom-components" },
     ],
   },
   {

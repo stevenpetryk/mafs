@@ -80,12 +80,14 @@ export function CartesianCoordinates({
         )}
       </g>
 
-      {xAxisOverrides !== false && xAxis.labels && (
-        <XLabels labelMaker={xAxis.labels} separation={xAxis.lines || 1} />
-      )}
-      {yAxisOverrides !== false && yAxis.labels && (
-        <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />
-      )}
+      <g className="mafs-shadow" fill="var(--mafs-fg)">
+        {xAxisOverrides !== false && xAxis.labels && (
+          <XLabels labelMaker={xAxis.labels} separation={xAxis.lines || 1} />
+        )}
+        {yAxisOverrides !== false && yAxis.labels && (
+          <YLabels labelMaker={yAxis.labels} separation={yAxis.lines || 1} />
+        )}
+      </g>
     </>
   )
 }
@@ -104,7 +106,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
   ).filter((x) => x !== 0)
 
   return (
-    <g className="mafs-shadow">
+    <g>
       {xs.map((x) => (
         <text
           key={x}
@@ -129,7 +131,7 @@ const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
   ).filter((y) => y !== 0)
 
   return (
-    <g className="mafs-shadow">
+    <g>
       {ys.map((y) => (
         <text key={y} x={5} y={vec.transform([0, y], toPx)[1]} dominantBaseline="central">
           {labelMaker(y)}

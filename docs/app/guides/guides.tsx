@@ -11,7 +11,7 @@ import {
   CursorArrowIcon,
   PlayIcon,
 } from "@radix-ui/react-icons"
-import { FunctionIcon, EllipseIcon, LinesIcon } from "components/icons"
+import { FunctionIcon, EllipseIcon, LinesIcon, CustomComponentsIcon } from "components/icons"
 
 type Section = {
   title: string
@@ -53,6 +53,7 @@ export const Guides: Section[] = [
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { separator: true },
       { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },
+      { title: "Custom", icon: CustomComponentsIcon, slug: "custom" },
     ],
   },
   {

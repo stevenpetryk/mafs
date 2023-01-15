@@ -5,6 +5,7 @@ import { Theme } from "../display/Theme"
 import { range } from "../math"
 import * as vec from "../vec"
 import { useTransformContext } from "../context/TransformContext"
+import { useSpanContext } from "../context/SpanContext"
 
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
@@ -30,7 +31,7 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
   color = Theme.pink,
 }) => {
   const { viewTransform, userTransform } = useTransformContext()
-  const [xSpan, ySpan] = vec.transform([1, -1], viewTransform)
+  const { xSpan, ySpan } = useSpanContext()
   const inverseViewTransform = vec.matrixInvert(viewTransform)
   invariant(inverseViewTransform, "The view transform must be invertible.")
 
@@ -64,7 +65,6 @@ export const MovablePoint: React.VFC<MovablePointProps> = ({
 
       const min = span / (divisions * 2)
       const tests = range(span / divisions, span / 2, span / divisions)
-      console.log({ ySpan, min, tests })
 
       for (const dx of tests) {
         // Transform the test back into the point's coordinate system

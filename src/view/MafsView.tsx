@@ -9,6 +9,7 @@ import * as vec from "../vec"
 import * as math from "../math"
 import { TransformContext } from "../context/TransformContext"
 import invariant from "tiny-invariant"
+import { SpanContext } from "../context/SpanContext"
 
 export type MafsViewProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -123,27 +124,29 @@ export function MafsView({
       {...bind()}
     >
       <CoordinateContext.Provider value={coordinateContext}>
-        <TransformContext.Provider
-          value={{ userTransform: vec.identity, viewTransform: viewTransform }}
-        >
-          <PaneManager>
-            <svg
-              width={width}
-              height={height}
-              viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
-              preserveAspectRatio="xMidYMin"
-              style={{
-                width: desiredCssWidth,
-                touchAction: pan ? "none" : "auto",
-                ...({
-                  "--mafs-transform-to-px": toPxCSS,
-                } as React.CSSProperties),
-              }}
-            >
-              {visible && children}
-            </svg>
-          </PaneManager>
-        </TransformContext.Provider>
+        <SpanContext.Provider value={{ xSpan, ySpan }}>
+          <TransformContext.Provider
+            value={{ userTransform: vec.identity, viewTransform: viewTransform }}
+          >
+            <PaneManager>
+              <svg
+                width={width}
+                height={height}
+                viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
+                preserveAspectRatio="xMidYMin"
+                style={{
+                  width: desiredCssWidth,
+                  touchAction: pan ? "none" : "auto",
+                  ...({
+                    "--mafs-transform-to-px": toPxCSS,
+                  } as React.CSSProperties),
+                }}
+              >
+                {visible && children}
+              </svg>
+            </PaneManager>
+          </TransformContext.Provider>
+        </SpanContext.Provider>
       </CoordinateContext.Provider>
     </div>
   )

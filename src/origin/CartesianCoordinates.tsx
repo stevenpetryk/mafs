@@ -44,8 +44,8 @@ export function CartesianCoordinates({
 
   return (
     <>
-      <g style={{ transform: "var(--mafs-transform-to-px)" }}>
-        <defs>
+      <defs>
+        <g style={{ transform: "var(--mafs-transform-to-px)" }}>
           <GridPattern
             id={id}
             xLines={xAxisOverrides != false ? xAxis.lines : false}
@@ -53,8 +53,9 @@ export function CartesianCoordinates({
             xSubdivisions={xAxisOverrides != false ? xAxis.subdivisions : false}
             ySubdivisions={yAxisOverrides != false ? yAxis.subdivisions : false}
           />
-        </defs>
-
+        </g>
+      </defs>
+      <g style={{ transform: "var(--mafs-transform-to-px)" }}>
         <rect fill={`url(#${id})`} x={minX} y={minY} width={maxX - minX} height={maxY - minY} />
 
         {xAxisOverrides !== false && xAxis.axis && (

@@ -1,10 +1,10 @@
 "use client"
 
-import PartyCircle from "guide-examples/custom/party-circle-1"
-import PartyCircleSource from "!raw-loader!guide-examples/custom/party-circle-1"
+import PartyCircle from "guide-examples/custom/party-circle"
+import PartyCircleSource from "!raw-loader!guide-examples/custom/party-circle"
 
-import PartyCircle2 from "guide-examples/custom/party-circle-2"
-import PartyCircle2Source from "!raw-loader!guide-examples/custom/party-circle-2"
+import PointCloud from "guide-examples/custom/point-cloud"
+import PointCloudSource from "!raw-loader!guide-examples/custom/point-cloud"
 
 import CodeAndExample from "components/CodeAndExample"
 import Link from "next/link"
@@ -28,7 +28,7 @@ export default function TransformContextsPage() {
       </ul>
 
       <p>
-        The general approach is that, to go render a point <code>(x, y)</code>, you must first apply
+        The general approach is that, to render a point <code>(x, y)</code>, you must first apply
         the user transform (because, well, the user is trying to move your component in some way),
         and <em>then</em> the view transform (so that it gets rendered by the SVG renderer in the
         right spot).
@@ -83,7 +83,7 @@ export default function TransformContextsPage() {
         the CSS transforms approach here, because that would distort each circle.
       </p>
 
-      <CodeAndExample component={<PartyCircle2 />} source={PartyCircle2Source} />
+      <CodeAndExample component={<PointCloud />} source={PointCloudSource} />
     </>
   )
 }

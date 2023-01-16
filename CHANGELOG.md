@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.1
+
+- Fixes a tiny bug where `--mafs-user-transform` was not defined by `Mafs`, causing CSS to treat some transform strings as invalid.
+
 ## 0.11.0
 
 - Mafs now exposes a bit of its internals to allow you to use your own custom components. See the documentation on [Custom Components](https://mafs.dev/guides/custom-components/overview) for more information.

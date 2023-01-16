@@ -138,6 +138,7 @@ export function MafsView({
                   touchAction: pan ? "none" : "auto",
                   ...({
                     "--mafs-view-transform": toPxCSS,
+                    "--mafs-user-transform": "",
                   } as React.CSSProperties),
                 }}
               >

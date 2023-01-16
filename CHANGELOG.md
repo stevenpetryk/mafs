@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.11.2
+
+- Fixes a subtle bug introduced in v0.11.1 involving Safari treating empty CSS elements the same as undefined ones.
+
 ## 0.11.1
 
 - Fixes a tiny bug where `--mafs-user-transform` was not defined by `Mafs`, causing CSS to treat some transform strings as invalid.

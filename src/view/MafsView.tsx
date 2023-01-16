@@ -151,3 +151,5 @@ export function MafsView({
     </div>
   )
 }
+
+MafsView.displayName = "Mafs"

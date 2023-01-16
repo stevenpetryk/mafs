@@ -23,7 +23,7 @@ function MafsPage() {
       </p>
 
       <CodeAndExample component={<PlainMafsExample />} source={PlainMafsExampleSource} />
-      <PropTable of={Mafs} displayName="Mafs" />
+      <PropTable of={Mafs} />
 
       <h2>Sizing</h2>
 

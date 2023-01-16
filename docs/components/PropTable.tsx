@@ -23,10 +23,9 @@ export type DocgenPropType =
 
 interface PropTableProps {
   of: { displayName: string } | unknown
-  displayName?: string
 }
 
-export function PropTable({ of: component, displayName: displayNameOverride }: PropTableProps) {
+export function PropTable({ of: component }: PropTableProps) {
   const docgenInfo = (component as { __docgenInfo: Docgen })?.__docgenInfo
 
   if (process.env.NODE_ENV === "development" && docgenInfo == null) {
@@ -44,7 +43,7 @@ export function PropTable({ of: component, displayName: displayNameOverride }: P
 
   const displayName =
     // eslint-disable-next-line
-    displayNameOverride ?? (component as any)?.displayName ?? docgenInfo.displayName
+    (component as any)?.displayName ?? docgenInfo.displayName
 
   const props = docgenInfo.props
 

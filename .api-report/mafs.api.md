@@ -53,6 +53,11 @@ export type ConstraintFunction = (position: Vector2) => Vector2;
 // @public (undocumented)
 export type _ConstraintFunction1 = (position: Vector2) => Vector2;
 
+// @public (undocumented)
+export const Debug: {
+    TransformWidget: typeof TransformWidget;
+};
+
 // @public
 export function det(m: Matrix): number;
 
@@ -156,6 +161,9 @@ export function matrixInvert(matrix: Matrix): Matrix | null;
 // @public
 export function matrixMult(m: Matrix, m2: Matrix): Matrix;
 
+// @public (undocumented)
+export function matrixToCSSTransform(matrix: Matrix): string;
+
 // @public
 export function midpoint(v: Vector2, v2: Vector2): Vector2;
 
@@ -197,6 +205,18 @@ export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     // (undocumented)
     x: (y: number) => number;
+}
+
+// @public (undocumented)
+export interface PaneContextShape {
+    // (undocumented)
+    xPaneRange: Interval;
+    // (undocumented)
+    xPanes: Interval[];
+    // (undocumented)
+    yPaneRange: Interval;
+    // (undocumented)
+    yPanes: Interval[];
 }
 
 // @public (undocumented)
@@ -350,11 +370,20 @@ export interface ThroughPointsProps extends Stroked {
     point2: Vector2;
 }
 
+// @public
+export const toCSS: typeof matrixToCSSTransform;
+
 // @public (undocumented)
 export function Transform(props: TransformProps): JSX.Element;
 
 // @public
 export function transform(v: Vector2, m: Matrix): Vector2;
+
+// @public (undocumented)
+export interface TransformContextShape {
+    userTransform: Matrix;
+    viewTransform: Matrix;
+}
 
 // @public (undocumented)
 export type TransformProps = React_2.PropsWithChildren<{
@@ -364,6 +393,12 @@ export type TransformProps = React_2.PropsWithChildren<{
     rotate?: number;
     shear?: Vector2;
 }>;
+
+// @public (undocumented)
+export function TransformWidget({ children }: TransformWidgetProps): JSX.Element;
+
+// @public (undocumented)
+export type TransformWidgetProps = React_2.PropsWithChildren<unknown>;
 
 // @public (undocumented)
 export interface UseMovablePoint {
@@ -390,7 +425,13 @@ export interface UseMovablePointArguments {
 }
 
 // @public (undocumented)
+export function usePaneContext(): PaneContextShape;
+
+// @public (undocumented)
 export function useStopwatch(options?: StopwatchArguments): Stopwatch;
+
+// @public
+export function useTransformContext(): TransformContextShape;
 
 // @public (undocumented)
 export const vec: {
@@ -413,6 +454,7 @@ export const vec: {
     det: typeof det;
     matrixInvert: typeof matrixInvert;
     matrixBuilder: typeof matrixBuilder;
+    toCSS: typeof matrixToCSSTransform;
     identity: Matrix;
 };
 

@@ -72,7 +72,7 @@ export const Guides: Section[] = [
     guides: [
       {
         sidebarTitle: "Overview",
-        title: "Custom elements",
+        title: "Custom components",
         icon: CustomComponentsIcon,
         slug: "overview",
       },

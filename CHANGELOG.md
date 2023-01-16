@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.0
+
+- Mafs now exposes a bit of its internals to allow you to use your own custom components. See the documentation on [Custom Components](https://mafs.dev/guides/custom-components/overview) for more information.
+
 ## 0.10.1
 
 - Fixes a bug where `Text` would have an ugly stroke when a custom color is set ([#85](https://github.com/stevenpetryk/mafs/issues/85)).

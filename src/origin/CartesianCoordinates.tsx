@@ -95,6 +95,8 @@ export function CartesianCoordinates({
   )
 }
 
+CartesianCoordinates.displayName = "CartesianCoordinates"
+
 export interface LabelsProps {
   separation: number
   labelMaker: LabelMaker
@@ -124,6 +126,9 @@ function XLabels({ separation, labelMaker }: LabelsProps) {
     </g>
   )
 }
+
+XLabels.displayName = "CartesianCoordinates.XLabels"
+
 function YLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform: toPx } = useTransformContext()
   const { yPanes } = usePaneContext()
@@ -143,6 +148,8 @@ function YLabels({ separation, labelMaker }: LabelsProps) {
     </g>
   )
 }
+
+YLabels.displayName = "CartesianCoordinates.YLabels"
 
 function snappedRange(min: number, max: number, step: number) {
   return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)

@@ -79,8 +79,8 @@ export const Guides: Section[] = [
         slug: "overview",
       },
       { title: "Transform contexts", icon: TransformContextsIcon, slug: "contexts" },
-      { title: "Panes", icon: MarginIcon, slug: "panes" },
-      { title: "Making pizza", icon: PizzaIcon, slug: "making-pizza" },
+      // { title: "Panes", icon: MarginIcon, slug: "panes" },
+      // { title: "Making pizza", icon: PizzaIcon, slug: "making-pizza" },
     ],
   },
   {

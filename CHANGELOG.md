@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.11.4
+
+- All exported Mafs components now have `displayName`, making the React devtools a little easier to read.
+
 # 0.11.3
 
 - Introduces a new debug component, `Debug.ViewportInfo`.

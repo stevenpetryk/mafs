@@ -78,7 +78,7 @@ export default function Example() {
   )
 
   return (
-    <Mafs height={300} viewBox={{ y: [-1, 1] }}>
+    <Mafs height={300} viewBox={{ y: [-1, 1], x: [-3, 3] }}>
       <CartesianCoordinates />
       <Plot.OfX y={fn} />
       {points.map((p, index) => (

@@ -7,7 +7,10 @@ import { Transform } from "../display/Transform"
 import { Circle } from "../display/Circle"
 import { Polygon } from "../display/Polygon"
 
-export type TransformWidgetProps = React.PropsWithChildren<unknown>
+export interface TransformWidgetProps {
+  /** The components to transform */
+  children: React.ReactNode
+}
 
 export function TransformWidget({ children }: TransformWidgetProps) {
   const t = useMovablePoint([0, 0])

@@ -174,3 +174,37 @@ export function PizzaIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function DebugIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M4.5 1.5L3.5 4L6.5 7M1.5 4.5L2.5 6.5L6 7.5L2.5 9L2 10.5M6.5 8L3.5 11L4.5 13.5"
+        stroke="currentColor"
+        strokeWidth="0.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.5 1.5L11.5 4L8.5 7M13.5 4.5L12.5 6.5L9 7.5L12.5 9L13 10.5M8.5 8L11.5 11L10.5 13.5"
+        stroke="currentColor"
+        strokeWidth="0.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7.5 4C7.96605 4 8.35763 3.68119 8.46856 3.24976C9.08366 3.59087 9.5 4.24681 9.5 5C9.5 5.59735 9.23812 6.13353 8.82291 6.5C9.23812 6.86647 9.5 7.40265 9.5 8C9.5 8.31941 9.42513 8.62133 9.29197 8.88916C9.57938 9.26705 9.75 9.7386 9.75 10.25C9.75 11.4926 8.74264 12.5 7.5 12.5C6.25736 12.5 5.25 11.4926 5.25 10.25C5.25 9.7386 5.42062 9.26705 5.70803 8.88916C5.57487 8.62133 5.5 8.31941 5.5 8C5.5 7.40265 5.76188 6.86647 6.17709 6.5C5.76188 6.13353 5.5 5.59735 5.5 5C5.5 4.24681 5.91634 3.59087 6.53144 3.24976C6.64237 3.68119 7.03395 4 7.5 4Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}

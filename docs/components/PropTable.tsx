@@ -56,7 +56,13 @@ export function PropTable({ of: component, displayName: displayNameOverride }: P
         <code className="font-medium mr-1 text-sm text-purple-600 dark:text-purple-300">
           <span className="opacity-50">{"<"}</span>
           {typeof displayName === "string" ? displayName : docgenInfo.displayName}
-          <span className="opacity-50">{" ... />"}</span>
+          <span className="opacity-50">{props.children ? ">...</" : " ... />"}</span>
+          {props.children && (
+            <>
+              {typeof displayName === "string" ? displayName : docgenInfo.displayName}
+              <span className="opacity-50">{">"}</span>
+            </>
+          )}
         </code>
       </header>
 

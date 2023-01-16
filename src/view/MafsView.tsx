@@ -111,8 +111,8 @@ export function MafsView({
     [xMin, xMax, yMin, yMax, height, width]
   )
 
-  const viewBoxX = round((xMin / (xMax - xMin)) * width)
-  const viewBoxY = round((yMax / (yMin - yMax)) * height)
+  const viewBoxX = round((xMin / (xMax - xMin)) * width, 2)
+  const viewBoxY = round((yMax / (yMin - yMax)) * height, 2)
 
   return (
     <div

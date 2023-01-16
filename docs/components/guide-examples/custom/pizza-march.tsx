@@ -24,7 +24,7 @@ function PizzaSlice({ at, radius: r }) {
   return (
     <g
       style={{
-        transform: `var(--mafs-transform-to-px)`,
+        transform: `var(--mafs-view-transform)`,
       }}
     >
       <defs>

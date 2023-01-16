@@ -5,7 +5,7 @@ function MyCustomCircle() {
     // prettier-ignore
     <circle
       cx={1} cy={0} r={3} fill="#f00a" stroke="white"
-      style={{ transform: "var(--mafs-transform-to-px)" }}
+      style={{ transform: "var(--mafs-view-transform)" }}
     />
   )
 }

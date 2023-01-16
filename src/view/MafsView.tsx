@@ -137,7 +137,7 @@ export function MafsView({
                   width: desiredCssWidth,
                   touchAction: pan ? "none" : "auto",
                   ...({
-                    "--mafs-transform-to-px": toPxCSS,
+                    "--mafs-view-transform": toPxCSS,
                   } as React.CSSProperties),
                 }}
               >

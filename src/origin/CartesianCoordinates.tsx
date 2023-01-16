@@ -59,7 +59,7 @@ export function CartesianCoordinates({
         />
       </defs>
       <rect fill={`url(#${id})`} x={minXPx} y={minYPx} width={widthPx} height={-heightPx} />
-      <g style={{ transform: "var(--mafs-transform-to-px)" }}>
+      <g style={{ transform: "var(--mafs-view-transform)" }}>
         {xAxisOverrides !== false && xAxis.axis && (
           <line
             x1={minX}

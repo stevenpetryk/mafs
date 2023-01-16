@@ -5,7 +5,7 @@ import { Mafs, CartesianCoordinates } from "mafs"
 function PizzaSlice({ at, radius: r }) {
   const [x, y] = at
   return (
-    <g style={{ transform: "var(--mafs-transform-to-px)" }}>
+    <g style={{ transform: "var(--mafs-view-transform)" }}>
       <defs>
         <mask id="pizza-slice-mask">
           <polyline

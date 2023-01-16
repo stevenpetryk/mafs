@@ -6,7 +6,7 @@ function MyCustomCircle() {
     <circle
       cx={1} cy={0} r={3} fill="#f00a" stroke="white"
       vectorEffect="non-scaling-stroke"
-      style={{ transform: "var(--mafs-transform-to-px)" }}
+      style={{ transform: "var(--mafs-view-transform)" }}
     />
   )
 }

@@ -64,3 +64,5 @@ export { Transform, type TransformProps } from "./display/Transform"
 
 export { useTransformContext } from "./context/TransformContext"
 export { usePaneContext } from "./context/PaneContext"
+
+export { Debug } from "./debug"

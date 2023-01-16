@@ -54,7 +54,7 @@ export function Parametric({
         stroke: color || "var(--mafs-fg)",
         strokeOpacity: opacity,
         vectorEffect: "non-scaling-stroke",
-        transform: "var(--mafs-transform-to-px)",
+        transform: "var(--mafs-view-transform)",
         ...(svgPathProps.style || {}),
       }}
     />

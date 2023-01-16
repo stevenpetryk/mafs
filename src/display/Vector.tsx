@@ -57,7 +57,7 @@ export const Vector: React.VFC<VectorProps> = ({
           stroke: color || "var(--mafs-fg)",
           strokeOpacity: opacity,
           ...(svgLineProps?.style || {}),
-          transform: "var(--mafs-transform-to-px)",
+          transform: "var(--mafs-view-transform)",
           vectorEffect: "non-scaling-stroke",
         }}
       />

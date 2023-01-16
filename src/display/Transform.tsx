@@ -51,3 +51,5 @@ export function Transform(props: TransformProps) {
     </TransformContext.Provider>
   )
 }
+
+Transform.displayName = "Transform"

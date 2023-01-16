@@ -19,13 +19,7 @@ interface GridPatternProps {
  * This is a bit more complex than just rendering lines, but is way more performant, since the
  * browser handles making the pattern repeat for us.
  */
-const GridPattern: React.VFC<GridPatternProps> = ({
-  id,
-  xLines,
-  yLines,
-  xSubdivisions,
-  ySubdivisions,
-}) => {
+function GridPattern({ id, xLines, yLines, xSubdivisions, ySubdivisions }: GridPatternProps) {
   const { viewTransform } = useTransformContext()
 
   const [width, invHeight] = vec.transform([xLines || 1, yLines || 1], viewTransform)

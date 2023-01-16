@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Stroked, Theme } from "../../display/Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { round } from "../../math"
@@ -9,14 +8,14 @@ export interface SegmentProps extends Stroked {
   point2: vec.Vector2
 }
 
-export const Segment: React.VFC<SegmentProps> = ({
+export function Segment({
   point1,
   point2,
   color = Theme.foreground,
   style = "solid",
   weight = 2,
   opacity = 1.0,
-}) => {
+}: SegmentProps) {
   const { viewTransform: pixelMatrix, userTransform } = useTransformContext()
   const transform = vec.matrixMult(pixelMatrix, userTransform)
 

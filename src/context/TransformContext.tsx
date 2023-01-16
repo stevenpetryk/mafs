@@ -19,6 +19,7 @@ interface TransformContextShape {
 }
 
 export const TransformContext = React.createContext<TransformContextShape | null>(null)
+TransformContext.displayName = "TransformContext"
 
 /**
  * A hook that returns the current transformation context. This is useful for

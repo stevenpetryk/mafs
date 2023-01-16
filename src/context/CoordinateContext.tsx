@@ -11,6 +11,7 @@ export interface CoordinateContextShape {
 }
 
 const CoordinateContext = React.createContext<CoordinateContextShape | null>(null)
+CoordinateContext.displayName = "CoordinateContext"
 
 export function useCoordinateContext(): CoordinateContextShape {
   const context = React.useContext(CoordinateContext)

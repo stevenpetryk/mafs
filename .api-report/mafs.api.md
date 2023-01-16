@@ -55,6 +55,7 @@ export type _ConstraintFunction1 = (position: Vector2) => Vector2;
 
 // @public (undocumented)
 export const Debug: {
+    ViewportInfo: typeof ViewportInfo;
     TransformWidget: typeof TransformWidget;
 };
 
@@ -217,6 +218,11 @@ export interface PaneContextShape {
     yPaneRange: Interval;
     // (undocumented)
     yPanes: Interval[];
+}
+
+// @public (undocumented)
+export interface PaneVisualizerProps {
+    precision?: number;
 }
 
 // @public (undocumented)
@@ -398,7 +404,9 @@ export type TransformProps = React_2.PropsWithChildren<{
 export function TransformWidget({ children }: TransformWidgetProps): JSX.Element;
 
 // @public (undocumented)
-export type TransformWidgetProps = React_2.PropsWithChildren<unknown>;
+export interface TransformWidgetProps {
+    children: React_2.ReactNode;
+}
 
 // @public (undocumented)
 export interface UseMovablePoint {
@@ -490,6 +498,9 @@ export interface VectorProps extends Stroked {
     // (undocumented)
     tip: Vector2;
 }
+
+// @public (undocumented)
+export function ViewportInfo({ precision }: PaneVisualizerProps): JSX.Element;
 
 // @public (undocumented)
 export function withMag(v: Vector2, m: number): Vector2;

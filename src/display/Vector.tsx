@@ -13,7 +13,7 @@ export interface VectorProps extends Stroked {
   svgLineProps?: React.SVGProps<SVGLineElement>
 }
 
-export const Vector: React.VFC<VectorProps> = ({
+export function Vector({
   tail = [0, 0],
   tip,
   color = Theme.foreground,
@@ -21,7 +21,7 @@ export const Vector: React.VFC<VectorProps> = ({
   style = "solid",
   opacity = 1.0,
   svgLineProps = {},
-}) => {
+}: VectorProps) {
   const { userTransform } = useTransformContext()
 
   const pixelTail = vec.transform(tail, userTransform)
@@ -64,3 +64,5 @@ export const Vector: React.VFC<VectorProps> = ({
     </>
   )
 }
+
+Vector.displayName = "Vector"

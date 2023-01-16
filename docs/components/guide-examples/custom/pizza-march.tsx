@@ -70,7 +70,7 @@ export default function Example() {
   const deriv = (x) => 2 * Math.cos(x * 2)
 
   const offset = useMovablePoint([2, fn(2)], {
-    constrain: ([x, y]) => [x, fn(x)],
+    constrain: ([x]) => [x, fn(x)],
   })
 
   const points = range(-4, 0.1, 1 / 2).map(

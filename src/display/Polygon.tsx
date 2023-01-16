@@ -9,7 +9,7 @@ export interface PolygonProps extends Filled {
   svgPolygonProps?: React.SVGProps<SVGPolygonElement>
 }
 
-export const Polygon: React.VFC<PolygonProps> = ({
+export function Polygon({
   points,
   color = Theme.foreground,
   weight = 2,
@@ -17,7 +17,7 @@ export const Polygon: React.VFC<PolygonProps> = ({
   strokeOpacity = 1.0,
   strokeStyle = "solid",
   svgPolygonProps = {},
-}) => {
+}: PolygonProps) {
   const { userTransform } = useTransformContext()
 
   const scaledPoints = points
@@ -44,3 +44,5 @@ export const Polygon: React.VFC<PolygonProps> = ({
     ></polygon>
   )
 }
+
+Polygon.displayName = "Polygon"

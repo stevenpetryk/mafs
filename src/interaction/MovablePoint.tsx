@@ -24,12 +24,12 @@ export interface MovablePointProps {
   color?: string
 }
 
-export const MovablePoint: React.VFC<MovablePointProps> = ({
+export function MovablePoint({
   point,
   onMove,
   constrain = (point) => point,
   color = Theme.pink,
-}) => {
+}: MovablePointProps) {
   const { viewTransform, userTransform } = useTransformContext()
   const { xSpan, ySpan } = useSpanContext()
   const inverseViewTransform = vec.matrixInvert(viewTransform)

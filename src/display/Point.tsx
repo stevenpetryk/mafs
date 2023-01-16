@@ -11,13 +11,13 @@ export interface PointProps {
   svgCircleProps?: React.SVGProps<SVGCircleElement>
 }
 
-export const Point: React.VFC<PointProps> = ({
+export function Point({
   x,
   y,
   color = Theme.foreground,
   opacity = 1,
   svgCircleProps = {},
-}) => {
+}: PointProps) {
   const { viewTransform: pixelMatrix, userTransform: transform } = useTransformContext()
 
   const [cx, cy] = vec.transform([x, y], vec.matrixMult(pixelMatrix, transform))
@@ -32,3 +32,5 @@ export const Point: React.VFC<PointProps> = ({
     />
   )
 }
+
+Point.displayName = "Point"

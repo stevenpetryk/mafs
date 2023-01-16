@@ -12,7 +12,7 @@ export interface EllipseProps extends Filled {
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>
 }
 
-export const Ellipse: React.VFC<EllipseProps> = ({
+export function Ellipse({
   center,
   radius,
   angle = 0,
@@ -22,7 +22,7 @@ export const Ellipse: React.VFC<EllipseProps> = ({
   color = Theme.foreground,
   fillOpacity = 0.15,
   svgEllipseProps = {},
-}) => {
+}: EllipseProps) {
   const { viewTransform: toPx, userTransform } = useTransformContext()
 
   const transform = vec
@@ -60,3 +60,5 @@ export const Ellipse: React.VFC<EllipseProps> = ({
     />
   )
 }
+
+Ellipse.displayName = "Ellipse"

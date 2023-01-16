@@ -99,7 +99,7 @@ export interface LabelsProps {
   separation: number
   labelMaker: LabelMaker
 }
-const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
+function XLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform } = useTransformContext()
   const { xPanes } = usePaneContext()
   const xs = snappedRange(
@@ -124,7 +124,7 @@ const XLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
     </g>
   )
 }
-const YLabels: React.VFC<LabelsProps> = ({ separation, labelMaker }) => {
+function YLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform: toPx } = useTransformContext()
   const { yPanes } = usePaneContext()
   const ys = snappedRange(

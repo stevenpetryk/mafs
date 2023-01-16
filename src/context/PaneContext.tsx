@@ -21,7 +21,7 @@ export function usePaneContext(): PaneContextShape {
   return React.useContext(PaneContext)
 }
 
-const PaneManager: React.FC = ({ children }) => {
+function PaneManager({ children }: { children: React.ReactNode }) {
   const { xMin, xMax, yMin, yMax } = useCoordinateContext()
 
   const base = 2
@@ -58,5 +58,7 @@ const PaneManager: React.FC = ({ children }) => {
 
   return <PaneContext.Provider value={context}>{children}</PaneContext.Provider>
 }
+
+PaneManager.displayName = "PaneManager"
 
 export default PaneManager

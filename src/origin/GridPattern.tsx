@@ -89,6 +89,6 @@ function GridPattern({ id, xLines, yLines, xSubdivisions, ySubdivisions }: GridP
   )
 }
 
-GridPattern.displayName = "CartesianCoordinates/GridPattern"
+GridPattern.displayName = "CartesianCoordinates.GridPattern"
 
 export default React.memo(GridPattern)

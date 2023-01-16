@@ -51,8 +51,8 @@ export default function TransformContextsPage() {
         Components can mix and match these two approaches depending on needs. For example, the{" "}
         <Link href="/guides/display/text">Text</Link> component transforms its <em>anchor point</em>{" "}
         in JavaScript, and doesn't apply any CSS transforms, because that would distort the text
-        itself. On the other hand, the <Link href="/guides/display/ellipse">Ellipse</Link> component
-        almost entirely relies on CSS transforms internally.
+        itself. On the other hand, the <Link href="/guides/display/ellipses">Ellipse</Link>{" "}
+        component almost entirely relies on CSS transforms internally.
       </p>
 
       <h2>Accessing transforms in CSS</h2>
@@ -68,8 +68,9 @@ export default function TransformContextsPage() {
 
       <p>
         This is an example of a component that gets entirely transformed by the user and view
-        transforms. The circle can end up totally distorted. For cases where you want to preserve
-        the aspect ratio or pixel size of your component, you likely need to use the hooks approach.
+        transforms. The pizza slice can end up totally distorted. For cases where you want to
+        preserve the aspect ratio or pixel size of your component, you likely need to use the hooks
+        approach.
       </p>
 
       <h2>Accessing transforms in JavaScript</h2>

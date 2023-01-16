@@ -6,9 +6,9 @@ export default function Example() {
     <Mafs height={300} viewBox={{ y: [-1, 1], x: [-1, 1] }}>
       <CartesianCoordinates />
 
-      {/* <Debug.TransformWidget> */}
-      <PizzaSlice />
-      {/* </Debug.TransformWidget> */}
+      <Debug.TransformWidget>
+        <PizzaSlice />
+      </Debug.TransformWidget>
     </Mafs>
   )
 }

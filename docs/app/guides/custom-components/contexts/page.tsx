@@ -1,7 +1,7 @@
 "use client"
 
-import PartyCircle from "guide-examples/custom/party-circle"
-import PartyCircleSource from "!raw-loader!guide-examples/custom/party-circle"
+import PizzaSlice from "guide-examples/custom/pizza-slice"
+import PizzaSliceSource from "!raw-loader!guide-examples/custom/pizza-slice"
 
 import PointCloud from "guide-examples/custom/point-cloud"
 import PointCloudSource from "!raw-loader!guide-examples/custom/point-cloud"
@@ -59,12 +59,12 @@ export default function TransformContextsPage() {
 
       <p>
         Here's an example of a custom component that uses the CSS transforms approach to render a
-        groovy little circle (<code>PartyCircle</code>). The ellipse is wrapped in{" "}
+        delicious little <code>PizzaSlice</code>. The slice is wrapped in{" "}
         <code>Debug.TransformWidget</code> component so that you can try applying some user
         transforms it.
       </p>
 
-      <CodeAndExample component={<PartyCircle />} source={PartyCircleSource} />
+      <CodeAndExample component={<PizzaSlice />} source={PizzaSliceSource} />
 
       <p>
         This is an example of a component that gets entirely transformed by the user and view

@@ -10,7 +10,6 @@ import {
   TextIcon,
   CursorArrowIcon,
   PlayIcon,
-  MarginIcon,
 } from "@radix-ui/react-icons"
 
 import {
@@ -19,7 +18,6 @@ import {
   LinesIcon,
   CustomComponentsIcon,
   TransformContextsIcon,
-  PizzaIcon,
 } from "components/icons"
 
 type Section = {
@@ -80,7 +78,6 @@ export const Guides: Section[] = [
       },
       { title: "Transform contexts", icon: TransformContextsIcon, slug: "contexts" },
       // { title: "Panes", icon: MarginIcon, slug: "panes" },
-      // { title: "Making pizza", icon: PizzaIcon, slug: "making-pizza" },
     ],
   },
   {

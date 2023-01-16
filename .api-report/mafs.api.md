@@ -5,7 +5,6 @@
 ```ts
 
 import * as React_2 from 'react';
-import { VFC } from 'react';
 
 // @public
 export function add(v: Vector2, v2: Vector2): Vector2;
@@ -35,7 +34,13 @@ export interface CartesianCoordinatesProps {
 }
 
 // @public (undocumented)
-export const Circle: React_2.VFC<CircleProps>;
+export function Circle({ radius, ...rest }: CircleProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Circle {
+    var // (undocumented)
+    displayName: string;
+}
 
 // @public (undocumented)
 export interface CircleProps extends Filled {
@@ -69,7 +74,13 @@ export function dist(v: Vector2, v2: Vector2): number;
 export function dot(v: Vector2, v2: Vector2): number;
 
 // @public (undocumented)
-export const Ellipse: React_2.VFC<EllipseProps>;
+export function Ellipse({ center, radius, angle, strokeStyle, strokeOpacity, weight, color, fillOpacity, svgEllipseProps, }: EllipseProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Ellipse {
+    var // (undocumented)
+    displayName: string;
+}
 
 // @public (undocumented)
 export interface EllipseProps extends Filled {
@@ -114,10 +125,10 @@ export function lerp(v1: Vector2, v2: Vector2, t: number): Vector2;
 
 // @public (undocumented)
 export const Line: {
-    PointAngle: VFC<PointAngleProps>;
-    PointSlope: VFC<PointSlopeProps>;
+    PointAngle: typeof PointAngle;
+    PointSlope: typeof PointSlope;
     ThroughPoints: typeof ThroughPoints;
-    Segment: VFC<SegmentProps>;
+    Segment: typeof Segment;
 };
 
 // @public (undocumented)
@@ -169,7 +180,7 @@ export function matrixToCSSTransform(matrix: Matrix): string;
 export function midpoint(v: Vector2, v2: Vector2): Vector2;
 
 // @public (undocumented)
-export const MovablePoint: React_2.VFC<MovablePointProps>;
+export function MovablePoint({ point, onMove, constrain, color, }: MovablePointProps): JSX.Element;
 
 // @public (undocumented)
 export interface MovablePointProps {
@@ -247,7 +258,16 @@ export const Plot: {
 };
 
 // @public (undocumented)
-export const Point: React_2.VFC<PointProps>;
+export function Point({ x, y, color, opacity, svgCircleProps, }: PointProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Point {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public (undocumented)
+export function PointAngle({ point, angle, ...rest }: PointAngleProps): JSX.Element;
 
 // @public (undocumented)
 export interface PointAngleProps extends Stroked {
@@ -272,6 +292,9 @@ export interface PointProps {
 }
 
 // @public (undocumented)
+export function PointSlope({ point, slope, ...rest }: PointSlopeProps): JSX.Element;
+
+// @public (undocumented)
 export interface PointSlopeProps extends Stroked {
     // (undocumented)
     point: Vector2;
@@ -280,7 +303,13 @@ export interface PointSlopeProps extends Stroked {
 }
 
 // @public (undocumented)
-export const Polygon: React_2.VFC<PolygonProps>;
+export function Polygon({ points, color, weight, fillOpacity, strokeOpacity, strokeStyle, svgPolygonProps, }: PolygonProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Polygon {
+    var // (undocumented)
+    displayName: string;
+}
 
 // @public (undocumented)
 export interface PolygonProps extends Filled {
@@ -298,6 +327,9 @@ export function rotateAbout(v: Vector2, cp: Vector2, a: number): Vector2;
 
 // @public
 export function scale(v: Vector2, sc: number): Vector2;
+
+// @public (undocumented)
+export function Segment({ point1, point2, color, style, weight, opacity, }: SegmentProps): JSX.Element;
 
 // @public (undocumented)
 export interface SegmentProps extends Stroked {
@@ -338,6 +370,12 @@ export function sub(v: Vector2, v2: Vector2): Vector2;
 
 // @public (undocumented)
 function Text_2({ children, x, y, color, size, svgTextProps, attach, attachDistance, }: TextProps): JSX.Element;
+
+// @public (undocumented)
+namespace Text_2 {
+    var // (undocumented)
+    displayName: string;
+}
 export { Text_2 as Text }
 
 // @public (undocumented)
@@ -381,6 +419,12 @@ export const toCSS: typeof matrixToCSSTransform;
 
 // @public (undocumented)
 export function Transform(props: TransformProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Transform {
+    var // (undocumented)
+    displayName: string;
+}
 
 // @public
 export function transform(v: Vector2, m: Matrix): Vector2;
@@ -467,7 +511,13 @@ export const vec: {
 };
 
 // @public (undocumented)
-export const Vector: React_2.VFC<VectorProps>;
+export function Vector({ tail, tip, color, weight, style, opacity, svgLineProps, }: VectorProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Vector {
+    var // (undocumented)
+    displayName: string;
+}
 
 // @public
 export type Vector2 = [x: number, y: number];

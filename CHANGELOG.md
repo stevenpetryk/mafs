@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.11.3
+
+- Introduces a new debug component, `Debug.ViewportInfo`.
+
 # 0.11.2
 
 - Fixes a subtle bug introduced in v0.11.1 involving Safari treating empty CSS elements the same as undefined ones.

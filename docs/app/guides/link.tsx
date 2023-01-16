@@ -9,14 +9,14 @@ type GuideLinkProps = React.PropsWithChildren<{
   guideSlug: string
 }>
 
-export function GuideLink({ sectionTitle, guideTitle, guideSlug, children }: GuideLinkProps) {
+export function GuideLink({ sectionTitle, guideSlug, children }: GuideLinkProps) {
   const segments = useSelectedLayoutSegments()
   const active = segments[0] === sectionTitle && segments[1] === guideSlug
 
   return (
     <li>
       <Link
-        href={`/guides/${sectionTitle}/${guideTitle}`}
+        href={`/guides/${sectionTitle}/${guideSlug}`}
         className={`
           flex gap-2 items-center px-2 -mx-2 py-0.5 rounded-lg
           md:hover:bg-slate-100 md:dark:hover:bg-slate-800

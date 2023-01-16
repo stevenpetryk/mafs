@@ -32,7 +32,7 @@ function GuidesSidebar() {
               key={index}
             >
               {IconElement && <IconElement className="opacity-50" />}
-              {fancyFx(guide.title)}
+              {fancyFx(guide.sidebarTitle ?? guide.title)}
             </GuideLink>
           )
         })}

@@ -38,7 +38,7 @@ export const Polygon: React.VFC<PolygonProps> = ({
         stroke: color,
         strokeOpacity,
         vectorEffect: "non-scaling-stroke",
-        transform: "var(--mafs-transform-to-px)",
+        transform: "var(--mafs-view-transform)",
         ...(svgPolygonProps.style || {}),
       }}
     ></polygon>

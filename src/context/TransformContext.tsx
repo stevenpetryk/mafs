@@ -12,7 +12,7 @@ interface TransformContextShape {
   /**
    * A transformation that maps "math" space to pixel space. Note that, in many
    * cases, you don't need to use this transformation directly. Instead, use the
-   * `var(--mafs-transform-to-px)` CSS custom property in combination with the
+   * `var(--mafs-view-transform)` CSS custom property in combination with the
    * SVG `transform` prop.
    */
   viewTransform: vec.Matrix

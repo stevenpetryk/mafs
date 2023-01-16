@@ -45,7 +45,9 @@ export function Transform(props: TransformProps) {
 
   return (
     <TransformContext.Provider value={{ userTransform: newUserTransform, viewTransform }}>
-      {children}
+      <g style={{ "--mafs-user-transform": vec.toCSS(newUserTransform) } as React.CSSProperties}>
+        {children}
+      </g>
     </TransformContext.Provider>
   )
 }

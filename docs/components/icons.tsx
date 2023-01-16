@@ -74,3 +74,103 @@ export function CustomComponentsIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function TransformContextsIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2H12.5C12.7761 2 13 2.22386 13 2.5V12.5C13 12.7761 12.7761 13 12.5 13H12V14H12.5C13.3284 14 14 13.3284 14 12.5V2.5C14 1.67157 13.3284 1 12.5 1H12V2ZM3 2V1H2.5C1.67157 1 1 1.67157 1 2.5V12.5C1 13.3284 1.67157 14 2.5 14H3V13H2.5C2.22386 13 2 12.7761 2 12.5V2.5C2 2.22386 2.22386 2 2.5 2H3Z"
+        fill="currentColor"
+      />
+      <circle cx="4.5" cy="4.5" r="0.75" fill="currentColor" />
+      <circle cx="4.5" cy="7.5" r="0.75" fill="currentColor" />
+      <circle cx="4.5" cy="10.5" r="0.75" fill="currentColor" />
+      <circle cx="7.5" cy="4.5" r="0.75" fill="currentColor" />
+      <circle cx="7.5" cy="7.5" r="0.75" fill="currentColor" />
+      <circle cx="7.5" cy="10.5" r="0.75" fill="currentColor" />
+      <circle cx="10.5" cy="4.5" r="0.75" fill="currentColor" />
+      <circle cx="10.5" cy="7.5" r="0.75" fill="currentColor" />
+      <circle cx="10.5" cy="10.5" r="0.75" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function PizzaIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <g clipPath="url(#clip0_13_2)">
+        <circle
+          cx="6.87865"
+          cy="8.47421"
+          r="0.75"
+          transform="rotate(-45 6.87865 8.47421)"
+          fill="currentColor"
+        />
+        <circle
+          cx="4.75738"
+          cy="6.35291"
+          r="0.75"
+          transform="rotate(-45 4.75738 6.35291)"
+          fill="currentColor"
+        />
+        <circle
+          cx="8.99999"
+          cy="9.1813"
+          r="0.75"
+          transform="rotate(-45 8.99999 9.1813)"
+          fill="currentColor"
+        />
+        <circle
+          cx="8.2929"
+          cy="5.64578"
+          r="0.75"
+          transform="rotate(-45 8.2929 5.64578)"
+          fill="currentColor"
+        />
+        <circle
+          cx="10.4142"
+          cy="6.35287"
+          r="0.75"
+          transform="rotate(-45 10.4142 6.35287)"
+          fill="currentColor"
+        />
+        <circle
+          cx="10.4142"
+          cy="3.52447"
+          r="0.75"
+          transform="rotate(-45 10.4142 3.52447)"
+          fill="currentColor"
+        />
+        <path
+          d="M7.42916 12.9138L2.08556 7.57018C1.8387 7.32332 1.9144 6.9059 2.23221 6.76144L12.6357 2.03256C12.846 1.93698 13.0624 2.15331 12.9668 2.36361L8.2379 12.7671C8.09344 13.0849 7.67602 13.1606 7.42916 12.9138Z"
+          stroke="currentColor"
+        />
+        <path
+          d="M1.92896 7.41354L2.63606 6.70644L8.29292 12.3633L7.58581 13.0704L1.92896 7.41354Z"
+          fill="currentColor"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_13_2">
+          <rect width="15" height="15" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}

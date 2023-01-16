@@ -121,6 +121,8 @@ export function MovablePoint({
   )
 }
 
+MovablePoint.displayName = "MovablePoint"
+
 function getInverseTransform(transform: vec.Matrix) {
   const invert = vec.matrixInvert(transform)
   invariant(

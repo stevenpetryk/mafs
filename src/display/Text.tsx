@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as vec from "../vec"
+import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"

@@ -1,5 +1,5 @@
 {
-  "mainEntryPointFilePath": "<projectFolder>/build/index.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/build/types/index.d.ts",
   "bundledPackages": [],
   "apiReport": {
     "enabled": true,
@@ -8,7 +8,8 @@
     "reportTempFolder": ".api-report/temp"
   },
   "dtsRollup": {
-    "enabled": false
+    "enabled": true,
+    "untrimmedFilePath": "<projectFolder>/build/index.d.ts"
   },
   "docModel": {
     "enabled": false

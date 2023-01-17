@@ -1,5 +1,3 @@
-import type { Matrix } from "./vec"
-
 export type Interval = [min: number, max: number]
 
 export function round(value: number, precision = 0): number {
@@ -18,9 +16,4 @@ export function range(min: number, max: number, step = 1): number[] {
 
 export function clamp(number: number, min: number, max: number): number {
   return Math.min(Math.max(number, min), max)
-}
-
-export function matrixToCSSTransform(matrix: Matrix) {
-  const [a, c, tx, b, d, ty] = matrix
-  return `matrix(${a}, ${b}, ${c}, ${d}, ${tx}, ${ty})`
 }

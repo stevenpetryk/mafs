@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as vec from "../../vec"
+import { vec } from "../../vec"
 import { Stroked } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { adaptiveSampling } from "./PlotUtils"

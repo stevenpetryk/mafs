@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as vec from "../vec"
+import { vec } from "../vec"
 import { TransformContext, useTransformContext } from "../context/TransformContext"
 
 export type TransformProps = React.PropsWithChildren<{

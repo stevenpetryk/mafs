@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useTransformContext } from "../context/TransformContext"
 import { Theme } from "./Theme"
-import * as vec from "../vec"
+import { vec } from "../vec"
 
 export interface PointProps {
   x: number

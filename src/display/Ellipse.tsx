@@ -1,13 +1,11 @@
 import * as React from "react"
 import { Filled, Theme } from "./Theme"
 import { useTransformContext } from "../context/TransformContext"
-import { Vector2 } from "../vec"
-import * as vec from "../vec"
-import * as math from "../math"
+import { vec } from "../vec"
 
 export interface EllipseProps extends Filled {
-  center: Vector2
-  radius: Vector2
+  center: vec.Vector2
+  radius: vec.Vector2
   angle?: number
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>
 }
@@ -35,7 +33,7 @@ export function Ellipse({
     .get()
 
   const cssTransform = `
-    ${math.matrixToCSSTransform(transform)}
+    ${vec.toCSS(transform)}
     rotate(${angle * (180 / Math.PI)})
   `
 

@@ -1,11 +1,10 @@
 import * as React from "react"
 import { Theme, Filled } from "./Theme"
-import { Vector2 } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
-import * as vec from "../vec"
+import { vec } from "../vec"
 
 export interface PolygonProps extends Filled {
-  points: Vector2[]
+  points: vec.Vector2[]
   svgPolygonProps?: React.SVGProps<SVGPolygonElement>
 }
 

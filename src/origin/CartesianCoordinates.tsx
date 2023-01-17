@@ -2,7 +2,7 @@ import * as React from "react"
 import { range, round } from "../math"
 import { usePaneContext } from "../context/PaneContext"
 import { useTransformContext } from "../context/TransformContext"
-import * as vec from "../vec"
+import { vec } from "../vec"
 import GridPattern from "./GridPattern"
 
 export type LabelMaker = (value: number) => number | string

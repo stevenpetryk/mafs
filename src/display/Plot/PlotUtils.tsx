@@ -1,4 +1,4 @@
-import * as vec from "../../vec"
+import { vec } from "../.."
 
 export function adaptiveSampling(
   xy: (t: number) => vec.Vector2,

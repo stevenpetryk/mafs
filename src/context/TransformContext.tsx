@@ -1,6 +1,6 @@
 import * as React from "react"
 import invariant from "tiny-invariant"
-import * as vec from "../vec"
+import { vec } from "../vec"
 
 interface TransformContextShape {
   /**

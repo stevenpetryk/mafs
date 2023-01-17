@@ -5,8 +5,7 @@ import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
 import { round } from "../math"
-import * as vec from "../vec"
-import * as math from "../math"
+import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
 
@@ -104,7 +103,7 @@ export function MafsView({
     return vec.matrixBuilder().scale(scaleX, scaleY).get()
   }, [height, width, xSpan, ySpan])
 
-  const toPxCSS = math.matrixToCSSTransform(viewTransform)
+  const toPxCSS = vec.toCSS(viewTransform)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
     () => ({ xMin, xMax, yMin, yMax, height, width }),

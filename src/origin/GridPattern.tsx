@@ -1,7 +1,7 @@
 import * as React from "react"
 import { range } from "../math"
 import { useTransformContext } from "../context/TransformContext"
-import * as vec from "../vec"
+import { vec } from "../vec"
 
 interface GridPatternProps {
   id: string

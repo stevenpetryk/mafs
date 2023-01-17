@@ -1,7 +1,7 @@
 import * as React from "react"
 import { usePaneContext } from "../../context/PaneContext"
 import { Parametric, ParametricProps } from "./Parametric"
-import * as vec from "../../vec"
+import { vec } from "../../vec"
 
 export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
   y: (x: number) => number

@@ -8,11 +8,11 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "prettier",
   ],
   rules: {
     "react/prop-types": "off",
     "react/no-unescaped-entities": "off",
-    "@typescript-eslint/no-extra-semi": "off",
   },
   overrides: [
     {

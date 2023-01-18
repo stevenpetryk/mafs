@@ -18,7 +18,7 @@
     "start": "cd docs && pnpm dev",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "ts-node build.mts",
+    "build": "ts-node scripts/build.mts",
     "api-report:update": "pnpm tsc && api-extractor run --local",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",

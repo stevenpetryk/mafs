@@ -53,7 +53,7 @@ export namespace vec {
   export function lerp(v1: Vector2, v2: Vector2, t: number): Vector2 {
     const d = sub(v2, v1)
     const m = mag(d)
-    return add(v1, scale(normalize(d), t * m))
+    return add(v1, withMag(d, t*m));
   }
 
   /**
@@ -61,7 +61,7 @@ export namespace vec {
    */
   export function normalize(v: Vector2): Vector2 {
     const magnitude = mag(v)
-    return [v[0] / magnitude, v[1] / magnitude]
+    return scale(v, 1 / magnitude);
   }
 
   export function withMag(v: Vector2, m: number): Vector2 {
@@ -103,7 +103,9 @@ export namespace vec {
    * Rotates a vector around the origin. Shorthand for a rotation matrix
    */
   export function rotate(v: Vector2, a: number): Vector2 {
-    return [v[0] * Math.cos(a) - v[1] * Math.sin(a), v[0] * Math.sin(a) + v[1] * Math.cos(a)]
+    const c = Math.cos(a);
+    const s = Math.sin(a);
+    return [v[0] * c - v[1] * s, v[0] * s + v[1] * c]
   }
 
   /**
@@ -111,10 +113,7 @@ export namespace vec {
    */
   export function rotateAbout(v: Vector2, cp: Vector2, a: number): Vector2 {
     const v2 = sub(v, cp)
-    return add(cp, [
-      v2[0] * Math.cos(a) - v2[1] * Math.sin(a),
-      v2[0] * Math.sin(a) + v2[1] * Math.cos(a),
-    ])
+    return add(cp, rotate(v2, a));
   }
 
   /**

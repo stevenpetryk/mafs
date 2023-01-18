@@ -56,16 +56,15 @@ export namespace vec {
     return add(v1, withMag(d, t*m));
   }
 
+  export function withMag(v: Vector2, m: number): Vector2 {
+    const magnitude = mag(v)
+    return scale(v, m / magnitude);
+  }
   /**
    * Return a normalized version of a vector
    */
   export function normalize(v: Vector2): Vector2 {
-    const magnitude = mag(v)
-    return scale(v, 1 / magnitude);
-  }
-
-  export function withMag(v: Vector2, m: number): Vector2 {
-    return scale(normalize(v), m)
+    return withMag(v, 1);
   }
 
   /**

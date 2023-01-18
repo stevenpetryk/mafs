@@ -9,7 +9,7 @@ import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
 
-export type MafsViewProps = React.PropsWithChildren<{
+export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
   height?: number
   /** Whether to enable panning with the mouse and keyboard */
@@ -34,7 +34,7 @@ export type MafsViewProps = React.PropsWithChildren<{
   ssr?: boolean
 }>
 
-export function MafsView({
+export function Mafs({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
@@ -42,7 +42,7 @@ export function MafsView({
   preserveAspectRatio = "contain",
   children,
   ssr = false,
-}: MafsViewProps) {
+}: MafsProps) {
   const [visible, setVisible] = React.useState(ssr ? true : false)
   const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
 
@@ -151,4 +151,4 @@ export function MafsView({
   )
 }
 
-MafsView.displayName = "Mafs"
+Mafs.displayName = "Mafs"

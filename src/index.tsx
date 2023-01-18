@@ -1,5 +1,5 @@
-export { MafsView as Mafs } from "./view/MafsView"
-export type { MafsViewProps } from "./view/MafsView"
+export { Mafs } from "./view/Mafs"
+export type { MafsProps } from "./view/Mafs"
 
 export { CartesianCoordinates, autoPi as labelPi } from "./origin/CartesianCoordinates"
 export type {

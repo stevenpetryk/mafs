@@ -3,7 +3,7 @@ import * as ReactDOMServer from "react-dom/server"
 import * as fs from "fs"
 import * as path from "path"
 
-import { Mafs, CartesianCoordinates, MafsViewProps } from ".."
+import { Mafs, CartesianCoordinates, MafsProps } from ".."
 
 const css = fs.readFileSync(path.join(process.cwd(), "core.css")).toString()
 
@@ -15,7 +15,7 @@ export default async function renderToImage(
     preserveAspectRatio = true,
   }: {
     coordinates?: boolean
-    viewBox?: MafsViewProps["viewBox"]
+    viewBox?: MafsProps["viewBox"]
     preserveAspectRatio?: boolean
   } = {}
 ): Promise<Buffer | string | void> {

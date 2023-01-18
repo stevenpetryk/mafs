@@ -119,7 +119,7 @@ export const Line: {
 };
 
 // @public (undocumented)
-export function Mafs({ width: desiredWidth, height, pan, viewBox, preserveAspectRatio, children, ssr, }: MafsViewProps): JSX.Element;
+export function Mafs({ width: desiredWidth, height, pan, viewBox, preserveAspectRatio, children, ssr, }: MafsProps): JSX.Element;
 
 // @public (undocumented)
 export namespace Mafs {
@@ -128,7 +128,7 @@ export namespace Mafs {
 }
 
 // @public (undocumented)
-export type MafsViewProps = React_2.PropsWithChildren<{
+export type MafsProps = React_2.PropsWithChildren<{
     width?: number | "auto";
     height?: number;
     pan?: boolean;

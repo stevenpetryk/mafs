@@ -9,9 +9,6 @@
   "main": "build/index.js",
   "module": "build/index.mjs",
   "types": "build/index.d.ts",
-  "targets": {
-    "types": false
-  },
   "files": [
     "build/",
     "core.css",
@@ -36,6 +33,7 @@
     "@types/jest": "^29.2.5",
     "@types/jest-environment-puppeteer": "^5.0.3",
     "@types/jest-image-snapshot": "^6.1.0",
+    "@types/node": "16",
     "@types/puppeteer": "^5.4.7",
     "@types/react": "^17.0.52",
     "@types/react-dom": "^17.0.18",
@@ -54,6 +52,7 @@
     "react": "17",
     "react-dom": "17",
     "resize-observer-polyfill": "^1.5.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },
   "peerDependencies": {

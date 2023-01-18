@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.12.0
+
+- Mafs has had a mostly-internal update to correct the TypeScript types that were being exported. This is unlikely to affect existing code, unless you were importing `Vector2` or `Matrix` from Mafs. The correct way to import those types is now `import { vec } from 'mafs'` and then use `vec.Vector2` and `vec.Matrix`.
+
 # 0.11.4
 
 - All exported Mafs components now have `displayName`, making the React devtools a little easier to read.

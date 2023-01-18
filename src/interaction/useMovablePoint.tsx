@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Theme } from "../display/Theme"
-import * as vec from "../vec"
+import { vec } from "../vec"
 import { MovablePoint } from "./MovablePoint"
 
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2

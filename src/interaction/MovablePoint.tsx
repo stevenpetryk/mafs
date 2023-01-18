@@ -3,7 +3,7 @@ import * as React from "react"
 import invariant from "tiny-invariant"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
-import * as vec from "../vec"
+import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 import { useSpanContext } from "../context/SpanContext"
 

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import * as vec from "../vec"
+import { vec } from "../vec"
 import { Theme } from "../display/Theme"
 import { useMovablePoint } from "../interaction/useMovablePoint"
 import { Transform } from "../display/Transform"

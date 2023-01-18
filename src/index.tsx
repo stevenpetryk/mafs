@@ -1,5 +1,5 @@
-export { MafsView as Mafs } from "./view/MafsView"
-export type { MafsViewProps } from "./view/MafsView"
+export { Mafs } from "./view/Mafs"
+export type { MafsProps } from "./view/Mafs"
 
 export { CartesianCoordinates, autoPi as labelPi } from "./origin/CartesianCoordinates"
 export type {
@@ -54,10 +54,6 @@ export { useStopwatch } from "./animation/useStopwatch"
 export type { Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
 
 export type { Interval } from "./math"
-
-export type { Vector2, Matrix } from "./vec"
-
-// Some wonk here because Parcel doesn't understand the export * as syntax
 export { vec } from "./vec"
 
 export { Transform, type TransformProps } from "./display/Transform"

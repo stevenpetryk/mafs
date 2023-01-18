@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "noEmit": true,
+    "declaration": true,
+    "declarationDir": "build/types",
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
     "module": "es6",
     "target": "ES2021",
     "moduleResolution": "node",
@@ -10,5 +13,9 @@
     "checkJs": true,
     "allowJs": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "ts-node": {
+    "swc": true,
+    "esm": true
+  }
 }

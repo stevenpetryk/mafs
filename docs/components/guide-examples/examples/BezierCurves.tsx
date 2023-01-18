@@ -10,7 +10,6 @@ import {
   Theme,
   useMovablePoint,
   useStopwatch,
-  Vector2,
   vec,
 } from "mafs"
 import { easeInOutCubic } from "js-easing-functions"
@@ -21,10 +20,10 @@ import { easeInOutCubic } from "js-easing-functions"
  * See https://youtu.be/aVwxzDHniEw?t=265
  */
 function xyFromBernsteinPolynomial(
-  p1: Vector2,
-  c1: Vector2,
-  c2: Vector2,
-  p2: Vector2,
+  p1: vec.Vector2,
+  c1: vec.Vector2,
+  c2: vec.Vector2,
+  p2: vec.Vector2,
   t: number
 ) {
   return [
@@ -75,7 +74,7 @@ export default function BezierCurves() {
   }, [time])
 
   function drawLineSegments(
-    pointPath: Vector2[],
+    pointPath: vec.Vector2[],
     color: string,
     customOpacity = opacity * 0.5
   ) {
@@ -90,7 +89,10 @@ export default function BezierCurves() {
     ))
   }
 
-  function drawPoints(points: Vector2[], color: string) {
+  function drawPoints(
+    points: vec.Vector2[],
+    color: string
+  ) {
     return points.map((point, index) => (
       <Point
         key={index}

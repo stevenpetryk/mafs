@@ -5,12 +5,11 @@ import useResizeObserver from "use-resize-observer"
 
 import { useDrag } from "@use-gesture/react"
 import { round } from "../math"
-import * as vec from "../vec"
-import * as math from "../math"
+import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
 
-export type MafsViewProps = React.PropsWithChildren<{
+export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
   height?: number
   /** Whether to enable panning with the mouse and keyboard */
@@ -35,7 +34,7 @@ export type MafsViewProps = React.PropsWithChildren<{
   ssr?: boolean
 }>
 
-export function MafsView({
+export function Mafs({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
@@ -43,7 +42,7 @@ export function MafsView({
   preserveAspectRatio = "contain",
   children,
   ssr = false,
-}: MafsViewProps) {
+}: MafsProps) {
   const [visible, setVisible] = React.useState(ssr ? true : false)
   const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
 
@@ -104,7 +103,7 @@ export function MafsView({
     return vec.matrixBuilder().scale(scaleX, scaleY).get()
   }, [height, width, xSpan, ySpan])
 
-  const toPxCSS = math.matrixToCSSTransform(viewTransform)
+  const toPxCSS = vec.toCSS(viewTransform)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
     () => ({ xMin, xMax, yMin, yMax, height, width }),
@@ -152,4 +151,4 @@ export function MafsView({
   )
 }
 
-MafsView.displayName = "Mafs"
+Mafs.displayName = "Mafs"

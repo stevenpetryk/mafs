@@ -1,14 +1,14 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, CartesianCoordinates, MovablePoint, Vector2, useMovablePoint, Line, Theme, vec } from "mafs"
+import { Mafs, CartesianCoordinates, MovablePoint, useMovablePoint, Line, Theme, vec } from "mafs"
 import range from "lodash/range"
 
 export default function DynamicMovablePoints() {
   const start = useMovablePoint([-3, -1])
   const end = useMovablePoint([3, 1])
 
-  function shift(shiftBy: Vector2) {
+  function shift(shiftBy: vec.Vector2) {
     start.setPoint(vec.add(start.point, shiftBy))
     end.setPoint(vec.add(end.point, shiftBy))
   }

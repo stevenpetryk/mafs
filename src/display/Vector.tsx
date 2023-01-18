@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Stroked } from "../display/Theme"
 import { Theme } from "./Theme"
-import * as vec from "../vec"
+import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.

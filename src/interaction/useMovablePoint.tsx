@@ -46,14 +46,7 @@ export function useMovablePoint(
   }, [constrain, initialX, initialY])
 
   const element = React.useMemo(() => {
-    return (
-      <MovablePoint
-        {...{ point, color }}
-        constrain={constraintFunction}
-        point={point}
-        onMove={setPoint}
-      />
-    )
+    return <MovablePoint {...{ point, color }} constrain={constraintFunction} onMove={setPoint} />
   }, [point, color, constraintFunction])
 
   return {

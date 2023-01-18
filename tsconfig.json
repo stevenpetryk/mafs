@@ -13,7 +13,7 @@
     "checkJs": true,
     "allowJs": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "e2e"],
   "ts-node": {
     "swc": true,
     "esm": true

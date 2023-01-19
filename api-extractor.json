@@ -1,5 +1,5 @@
 {
-  "mainEntryPointFilePath": "<projectFolder>/build/types/index.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/build/types/src/index.d.ts",
   "bundledPackages": [],
   "apiReport": {
     "enabled": true,

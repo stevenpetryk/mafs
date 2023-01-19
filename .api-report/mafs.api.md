@@ -390,7 +390,7 @@ export namespace vec {
     export function dot(v: Vector2, v2: Vector2): number;
     export function lerp(v1: Vector2, v2: Vector2, t: number): Vector2;
     export function mag(v: Vector2): number;
-    export type Matrix = [number, number, number, number, number, number, number, number, number];
+    export type Matrix = [number, number, number, number, number, number];
     export function matrixBuilder(m?: Matrix | null): {
         mult: (m: Matrix) => any;
         translate: (x: number, y: number) => any;
@@ -399,7 +399,7 @@ export namespace vec {
         shear: (x: number, y: number) => any;
         get: () => Matrix;
     };
-    export function matrixInvert(matrix: Matrix): Matrix | null;
+    export function matrixInvert(a: Matrix): Matrix | null;
     export function matrixMult(m: Matrix, m2: Matrix): Matrix;
     export function midpoint(v: Vector2, v2: Vector2): Vector2;
     export function normal(v: Vector2): Vector2;

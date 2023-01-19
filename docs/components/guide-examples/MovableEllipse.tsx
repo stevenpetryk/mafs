@@ -17,7 +17,7 @@ export default function MovableEllipse() {
     color: Theme.blue,
     // Constrain this point to only move in a circle
     constrain: (position) =>
-      vec.scale(vec.normalize(position), hintRadius),
+      vec.withMag(position, hintRadius),
   })
   const angle = Math.atan2(rotate.point[1], rotate.point[0])
 

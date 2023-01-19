@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.13.0
+
+- `vec.Matrix` is now a 2x3 matrix instead of a 3x3 matrix. This is a potentially breaking change from a TypeScript perspective, but shouldn't have any real impact on behavior—other than making things faster! Thank you to @sritchie for identifying this opportunity and [improving a lot of the code in `vec`](https://github.com/stevenpetryk/mafs/pull/92).
+
 # 0.12.0
 
 - Mafs has had a mostly-internal update to correct the TypeScript types that were being exported. This is unlikely to affect existing code, unless you were importing `Vector2` or `Matrix` from Mafs. The correct way to import those types is now `import { vec } from 'mafs'` and then use `vec.Vector2` and `vec.Matrix`.

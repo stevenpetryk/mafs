@@ -49,7 +49,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       - run: pnpm install
-      - run: pnpm test
+      - run: pnpm test:unit
 
   check-format:
     runs-on: ubuntu-latest

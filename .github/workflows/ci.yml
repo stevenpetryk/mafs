@@ -51,7 +51,7 @@ jobs:
       - run: pnpm install
       - run: pnpm test
 
-  tests_e2e:
+  tests-e2e:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

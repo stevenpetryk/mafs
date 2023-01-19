@@ -49,7 +49,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       - run: pnpm install
-      - run: pnpm test
+      - run: pnpm test:unit
 
   tests-e2e:
     runs-on: ubuntu-latest
@@ -74,9 +74,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - run: pnpm install
       - name: Install playwright browsers
-        run: npx playwright install --with-deps
+        run: pnpm playwright install --with-deps
       - name: Run tests
-        run: npx playwright test
+        run: pnpm test:e2e
 
   check-format:
     runs-on: ubuntu-latest

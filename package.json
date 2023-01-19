@@ -16,9 +16,9 @@
   ],
   "scripts": {
     "start": "cd docs && pnpm dev",
-    "test": "jest && pnpm -s test:vrt",
-    "test:watch": "jest --watch",
-    "test:vrt": "ts-node scripts/testgen.mts && playwright test",
+    "test": "pnpm -s test:unit && pnpm -s test:e2e",
+    "test:unit": "jest",
+    "test:e2e": "ts-node scripts/testgen.mts && playwright test",
     "build": "ts-node scripts/build.mts",
     "api-report:update": "pnpm tsc && api-extractor run --local",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

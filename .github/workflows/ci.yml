@@ -52,7 +52,6 @@ jobs:
       - run: pnpm test
 
   tests_e2e:
-    name: Run end-to-end tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

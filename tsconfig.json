@@ -11,7 +11,8 @@
     "strict": true,
     "noImplicitAny": true,
     "checkJs": true,
-    "allowJs": true
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "include": ["src/**/*", "e2e"],
   "ts-node": {

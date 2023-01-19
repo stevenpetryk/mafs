@@ -8,10 +8,10 @@ import {
 } from "mafs"
 
 export default function LinePointAngleExample() {
-  const point = useMovablePoint([-1, -1])
+  const point = useMovablePoint([0, 0])
 
   return (
-    <Mafs height={200} viewBox={{ y: [-1, 1] }}>
+    <Mafs height={200} viewBox={{ x: [-1, 1], y: [-1, 1] }}>
       <CartesianCoordinates />
       <Line.PointAngle
         point={point.point}

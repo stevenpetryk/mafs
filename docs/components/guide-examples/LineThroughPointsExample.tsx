@@ -8,11 +8,11 @@ import {
 } from "mafs"
 
 export default function LineThroughPointsExample() {
-  const point1 = useMovablePoint([-1, -1])
+  const point1 = useMovablePoint([-2, -1])
   const point2 = useMovablePoint([2, 1])
 
   return (
-    <Mafs height={200} viewBox={{ y: [-1, 1] }}>
+    <Mafs height={200} viewBox={{ x: [-2, 2], y: [-1, 1] }}>
       <CartesianCoordinates />
       <Line.ThroughPoints
         point1={point1.point}

@@ -107,7 +107,7 @@ function CodeAndExample({
               <button
                 type="button"
                 onClick={() => openPlayground(source)}
-                className="flex gap-2 items-center bg-neutral-800 px-4 py-2 rounded-full hover:bg-opacity-20 focus:bg-opacity-20"
+                className="flex gap-2 items-center bg-neutral-800 px-4 py-2 rounded-full hover:bg-neutral-700 focus:bg-neutral-700"
               >
                 <StackBlitzIcon className="text-[#1389fd]" />
                 <span>Edit in StackBlitz</span>

@@ -22,25 +22,18 @@ export function Vector({
   opacity = 1.0,
   svgLineProps = {},
 }: VectorProps) {
-  const { userTransform } = useTransformContext()
+  const { userTransform, viewTransform } = useTransformContext()
+  const combinedTransform = vec.matrixMult(viewTransform, userTransform)
 
-  const pixelTail = vec.transform(tail, userTransform)
-  const pixelTip = vec.transform(tip, userTransform)
+  const pixelTail = vec.transform(tail, combinedTransform)
+  const pixelTip = vec.transform(tip, combinedTransform)
 
   const id = React.useMemo(() => `mafs-triangle-${incrementer++}`, [])
 
   return (
     <>
       <defs>
-        <marker
-          id={id}
-          markerWidth="8"
-          markerHeight="8"
-          refX="8"
-          refY="4"
-          orient="auto"
-          markerUnits="strokeWidth"
-        >
+        <marker id={id} markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
           <path d="M 0 0 L 8 4 L 0 8 z" fill={color || "var(--mafs-fg)"} />
         </marker>
       </defs>
@@ -57,7 +50,6 @@ export function Vector({
           stroke: color || "var(--mafs-fg)",
           strokeOpacity: opacity,
           ...(svgLineProps?.style || {}),
-          transform: "var(--mafs-view-transform)",
           vectorEffect: "non-scaling-stroke",
         }}
       />

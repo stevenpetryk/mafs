@@ -1,22 +1,19 @@
 import * as React from "react"
 import katex from "katex"
-import { vec, Vector2 } from "../vec"
-import { useScaleContext } from "../view/ScaleContext"
-import { useTransformContext } from "./Transform"
+import { vec } from "../vec"
+import { useTransformContext } from "../context/TransformContext"
 import { Theme } from "./Theme"
 
 interface LatexProps {
   tex: string
-  at: Vector2
+  at: vec.Vector2
   macros?: Record<string, string>
 }
 
 export function LaTeX({ at: center, tex, macros }: LatexProps) {
   const ref = React.useRef<HTMLSpanElement>(null)
-  const { pixelMatrix } = useScaleContext()
-  const transformContext = useTransformContext()
-
-  const transform = vec.matrixMult(pixelMatrix, transformContext)
+  const { viewTransform, userTransform } = useTransformContext()
+  const combinedTransform = vec.matrixMult(viewTransform, userTransform)
 
   // TODO: there's gotta be a better way to do this lol
   const width = 10000
@@ -28,9 +25,9 @@ export function LaTeX({ at: center, tex, macros }: LatexProps) {
     katex.render(tex, ref.current, { macros })
     const durationMs = performance.now() - start
     console.log(`Rendered LaTeX in ${durationMs}ms`)
-  }, [tex])
+  }, [macros, tex])
 
-  const pixelCenter = vec.add(vec.transform(center, transform), [-width / 2, -height / 2])
+  const pixelCenter = vec.add(vec.transform(center, combinedTransform), [-width / 2, -height / 2])
 
   return (
     <foreignObject

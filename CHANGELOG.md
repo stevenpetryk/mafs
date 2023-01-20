@@ -1,22 +1,26 @@
 # Changelog
 
-# 0.13.0
+## 0.13.1
+
+- Fixes an issue ([#95](https://github.com/stevenpetryk/mafs/issues/95)) where arrow markers in `Vector` were transformed incorrectly and looked comically large.
+
+## 0.13.0
 
 - `vec.Matrix` is now a 2x3 matrix instead of a 3x3 matrix. This is a potentially breaking change from a TypeScript perspective, but shouldn't have any real impact on behavior—other than making things faster! Thank you to @sritchie for identifying this opportunity and [improving a lot of the code in `vec`](https://github.com/stevenpetryk/mafs/pull/92).
 
-# 0.12.0
+## 0.12.0
 
 - Mafs has had a mostly-internal update to correct the TypeScript types that were being exported. This is unlikely to affect existing code, unless you were importing `Vector2` or `Matrix` from Mafs. The correct way to import those types is now `import { vec } from 'mafs'` and then use `vec.Vector2` and `vec.Matrix`.
 
-# 0.11.4
+## 0.11.4
 
 - All exported Mafs components now have `displayName`, making the React devtools a little easier to read.
 
-# 0.11.3
+## 0.11.3
 
 - Introduces a new debug component, `Debug.ViewportInfo`.
 
-# 0.11.2
+## 0.11.2
 
 - Fixes a subtle bug introduced in v0.11.1 involving Safari treating empty CSS elements the same as undefined ones.
 

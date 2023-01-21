@@ -20,13 +20,12 @@ const defaultAxisOptions: Partial<AxisOptions> = {
   axis: true,
   lines: 1,
   labels: (x) => {
-    return x
-    // return (
-    //   <>
-    //     {x}
-    //     {x < 0 && <tspan visibility="hidden">-</tspan>}
-    //   </>
-    // )
+    return (
+      <>
+        {x}
+        {x < 0 && <tspan visibility="hidden">-</tspan>}
+      </>
+    )
   },
 }
 

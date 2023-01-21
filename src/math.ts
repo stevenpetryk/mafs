@@ -10,7 +10,14 @@ export function range(min: number, max: number, step = 1): number[] {
   for (let i = min; i < max - step / 2; i += step) {
     result.push(i)
   }
-  result.push(max)
+
+  const computedMax = result[result.length - 1] + step
+  if (Math.abs(max - computedMax) < step / 1e-6) {
+    result.push(max)
+  } else {
+    result.push(computedMax)
+  }
+
   return result
 }
 

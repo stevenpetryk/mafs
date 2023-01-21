@@ -106,11 +106,11 @@ function XLabels({ separation, labelMaker }: LabelsProps) {
   const { xPanes } = usePaneContext()
 
   return (
-    <g>
+    <g className="mafs-axis">
       {xPanes.map(([min, max]) => (
         <g key={`${min},${max}`}>
-          {range(min, max - separation, separation)
-            .filter((x) => x)
+          {snappedRange(min, max - separation, separation)
+            .filter((x) => Math.abs(x) > separation / 1e6)
             .map((x) => (
               <text
                 x={vec.transform([x, 0], viewTransform)[0]}
@@ -135,11 +135,11 @@ function YLabels({ separation, labelMaker }: LabelsProps) {
   const { yPanes } = usePaneContext()
 
   return (
-    <g>
+    <g className="mafs-axis">
       {yPanes.map(([min, max]) => (
         <g key={`${min},${max}`}>
-          {range(min, max - separation, separation)
-            .filter((y) => y)
+          {snappedRange(min, max - separation, separation)
+            .filter((y) => Math.abs(y) > separation / 1e6)
             .map((y) => (
               <text
                 x={5}
@@ -157,6 +157,10 @@ function YLabels({ separation, labelMaker }: LabelsProps) {
 }
 
 YLabels.displayName = "CartesianCoordinates.YLabels"
+
+function snappedRange(min: number, max: number, step: number) {
+  return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)
+}
 
 export function autoPi(x: number): string {
   if (x === 0) return "0"

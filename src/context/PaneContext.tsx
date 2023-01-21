@@ -1,6 +1,7 @@
 import * as React from "react"
 import { useCoordinateContext } from "./CoordinateContext"
 import { range, Interval } from "../math"
+const { round, ceil, floor, log2 } = Math
 
 interface PaneContextShape {
   xPanes: Interval[]
@@ -24,26 +25,32 @@ export function usePaneContext(): PaneContextShape {
 function PaneManager({ children }: { children: React.ReactNode }) {
   const { xMin, xMax, yMin, yMax } = useCoordinateContext()
 
-  const base = 2
+  const xPaneSize = 2 ** round(log2(xMax - xMin) - 1)
+  const yPaneSize = 2 ** round(log2(yMax - yMin) - 1)
 
-  const xSpan = xMax - xMin
-  const xStep = base ** Math.round(Math.log10(xSpan) / Math.log10(base))
-  const xLowerBound = Math.floor(xMin / xStep) * xStep
-  const xUpperBound = Math.ceil(xMax / xStep) * xStep
-
-  const ySpan = yMax - yMin
-  const yStep = base ** Math.round(Math.log10(ySpan) / Math.log10(base))
-  const yLowerBound = Math.floor(yMin / yStep) * yStep
-  const yUpperBound = Math.ceil(yMax / yStep) * yStep
+  // When there's only `pad` remaining of the current pane, we round up to
+  // load the next pane. For example, if each pane is 2 units wide, the next
+  // step of panes will be loaded at x = 1.75, 3.75, 5.75, etc when pad = 1/8.
+  const pad = 1 / 8
+  const xLowerBound = xPaneSize * floor(xMin / xPaneSize - pad)
+  const xUpperBound = xPaneSize * ceil(xMax / xPaneSize + pad)
+  const yLowerBound = yPaneSize * floor(yMin / yPaneSize - pad)
+  const yUpperBound = yPaneSize * ceil(yMax / yPaneSize + pad)
 
   const xPanes = React.useMemo(
-    () => range(xLowerBound, xUpperBound, xStep).map((xMin) => [xMin, xMin + xStep] as Interval),
-    [xLowerBound, xUpperBound, xStep]
+    () =>
+      range(xLowerBound, xUpperBound - xPaneSize, xPaneSize).map(
+        (xMin) => [xMin, xMin + xPaneSize] as Interval
+      ),
+    [xLowerBound, xUpperBound, xPaneSize]
   )
 
   const yPanes = React.useMemo(
-    () => range(yLowerBound, yUpperBound, yStep).map((yMin) => [yMin, yMin + yStep] as Interval),
-    [yLowerBound, yUpperBound, yStep]
+    () =>
+      range(yLowerBound, yUpperBound - yPaneSize, yPaneSize).map(
+        (yMin) => [yMin, yMin + yPaneSize] as Interval
+      ),
+    [yLowerBound, yUpperBound, yPaneSize]
   )
 
   const context = React.useMemo(

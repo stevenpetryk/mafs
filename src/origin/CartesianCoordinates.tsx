@@ -104,24 +104,25 @@ export interface LabelsProps {
 function XLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform } = useTransformContext()
   const { xPanes } = usePaneContext()
-  const xs = snappedRange(
-    xPanes[0][0] - separation,
-    xPanes[xPanes.length - 1][1] + separation,
-    separation
-  ).filter((x) => x !== 0)
 
   return (
     <g>
-      {xs.map((x) => (
-        <text
-          key={x}
-          x={vec.transform([x, 0], viewTransform)[0]}
-          y={5}
-          dominantBaseline="hanging"
-          textAnchor="middle"
-        >
-          {labelMaker(x)}
-        </text>
+      {xPanes.map(([min, max]) => (
+        <g key={`${min},${max}`}>
+          {range(min, max - separation, separation)
+            .filter((x) => x)
+            .map((x) => (
+              <text
+                x={vec.transform([x, 0], viewTransform)[0]}
+                y={5}
+                key={x}
+                dominantBaseline="hanging"
+                textAnchor="middle"
+              >
+                {labelMaker(x)}
+              </text>
+            ))}
+        </g>
       ))}
     </g>
   )
@@ -130,30 +131,32 @@ function XLabels({ separation, labelMaker }: LabelsProps) {
 XLabels.displayName = "CartesianCoordinates.XLabels"
 
 function YLabels({ separation, labelMaker }: LabelsProps) {
-  const { viewTransform: toPx } = useTransformContext()
+  const { viewTransform } = useTransformContext()
   const { yPanes } = usePaneContext()
-  const ys = snappedRange(
-    yPanes[0][0] - separation,
-    yPanes[yPanes.length - 1][1] + separation,
-    separation
-  ).filter((y) => y !== 0)
 
   return (
     <g>
-      {ys.map((y) => (
-        <text key={y} x={5} y={vec.transform([0, y], toPx)[1]} dominantBaseline="central">
-          {labelMaker(y)}
-        </text>
+      {yPanes.map(([min, max]) => (
+        <g key={`${min},${max}`}>
+          {range(min, max - separation, separation)
+            .filter((y) => y)
+            .map((y) => (
+              <text
+                x={5}
+                y={vec.transform([0, y], viewTransform)[1]}
+                key={y}
+                dominantBaseline="central"
+              >
+                {labelMaker(y)}
+              </text>
+            ))}
+        </g>
       ))}
     </g>
   )
 }
 
 YLabels.displayName = "CartesianCoordinates.YLabels"
-
-function snappedRange(min: number, max: number, step: number) {
-  return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)
-}
 
 export function autoPi(x: number): string {
   if (x === 0) return "0"

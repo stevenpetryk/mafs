@@ -105,7 +105,7 @@ export interface Filled {
 export type Interval = [min: number, max: number];
 
 // @public (undocumented)
-export type LabelMaker = (value: number) => number | string;
+export type LabelMaker = (value: number) => React_2.ReactNode;
 
 // @public (undocumented)
 export function labelPi(x: number): string;

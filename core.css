@@ -52,6 +52,7 @@
   stroke-width: 3px;
   stroke: var(--mafs-bg);
   stroke-opacity: 0.75;
+  stroke-linejoin: round;
 }
 
 .mafs-movable-point {

@@ -10,11 +10,11 @@ export default function PointsAlongFunction() {
     constrain: "horizontal",
   })
 
+  const n = 10
+
   const points =
     sep.x != 0
-      ? range(0, 10 * sep.x, sep.x).concat(
-          range(0, -10 * sep.x, -sep.x)
-        )
+      ? range(-n * sep.x, (n + 0.5) * sep.x, sep.x)
       : []
 
   return (

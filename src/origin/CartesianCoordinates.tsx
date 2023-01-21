@@ -93,6 +93,8 @@ export function CartesianCoordinates({
           </g>
         </pattern>
 
+        <rect width={unitW} height={unitH} fill={`url(#${id}-subdivision)`} />
+
         <g stroke="var(--mafs-line-color)">
           {yAxisEnabled && xAxis.lines && (
             <>
@@ -107,7 +109,6 @@ export function CartesianCoordinates({
             </>
           )}
         </g>
-        <rect width={unitW} height={unitH} fill={`url(#${id}-subdivision)`} />
       </pattern>
 
       <rect x={vxMin} y={vyMax} width={vxMax - vxMin} height={vyMin - vyMax} fill={`url(#${id})`} />

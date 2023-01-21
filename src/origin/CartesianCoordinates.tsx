@@ -40,6 +40,9 @@ export function CartesianCoordinates({
   yAxis: yAxisOverrides,
   subdivisions = false,
 }: CartesianCoordinatesProps) {
+  const xAxisEnabled = xAxisOverrides !== false
+  const yAxisEnabled = yAxisOverrides !== false
+
   const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as AxisOptions
   const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as AxisOptions
 
@@ -75,13 +78,13 @@ export function CartesianCoordinates({
           patternUnits="userSpaceOnUse"
         >
           <g stroke="var(--grid-line-subdivision-color)">
-            {xSubs > 1 && (
+            {xAxisEnabled !== false && xSubs > 1 && (
               <>
                 <line x1={0} y1={0} x2={0} y2={subUnitH} />
                 <line x1={subUnitW} y1={0} x2={subUnitW} y2={subUnitH} />
               </>
             )}
-            {ySubs > 1 && (
+            {yAxisEnabled !== false && ySubs > 1 && (
               <>
                 <line x1={0} y1={0} x2={subUnitW} y2={0} />
                 <line x1={0} y1={subUnitH} x2={subUnitW} y2={subUnitH} />
@@ -90,24 +93,37 @@ export function CartesianCoordinates({
           </g>
         </pattern>
 
-        <rect
-          width={unitW}
-          height={unitH}
-          stroke="var(--mafs-line-color)"
-          fill={`url(#${id}-subdivision)`}
-        />
+        <g stroke="var(--mafs-line-color)">
+          {yAxisEnabled && xAxis.lines && (
+            <>
+              <line x1={0} y1={0} x2={unitW} y2={0} />
+              <line x1={0} y1={unitH} x2={unitW} y2={unitH} />
+            </>
+          )}
+          {xAxisEnabled && yAxis.lines && (
+            <>
+              <line x1={0} y1={0} x2={0} y2={unitH} />
+              <line x1={unitW} y1={0} x2={unitW} y2={unitH} />
+            </>
+          )}
+        </g>
+        <rect width={unitW} height={unitH} fill={`url(#${id}-subdivision)`} />
       </pattern>
 
       <rect x={vxMin} y={vyMax} width={vxMax - vxMin} height={vyMin - vyMax} fill={`url(#${id})`} />
 
       <g stroke="var(--mafs-origin-color)">
-        {xAxis.axis && <line x1={vxMin} y1={0} x2={vxMax} y2={0} />}
-        {yAxis.axis && <line x1={0} y1={vyMin} x2={0} y2={vyMax} />}
+        {xAxisEnabled && xAxis.axis && <line x1={vxMin} y1={0} x2={vxMax} y2={0} />}
+        {yAxisEnabled && yAxis.axis && <line x1={0} y1={vyMin} x2={0} y2={vyMax} />}
       </g>
 
       <g className="mafs-shadow">
-        {xAxis.labels && <XLabels separation={xAxis.lines || 1} labelMaker={xAxis.labels} />}
-        {yAxis.labels && <YLabels separation={yAxis.lines || 1} labelMaker={yAxis.labels} />}
+        {xAxisEnabled && xAxis.labels && (
+          <XLabels separation={xAxis.lines || 1} labelMaker={xAxis.labels} />
+        )}
+        {yAxisEnabled && yAxis.labels && (
+          <YLabels separation={yAxis.lines || 1} labelMaker={yAxis.labels} />
+        )}
       </g>
     </g>
   )

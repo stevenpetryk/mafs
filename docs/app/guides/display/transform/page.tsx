@@ -73,7 +73,7 @@ export default function Page() {
         </li>
 
         <li>
-          <code>CartesianCoordinates</code> cannot be transformed.
+          <code>Coordinates.*</code> cannot be transformed.
         </li>
 
         <li>

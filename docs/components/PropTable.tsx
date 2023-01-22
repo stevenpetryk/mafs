@@ -41,6 +41,8 @@ export function PropTable({ of: component }: PropTableProps) {
     throw new Error("Non-docgen object passed to PropTable")
   }
 
+  console.log({ component })
+
   const displayName =
     // eslint-disable-next-line
     (component as any)?.displayName ?? docgenInfo.displayName

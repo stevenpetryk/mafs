@@ -2,11 +2,7 @@ export { Mafs } from "./view/Mafs"
 export type { MafsProps } from "./view/Mafs"
 
 export { Coordinates } from "./display/Coordinates"
-import { Cartesian, autoPi as labelPi } from "./display/Coordinates/Cartesian"
-
-/** @deprecated use `Cartesian.Coordinates` */
-export const CartesianCoordinates = Cartesian
-export { labelPi }
+export { autoPi as labelPi } from "./display/Coordinates/Cartesian"
 
 export { Plot } from "./display/Plot"
 export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"

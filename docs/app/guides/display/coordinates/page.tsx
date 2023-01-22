@@ -80,6 +80,14 @@ function CoordinatesPage() {
       />
 
       <PropTable of={Coordinates.Polar} />
+
+      <h3>Axis options</h3>
+
+      <p>
+        Polar coordinates take most of the same options as cartesian coordinates, except that{" "}
+        <code>lines</code> and <code>subdivisions</code> affects the radial rather than the{" "}
+        <code>x</code> and <code>y</code> axes.
+      </p>
     </>
   )
 }

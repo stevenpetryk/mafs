@@ -9,11 +9,15 @@ const thetas = range(0, 2 * Math.PI, Math.PI / 12)
 export interface PolarCoordinatesProps {
   xAxis?: Partial<AxisOptions> | false
   yAxis?: Partial<AxisOptions> | false
+  lines?: number
+  subdivisions?: number
 }
 
 export function PolarCoordinates({
   xAxis: xAxisOverrides,
   yAxis: yAxisOverrides,
+  lines = 1,
+  subdivisions,
 }: PolarCoordinatesProps) {
   const xAxisEnabled = xAxisOverrides !== false
   const yAxisEnabled = yAxisOverrides !== false
@@ -34,7 +38,7 @@ export function PolarCoordinates({
     vec.mag([xMax, yMax]),
     vec.mag([(xMin + xMax) / 2, (yMin + yMax) / 2]),
   ]
-  const b = 1
+  const b = lines
 
   const closeToOrigin = Math.min(...distances) < Math.max(xMax - xMin, yMax - yMin)
   const minRadiusPrecise = closeToOrigin ? 0 : Math.min(...distances)
@@ -49,7 +53,7 @@ export function PolarCoordinates({
   const [scaleX, scaleY] = vec.transform([1, -1], viewTransform)
 
   const rs = range(minRadius, maxRadius, b)
-  const subRs = range(minRadius, maxRadius, b / 4)
+  const subRs = subdivisions != undefined ? range(minRadius, maxRadius, b / subdivisions) : []
 
   return (
     <g fill="none">
@@ -95,11 +99,11 @@ export function PolarCoordinates({
       </g>
 
       <g className="mafs-shadow">
-        {xAxisEnabled && xAxis.lines && (
-          <XLabels separation={xAxis.lines} labelMaker={xAxis.labels || defaultLabelMaker} />
+        {xAxisEnabled && xAxis.labels && (
+          <XLabels separation={xAxis.lines || 1} labelMaker={xAxis.labels || defaultLabelMaker} />
         )}
-        {yAxisEnabled && yAxis.lines && (
-          <YLabels separation={yAxis.lines} labelMaker={yAxis.labels || defaultLabelMaker} />
+        {yAxisEnabled && yAxis.labels && (
+          <YLabels separation={yAxis.lines || 1} labelMaker={yAxis.labels || defaultLabelMaker} />
         )}
       </g>
     </g>

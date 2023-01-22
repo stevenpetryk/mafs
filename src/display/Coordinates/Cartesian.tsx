@@ -13,7 +13,6 @@ export interface CartesianCoordinatesProps {
   xAxis?: Partial<GridAxisOptions> | false
   yAxis?: Partial<GridAxisOptions> | false
   subdivisions?: number | false
-  showZero?: boolean
 }
 
 export function Cartesian({

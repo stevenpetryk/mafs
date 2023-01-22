@@ -1,13 +1,13 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Transform, Vector, CartesianCoordinates, useMovablePoint, Circle, Polygon, vec, Theme } from "mafs"
+import { Mafs, Transform, Vector, Coordinates, useMovablePoint, Circle, Polygon, vec, Theme } from "mafs"
 import clamp from "lodash/clamp"
 
 export default function SnapPoint() {
   return (
     <Mafs height={200} viewBox={{ x: [-8, 8], y: [-2, 2] }}>
-      <CartesianCoordinates
+      <Coordinates.Cartesian
         xAxis={{ labels: false, axis: false }}
       />
 

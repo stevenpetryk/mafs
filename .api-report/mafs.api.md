@@ -9,34 +9,7 @@
 import * as React_2 from 'react';
 
 // @public (undocumented)
-export type AxisOptions = {
-    axis: boolean;
-    lines: number | false;
-    subdivisions: number | false;
-    labels: false | LabelMaker;
-};
-
-// @public (undocumented)
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
-
-// @public (undocumented)
-export function CartesianCoordinates({ xAxis: xAxisOverrides, yAxis: yAxisOverrides, subdivisions, }: CartesianCoordinatesProps): JSX.Element;
-
-// @public (undocumented)
-export namespace CartesianCoordinates {
-    var // (undocumented)
-    displayName: string;
-}
-
-// @public (undocumented)
-export interface CartesianCoordinatesProps {
-    // (undocumented)
-    subdivisions?: number | false;
-    // (undocumented)
-    xAxis?: Partial<AxisOptions> | false;
-    // (undocumented)
-    yAxis?: Partial<AxisOptions> | false;
-}
 
 // @public (undocumented)
 export function Circle({ radius, ...rest }: CircleProps): JSX.Element;
@@ -59,6 +32,12 @@ export interface CircleProps extends Filled {
 
 // @public (undocumented)
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2;
+
+// @public (undocumented)
+export const Coordinates: {
+    Cartesian: typeof Cartesian;
+    Polar: typeof PolarCoordinates;
+};
 
 // @public (undocumented)
 export const Debug: {
@@ -103,9 +82,6 @@ export interface Filled {
 
 // @public (undocumented)
 export type Interval = [min: number, max: number];
-
-// @public (undocumented)
-export type LabelMaker = (value: number) => React_2.ReactNode;
 
 // @public (undocumented)
 export function labelPi(x: number): string;
@@ -455,6 +431,8 @@ export interface VectorProps extends Stroked {
 //
 // src/debug/index.tsx:4:19 - (ae-forgotten-export) The symbol "ViewportInfo" needs to be exported by the entry point index.d.ts
 // src/debug/index.tsx:4:19 - (ae-forgotten-export) The symbol "TransformWidget" needs to be exported by the entry point index.d.ts
+// src/display/Coordinates/index.tsx:9:25 - (ae-forgotten-export) The symbol "Cartesian" needs to be exported by the entry point index.d.ts
+// src/display/Coordinates/index.tsx:9:25 - (ae-forgotten-export) The symbol "PolarCoordinates" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointAngle" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointSlope" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "ThroughPoints" needs to be exported by the entry point index.d.ts

@@ -3,7 +3,7 @@
 import {
   Mafs,
   Line,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
 } from "mafs"
 
@@ -13,7 +13,7 @@ export default function LineSegmentExample() {
 
   return (
     <Mafs height={200} viewBox={{ x: [-2, 2], y: [-1, 1] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Line.Segment
         point1={point1.point}
         point2={point2.point}

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import {
-  CartesianCoordinates,
+  Coordinates,
   Plot,
   Line,
   Mafs,
@@ -107,7 +107,7 @@ export default function BezierCurves() {
   return (
     <>
       <Mafs viewBox={{ x: [-5, 5], y: [-4, 4] }}>
-        <CartesianCoordinates
+        <Coordinates.Cartesian
           xAxis={{ labels: false, axis: false }}
           yAxis={{ labels: false, axis: false }}
         />

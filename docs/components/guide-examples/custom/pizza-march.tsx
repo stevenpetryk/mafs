@@ -3,7 +3,7 @@
 import { range } from "lodash"
 import {
   Mafs,
-  CartesianCoordinates,
+  Coordinates,
   Plot,
   useMovablePoint,
   Transform,
@@ -79,7 +79,7 @@ export default function Example() {
 
   return (
     <Mafs height={300} viewBox={{ y: [-1, 1], x: [-3, 3] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Plot.OfX y={fn} />
       {points.map((p, index) => (
         <Transform

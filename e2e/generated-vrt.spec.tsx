@@ -31,6 +31,7 @@ import TwistyBoi from "../docs/components/guide-examples/plots/twisty-boi"
 import SimpleTransform from "../docs/components/guide-examples/utility/SimpleTransform"
 import CartesianCoordinatesConfigExample from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesExample from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesExample"
+import PolarCoordinatesExample from "../docs/components/guide-examples/display/coordinates/PolarCoordinatesExample"
 import VectorExample from "../docs/components/guide-examples/display/vectors/VectorExample"
 import ContainViewbox from "../docs/components/guide-examples/display/viewbox/ContainViewbox"
 import StretchViewbox from "../docs/components/guide-examples/display/viewbox/StretchViewbox"
@@ -264,6 +265,14 @@ test("guide-examples/display/coordinates/CartesianCoordinatesConfigExample", asy
 
 test("guide-examples/display/coordinates/CartesianCoordinatesExample", async ({ mount, page }) => {
   const component = await mount(<CartesianCoordinatesExample />)
+  ;(await component.locator(".MafsView").count()) === 0
+    ? await expect(component).toHaveClass("MafsView")
+    : await expect(component.locator(".MafsView")).toHaveClass("MafsView")
+  await expect(page).toHaveScreenshot()
+})
+
+test("guide-examples/display/coordinates/PolarCoordinatesExample", async ({ mount, page }) => {
+  const component = await mount(<PolarCoordinatesExample />)
   ;(await component.locator(".MafsView").count()) === 0
     ? await expect(component).toHaveClass("MafsView")
     : await expect(component.locator(".MafsView")).toHaveClass("MafsView")

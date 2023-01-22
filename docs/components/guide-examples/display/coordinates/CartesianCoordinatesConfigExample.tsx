@@ -1,4 +1,4 @@
-import { Mafs, CartesianCoordinates, labelPi } from "mafs"
+import { Mafs, Coordinates, labelPi } from "mafs"
 
 export default function CartesianCoordinatesExample() {
   return (
@@ -8,7 +8,7 @@ export default function CartesianCoordinatesExample() {
       viewBox={{ x: [-8, 8], y: [-Math.PI * 2, Math.PI * 2], padding: Math.PI / 2, }}
       preserveAspectRatio={false}
     >
-      <CartesianCoordinates
+      <Coordinates.Cartesian
         xAxis={{
           lines: 1,
           labels: (n) => (isOdd(n) ? n : ""),

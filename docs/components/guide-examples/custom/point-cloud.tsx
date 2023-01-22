@@ -1,5 +1,5 @@
 import {
-  CartesianCoordinates,
+  Coordinates,
   Debug,
   Mafs,
   useTransformContext,
@@ -9,7 +9,7 @@ import {
 export default function Example() {
   return (
     <Mafs height={300} viewBox={{ y: [-1, 5], x: [-1, 6] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
 
       <Debug.TransformWidget>
         <PointCloud />

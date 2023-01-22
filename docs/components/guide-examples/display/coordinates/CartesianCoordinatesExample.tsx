@@ -1,9 +1,9 @@
-import { Mafs, CartesianCoordinates } from "mafs"
+import { Mafs, Coordinates } from "mafs"
 
-export default function CartesianCoordinatesExample() {
+export default function Example() {
   return (
-    <Mafs height={200}>
-      <CartesianCoordinates />
+    <Mafs height={300}>
+      <Coordinates.Cartesian />
     </Mafs>
   )
 }

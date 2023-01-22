@@ -1,15 +1,18 @@
 "use client"
 
-import { CartesianCoordinates } from "mafs"
+import { Coordinates } from "mafs"
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
-import Link from "next/link"
 
 import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"
 
 import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
+import Code from "components/Code"
+
+import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
+import PolarCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/PolarCoordinatesExample"
 
 function CoordinatesPage() {
   return (
@@ -20,6 +23,8 @@ function CoordinatesPage() {
         themselves can be altered.
       </p>
 
+      <Code source={`import { Coordinates } from "mafs"`} language="tsx" />
+
       <h2>Cartesian coordinates</h2>
 
       <CodeAndExample
@@ -27,7 +32,7 @@ function CoordinatesPage() {
         source={CartesianCoordinatesExampleSource}
       />
 
-      <PropTable of={CartesianCoordinates} />
+      <PropTable of={Coordinates.Cartesian} />
 
       <h3>Axis options</h3>
 
@@ -54,7 +59,7 @@ function CoordinatesPage() {
       </ul>
 
       <p>
-        The entire axis can also be set to <code>false</code>to disable it entirely.
+        The entire axis can also be set to <code>false</code> to disable it entirely.
       </p>
 
       <p>
@@ -69,12 +74,19 @@ function CoordinatesPage() {
 
       <h2>Polar coordinates</h2>
 
+      <CodeAndExample
+        component={<PolarCoordinatesExample />}
+        source={PolarCoordinatesExampleSource}
+      />
+
+      <PropTable of={Coordinates.Polar} />
+
+      <h3>Axis options</h3>
+
       <p>
-        Polar coordinates are not yet implemented in Mafs. There is an{" "}
-        <Link href="https://github.com/stevenpetryk/mafs/issues/6" target="_blank">
-          open issue for this
-        </Link>
-        .
+        Polar coordinates take most of the same options as cartesian coordinates, except that{" "}
+        <code>lines</code> and <code>subdivisions</code> affects the radial rather than the{" "}
+        <code>x</code> and <code>y</code> axes.
       </p>
     </>
   )

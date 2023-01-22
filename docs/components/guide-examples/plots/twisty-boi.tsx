@@ -2,7 +2,7 @@
 
 import {
   Mafs,
-  CartesianCoordinates,
+  Coordinates,
   Plot,
   useMovablePoint,
 } from "mafs"
@@ -17,7 +17,7 @@ export default function TwistyBoi() {
 
   return (
     <Mafs height={300} viewBox={{ x: [-1, 1], y: [-1, 1] }}>
-      <CartesianCoordinates subdivisions={4} />
+      <Coordinates.Cartesian subdivisions={4} />
 
       <Plot.Parametric
         t={[0, k]}

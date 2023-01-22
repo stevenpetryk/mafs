@@ -3,7 +3,7 @@
 import {
   Mafs,
   Line,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
 } from "mafs"
 
@@ -12,7 +12,7 @@ export default function LinePointAngleExample() {
 
   return (
     <Mafs height={200} viewBox={{ x: [-1, 1], y: [-1, 1] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Line.PointAngle
         point={point.point}
         angle={Math.PI / 6}

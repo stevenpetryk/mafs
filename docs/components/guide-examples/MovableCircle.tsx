@@ -3,7 +3,7 @@
 import {
   Mafs,
   Circle,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
   vec,
 } from "mafs"
@@ -17,7 +17,7 @@ export default function MovableCircle() {
 
   return (
     <Mafs height={200} viewBox={{ y: [-2, 2] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Circle center={[0, 0]} radius={r} />
       {pointOnCircle.element}
     </Mafs>

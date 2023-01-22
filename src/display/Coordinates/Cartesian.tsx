@@ -1,41 +1,21 @@
-import * as React from "react"
-import { range, round } from "../math"
-import { usePaneContext } from "../context/PaneContext"
-import { useTransformContext } from "../context/TransformContext"
-import { vec } from "../vec"
-
-export type LabelMaker = (value: number) => React.ReactNode
+import { range, round } from "../../math"
+import { usePaneContext } from "../../context/PaneContext"
+import { useTransformContext } from "../../context/TransformContext"
+import { vec } from "../../vec"
+import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0
 
-export type AxisOptions = {
-  axis: boolean
-  lines: number | false
-  subdivisions: number | false
-  labels: false | LabelMaker
-}
-
-const defaultAxisOptions: Partial<AxisOptions> = {
-  axis: true,
-  lines: 1,
-  labels: (x) => {
-    return (
-      <>
-        {x}
-        {x < 0 && <tspan visibility="hidden">-</tspan>}
-      </>
-    )
-  },
-}
+type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
 
 export interface CartesianCoordinatesProps {
-  xAxis?: Partial<AxisOptions> | false
-  yAxis?: Partial<AxisOptions> | false
+  xAxis?: GridAxisOptions | false
+  yAxis?: GridAxisOptions | false
   subdivisions?: number | false
 }
 
-export function CartesianCoordinates({
+export function Cartesian({
   xAxis: xAxisOverrides,
   yAxis: yAxisOverrides,
   subdivisions = false,
@@ -43,8 +23,8 @@ export function CartesianCoordinates({
   const xAxisEnabled = xAxisOverrides !== false
   const yAxisEnabled = yAxisOverrides !== false
 
-  const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as AxisOptions
-  const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as AxisOptions
+  const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as GridAxisOptions
+  const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as GridAxisOptions
 
   const id = `cartesian-${incrementer++}`
 
@@ -130,70 +110,7 @@ export function CartesianCoordinates({
   )
 }
 
-CartesianCoordinates.displayName = "CartesianCoordinates"
-
-export interface LabelsProps {
-  separation: number
-  labelMaker: LabelMaker
-}
-function XLabels({ separation, labelMaker }: LabelsProps) {
-  const { viewTransform } = useTransformContext()
-  const { xPanes } = usePaneContext()
-
-  return (
-    <g className="mafs-axis">
-      {xPanes.map(([min, max]) => (
-        <g key={`${min},${max}`}>
-          {snappedRange(min, max - separation, separation)
-            .filter((x) => Math.abs(x) > separation / 1e6)
-            .map((x) => (
-              <text
-                x={vec.transform([x, 0], viewTransform)[0]}
-                y={5}
-                key={x}
-                dominantBaseline="hanging"
-                textAnchor="middle"
-              >
-                {labelMaker(x)}
-              </text>
-            ))}
-        </g>
-      ))}
-    </g>
-  )
-}
-
-XLabels.displayName = "CartesianCoordinates.XLabels"
-
-function YLabels({ separation, labelMaker }: LabelsProps) {
-  const { viewTransform } = useTransformContext()
-  const { yPanes } = usePaneContext()
-
-  return (
-    <g className="mafs-axis">
-      {yPanes.map(([min, max]) => (
-        <g key={`${min},${max}`}>
-          {snappedRange(min, max - separation, separation)
-            .filter((y) => Math.abs(y) > separation / 1e6)
-            .map((y) => (
-              <text
-                x={5}
-                y={vec.transform([0, y], viewTransform)[1]}
-                key={y}
-                dominantBaseline="central"
-              >
-                {labelMaker(y)}
-              </text>
-            ))}
-        </g>
-      ))}
-    </g>
-  )
-}
-
-YLabels.displayName = "CartesianCoordinates.YLabels"
-
-function snappedRange(min: number, max: number, step: number) {
+export function snappedRange(min: number, max: number, step: number) {
   return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)
 }
 

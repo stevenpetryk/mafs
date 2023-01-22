@@ -1,7 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Ellipse, Circle, CartesianCoordinates, useMovablePoint, Theme, vec, Transform } from "mafs"
+import { Mafs, Ellipse, Circle, Coordinates, useMovablePoint, Theme, vec, Transform } from "mafs"
 
 export default function MovableEllipse() {
   const hintRadius = 3
@@ -30,7 +30,7 @@ export default function MovableEllipse() {
 
   return (
     <Mafs height={400} viewBox={{ x: [-3, 3], y: [-3, 3] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
 
       <Transform translate={translate.point}>
         <Transform rotate={angle}>

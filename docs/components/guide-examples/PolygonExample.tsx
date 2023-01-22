@@ -4,7 +4,7 @@ import {
   Mafs,
   Theme,
   Polygon,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
 } from "mafs"
 
@@ -15,7 +15,7 @@ export default function TrianglePool() {
 
   return (
     <Mafs height={300}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Polygon
         points={[[c.x, -c.y], a, b]}
         strokeStyle="dashed"

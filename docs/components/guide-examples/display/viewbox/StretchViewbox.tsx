@@ -1,6 +1,6 @@
 "use client"
 
-import { Mafs, CartesianCoordinates, Polygon } from "mafs"
+import { Mafs, Coordinates, Polygon } from "mafs"
 
 export default function ViewboxEample() {
   return (
@@ -9,7 +9,7 @@ export default function ViewboxEample() {
       preserveAspectRatio={false}
       height={400}
     >
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       {/* prettier-ignore */}
       <Polygon points={[[-5, -5], [5, -5], [5, 5], [-5, 5]]} />
     </Mafs>

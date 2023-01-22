@@ -3,7 +3,7 @@
 import {
   Mafs,
   Line,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
 } from "mafs"
 
@@ -15,7 +15,7 @@ export default function LinePointSlopeExample() {
 
   return (
     <Mafs height={200} viewBox={{ x: [-1, 1], y: [-1, 1] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Line.PointSlope
         point={point.point}
         slope={slope.y}

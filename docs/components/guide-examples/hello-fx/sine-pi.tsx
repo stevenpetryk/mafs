@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  Mafs,
-  CartesianCoordinates,
-  Plot,
-  labelPi,
-} from "mafs"
+import { Mafs, Coordinates, Plot, labelPi } from "mafs"
 
 export default function HelloFx() {
   return (
@@ -14,7 +9,7 @@ export default function HelloFx() {
       viewBox={{ x: [-10, 10], y: [-2, 2] }}
       preserveAspectRatio={false}
     >
-      <CartesianCoordinates
+      <Coordinates.Cartesian
         subdivisions={4}
         xAxis={{ lines: Math.PI, labels: labelPi }}
       />

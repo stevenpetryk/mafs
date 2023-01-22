@@ -1,4 +1,4 @@
-import { Mafs, CartesianCoordinates, Circle, useMovablePoint, Theme, Debug } from "../../src"
+import { Mafs, Coordinates, Circle, useMovablePoint, Theme, Debug } from "../../src"
 
 export function MafsDragging() {
   const point1 = useMovablePoint([0, 0], { color: Theme.blue })
@@ -7,7 +7,7 @@ export function MafsDragging() {
 
   return (
     <Mafs>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
 
       <Circle center={point1.point} radius={0.5} />
       <Circle center={point2.point} radius={0.5} />

@@ -3,7 +3,6 @@
 import { Coordinates } from "mafs"
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
-import Link from "next/link"
 
 import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"

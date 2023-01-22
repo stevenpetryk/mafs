@@ -100,10 +100,16 @@ export function PolarCoordinates({
 
       <g className="mafs-shadow">
         {xAxisEnabled && xAxis.labels && (
-          <XLabels separation={xAxis.lines || 1} labelMaker={xAxis.labels || defaultLabelMaker} />
+          <XLabels
+            separation={xAxisOverrides?.lines || lines || 1}
+            labelMaker={xAxis.labels || defaultLabelMaker}
+          />
         )}
         {yAxisEnabled && yAxis.labels && (
-          <YLabels separation={yAxis.lines || 1} labelMaker={yAxis.labels || defaultLabelMaker} />
+          <YLabels
+            separation={yAxisOverrides?.lines || lines || 1}
+            labelMaker={yAxis.labels || defaultLabelMaker}
+          />
         )}
       </g>
     </g>

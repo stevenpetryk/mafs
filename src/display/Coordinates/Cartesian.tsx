@@ -10,8 +10,8 @@ let incrementer = 0
 type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
 
 export interface CartesianCoordinatesProps {
-  xAxis?: Partial<GridAxisOptions> | false
-  yAxis?: Partial<GridAxisOptions> | false
+  xAxis?: GridAxisOptions | false
+  yAxis?: GridAxisOptions | false
   subdivisions?: number | false
 }
 

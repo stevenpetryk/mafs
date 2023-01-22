@@ -1,7 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, CartesianCoordinates, MovablePoint, useMovablePoint, Line, Theme, vec } from "mafs"
+import { Mafs, Coordinates, MovablePoint, useMovablePoint, Line, Theme, vec } from "mafs"
 import range from "lodash/range"
 
 export default function DynamicMovablePoints() {
@@ -20,7 +20,7 @@ export default function DynamicMovablePoints() {
 
   return (
     <Mafs>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
 
       <Line.Segment
         point1={start.point}

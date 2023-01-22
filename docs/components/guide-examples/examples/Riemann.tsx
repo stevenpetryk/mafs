@@ -7,7 +7,7 @@ import {
   Plot,
   Polygon,
   Text,
-  CartesianCoordinates,
+  Coordinates,
 } from "mafs"
 
 import sumBy from "lodash/sumBy"
@@ -69,7 +69,7 @@ export default function RiemannSum() {
         height={400}
         viewBox={{ x: [-1, 12], y: [-3, 10] }}
       >
-        <CartesianCoordinates subdivisions={2} />
+        <Coordinates.Cartesian subdivisions={2} />
 
         <Plot.OfX y={wave} color="#358CF1" />
 

@@ -1,13 +1,9 @@
-import {
-  Mafs,
-  CartesianCoordinates,
-  PolarCoordinates,
-} from "mafs"
+import { Mafs, Coordinates } from "mafs"
 
-export default function PolarCoordinatesExample() {
+export default function Example() {
   return (
-    <Mafs height={500}>
-      <PolarCoordinates />
+    <Mafs height={300}>
+      <Coordinates.Polar />
     </Mafs>
   )
 }

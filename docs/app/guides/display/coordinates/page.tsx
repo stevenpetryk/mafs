@@ -1,6 +1,6 @@
 "use client"
 
-import { CartesianCoordinates } from "mafs"
+import { Coordinates } from "mafs"
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
 import Link from "next/link"
@@ -10,18 +10,21 @@ import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/displa
 
 import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
+import Code from "components/Code"
+
 import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
+import PolarCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/PolarCoordinatesExample"
 
 function CoordinatesPage() {
   return (
     <>
-      <PolarCoordinatesExample />
-
       <p>
         Coordinates overlay a grid of lines on top of the Mafs canvas to give a sense of scale. Axes
         are pretty configurable—the spacing between lines, number of subdivisions, and the labels
         themselves can be altered.
       </p>
+
+      <Code source={`import { Coordinates } from "mafs"`} language="tsx" />
 
       <h2>Cartesian coordinates</h2>
 
@@ -30,7 +33,7 @@ function CoordinatesPage() {
         source={CartesianCoordinatesExampleSource}
       />
 
-      <PropTable of={CartesianCoordinates} />
+      <PropTable of={Coordinates.Cartesian} />
 
       <h3>Axis options</h3>
 
@@ -57,7 +60,7 @@ function CoordinatesPage() {
       </ul>
 
       <p>
-        The entire axis can also be set to <code>false</code>to disable it entirely.
+        The entire axis can also be set to <code>false</code> to disable it entirely.
       </p>
 
       <p>
@@ -71,6 +74,11 @@ function CoordinatesPage() {
       />
 
       <h2>Polar coordinates</h2>
+
+      <CodeAndExample
+        component={<PolarCoordinatesExample />}
+        source={PolarCoordinatesExampleSource}
+      />
 
       <p>
         Polar coordinates are not yet implemented in Mafs. There is an{" "}

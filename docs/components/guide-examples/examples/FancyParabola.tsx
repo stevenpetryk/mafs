@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  CartesianCoordinates,
+  Coordinates,
   Plot,
   Mafs,
   Transform,
@@ -25,7 +25,7 @@ export default function FancyParabola() {
 
   return (
     <Mafs>
-      <CartesianCoordinates subdivisions={2} />
+      <Coordinates.Cartesian subdivisions={2} />
 
       <Plot.OfX y={(x) => (k.y * fn(x)) / fn(mid)} />
       {a.element}

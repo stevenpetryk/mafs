@@ -2,7 +2,7 @@
 
 import {
   Mafs,
-  CartesianCoordinates,
+  Coordinates,
   Plot,
   labelPi,
   useMovablePoint,
@@ -19,7 +19,7 @@ export default function HelloFx() {
       viewBox={{ x: [-10, 10], y: [-2, 2] }}
       preserveAspectRatio={false}
     >
-      <CartesianCoordinates
+      <Coordinates.Cartesian
         subdivisions={4}
         xAxis={{ lines: Math.PI, labels: labelPi }}
       />

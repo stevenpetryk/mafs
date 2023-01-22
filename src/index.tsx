@@ -1,14 +1,12 @@
 export { Mafs } from "./view/Mafs"
 export type { MafsProps } from "./view/Mafs"
 
-export { CartesianCoordinates, autoPi as labelPi } from "./origin/CartesianCoordinates"
-export type {
-  CartesianCoordinatesProps,
-  AxisOptions,
-  LabelMaker,
-} from "./origin/CartesianCoordinates"
+export { Coordinates } from "./display/Coordinates"
+import { Cartesian, autoPi as labelPi } from "./display/Coordinates/Cartesian"
 
-export { PolarCoordinates } from "./origin/PolarCoordinates"
+/** @deprecated use `Cartesian.Coordinates` */
+export const CartesianCoordinates = Cartesian
+export { labelPi }
 
 export { Plot } from "./display/Plot"
 export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"

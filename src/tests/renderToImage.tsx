@@ -3,7 +3,7 @@ import * as ReactDOMServer from "react-dom/server"
 import * as fs from "fs"
 import * as path from "path"
 
-import { Mafs, CartesianCoordinates, MafsProps } from ".."
+import { Mafs, Coordinates, MafsProps } from ".."
 
 const css = fs.readFileSync(path.join(process.cwd(), "core.css")).toString()
 
@@ -50,7 +50,7 @@ export default async function renderToImage(
           preserveAspectRatio={preserveAspectRatio ? "contain" : false}
           pan={false}
         >
-          {coordinates ? <CartesianCoordinates /> : null}
+          {coordinates ? <Coordinates.Cartesian /> : null}
           {children}
         </Mafs>
       </body>

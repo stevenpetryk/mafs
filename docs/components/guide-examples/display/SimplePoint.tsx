@@ -1,11 +1,11 @@
 "use client"
 
-import { Mafs, Point, CartesianCoordinates } from "mafs"
+import { Mafs, Point, Coordinates } from "mafs"
 
 export default function SimplePoint() {
   return (
     <Mafs height={300}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Point x={1} y={1} />
     </Mafs>
   )

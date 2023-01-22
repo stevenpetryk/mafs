@@ -1,34 +1,31 @@
-import { usePaneContext } from "../context/PaneContext"
-import { useTransformContext } from "../context/TransformContext"
-import { range } from "../math"
-import { vec } from "../vec"
-import { XLabels, YLabels } from "./CartesianCoordinates"
+import { usePaneContext } from "../../context/PaneContext"
+import { useTransformContext } from "../../context/TransformContext"
+import { range } from "../../math"
+import { vec } from "../../vec"
+import { XLabels, YLabels, defaultLabelMaker, AxisOptions, defaultAxisOptions } from "./Axes"
 
-const thetas = [
-  1 * (Math.PI / 8),
-  2 * (Math.PI / 8),
-  3 * (Math.PI / 8),
-  5 * (Math.PI / 8),
-  6 * (Math.PI / 8),
-  7 * (Math.PI / 8),
-  9 * (Math.PI / 8),
-  10 * (Math.PI / 8),
-  11 * (Math.PI / 8),
-  13 * (Math.PI / 8),
-  14 * (Math.PI / 8),
-  15 * (Math.PI / 8),
-]
+const thetas = range(0, 2 * Math.PI, Math.PI / 12)
 
-export function PolarCoordinates() {
+export interface PolarCoordinatesProps {
+  xAxis?: Partial<AxisOptions> | false
+  yAxis?: Partial<AxisOptions> | false
+}
+
+export function PolarCoordinates({
+  xAxis: xAxisOverrides,
+  yAxis: yAxisOverrides,
+}: PolarCoordinatesProps) {
+  const xAxisEnabled = xAxisOverrides !== false
+  const yAxisEnabled = yAxisOverrides !== false
+
+  const xAxis = { ...defaultAxisOptions, ...xAxisOverrides } as AxisOptions
+  const yAxis = { ...defaultAxisOptions, ...yAxisOverrides } as AxisOptions
+
   const { viewTransform } = useTransformContext()
   const { xPaneRange, yPaneRange } = usePaneContext()
 
   const [xMin, xMax] = xPaneRange
   const [yMin, yMax] = yPaneRange
-
-  // Given these min and max values (the viewport),
-  // find the minimum and maximum radius of circle
-  // to display
 
   const distances = [
     vec.mag([xMin, yMin]),
@@ -93,13 +90,17 @@ export function PolarCoordinates() {
       ))}
 
       <g stroke="var(--mafs-origin-color)">
-        <line x1={vxMin} y1={0} x2={vxMax} y2={0} />
-        <line x1={0} y1={vyMin} x2={0} y2={vyMax} />
+        {xAxisEnabled && xAxis.axis && <line x1={vxMin} y1={0} x2={vxMax} y2={0} />}
+        {yAxisEnabled && yAxis.axis && <line x1={0} y1={vyMin} x2={0} y2={vyMax} />}
       </g>
 
       <g className="mafs-shadow">
-        <XLabels separation={1} labelMaker={(x) => x} />
-        <YLabels separation={1} labelMaker={(y) => y} />
+        {xAxisEnabled && xAxis.lines && (
+          <XLabels separation={xAxis.lines} labelMaker={xAxis.labels || defaultLabelMaker} />
+        )}
+        {yAxisEnabled && yAxis.lines && (
+          <YLabels separation={yAxis.lines} labelMaker={yAxis.labels || defaultLabelMaker} />
+        )}
       </g>
     </g>
   )

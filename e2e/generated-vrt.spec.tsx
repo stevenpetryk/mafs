@@ -30,7 +30,7 @@ import SineStressTest from "../docs/components/guide-examples/plots/sine-stress-
 import TwistyBoi from "../docs/components/guide-examples/plots/twisty-boi"
 import SimpleTransform from "../docs/components/guide-examples/utility/SimpleTransform"
 import CartesianCoordinatesConfigExample from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
-import CartesianCoordinatesExample from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesExample"
+import Example from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesExample"
 import VectorExample from "../docs/components/guide-examples/display/vectors/VectorExample"
 import ContainViewbox from "../docs/components/guide-examples/display/viewbox/ContainViewbox"
 import StretchViewbox from "../docs/components/guide-examples/display/viewbox/StretchViewbox"
@@ -255,7 +255,7 @@ test("guide-examples/display/coordinates/CartesianCoordinatesConfigExample", asy
   mount,
   page,
 }) => {
-  const component = await mount(<CartesianCoordinatesConfigExample />)
+  const component = await mount(<Coordinates.CartesianConfigExample />)
   ;(await component.locator(".MafsView").count()) === 0
     ? await expect(component).toHaveClass("MafsView")
     : await expect(component.locator(".MafsView")).toHaveClass("MafsView")
@@ -263,7 +263,7 @@ test("guide-examples/display/coordinates/CartesianCoordinatesConfigExample", asy
 })
 
 test("guide-examples/display/coordinates/CartesianCoordinatesExample", async ({ mount, page }) => {
-  const component = await mount(<CartesianCoordinatesExample />)
+  const component = await mount(<Coordinates.CartesianExample />)
   ;(await component.locator(".MafsView").count()) === 0
     ? await expect(component).toHaveClass("MafsView")
     : await expect(component.locator(".MafsView")).toHaveClass("MafsView")

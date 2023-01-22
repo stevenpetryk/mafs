@@ -3,7 +3,7 @@
 import {
   Mafs,
   Plot,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
 } from "mafs"
 
@@ -12,7 +12,7 @@ function VectorFieldExample() {
 
   return (
     <Mafs>
-      <CartesianCoordinates subdivisions={2} />
+      <Coordinates.Cartesian subdivisions={2} />
       <Plot.VectorField
         xy={([x, y]) => [
           y - a.y - (x - a.x),

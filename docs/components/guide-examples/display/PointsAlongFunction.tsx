@@ -1,7 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, Plot, Point, CartesianCoordinates, useMovablePoint } from "mafs"
+import { Mafs, Plot, Point, Coordinates, useMovablePoint } from "mafs"
 import range from "lodash/range"
 
 export default function PointsAlongFunction() {
@@ -22,7 +22,7 @@ export default function PointsAlongFunction() {
       height={300}
       viewBox={{ x: [0, 0], y: [-1.3, 4.7] }}
     >
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
 
       <Plot.OfX y={fn} opacity={0.25} />
       {points.map((x, index) => (

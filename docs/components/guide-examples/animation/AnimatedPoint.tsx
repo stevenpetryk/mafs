@@ -4,7 +4,7 @@ import * as React from "react"
 import {
   Mafs,
   Point,
-  CartesianCoordinates,
+  Coordinates,
   useStopwatch,
 } from "mafs"
 
@@ -20,7 +20,7 @@ export default function AnimatedPoint() {
 
   return (
     <Mafs height={500}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
       <Point
         x={Math.cos(time * 2 * Math.PI)}
         y={Math.sin(time * 2 * Math.PI)}

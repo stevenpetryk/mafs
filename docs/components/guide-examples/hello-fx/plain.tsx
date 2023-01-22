@@ -1,11 +1,11 @@
 "use client"
 
-import { Mafs, CartesianCoordinates } from "mafs"
+import { Mafs, Coordinates } from "mafs"
 
 export default function HelloFx() {
   return (
     <Mafs height={300}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
     </Mafs>
   )
 }

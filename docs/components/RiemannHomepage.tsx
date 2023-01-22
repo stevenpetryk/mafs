@@ -6,7 +6,7 @@ import {
   useMovablePoint,
   Plot,
   Polygon,
-  CartesianCoordinates,
+  Coordinates,
   useStopwatch,
   ConstraintFunction,
 } from "mafs"
@@ -73,7 +73,7 @@ export default function RiemannHomepage() {
       preserveAspectRatio={false}
       pan={false}
     >
-      <CartesianCoordinates
+      <Coordinates.Cartesian
         yAxis={{
           axis: false,
           lines: false,

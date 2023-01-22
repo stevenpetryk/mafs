@@ -1,7 +1,7 @@
 "use client"
 
 // prettier-ignore
-import { Mafs, CartesianCoordinates, Transform, useMovablePoint, Theme, Text, Polygon, Circle, vec, } from "mafs"
+import { Mafs, Coordinates, Transform, useMovablePoint, Theme, Text, Polygon, Circle, vec, } from "mafs"
 
 export default function SimpleTransformExample() {
   const t = useMovablePoint([-4, -2])
@@ -14,7 +14,7 @@ export default function SimpleTransformExample() {
 
   return (
     <Mafs height={400} viewBox={{ x: [-8, 8], y: [-3, 3] }}>
-      <CartesianCoordinates />
+      <Coordinates.Cartesian />
 
       <Transform translate={t.point}>
         <Transform rotate={angle}>

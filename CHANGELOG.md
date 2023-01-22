@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.14.0
+
+- `CartesianCoordinates` is now `Coordinates.Cartesian`. In addition to Cartesian coordinates, you
+  can now also use `Coordinates.Polar` to display polar coordinates. See the [Coordinates docs](https://mafs.dev/guides/display/coordinates) for more information.
+
 ## 0.13.1
 
 - Fixes an issue ([#95](https://github.com/stevenpetryk/mafs/issues/95)) where arrow markers in `Vector` were transformed incorrectly and looked comically large.

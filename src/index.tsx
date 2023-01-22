@@ -8,6 +8,8 @@ export type {
   LabelMaker,
 } from "./origin/CartesianCoordinates"
 
+export { PolarCoordinates } from "./origin/PolarCoordinates"
+
 export { Plot } from "./display/Plot"
 export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"
 

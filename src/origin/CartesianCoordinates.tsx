@@ -136,7 +136,7 @@ export interface LabelsProps {
   separation: number
   labelMaker: LabelMaker
 }
-function XLabels({ separation, labelMaker }: LabelsProps) {
+export function XLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform } = useTransformContext()
   const { xPanes } = usePaneContext()
 
@@ -165,7 +165,7 @@ function XLabels({ separation, labelMaker }: LabelsProps) {
 
 XLabels.displayName = "CartesianCoordinates.XLabels"
 
-function YLabels({ separation, labelMaker }: LabelsProps) {
+export function YLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform } = useTransformContext()
   const { yPanes } = usePaneContext()
 

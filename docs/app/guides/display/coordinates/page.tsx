@@ -10,10 +10,13 @@ import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/displa
 
 import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
+import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
 
 function CoordinatesPage() {
   return (
     <>
+      <PolarCoordinatesExample />
+
       <p>
         Coordinates overlay a grid of lines on top of the Mafs canvas to give a sense of scale. Axes
         are pretty configurable—the spacing between lines, number of subdivisions, and the labels

@@ -80,13 +80,7 @@ function CoordinatesPage() {
         source={PolarCoordinatesExampleSource}
       />
 
-      <p>
-        Polar coordinates are not yet implemented in Mafs. There is an{" "}
-        <Link href="https://github.com/stevenpetryk/mafs/issues/6" target="_blank">
-          open issue for this
-        </Link>
-        .
-      </p>
+      <PropTable of={Coordinates.Polar} />
     </>
   )
 }

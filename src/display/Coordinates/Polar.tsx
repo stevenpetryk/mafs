@@ -109,3 +109,5 @@ export function PolarCoordinates({
     </g>
   )
 }
+
+PolarCoordinates.displayName = "Coordinates.Polar"

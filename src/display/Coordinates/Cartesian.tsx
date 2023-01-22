@@ -110,7 +110,7 @@ export function Cartesian({
   )
 }
 
-Cartesian.displayName = "CartesianCoordinates"
+Cartesian.displayName = "Coordinates.Cartesian"
 
 export function snappedRange(min: number, max: number, step: number) {
   return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)

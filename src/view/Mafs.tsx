@@ -3,17 +3,26 @@ import CoordinateContext, { CoordinateContextShape } from "../context/Coordinate
 import PaneManager from "../context/PaneContext"
 import useResizeObserver from "use-resize-observer"
 
-import { useDrag } from "@use-gesture/react"
-import { round } from "../math"
+import { useGesture } from "@use-gesture/react"
+import { clamp, round } from "../math"
 import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
+import invariant from "tiny-invariant"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
   height?: number
+
   /** Whether to enable panning with the mouse and keyboard */
   pan?: boolean
+
+  /**
+   * Whether to enable zooming with the mouse and keyboard. Can also be an
+   * object with `min` and `max` properties to set the scale limits (default: 0.1 to 5).
+   */
+  zoom?: boolean | { min?: number; max?: number }
+
   /**
    * A way to declare the "area of interest" of your visualizations. Mafs will center and zoom to
    * this area.
@@ -38,6 +47,7 @@ export function Mafs({
   width: desiredWidth = "auto",
   height = 500,
   pan = true,
+  zoom = false,
   viewBox = { x: [-3, 3], y: [-3, 3] },
   preserveAspectRatio = "contain",
   children,
@@ -46,56 +56,44 @@ export function Mafs({
   const [visible, setVisible] = React.useState(ssr ? true : false)
   const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
 
-  const { ref, width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>()
+  const rootRef = React.useRef<HTMLDivElement>(null)
+  const { width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>({ ref: rootRef })
 
   React.useEffect(() => {
     setVisible(true)
   }, [])
 
-  const aspect = width / height
-
-  const [offset, setOffset] = React.useState<vec.Vector2>([0, 0])
+  const { matrix: camera, move, commit } = useCamera({ minZoom: 0.2, maxZoom: 5 })
 
   const padding = viewBox?.padding ?? 0.5
-  const aoi = {
-    xMin: (viewBox?.x?.[0] ?? 0) - padding + offset[0],
-    xMax: (viewBox?.x?.[1] ?? 0) + padding + offset[0],
-    yMin: (viewBox?.y?.[0] ?? 0) - padding + offset[1],
-    yMax: (viewBox?.y?.[1] ?? 0) + padding + offset[1],
-  }
-
   // Default behavior for `preserveAspectRatio == false`
-  let xMin = aoi.xMin
-  let xMax = aoi.xMax
-  let yMin = aoi.yMin
-  let yMax = aoi.yMax
+  let xMin = (viewBox?.x?.[0] ?? 0) - padding
+  let xMax = (viewBox?.x?.[1] ?? 0) + padding
+  let yMin = (viewBox?.y?.[0] ?? 0) - padding
+  let yMax = (viewBox?.y?.[1] ?? 0) + padding
 
   if (preserveAspectRatio === "contain") {
-    const aoiAspect = (aoi.xMax - aoi.xMin) / (aoi.yMax - aoi.yMin)
+    const aspect = width / height
+    const aoiAspect = (xMax - xMin) / (yMax - yMin)
+
     if (aoiAspect > aspect) {
-      const yCenter = (aoi.yMax + aoi.yMin) / 2
-      const ySpan = (aoi.xMax - aoi.xMin) / aspect / 2
+      const yCenter = (yMax + yMin) / 2
+      const ySpan = (xMax - xMin) / aspect / 2
       yMin = yCenter - ySpan
       yMax = yCenter + ySpan
     } else {
-      const xCenter = (aoi.xMax + aoi.xMin) / 2
-      const xSpan = ((aoi.yMax - aoi.yMin) * aspect) / 2
+      const xCenter = (xMax + xMin) / 2
+      const xSpan = ((yMax - yMin) * aspect) / 2
       xMin = xCenter - xSpan
       xMax = xCenter + xSpan
     }
   }
 
+  ;[xMin, yMin] = vec.transform([xMin, yMin], camera)
+  ;[xMax, yMax] = vec.transform([xMax, yMax], camera)
+
   const xSpan = xMax - xMin
   const ySpan = yMax - yMin
-
-  const bind = useDrag(
-    ({ offset: [mx, my], event, type }) => {
-      // Prevent document scroll
-      if (type.includes("key")) event.preventDefault()
-      setOffset([(-mx / width) * xSpan, (my / height) * ySpan])
-    },
-    { enabled: pan }
-  )
 
   const viewTransform = React.useMemo(() => {
     const scaleX = round((1 / xSpan) * width, 5)
@@ -103,23 +101,109 @@ export function Mafs({
     return vec.matrixBuilder().scale(scaleX, scaleY).get()
   }, [height, width, xSpan, ySpan])
 
-  const toPxCSS = vec.toCSS(viewTransform)
+  const inverseViewTransform = vec.matrixInvert(viewTransform)
+
+  const viewTransformCSS = vec.toCSS(viewTransform)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
     () => ({ xMin, xMax, yMin, yMax, height, width }),
     [xMin, xMax, yMin, yMax, height, width]
   )
 
-  const viewBoxX = round((xMin / (xMax - xMin)) * width, 2)
-  const viewBoxY = round((yMax / (yMin - yMax)) * height, 2)
+  const viewBoxX = round((xMin / (xMax - xMin)) * width, 10)
+  const viewBoxY = round((yMax / (yMin - yMax)) * height, 10)
+
+  const pickupOrigin = React.useRef<vec.Vector2>([0, 0])
+  const pickupPoint = React.useRef<vec.Vector2>([0, 0])
+
+  function mapGesturePoint(point: vec.Vector2): vec.Vector2 {
+    const el = rootRef.current
+    invariant(el, "SVG is not mounted")
+    invariant(inverseViewTransform, "View transform is not invertible")
+
+    const rect = el.getBoundingClientRect()
+    return vec.transform(
+      [point[0] - rect.left + viewBoxX, point[1] - rect.top + viewBoxY],
+      inverseViewTransform
+    )
+  }
+
+  useGesture(
+    {
+      // The view can be panned with the mouse, keyboard, or touch.
+      onDrag: ({ movement, first, type, event, pinching, memo = [0, 0] }) => {
+        if (pinching) return movement
+        if (type.includes("key")) event.preventDefault()
+
+        if (first || type.includes("key")) commit()
+
+        const [mx, my] = vec.sub(movement, memo)
+        move({ pan: [(-mx / width) * xSpan, (my / height) * ySpan] })
+        return first ? movement : memo
+      },
+      // The view can be zoomed and panned with touch.
+      onPinch: ({ first, movement: [scale], origin, event, last }) => {
+        if (!event.currentTarget || !inverseViewTransform) return
+        if (first) {
+          commit()
+          pickupOrigin.current = origin
+          pickupPoint.current = mapGesturePoint(origin)
+        }
+
+        const offset = vec.transform(vec.sub(origin, pickupOrigin.current), inverseViewTransform)
+        move({ zoom: { at: pickupPoint.current, scale }, pan: vec.scale(offset, -1) })
+
+        // Commit the camera just in case we are transitioning into a drag
+        // gesture (such as by lifting a single finger but not both).
+        if (last) {
+          console.log("last pinch")
+          commit()
+        }
+      },
+      // The view can also be scrolled on top of to zoom.
+      onWheel: ({ pinching, event, delta: [, scroll] }) => {
+        if (pinching) return
+
+        // Simple sigmoid function to flatten extreme scrolling
+        const scale = 2 / (1 + Math.exp(-scroll / 400))
+
+        const point = mapGesturePoint([event.clientX, event.clientY])
+        commit()
+        move({ zoom: { at: point, scale: 1 / scale } })
+      },
+      // The view can be zoomed with the keyboard.
+      onKeyDown: ({ event }) => {
+        // Avoid messing with browser zoom
+        if (event.metaKey) return
+
+        const base = { Equal: 1, Minus: -1 }[event.code] ?? 0
+        if (!base) return
+
+        let multiplier = 0.1
+        if (event.altKey || event.metaKey) multiplier = 0.01
+        if (event.shiftKey) multiplier = 0.3
+
+        const scale = 1 + base * multiplier
+        const center: vec.Vector2 = [(xMax + xMin) / 2, (yMax + yMin) / 2]
+
+        commit()
+        move({ zoom: { at: center, scale } })
+      },
+    },
+    {
+      drag: { enabled: pan, eventOptions: { passive: false } },
+      pinch: { enabled: !!zoom, eventOptions: { passive: false } },
+      wheel: { enabled: !!zoom, preventDefault: true, eventOptions: { passive: false } },
+      target: rootRef,
+    }
+  )
 
   return (
     <div
       className="MafsView"
       style={{ width: desiredCssWidth }}
-      tabIndex={pan ? 0 : -1}
-      ref={ref}
-      {...bind()}
+      tabIndex={pan || zoom ? 0 : -1}
+      ref={rootRef}
     >
       <CoordinateContext.Provider value={coordinateContext}>
         <SpanContext.Provider value={{ xSpan, ySpan }}>
@@ -136,7 +220,7 @@ export function Mafs({
                   width: desiredCssWidth,
                   touchAction: pan ? "none" : "auto",
                   ...({
-                    "--mafs-view-transform": toPxCSS,
+                    "--mafs-view-transform": viewTransformCSS,
                     "--mafs-user-transform": "translate(0, 0)",
                   } as React.CSSProperties),
                 }}
@@ -152,3 +236,39 @@ export function Mafs({
 }
 
 Mafs.displayName = "Mafs"
+
+function useCamera({ minZoom, maxZoom }: { minZoom: number; maxZoom: number }) {
+  const [matrix, setMatrix] = React.useState<vec.Matrix>(vec.identity)
+  const initialMatrix = React.useRef<vec.Matrix>(vec.identity)
+
+  return {
+    matrix: matrix,
+    commit() {
+      initialMatrix.current = matrix
+    },
+    move({ zoom, pan }: { zoom?: { at: vec.Vector2; scale?: number }; pan?: vec.Vector2 }) {
+      const scale = zoom?.scale ?? 1
+      const zoomAt = zoom?.at ?? [0, 0]
+
+      // Figure out what number we need to multiply `scale` by to prevent
+      // the camera from zooming beyond the min or max amounts (noting that
+      // the matrix's scale is uniform and is stored in the first element):
+
+      const clampedScale = scale
+
+      const newCamera = vec
+        .matrixBuilder(initialMatrix.current)
+        .translate(...vec.scale(zoomAt, -1))
+        .scale(1 / clampedScale, 1 / clampedScale)
+        .translate(...zoomAt)
+        .translate(...(pan ?? [0, 0]))
+        .get()
+
+      newCamera[0] = clamp(newCamera[0], minZoom, maxZoom)
+      if (newCamera[0] !== newCamera[4]) return
+      newCamera[4] = clamp(newCamera[4], minZoom, maxZoom)
+
+      setMatrix(newCamera)
+    },
+  }
+}

@@ -47,58 +47,63 @@ export function MovablePoint({
 
   const pickup = React.useRef<vec.Vector2>([0, 0])
 
-  const bind = useDrag((state) => {
-    const { type, event } = state
-    event?.stopPropagation()
+  const ref = React.useRef<SVGGElement>(null)
 
-    const isKeyboard = type.includes("key")
-    if (isKeyboard) {
-      event?.preventDefault()
-      const { direction: yDownDirection, altKey, metaKey, shiftKey } = state
+  useDrag(
+    (state) => {
+      const { type, event } = state
+      event?.stopPropagation()
 
-      const direction = [yDownDirection[0], -yDownDirection[1]] as vec.Vector2
-      const span = Math.abs(direction[0]) ? xSpan : ySpan
+      const isKeyboard = type.includes("key")
+      if (isKeyboard) {
+        event?.preventDefault()
+        const { direction: yDownDirection, altKey, metaKey, shiftKey } = state
 
-      let divisions = 50
-      if (altKey || metaKey) divisions = 200
-      if (shiftKey) divisions = 10
+        const direction = [yDownDirection[0], -yDownDirection[1]] as vec.Vector2
+        const span = Math.abs(direction[0]) ? xSpan : ySpan
 
-      const min = span / (divisions * 2)
-      const tests = range(span / divisions, span / 2, span / divisions)
+        let divisions = 50
+        if (altKey || metaKey) divisions = 200
+        if (shiftKey) divisions = 10
 
-      for (const dx of tests) {
-        // Transform the test back into the point's coordinate system
-        const testMovement = vec.scale(direction, dx)
-        const testPoint = constrain(
-          vec.transform(
-            vec.add(vec.transform(point, userTransform), testMovement),
-            inverseTransform
+        const min = span / (divisions * 2)
+        const tests = range(span / divisions, span / 2, span / divisions)
+
+        for (const dx of tests) {
+          // Transform the test back into the point's coordinate system
+          const testMovement = vec.scale(direction, dx)
+          const testPoint = constrain(
+            vec.transform(
+              vec.add(vec.transform(point, userTransform), testMovement),
+              inverseTransform
+            )
           )
-        )
 
-        if (vec.dist(testPoint, point) > min) {
-          onMove(testPoint)
-          break
+          if (vec.dist(testPoint, point) > min) {
+            onMove(testPoint)
+            break
+          }
         }
+      } else {
+        const { last, movement: pixelMovement, first } = state
+
+        setDragging(!last)
+
+        if (first) pickup.current = vec.transform(point, userTransform)
+        if (vec.mag(pixelMovement) === 0) return
+
+        const movement = vec.transform(pixelMovement, inverseViewTransform)
+        onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
       }
-    } else {
-      const { last, movement: pixelMovement, first } = state
-
-      setDragging(!last)
-
-      if (first) pickup.current = vec.transform(point, userTransform)
-      if (vec.mag(pixelMovement) === 0) return
-
-      const movement = vec.transform(pixelMovement, inverseViewTransform)
-      onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
-    }
-  })
+    },
+    { target: ref }
+  )
 
   const ringSize = 15
 
   return (
     <g
-      {...bind()}
+      ref={ref}
       style={
         {
           "--movable-point-color": color,

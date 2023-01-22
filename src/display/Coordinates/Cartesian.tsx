@@ -111,7 +111,11 @@ export function Cartesian({
 }
 
 export function snappedRange(min: number, max: number, step: number) {
-  return range(Math.floor(min / step) * step, Math.ceil(max / step) * step, step)
+  const roundMin = Math.floor(min / step) * step
+  const roundMax = Math.ceil(max / step) * step
+
+  if (roundMin === roundMax - step) return [roundMin]
+  return range(roundMin, roundMax - step, step)
 }
 
 export function autoPi(x: number): string {

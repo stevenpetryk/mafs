@@ -153,13 +153,19 @@ export function Mafs({
       },
       onPinch: ({ first, movement: [scale], origin, event, last }) => {
         if (!event.currentTarget || !inverseViewTransform) return
+
         if (first) {
           camera.setBase()
           pickupOrigin.current = origin
-          pickupPoint.current = mapGesturePoint(origin)
+          pickupPoint.current = pan
+            ? mapGesturePoint(origin)
+            : [(xMin + xMax) / 2, (yMin + yMax) / 2]
         }
 
-        const offset = vec.transform(vec.sub(origin, pickupOrigin.current), inverseViewTransform)
+        let offset: vec.Vector2 = [0, 0]
+        if (pan) {
+          offset = vec.transform(vec.sub(origin, pickupOrigin.current), inverseViewTransform)
+        }
         camera.move({ zoom: { at: pickupPoint.current, scale }, pan: vec.scale(offset, -1) })
 
         // Commit the camera just in case we are transitioning into a drag

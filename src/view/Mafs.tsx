@@ -11,6 +11,7 @@ import { SpanContext } from "../context/SpanContext"
 import invariant from "tiny-invariant"
 import { useCamera } from "../gestures/useCamera"
 import { useWheelEnabler } from "../gestures/useWheelEnabler"
+import { TestContext } from "../context/TestContext"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -49,8 +50,8 @@ export type MafsProps = React.PropsWithChildren<{
 }>
 
 export function Mafs({
-  width: desiredWidth = "auto",
-  height = 500,
+  width: propWidth = "auto",
+  height: propHeight = 500,
   pan = true,
   zoom = false,
   viewBox = { x: [-3, 3], y: [-3, 3] },
@@ -58,8 +59,11 @@ export function Mafs({
   children,
   ssr = false,
 }: MafsProps) {
+  const testContext = React.useContext(TestContext)
+  const height = testContext.overrideHeight ?? propHeight
+
   const [visible, setVisible] = React.useState(ssr ? true : false)
-  const desiredCssWidth = desiredWidth === "auto" ? "100%" : `${desiredWidth}px`
+  const desiredCssWidth = propWidth === "auto" ? "100%" : `${propWidth}px`
 
   const rootRef = React.useRef<HTMLDivElement>(null)
   const { width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>({ ref: rootRef })

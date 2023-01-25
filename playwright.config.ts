@@ -1,5 +1,7 @@
 import type { PlaywrightTestConfig } from "@playwright/experimental-ct-react"
-import { devices } from "@playwright/test"
+import { devices, ViewportSize } from "@playwright/test"
+
+const viewport: ViewportSize = { width: 500, height: 500 }
 
 const config: PlaywrightTestConfig = {
   testDir: "./e2e",
@@ -28,11 +30,11 @@ const config: PlaywrightTestConfig = {
     },
   },
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
-    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
-    { name: "Mobile Chrome", use: { ...devices["Pixel 5"] } },
-    { name: "Mobile Safari", use: { ...devices["iPhone 12"] } },
+    { name: "chromium", use: { ...devices["Desktop Chrome"], viewport } },
+    { name: "firefox", use: { ...devices["Desktop Firefox"], viewport } },
+    { name: "webkit", use: { ...devices["Desktop Safari"], viewport } },
+    { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport } },
+    { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport } },
   ],
 }
 

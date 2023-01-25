@@ -95,7 +95,7 @@ export const Line: {
 };
 
 // @public (undocumented)
-export function Mafs({ width: desiredWidth, height, pan, zoom, viewBox, preserveAspectRatio, children, ssr, }: MafsProps): JSX.Element;
+export function Mafs({ width: propWidth, height: propHeight, pan, zoom, viewBox, preserveAspectRatio, children, ssr, }: MafsProps): JSX.Element;
 
 // @public (undocumented)
 export namespace Mafs {

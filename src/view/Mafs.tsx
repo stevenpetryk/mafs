@@ -63,7 +63,7 @@ export function Mafs({
     setVisible(true)
   }, [])
 
-  const { matrix: camera, move, commit } = useCamera({ minZoom: 0.2, maxZoom: 5 })
+  const { matrix: camera, move, commit } = useCamera({ minZoom: 0.5, maxZoom: 5 })
 
   const padding = viewBox?.padding ?? 0.5
   // Default behavior for `preserveAspectRatio == false`
@@ -155,10 +155,7 @@ export function Mafs({
 
         // Commit the camera just in case we are transitioning into a drag
         // gesture (such as by lifting a single finger but not both).
-        if (last) {
-          console.log("last pinch")
-          commit()
-        }
+        if (last) commit()
       },
       // The view can also be scrolled on top of to zoom.
       onWheel: ({ pinching, event, delta: [, scroll] }) => {
@@ -247,26 +244,26 @@ function useCamera({ minZoom, maxZoom }: { minZoom: number; maxZoom: number }) {
       initialMatrix.current = matrix
     },
     move({ zoom, pan }: { zoom?: { at: vec.Vector2; scale?: number }; pan?: vec.Vector2 }) {
-      const scale = zoom?.scale ?? 1
+      const scale = 1 / (zoom?.scale ?? 1)
       const zoomAt = zoom?.at ?? [0, 0]
 
-      // Figure out what number we need to multiply `scale` by to prevent
-      // the camera from zooming beyond the min or max amounts (noting that
-      // the matrix's scale is uniform and is stored in the first element):
+      const currentScale = initialMatrix.current[0]
+      const minScale = 1 / maxZoom / currentScale
+      const maxScale = 1 / minZoom / currentScale
 
-      const clampedScale = scale
+      /**
+       * Represents the amount of scaling to apply such that we never exceed the
+       * minimum or maximum zoom level.
+       */
+      const clampedScale = clamp(scale, minScale, maxScale)
 
       const newCamera = vec
         .matrixBuilder(initialMatrix.current)
         .translate(...vec.scale(zoomAt, -1))
-        .scale(1 / clampedScale, 1 / clampedScale)
-        .translate(...zoomAt)
+        .scale(clampedScale, clampedScale)
+        .translate(...vec.scale(zoomAt, 1))
         .translate(...(pan ?? [0, 0]))
         .get()
-
-      newCamera[0] = clamp(newCamera[0], minZoom, maxZoom)
-      if (newCamera[0] !== newCamera[4]) return
-      newCamera[4] = clamp(newCamera[4], minZoom, maxZoom)
 
       setMatrix(newCamera)
     },

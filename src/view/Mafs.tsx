@@ -139,7 +139,7 @@ export function Mafs({
 
   useGesture(
     {
-      onDrag: ({ movement, first, type, pinching, memo = [0, 0] }) => {
+      onDrag: ({ movement, first, event, type, pinching, memo = [0, 0] }) => {
         if (pinching) return movement
 
         if (first) camera.setBase()
@@ -148,6 +148,7 @@ export function Mafs({
         camera.move({ pan: [(-mx / width) * xSpan, (my / height) * ySpan] })
 
         const keyboard = type.includes("key")
+        if (keyboard) event?.preventDefault()
         return !keyboard && first ? movement : memo
       },
       onPinch: ({ first, movement: [scale], origin, event, last }) => {
@@ -165,10 +166,8 @@ export function Mafs({
         // gesture (such as by lifting just one finger after pinching).
         if (last) camera.setBase()
       },
-      onWheel: ({ pinching, event, xy, delta: [, scroll] }) => {
+      onWheel: ({ pinching, event, delta: [, scroll] }) => {
         if (pinching) return
-
-        console.log(xy)
 
         // Simple sigmoid function to flatten extreme scrolling
         const scale = 2 / (1 + Math.exp(-scroll / 300))
@@ -196,7 +195,7 @@ export function Mafs({
       },
     },
     {
-      drag: { enabled: pan, preventDefault: true, eventOptions: { passive: false } },
+      drag: { enabled: pan, eventOptions: { passive: false } },
       pinch: { enabled: !!zoom, eventOptions: { passive: false } },
       wheel: { enabled: !!zoom, preventDefault: true, eventOptions: { passive: false } },
       target: rootRef,

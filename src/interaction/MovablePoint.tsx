@@ -96,7 +96,7 @@ export function MovablePoint({
         onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
       }
     },
-    { target: ref }
+    { target: ref, eventOptions: { passive: false } }
   )
 
   const ringSize = 15

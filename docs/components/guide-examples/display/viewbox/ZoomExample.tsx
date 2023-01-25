@@ -9,7 +9,7 @@ export default function ZoomExample() {
         y: [-0.25, 0.25],
         padding: 0,
       }}
-      height={200}
+      height={400}
     >
       <Coordinates.Cartesian subdivisions={5} />
       <Circle center={[0, 0]} radius={1} />

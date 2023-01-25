@@ -19,10 +19,13 @@ export type MafsProps = React.PropsWithChildren<{
   pan?: boolean
 
   /**
-   * Whether to enable zooming with the mouse and keyboard. Can also be an
-   * object with `min` and `max` properties to set the scale limits (default: 0.1 to 5).
+   * Whether to enable zooming with the mouse and keyboard. This can also be an
+   * object with `min` and `max` properties to set the scale limits.
+   *
+   *  * `min` should be in the range (0, 1].
+   *  * `max` should be in the range [1, ∞).
    */
-  zoom?: boolean | { min?: number; max?: number }
+  zoom?: boolean | { min: number; max: number }
 
   /**
    * A way to declare the "area of interest" of your visualizations. Mafs will center and zoom to
@@ -64,7 +67,19 @@ export function Mafs({
     setVisible(true)
   }, [])
 
-  const camera = useCamera({ minZoom: 0.5, maxZoom: 5 })
+  let minZoom = 1
+  let maxZoom = 1
+  if (typeof zoom === "object") {
+    invariant(zoom.min > 0 && zoom.min <= 1, "zoom.min must be in the range (0, 1]")
+    invariant(zoom.max >= 1, "zoom.max must be in the range [1, ∞)")
+    minZoom = zoom.min
+    maxZoom = zoom.max
+  } else if (zoom) {
+    minZoom = 0.5
+    maxZoom = 5
+  }
+
+  const camera = useCamera({ minZoom, maxZoom })
 
   const padding = viewBox?.padding ?? 0.5
   // Default behavior for `preserveAspectRatio == false`
@@ -102,17 +117,10 @@ export function Mafs({
     return vec.matrixBuilder().scale(scaleX, scaleY).get()
   }, [height, width, xSpan, ySpan])
 
-  const inverseViewTransform = vec.matrixInvert(viewTransform)
-
-  const viewTransformCSS = vec.toCSS(viewTransform)
-
-  const coordinateContext = React.useMemo<CoordinateContextShape>(
-    () => ({ xMin, xMax, yMin, yMax, height, width }),
-    [xMin, xMax, yMin, yMax, height, width]
-  )
-
   const viewBoxX = round((xMin / (xMax - xMin)) * width, 10)
   const viewBoxY = round((yMax / (yMin - yMax)) * height, 10)
+
+  const inverseViewTransform = vec.matrixInvert(viewTransform)
 
   const pickupOrigin = React.useRef<vec.Vector2>([0, 0])
   const pickupPoint = React.useRef<vec.Vector2>([0, 0])
@@ -157,8 +165,10 @@ export function Mafs({
         // gesture (such as by lifting just one finger after pinching).
         if (last) camera.setBase()
       },
-      onWheel: ({ pinching, event, delta: [, scroll] }) => {
+      onWheel: ({ pinching, event, xy, delta: [, scroll] }) => {
         if (pinching) return
+
+        console.log(xy)
 
         // Simple sigmoid function to flatten extreme scrolling
         const scale = 2 / (1 + Math.exp(-scroll / 300))
@@ -191,6 +201,13 @@ export function Mafs({
       wheel: { enabled: !!zoom, preventDefault: true, eventOptions: { passive: false } },
       target: rootRef,
     }
+  )
+
+  const viewTransformCSS = vec.toCSS(viewTransform)
+
+  const coordinateContext = React.useMemo<CoordinateContextShape>(
+    () => ({ xMin, xMax, yMin, yMax, height, width }),
+    [xMin, xMax, yMin, yMax, height, width]
   )
 
   return (

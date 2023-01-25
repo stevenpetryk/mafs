@@ -4,11 +4,12 @@ import PaneManager from "../context/PaneContext"
 import useResizeObserver from "use-resize-observer"
 
 import { useGesture } from "@use-gesture/react"
-import { clamp, round } from "../math"
+import { round } from "../math"
 import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
 import invariant from "tiny-invariant"
+import { useCamera } from "../gestures/useCamera"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -63,7 +64,7 @@ export function Mafs({
     setVisible(true)
   }, [])
 
-  const { matrix: camera, move, commit } = useCamera({ minZoom: 0.5, maxZoom: 5 })
+  const camera = useCamera({ minZoom: 0.5, maxZoom: 5 })
 
   const padding = viewBox?.padding ?? 0.5
   // Default behavior for `preserveAspectRatio == false`
@@ -89,8 +90,8 @@ export function Mafs({
     }
   }
 
-  ;[xMin, yMin] = vec.transform([xMin, yMin], camera)
-  ;[xMax, yMax] = vec.transform([xMax, yMax], camera)
+  ;[xMin, yMin] = vec.transform([xMin, yMin], camera.matrix)
+  ;[xMax, yMax] = vec.transform([xMax, yMax], camera.matrix)
 
   const xSpan = xMax - xMin
   const ySpan = yMax - yMin
@@ -130,45 +131,42 @@ export function Mafs({
 
   useGesture(
     {
-      // The view can be panned with the mouse, keyboard, or touch.
-      onDrag: ({ movement, first, type, event, pinching, memo = [0, 0] }) => {
+      onDrag: ({ movement, first, type, pinching, memo = [0, 0] }) => {
         if (pinching) return movement
-        if (type.includes("key")) event.preventDefault()
 
-        if (first || type.includes("key")) commit()
-
+        if (first) camera.setBase()
         const [mx, my] = vec.sub(movement, memo)
-        move({ pan: [(-mx / width) * xSpan, (my / height) * ySpan] })
-        return first ? movement : memo
+
+        camera.move({ pan: [(-mx / width) * xSpan, (my / height) * ySpan] })
+
+        const keyboard = type.includes("key")
+        return !keyboard && first ? movement : memo
       },
-      // The view can be zoomed and panned with touch.
       onPinch: ({ first, movement: [scale], origin, event, last }) => {
         if (!event.currentTarget || !inverseViewTransform) return
         if (first) {
-          commit()
+          camera.setBase()
           pickupOrigin.current = origin
           pickupPoint.current = mapGesturePoint(origin)
         }
 
         const offset = vec.transform(vec.sub(origin, pickupOrigin.current), inverseViewTransform)
-        move({ zoom: { at: pickupPoint.current, scale }, pan: vec.scale(offset, -1) })
+        camera.move({ zoom: { at: pickupPoint.current, scale }, pan: vec.scale(offset, -1) })
 
         // Commit the camera just in case we are transitioning into a drag
-        // gesture (such as by lifting a single finger but not both).
-        if (last) commit()
+        // gesture (such as by lifting just one finger after pinching).
+        if (last) camera.setBase()
       },
-      // The view can also be scrolled on top of to zoom.
       onWheel: ({ pinching, event, delta: [, scroll] }) => {
         if (pinching) return
 
         // Simple sigmoid function to flatten extreme scrolling
-        const scale = 2 / (1 + Math.exp(-scroll / 400))
+        const scale = 2 / (1 + Math.exp(-scroll / 300))
 
         const point = mapGesturePoint([event.clientX, event.clientY])
-        commit()
-        move({ zoom: { at: point, scale: 1 / scale } })
+        camera.setBase()
+        camera.move({ zoom: { at: point, scale: 1 / scale } })
       },
-      // The view can be zoomed with the keyboard.
       onKeyDown: ({ event }) => {
         // Avoid messing with browser zoom
         if (event.metaKey) return
@@ -183,12 +181,12 @@ export function Mafs({
         const scale = 1 + base * multiplier
         const center: vec.Vector2 = [(xMax + xMin) / 2, (yMax + yMin) / 2]
 
-        commit()
-        move({ zoom: { at: center, scale } })
+        camera.setBase()
+        camera.move({ zoom: { at: center, scale } })
       },
     },
     {
-      drag: { enabled: pan, eventOptions: { passive: false } },
+      drag: { enabled: pan, preventDefault: true, eventOptions: { passive: false } },
       pinch: { enabled: !!zoom, eventOptions: { passive: false } },
       wheel: { enabled: !!zoom, preventDefault: true, eventOptions: { passive: false } },
       target: rootRef,
@@ -233,39 +231,3 @@ export function Mafs({
 }
 
 Mafs.displayName = "Mafs"
-
-function useCamera({ minZoom, maxZoom }: { minZoom: number; maxZoom: number }) {
-  const [matrix, setMatrix] = React.useState<vec.Matrix>(vec.identity)
-  const initialMatrix = React.useRef<vec.Matrix>(vec.identity)
-
-  return {
-    matrix: matrix,
-    commit() {
-      initialMatrix.current = matrix
-    },
-    move({ zoom, pan }: { zoom?: { at: vec.Vector2; scale?: number }; pan?: vec.Vector2 }) {
-      const scale = 1 / (zoom?.scale ?? 1)
-      const zoomAt = zoom?.at ?? [0, 0]
-
-      const currentScale = initialMatrix.current[0]
-      const minScale = 1 / maxZoom / currentScale
-      const maxScale = 1 / minZoom / currentScale
-
-      /**
-       * Represents the amount of scaling to apply such that we never exceed the
-       * minimum or maximum zoom level.
-       */
-      const clampedScale = clamp(scale, minScale, maxScale)
-
-      const newCamera = vec
-        .matrixBuilder(initialMatrix.current)
-        .translate(...vec.scale(zoomAt, -1))
-        .scale(clampedScale, clampedScale)
-        .translate(...vec.scale(zoomAt, 1))
-        .translate(...(pan ?? [0, 0]))
-        .get()
-
-      setMatrix(newCamera)
-    },
-  }
-}

@@ -10,6 +10,7 @@ import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
 import invariant from "tiny-invariant"
 import { useCamera } from "../gestures/useCamera"
+import { useWheelEnabler } from "../gestures/useWheelEnabler"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -137,6 +138,8 @@ export function Mafs({
     )
   }
 
+  const wheelEnabler = useWheelEnabler(!!zoom)
+
   useGesture(
     {
       onDrag: ({ movement, first, event, type, pinching, memo = [0, 0] }) => {
@@ -199,11 +202,18 @@ export function Mafs({
         camera.setBase()
         camera.move({ zoom: { at: center, scale } })
       },
+      onMouseMove: () => {
+        wheelEnabler.handleMouseMove()
+      },
     },
     {
       drag: { enabled: pan, eventOptions: { passive: false } },
       pinch: { enabled: !!zoom, eventOptions: { passive: false } },
-      wheel: { enabled: !!zoom, preventDefault: true, eventOptions: { passive: false } },
+      wheel: {
+        enabled: wheelEnabler.wheelEnabled,
+        preventDefault: true,
+        eventOptions: { passive: false },
+      },
       target: rootRef,
     }
   )

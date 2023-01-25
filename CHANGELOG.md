@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.0
+
+- Mafs now supports zooming! It's opt-in, and can be enabled by setting the `zoom` prop on `Mafs`. See the [Mafs docs](https://mafs.dev/guides/display/mafs) for more information.
+
 ## 0.14.0
 
 - `CartesianCoordinates` is now `Coordinates.Cartesian`. In addition to Cartesian coordinates, you

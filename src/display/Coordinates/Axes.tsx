@@ -37,7 +37,7 @@ export function XLabels({ separation, labelMaker }: LabelsProps) {
     <g className="mafs-axis">
       {xPanes.map(([min, max]) => (
         <g key={`${min},${max}`}>
-          {snappedRange(min, max - separation, separation)
+          {snappedRange(min, max, separation)
             .filter((x) => Math.abs(x) > separation / 1e6)
             .map((x) => (
               <text
@@ -46,6 +46,7 @@ export function XLabels({ separation, labelMaker }: LabelsProps) {
                 key={x}
                 dominantBaseline="hanging"
                 textAnchor="middle"
+                style={{ fill: "white", paintOrder: "stroke" }}
               >
                 {labelMaker(x)}
               </text>
@@ -65,14 +66,16 @@ export function YLabels({ separation, labelMaker }: LabelsProps) {
     <g className="mafs-axis">
       {yPanes.map(([min, max]) => (
         <g key={`${min},${max}`}>
-          {snappedRange(min, max - separation, separation)
+          {snappedRange(min, max, separation)
             .filter((y) => Math.abs(y) > separation / 1e6)
             .map((y) => (
               <text
+                fill="white"
                 x={5}
                 y={vec.transform([0, y], viewTransform)[1]}
                 key={y}
                 dominantBaseline="central"
+                style={{ fill: "white", paintOrder: "stroke" }}
               >
                 {labelMaker(y)}
               </text>

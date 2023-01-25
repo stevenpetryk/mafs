@@ -35,6 +35,7 @@ import PolarCoordinatesExample from "../docs/components/guide-examples/display/c
 import VectorExample from "../docs/components/guide-examples/display/vectors/VectorExample"
 import ContainViewbox from "../docs/components/guide-examples/display/viewbox/ContainViewbox"
 import StretchViewbox from "../docs/components/guide-examples/display/viewbox/StretchViewbox"
+import ZoomExample from "../docs/components/guide-examples/display/viewbox/ZoomExample"
 
 test("guide-examples/LinePointSlopeExample", async ({ mount, page }) => {
   const component = await mount(<LinePointSlopeExample />)
@@ -297,6 +298,14 @@ test("guide-examples/display/viewbox/ContainViewbox", async ({ mount, page }) =>
 
 test("guide-examples/display/viewbox/StretchViewbox", async ({ mount, page }) => {
   const component = await mount(<StretchViewbox />)
+  ;(await component.locator(".MafsView").count()) === 0
+    ? await expect(component).toHaveClass("MafsView")
+    : await expect(component.locator(".MafsView")).toHaveClass("MafsView")
+  await expect(page).toHaveScreenshot()
+})
+
+test("guide-examples/display/viewbox/ZoomExample", async ({ mount, page }) => {
+  const component = await mount(<ZoomExample />)
   ;(await component.locator(".MafsView").count()) === 0
     ? await expect(component).toHaveClass("MafsView")
     : await expect(component.locator(".MafsView")).toHaveClass("MafsView")

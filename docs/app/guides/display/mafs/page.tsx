@@ -10,6 +10,9 @@ import PlainMafsExampleSource from "!raw-loader!guide-examples/PlainMafsExample"
 import ContainViewboxExample from "guide-examples/display/viewbox/ContainViewbox"
 import ContainViewboxExampleSource from "!raw-loader!guide-examples/display/viewbox/ContainViewbox"
 
+import ZoomExample from "guide-examples/display/viewbox/ZoomExample"
+import ZoomExampleSource from "!raw-loader!guide-examples/display/viewbox/ZoomExample"
+
 import StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
 import StretchViewboxExampleSource from "!raw-loader!guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
@@ -33,6 +36,31 @@ function MafsPage() {
         <code>height</code> defaults to <code>500px</code>, and cannot be set to <code>"auto"</code>
         .
       </p>
+
+      <h2>Zooming and panning</h2>
+
+      <p>
+        Mafs can be zoomed and panned by end users using a variety of input methods. Zooming and
+        panning can be enabled, disabled, and configured via the <code>zoom</code> and{" "}
+        <code>pan</code> props.
+      </p>
+
+      <ul>
+        <li>The mouse wheel zooms the viewport.</li>
+        <li>Pressing and dragging pans the viewport.</li>
+        <li>The "pinch" gesture zooms and pans the viewport simultaneously.</li>
+        <li>
+          The arrow, <kbd>-</kbd>, and <kbd>+</kbd> keys pan and zoom the viewport, with the{" "}
+          <kbd>option</kbd>, <kbd>meta</kbd>, and <kbd>shift</kbd> keys adjusting the speed.
+        </li>
+      </ul>
+
+      <p>
+        Panning is enabled by default, but zooming is opt-in. The default zoom limits are{" "}
+        <code>0.5-5</code>
+      </p>
+
+      <CodeAndExample component={<ZoomExample />} source={ZoomExampleSource} />
 
       <h2>Viewbox</h2>
 

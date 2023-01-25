@@ -39,7 +39,11 @@ function MafsPage() {
 
       <h2>Zooming and panning</h2>
 
-      <p>Mafs can be zoomed and panned by end users using a variety of input methods.</p>
+      <p>
+        Mafs can be zoomed and panned by end users using a variety of input methods. Zooming and
+        panning can be enabled, disabled, and configured via the <code>zoom</code> and{" "}
+        <code>pan</code> props.
+      </p>
 
       <ul>
         <li>The mouse wheel zooms the viewport.</li>
@@ -52,7 +56,7 @@ function MafsPage() {
       </ul>
 
       <p>
-        Panning is enabled by default, but zooming has to be enabled. The default zoom limits are{" "}
+        Panning is enabled by default, but zooming is opt-in. The default zoom limits are{" "}
         <code>0.5-5</code>
       </p>
 

@@ -46,7 +46,7 @@ export function XLabels({ separation, labelMaker }: LabelsProps) {
                 key={x}
                 dominantBaseline="hanging"
                 textAnchor="middle"
-                style={{ fill: "white", paintOrder: "stroke" }}
+                style={{ fill: "var(--mafs-origin-color)", paintOrder: "stroke" }}
               >
                 {labelMaker(x)}
               </text>
@@ -70,12 +70,11 @@ export function YLabels({ separation, labelMaker }: LabelsProps) {
             .filter((y) => Math.abs(y) > separation / 1e6)
             .map((y) => (
               <text
-                fill="white"
                 x={5}
                 y={vec.transform([0, y], viewTransform)[1]}
                 key={y}
                 dominantBaseline="central"
-                style={{ fill: "white", paintOrder: "stroke" }}
+                style={{ fill: "var(--mafs-origin-color)", paintOrder: "stroke" }}
               >
                 {labelMaker(y)}
               </text>

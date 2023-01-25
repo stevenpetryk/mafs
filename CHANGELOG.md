@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.1
+
+- Fixes a regression introduced in v0.15.1 where the axis labels had a white fill regardless of the `--mafs-origin-color` custom property.
+
 ## 0.15.0
 
 - Mafs now supports zooming! It's opt-in, and can be enabled by setting the `zoom` prop on `Mafs`. See the [Mafs docs](https://mafs.dev/guides/display/mafs) for more information.

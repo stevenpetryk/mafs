@@ -98,7 +98,7 @@ export function PolarCoordinates({
         {yAxisEnabled && yAxis.axis && <line x1={0} y1={vyMin} x2={0} y2={vyMax} />}
       </g>
 
-      <g className="mafs-shadow" fill="var(--mafs-origin-color)">
+      <g className="mafs-shadow">
         {xAxisEnabled && xAxis.labels && (
           <XLabels
             separation={xAxisOverrides?.lines || lines || 1}

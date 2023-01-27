@@ -32,11 +32,11 @@ export function ThroughPoints({
   let offscreen2: vec.Vector2
 
   if (Math.abs(Math.atan(slope)) > Math.PI / 4) {
-    offscreen1 = [xMin, slope * (xMin - tPoint1[0]) + tPoint1[1]]
-    offscreen2 = [xMax, slope * (xMax - tPoint1[0]) + tPoint1[1]]
-  } else {
     offscreen1 = [(yMin - tPoint1[1]) / slope + tPoint1[0], yMin]
     offscreen2 = [(yMax - tPoint1[1]) / slope + tPoint1[0], yMax]
+  } else {
+    offscreen1 = [xMin, slope * (xMin - tPoint1[0]) + tPoint1[1]]
+    offscreen2 = [xMax, slope * (xMax - tPoint1[0]) + tPoint1[1]]
   }
 
   return (

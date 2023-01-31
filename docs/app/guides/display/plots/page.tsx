@@ -16,6 +16,8 @@ import SineStressTestSource from "!raw-loader!guide-examples/plots/sine-stress-t
 
 import { PropTable } from "components/PropTable"
 import { Plot } from "mafs"
+import InequalitiesExample from "guide-examples/plots/inequalities"
+import InequalitiesExampleSource from "!raw-loader!guide-examples/plots/inequalities.tsx"
 
 function Functions() {
   return (
@@ -31,6 +33,11 @@ function Functions() {
       <CodeAndExample component={<OfXAndY />} source={OfXAndYSource} />
       <PropTable of={Plot.OfX} />
       <PropTable of={Plot.OfY} />
+
+      <h2>
+        Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>
+      </h2>
+      <CodeAndExample component={<InequalitiesExample />} source={InequalitiesExampleSource} />
 
       <h2>Parametric functions</h2>
       <CodeAndExample component={<TwistyBoi />} source={TwistyBoiSource} />

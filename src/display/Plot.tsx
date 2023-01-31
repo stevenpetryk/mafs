@@ -1,12 +1,14 @@
 import { OfX, OfY } from "./Plot/Simple"
 import { Parametric } from "./Plot/Parametric"
 import { VectorField } from "./Plot/VectorField"
+import { Inequality } from "./Plot/Inequality"
 
 export const Plot = {
   OfX,
   OfY,
   Parametric,
   VectorField,
+  Inequality,
 }
 
 // @ts-expect-error - setting these here to avoid invalid .d.ts output
@@ -17,8 +19,11 @@ Plot.OfY.displayName = "Plot.OfY"
 Plot.Parametric.displayName = "Plot.Parametric"
 // @ts-expect-error - setting these here to avoid invalid .d.ts output
 Plot.VectorField.displayName = "Plot.VectorField"
+// @ts-expect-error - setting these here to avoid invalid .d.ts output
+Plot.Inequality.displayName = "Plot.Inequality"
 
+import type { InequalityProps } from "./Plot/Inequality"
 import type { OfXProps, OfYProps } from "./Plot/Simple"
 import type { ParametricProps } from "./Plot/Parametric"
 import type { VectorFieldProps } from "./Plot/VectorField"
-export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps }
+export type { InequalityProps, OfXProps, OfYProps, ParametricProps, VectorFieldProps }

@@ -5,7 +5,7 @@ import "./globals.css"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ background: "#000" }}>
       <head />
       <body className="flex flex-col min-h-screen items-stretch dark:bg-gray-900">
         <header className="sm:flex sm:space-x-6 sm:space-y-0 space-y-6 items-center p-6 self-center w-full max-w-5xl">

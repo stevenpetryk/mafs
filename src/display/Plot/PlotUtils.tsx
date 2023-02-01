@@ -1,13 +1,35 @@
-import { vec } from "../.."
+import { vec } from "../../vec"
 
-export function adaptiveSampling(
-  xy: (t: number) => vec.Vector2,
-  t: vec.Vector2,
-  minSamplingDepth: number,
-  maxSamplingDepth: number,
-  errorThreshold: number
-) {
-  let result = "M "
+interface SampleParams<P> {
+  fn: (t: number) => P
+  error: (real: P, estimate: P) => number
+  midpoint: (p1: P, p2: P) => P
+  onPoint: (t: number, p: P) => void
+  domain: [min: number, max: number]
+  minDepth: number
+  maxDepth: number
+  threshold: number
+}
+
+/**
+ * A relatively generic internal function which, given a function, domain, and
+ * an error function, will recursively subdivide the domain until sampling said
+ * function at each point in the domain yields an error less than the supplied
+ * threshold.
+ *
+ * The function makes no assumptions about the return type of the sampled.
+ */
+function sample<SampledReturnType>({
+  domain,
+  minDepth,
+  maxDepth,
+  threshold,
+  fn,
+  error,
+  onPoint,
+  midpoint,
+}: SampleParams<SampledReturnType>) {
+  const [min, max] = domain
 
   function subdivide(
     min: number,
@@ -15,60 +37,76 @@ export function adaptiveSampling(
     pushLeft: boolean,
     pushRight: boolean,
     depth: number,
-    xyMinX: number,
-    xyMinY: number,
-    xyMaxX: number,
-    xyMaxY: number
+    pMin: SampledReturnType,
+    pMax: SampledReturnType
   ) {
     const t = 0.5
     const mid = min + (max - min) * t
 
-    const [xyMidX, xyMidY] = xy(mid)
+    const pMid = fn(mid)
 
-    if (depth < minSamplingDepth) {
-      subdivide(min, mid, true, false, depth + 1, xyMinX, xyMinY, xyMidX, xyMidY)
-      subdivide(mid, max, false, true, depth + 1, xyMidX, xyMidY, xyMaxX, xyMaxY)
+    if (depth < minDepth) {
+      subdivide(min, mid, true, false, depth + 1, pMin, pMid)
+      subdivide(mid, max, false, true, depth + 1, pMid, pMax)
       return
     }
 
-    if (depth < maxSamplingDepth) {
-      const xyLerpMid = vec.lerp([xyMinX, xyMinY], [xyMaxX, xyMaxY], t)
-      const error = vec.squareDist([xyMidX, xyMidY], xyLerpMid)
-      if (error > errorThreshold) {
-        subdivide(min, mid, true, false, depth + 1, xyMinX, xyMinY, xyMidX, xyMidY)
-        subdivide(mid, max, false, true, depth + 1, xyMidX, xyMidY, xyMaxX, xyMaxY)
+    if (depth < maxDepth) {
+      const pLerpMid = midpoint(pMin, pMax)
+      const e = error(pMid, pLerpMid)
+      if (e > threshold) {
+        subdivide(min, mid, true, false, depth + 1, pMin, pMid)
+        subdivide(mid, max, false, true, depth + 1, pMid, pMax)
         return
       }
     }
 
-    if (pushLeft && Number.isFinite(xyMinX) && Number.isFinite(xyMinY)) {
-      result += `${xyMinX} ${xyMinY} L `
+    if (pushLeft) {
+      onPoint(min, pMin)
     }
-    if (Number.isFinite(xyMidX) && Number.isFinite(xyMidY)) {
-      result += `${xyMidX} ${xyMidY} L `
-    }
-    if (pushRight && Number.isFinite(xyMaxX) && Number.isFinite(xyMaxY)) {
-      result += `${xyMaxX} ${xyMaxY} L `
+    onPoint(mid, pMid)
+    if (pushRight) {
+      onPoint(max, pMax)
     }
   }
 
-  const [tMin, tMax] = t
+  subdivide(min, max, true, true, 0, fn(min), fn(max))
+}
 
-  const [xyMinX, xyMinY] = xy(tMin)
-  const [xyMaxX, xyMaxY] = xy(tMax)
+export function sampleParametric(
+  fn: (t: number) => vec.Vector2,
+  domain: vec.Vector2,
+  minDepth: number,
+  maxDepth: number,
+  threshold: number
+) {
+  let result = "M "
 
-  subdivide(tMin, tMax, true, true, 0, xyMinX, xyMinY, xyMaxX, xyMaxY)
+  sample({
+    fn,
+    error: (a, b) => vec.squareDist(a, b),
+    onPoint: (_t, [x, y]) => {
+      if (Number.isFinite(x) && Number.isFinite(y)) {
+        result += `${x} ${y} L `
+      }
+    },
+    midpoint: (p1, p2) => vec.midpoint(p1, p2),
+    domain,
+    minDepth,
+    maxDepth,
+    threshold,
+  })
 
   return result.substring(0, result.length - 2)
 }
 
-export function adaptiveSamplingBetween(
+export function sampleInequality(
   upper: (t: number) => number,
   lower: (t: number) => number,
-  t: vec.Vector2,
-  minSamplingDepth: number,
-  maxSamplingDepth: number,
-  errorThreshold: number
+  domain: vec.Vector2,
+  minDepth: number,
+  maxDepth: number,
+  threshold: number
 ) {
   const result = {
     fill: "",
@@ -76,95 +114,72 @@ export function adaptiveSamplingBetween(
     lower: "",
   }
 
-  let tmpUpper = ""
-  let tmpLower = ""
-  let spinch = false
+  let upperTmp = ""
+  let lowerTmp = ""
+  let ineqFalse = false
 
-  function pushPoints(x: number, upper: number, lower: number) {
-    if (upper < lower && !spinch) {
-      spinch = true
+  const reuse: [vec.Vector2, vec.Vector2] = [
+    [0, 0],
+    [0, 0],
+  ]
 
-      if (tmpUpper && tmpLower) {
-        result.fill += ` M ${tmpUpper} ${tmpLower.substring(0, tmpLower.length - 2)} z `
-        result.upper += ` M ${tmpUpper.substring(0, tmpUpper.length - 2)} `
-        result.lower += ` M ${tmpLower.substring(0, tmpLower.length - 2)} `
-        tmpUpper = ""
-        tmpLower = ""
+  sample<[vec.Vector2, vec.Vector2]>({
+    domain,
+    minDepth,
+    maxDepth,
+    threshold,
+    fn: (t) => {
+      return [
+        [t, lower(t)],
+        [t, upper(t)],
+      ]
+    },
+    error: ([realLower, realUpper], [estLower, estUpper]) => {
+      return Math.max(vec.squareDist(realLower, estLower), vec.squareDist(realUpper, estUpper))
+    },
+    midpoint: ([aLower, aUpper], [bLower, bUpper]) => {
+      return [vec.midpoint(aLower, bLower), vec.midpoint(aUpper, bUpper)]
+    },
+    onPoint: (t, [l, u]) => {
+      const lower = l[1]
+      const upper = u[1]
+
+      // TODO: these inequality operators should reflect the props, perhaps
+      // the inequality operator itself should be a function passed into this
+      const pathsJustCrossed = upper < lower && !ineqFalse
+      const pathsJustUncrossed = upper > lower && ineqFalse
+
+      if (pathsJustCrossed) {
+        ineqFalse = true
+
+        if (upperTmp && lowerTmp) {
+          result.fill += ` M ${upperTmp} ${lowerTmp.substring(0, lowerTmp.length - 2)} z `
+          result.upper += ` M ${upperTmp.substring(0, upperTmp.length - 2)} `
+          result.lower += ` M ${lowerTmp.substring(0, lowerTmp.length - 2)} `
+          upperTmp = ""
+          lowerTmp = ""
+        }
+      } else if (pathsJustUncrossed) {
+        ineqFalse = false
       }
-    } else if (upper > lower && spinch) {
-      spinch = false
-    }
 
-    if (!spinch) {
-      if (Number.isFinite(upper)) {
-        tmpUpper = tmpUpper + ` ${x} ${upper} L `
+      if (!ineqFalse) {
+        if (Number.isFinite(upper)) {
+          upperTmp = upperTmp + ` ${t} ${upper} L `
+        }
+        if (Number.isFinite(lower)) {
+          lowerTmp = ` ${t} ${lower} L ` + lowerTmp
+        }
       }
-      if (Number.isFinite(lower)) {
-        tmpLower = ` ${x} ${lower} L ` + tmpLower
-      }
-    }
-  }
+      return result
+    },
+  })
 
-  const [tMin, tMax] = t
-  const upperMin = upper(tMin)
-  const upperMax = upper(tMax)
-  const lowerMin = lower(tMin)
-  const lowerMax = lower(tMax)
-
-  function subdivide(
-    min: number,
-    max: number,
-    pushLeft: boolean,
-    pushRight: boolean,
-    depth: number,
-    upperMin: number,
-    upperMax: number,
-    lowerMin: number,
-    lowerMax: number
-  ) {
-    const t = 0.5
-    const mid = min + (max - min) * t
-
-    const upperMid = upper(mid)
-    const lowerMid = lower(mid)
-
-    if (depth < minSamplingDepth) {
-      subdivide(min, mid, true, false, depth + 1, upperMin, upperMid, lowerMin, lowerMid)
-      subdivide(mid, max, false, true, depth + 1, upperMid, upperMax, lowerMid, lowerMax)
-      return
-    }
-
-    if (depth < maxSamplingDepth) {
-      const upperLerpMid = vec.lerp([min, upperMin], [max, upperMax], t)
-      const lowerLerpMid = vec.lerp([min, lowerMin], [max, lowerMax], t)
-      const error = Math.max(
-        vec.squareDist([mid, upperMid], upperLerpMid),
-        vec.squareDist([mid, lowerMid], lowerLerpMid)
-      )
-      if (error > errorThreshold) {
-        subdivide(min, mid, true, false, depth + 1, upperMin, upperMid, lowerMin, lowerMid)
-        subdivide(mid, max, false, true, depth + 1, upperMid, upperMax, lowerMid, lowerMax)
-        return
-      }
-    }
-
-    if (pushLeft) {
-      pushPoints(min, upperMin, lowerMin)
-    }
-
-    pushPoints(mid, upperMid, lowerMid)
-
-    if (pushRight) {
-      pushPoints(max, upperMax, lowerMax)
-    }
-  }
-
-  subdivide(tMin, tMax, true, true, 0, upperMin, upperMax, lowerMin, lowerMax)
-
-  if (tmpUpper && tmpLower) {
-    result.fill += ` M ${tmpUpper} ${tmpLower.substring(0, tmpLower.length - 2)} z `
-    result.lower += ` M ${tmpLower.substring(0, tmpLower.length - 2)} `
-    result.upper += ` M ${tmpUpper.substring(0, tmpUpper.length - 2)} `
+  // Push on the remaining upper and lower tmps, if any
+  if (upperTmp && lowerTmp) {
+    result.fill += ` M ${upperTmp} ${lowerTmp.substring(0, lowerTmp.length - 2)} z `
+    result.lower += ` M ${lowerTmp.substring(0, lowerTmp.length - 2)} `
+    result.upper += ` M ${upperTmp.substring(0, upperTmp.length - 2)} `
   }
 
   return result

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { vec } from "../../vec"
 import { Filled } from "../Theme"
-import { adaptiveSamplingBetween } from "./PlotUtils"
+import { sampleInequality } from "./PlotUtils"
 import { usePaneContext } from "../../context/PaneContext"
 
 const enum BoundType {
@@ -41,12 +41,9 @@ export function Inequality({
   if (">" in y) lowerBoundType = BoundType.INEQUAL
 
   const upperFn = y["<"] ?? y["<="] ?? (() => yMax)
-
   const lowerFn = y[">"] ?? y[">="] ?? (() => yMin)
 
-  const tPos = React.useMemo<vec.Vector2>(() => [xMin, xMax], [xMin, xMax])
-
-  const svgPath = adaptiveSamplingBetween(upperFn, lowerFn, tPos, 12, 20, 0.1)
+  const svgPath = sampleInequality(upperFn, lowerFn, [xMin, xMax], 10, 10, 0.1)
 
   return (
     <g {...svgGroupProps}>

@@ -118,11 +118,6 @@ export function sampleInequality(
   let lowerTmp = ""
   let ineqFalse = false
 
-  const reuse: [vec.Vector2, vec.Vector2] = [
-    [0, 0],
-    [0, 0],
-  ]
-
   sample<[vec.Vector2, vec.Vector2]>({
     domain,
     minDepth,

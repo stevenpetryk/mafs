@@ -8,7 +8,7 @@ export default function ScrollTop() {
 
   // A little hack to scroll to the top until https://github.com/vercel/next.js/issues/42492 is fixed
   React.useEffect(() => {
-    // window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
   }, [sectionTitleKebab, guideTitleKebab])
 
   return null

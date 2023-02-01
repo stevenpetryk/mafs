@@ -1,5 +1,4 @@
 import * as React from "react"
-import { vec } from "../../vec"
 import { Filled } from "../Theme"
 import { sampleInequality } from "./PlotUtils"
 import { usePaneContext } from "../../context/PaneContext"

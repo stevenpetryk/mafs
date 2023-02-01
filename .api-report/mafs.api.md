@@ -173,6 +173,7 @@ export const Plot: {
     OfY: typeof OfY;
     Parametric: typeof Parametric;
     VectorField: typeof VectorField;
+    Inequality: typeof Inequality;
 };
 
 // @public (undocumented)
@@ -442,10 +443,11 @@ export interface VectorProps extends Stroked {
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointSlope" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "ThroughPoints" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "Segment" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "VectorField" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "VectorField" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "Inequality" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

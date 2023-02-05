@@ -38,6 +38,7 @@ function Functions() {
         Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>
       </h2>
       <CodeAndExample component={<InequalitiesExample />} source={InequalitiesExampleSource} />
+      <PropTable of={Plot.Inequality} />
 
       <h2>Parametric functions</h2>
       <CodeAndExample component={<TwistyBoi />} source={TwistyBoiSource} />

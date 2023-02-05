@@ -1,13 +1,21 @@
 import { vec } from "../../vec"
 
 interface SampleParams<P> {
+  /** The function to sample */
   fn: (t: number) => P
+  /** A function that computes the error between a real sample function output and a midpoint output */
   error: (real: P, estimate: P) => number
+  /** A function that computes the midpoint of two sample function outputs */
   midpoint: (p1: P, p2: P) => P
+  /** A function that is called whenever a point should be part of the sample */
   onPoint: (t: number, p: P) => void
+  /** The domain to sample */
   domain: [min: number, max: number]
+  /** The minimum recursion depth */
   minDepth: number
+  /** The maximum recursion depth */
   maxDepth: number
+  /** The maximium tolerated error returned by the error function */
   threshold: number
 }
 
@@ -15,9 +23,8 @@ interface SampleParams<P> {
  * A relatively generic internal function which, given a function, domain, and
  * an error function, will recursively subdivide the domain until sampling said
  * function at each point in the domain yields an error less than the supplied
- * threshold.
- *
- * The function makes no assumptions about the return type of the sampled.
+ * threshold. Importantly, this makes no assumptions about the return type of
+ * the sampled function.
  */
 function sample<SampledReturnType>({
   domain,
@@ -42,7 +49,6 @@ function sample<SampledReturnType>({
   ) {
     const t = 0.5
     const mid = min + (max - min) * t
-
     const pMid = fn(mid)
 
     if (depth < minDepth) {
@@ -52,8 +58,8 @@ function sample<SampledReturnType>({
     }
 
     if (depth < maxDepth) {
-      const pLerpMid = midpoint(pMin, pMax)
-      const e = error(pMid, pLerpMid)
+      const fnMidpoint = midpoint(pMin, pMax)
+      const e = error(pMid, fnMidpoint)
       if (e > threshold) {
         subdivide(min, mid, true, false, depth + 1, pMin, pMid)
         subdivide(mid, max, false, true, depth + 1, pMid, pMax)
@@ -108,37 +114,32 @@ export function sampleInequality(
   maxDepth: number,
   threshold: number
 ) {
-  const result = {
-    fill: "",
-    upper: "",
-    lower: "",
-  }
+  const result = { fill: "", upper: "", lower: "" }
 
   let upperTmp = ""
   let lowerTmp = ""
   let ineqFalse = false
+
+  let prevX = 0
+  let prevUpper = 0
+  let prevLower = 0
 
   sample<[vec.Vector2, vec.Vector2]>({
     domain,
     minDepth,
     maxDepth,
     threshold,
-    fn: (t) => {
-      return [
-        [t, lower(t)],
-        [t, upper(t)],
-      ]
-    },
+    fn: (x) => [
+      [x, lower(x)],
+      [x, upper(x)],
+    ],
     error: ([realLower, realUpper], [estLower, estUpper]) => {
       return Math.max(vec.squareDist(realLower, estLower), vec.squareDist(realUpper, estUpper))
     },
     midpoint: ([aLower, aUpper], [bLower, bUpper]) => {
       return [vec.midpoint(aLower, bLower), vec.midpoint(aUpper, bUpper)]
     },
-    onPoint: (t, [l, u]) => {
-      const lower = l[1]
-      const upper = u[1]
-
+    onPoint: (x, [[, lower], [, upper]]) => {
       // TODO: these inequality operators should reflect the props, perhaps
       // the inequality operator itself should be a function passed into this
       const pathsJustCrossed = upper < lower && !ineqFalse
@@ -148,6 +149,13 @@ export function sampleInequality(
         ineqFalse = true
 
         if (upperTmp && lowerTmp) {
+          const midX = (prevX + x) / 2
+          const midUpper = (prevUpper + upper) / 2
+          const midLower = (prevLower + lower) / 2
+          const midY = (midUpper + midLower) / 2
+          upperTmp += ` ${midX} ${midY} L `
+          lowerTmp = ` ${midX} ${midY} L ` + lowerTmp
+
           result.fill += ` M ${upperTmp} ${lowerTmp.substring(0, lowerTmp.length - 2)} z `
           result.upper += ` M ${upperTmp.substring(0, upperTmp.length - 2)} `
           result.lower += ` M ${lowerTmp.substring(0, lowerTmp.length - 2)} `
@@ -156,17 +164,26 @@ export function sampleInequality(
         }
       } else if (pathsJustUncrossed) {
         ineqFalse = false
+        const midX = (prevX + x) / 2
+        const midUpper = (prevUpper + upper) / 2
+        const midLower = (prevLower + lower) / 2
+        const midY = (midUpper + midLower) / 2
+        upperTmp += ` ${midX} ${midY} L `
+        lowerTmp = ` ${midX} ${midY} L ` + lowerTmp
       }
 
       if (!ineqFalse) {
         if (Number.isFinite(upper)) {
-          upperTmp = upperTmp + ` ${t} ${upper} L `
+          upperTmp = upperTmp + ` ${x} ${upper} L `
         }
         if (Number.isFinite(lower)) {
-          lowerTmp = ` ${t} ${lower} L ` + lowerTmp
+          lowerTmp = ` ${x} ${lower} L ` + lowerTmp
         }
       }
-      return result
+
+      prevX = x
+      prevUpper = upper
+      prevLower = lower
     },
   })
 

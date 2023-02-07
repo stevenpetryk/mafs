@@ -40,6 +40,9 @@ export type MafsProps = React.PropsWithChildren<{
    */
   preserveAspectRatio?: "contain" | false
 
+  /** Called when the view is clicked on, and passed the point where it was clicked. */
+  onClick?: (point: vec.Vector2, event: MouseEvent) => void
+
   /**
    * Enable rendering on the server side. If false, an empty view will still be rendered, with
    * nothing in it.
@@ -58,6 +61,7 @@ export function Mafs({
   preserveAspectRatio = "contain",
   children,
   ssr = false,
+  onClick = undefined,
 }: MafsProps) {
   const testContext = React.useContext(TestContext)
   const height = testContext.overrideHeight ?? propHeight
@@ -144,9 +148,11 @@ export function Mafs({
 
   const wheelEnabler = useWheelEnabler(!!zoom)
 
+  const justDragged = React.useRef(false)
+
   useGesture(
     {
-      onDrag: ({ movement, first, event, type, pinching, memo = [0, 0] }) => {
+      onDrag: ({ movement, first, event, type, pinching, memo = [0, 0], last }) => {
         if (pinching) return movement
 
         if (first) camera.setBase()
@@ -156,6 +162,12 @@ export function Mafs({
 
         const keyboard = type.includes("key")
         if (keyboard) event?.preventDefault()
+
+        // Some minor jank so that onClick doesn't fire on drag.
+        if (last) {
+          justDragged.current = true
+          setTimeout(() => (justDragged.current = false), 10)
+        }
         return !keyboard && first ? movement : memo
       },
       onPinch: ({ first, movement: [scale], origin, event, last }) => {
@@ -209,9 +221,20 @@ export function Mafs({
       onMouseMove: () => {
         wheelEnabler.handleMouseMove()
       },
+      onClick: ({ event }) => {
+        if (!onClick || !rootRef.current || justDragged.current) return
+
+        const box = rootRef.current.getBoundingClientRect()
+        const pxX = event.clientX - box.left
+        const pxY = box.bottom - event.clientY
+        const x = (pxX / width) * xSpan + xMin
+        const y = (pxY / height) * ySpan + yMin
+
+        onClick([x, y], event)
+      },
     },
     {
-      drag: { enabled: pan, eventOptions: { passive: false } },
+      drag: { enabled: pan, eventOptions: { passive: false }, threshold: 1 },
       pinch: { enabled: !!zoom, eventOptions: { passive: false } },
       wheel: {
         enabled: wheelEnabler.wheelEnabled,

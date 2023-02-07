@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.2
+
+- The `<Mafs />` component now has an `onClick` prop.
+
 ## 0.15.1
 
 - Fixes a regression introduced in v0.15.1 where the axis labels had a white fill regardless of the `--mafs-origin-color` custom property.

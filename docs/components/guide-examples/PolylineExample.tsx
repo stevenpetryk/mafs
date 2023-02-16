@@ -8,7 +8,7 @@ import {
   useMovablePoint,
 } from "mafs"
 
-export default function TrianglePool() {
+export default function LightningBolt() {
   const a = [-2, -2] as [number, number]
   const b = useMovablePoint([-1, 1])
   const c = useMovablePoint([1, -1])

@@ -5,13 +5,11 @@ import { vec } from "../vec"
 
 export interface PolygonProps extends Filled {
   points: vec.Vector2[]
-  shapeType?: "open" | "closed"
   svgPolygonProps?: React.SVGProps<SVGPolygonElement>
 }
 
 export function Polygon({
   points,
-  shapeType = "closed",
   color = Theme.foreground,
   weight = 2,
   fillOpacity = 0.15,
@@ -25,10 +23,8 @@ export function Polygon({
     .map((point) => vec.transform(point, userTransform).join(" "))
     .join(" ")
 
-  const Shape = shapeType === "closed" ? "polygon" : "polyline"
-
   return (
-    <Shape
+    <polygon
       points={scaledPoints}
       strokeWidth={weight}
       fillOpacity={fillOpacity}
@@ -44,7 +40,7 @@ export function Polygon({
         transform: "var(--mafs-view-transform)",
         ...(svgPolygonProps.style || {}),
       }}
-    />
+    ></polygon>
   )
 }
 

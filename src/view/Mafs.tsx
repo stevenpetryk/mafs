@@ -70,7 +70,10 @@ export function Mafs({
   const desiredCssWidth = propWidth === "auto" ? "100%" : `${propWidth}px`
 
   const rootRef = React.useRef<HTMLDivElement>(null)
-  const { width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>({ ref: rootRef })
+  const { width = propWidth === "auto" ? (ssr ? 500 : 1) : propWidth } =
+    useResizeObserver<HTMLDivElement>({
+      ref: propWidth === "auto" ? rootRef : null,
+    })
 
   React.useEffect(() => {
     setVisible(true)

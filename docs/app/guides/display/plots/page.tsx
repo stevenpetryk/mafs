@@ -16,6 +16,8 @@ import SineStressTestSource from "!raw-loader!guide-examples/plots/sine-stress-t
 
 import { PropTable } from "components/PropTable"
 import { Plot } from "mafs"
+import InequalitiesExample from "guide-examples/plots/inequalities"
+import InequalitiesExampleSource from "!raw-loader!guide-examples/plots/inequalities.tsx"
 
 function Functions() {
   return (
@@ -31,6 +33,26 @@ function Functions() {
       <CodeAndExample component={<OfXAndY />} source={OfXAndYSource} />
       <PropTable of={Plot.OfX} />
       <PropTable of={Plot.OfY} />
+
+      <h2>
+        Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>
+      </h2>
+
+      <p>
+        Inequalities represent the region less than or greater than one or two functions. Mafs
+        allows you to plot the region between two functions, or a function and a constant. The
+        inequality can be a function of <em className="font-display">x</em> or{" "}
+        <em className="font-display">y</em>.
+      </p>
+
+      <p>
+        You cannot provide an <code>x</code> and a <code>y</code> prop to Inequality—it will throw a
+        runtime exception. Similarly, you cannot pass conflicting inequality operators—like both{" "}
+        <code>&lt;</code> <em>and</em> <code>≤</code>.
+      </p>
+
+      <CodeAndExample component={<InequalitiesExample />} source={InequalitiesExampleSource} />
+      <PropTable of={Plot.Inequality} />
 
       <h2>Parametric functions</h2>
       <CodeAndExample component={<TwistyBoi />} source={TwistyBoiSource} />

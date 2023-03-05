@@ -173,6 +173,7 @@ export const Plot: {
     OfY: typeof OfY;
     Parametric: typeof Parametric;
     VectorField: typeof VectorField;
+    Inequality: typeof Inequality;
 };
 
 // @public (undocumented)
@@ -215,7 +216,7 @@ export interface PointSlopeProps extends Stroked {
 }
 
 // @public (undocumented)
-export function Polygon({ points, color, weight, fillOpacity, strokeOpacity, strokeStyle, svgPolygonProps, }: PolygonProps): JSX.Element;
+export function Polygon({ svgPolygonProps, ...otherProps }: PolygonProps): JSX.Element;
 
 // @public (undocumented)
 export namespace Polygon {
@@ -223,12 +224,27 @@ export namespace Polygon {
     displayName: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "PolyBaseProps" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export interface PolygonProps extends Filled {
-    // (undocumented)
-    points: vec.Vector2[];
+export interface PolygonProps extends PolyBaseProps {
     // (undocumented)
     svgPolygonProps?: React_2.SVGProps<SVGPolygonElement>;
+}
+
+// @public (undocumented)
+export function Polyline({ fillOpacity, svgPolylineProps, ...otherProps }: PolylineProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Polyline {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public (undocumented)
+export interface PolylineProps extends PolyBaseProps {
+    // (undocumented)
+    svgPolylineProps?: React_2.SVGProps<SVGPolylineElement>;
 }
 
 // @public (undocumented)
@@ -442,10 +458,11 @@ export interface VectorProps extends Stroked {
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointSlope" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "ThroughPoints" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "Segment" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:5:18 - (ae-forgotten-export) The symbol "VectorField" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "VectorField" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "Inequality" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

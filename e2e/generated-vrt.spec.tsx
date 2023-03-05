@@ -29,6 +29,7 @@ import Plain from "../docs/components/guide-examples/hello-fx/plain"
 import SinePi from "../docs/components/guide-examples/hello-fx/sine-pi"
 import Sine from "../docs/components/guide-examples/hello-fx/sine"
 import Subdivisions from "../docs/components/guide-examples/hello-fx/subdivisions"
+import Inequalities from "../docs/components/guide-examples/plots/inequalities"
 import OfXAndY from "../docs/components/guide-examples/plots/of-x-and-y"
 import SineStressTest from "../docs/components/guide-examples/plots/sine-stress-test"
 import TwistyBoi from "../docs/components/guide-examples/plots/twisty-boi"
@@ -262,6 +263,15 @@ test("guide-examples/hello-fx/Subdivisions", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Subdivisions />
+    </TestContextProvider>
+  ))
+
+test("guide-examples/plots/Inequalities", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <Inequalities />
     </TestContextProvider>
   ))
 

@@ -2,7 +2,7 @@ import * as React from "react"
 import { vec } from "../../vec"
 import { Stroked } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
-import { adaptiveSampling } from "./PlotUtils"
+import { sampleParametric } from "./PlotUtils"
 
 export interface ParametricProps extends Stroked {
   /** A function that takes a `t` value and returns a point. */
@@ -37,7 +37,7 @@ export function Parametric({
   const errorThreshold = 0.1 / pixelsPerSquare
 
   const svgPath = React.useMemo(
-    () => adaptiveSampling(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
+    () => sampleParametric(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
     [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax]
   )
 

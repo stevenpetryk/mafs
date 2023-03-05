@@ -76,6 +76,13 @@ export function Inequality({
     "You must pass either an x or y set of functions to Inequality (but not both)"
   )
 
+  // Make sure only valid combinations of inequality operators are passed
+  invariant(
+    (fn["<"] === undefined || fn["<="] === undefined) &&
+      (fn[">"] === undefined || fn[">="] === undefined),
+    "You cannot pass both an inequality and an equality operator to Inequality"
+  )
+
   let upperBoundType = BoundType.UNBOUNDED
   if ("<=" in fn) upperBoundType = BoundType.EQUAL
   if ("<" in fn) upperBoundType = BoundType.INEQUAL

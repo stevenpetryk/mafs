@@ -23,6 +23,14 @@ export default function InequalitiesExample() {
         color={Theme.blue}
       />
 
+      <Plot.Inequality
+        y={{
+          "<=": (x) => Math.cos(x + a.x) - a.y,
+          ">": (x) => Math.sin(x - a.x) + a.y,
+        }}
+        color={Theme.pink}
+      />
+
       {a.element}
     </Mafs>
   )

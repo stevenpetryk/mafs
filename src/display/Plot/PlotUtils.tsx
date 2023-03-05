@@ -107,6 +107,7 @@ export function sampleParametric(
 }
 
 export function sampleInequality(
+  rangeAxis: "x" | "y",
   upper: (t: number) => number,
   lower: (t: number) => number,
   domain: vec.Vector2,
@@ -123,6 +124,10 @@ export function sampleInequality(
   let prevX = 0
   let prevUpper = 0
   let prevLower = 0
+
+  function pointToString(x: number, y: number) {
+    return rangeAxis === "x" ? `${x} ${y}` : `${y} ${x}`
+  }
 
   sample<[vec.Vector2, vec.Vector2]>({
     domain,
@@ -153,8 +158,8 @@ export function sampleInequality(
           const midUpper = (prevUpper + upper) / 2
           const midLower = (prevLower + lower) / 2
           const midY = (midUpper + midLower) / 2
-          upperTmp += ` ${midX} ${midY} L `
-          lowerTmp = ` ${midX} ${midY} L ` + lowerTmp
+          upperTmp += ` ${pointToString(midX, midY)} L `
+          lowerTmp = ` ${pointToString(midX, midY)} L ` + lowerTmp
 
           result.fill += ` M ${upperTmp} ${lowerTmp.substring(0, lowerTmp.length - 2)} z `
           result.upper += ` M ${upperTmp.substring(0, upperTmp.length - 2)} `
@@ -168,16 +173,16 @@ export function sampleInequality(
         const midUpper = (prevUpper + upper) / 2
         const midLower = (prevLower + lower) / 2
         const midY = (midUpper + midLower) / 2
-        upperTmp += ` ${midX} ${midY} L `
-        lowerTmp = ` ${midX} ${midY} L ` + lowerTmp
+        upperTmp += ` ${pointToString(midX, midY)} L `
+        lowerTmp = ` ${pointToString(midX, midY)} L ` + lowerTmp
       }
 
       if (!ineqFalse) {
         if (Number.isFinite(upper)) {
-          upperTmp = upperTmp + ` ${x} ${upper} L `
+          upperTmp = upperTmp + ` ${pointToString(x, upper)} L `
         }
         if (Number.isFinite(lower)) {
-          lowerTmp = ` ${x} ${lower} L ` + lowerTmp
+          lowerTmp = ` ${pointToString(x, lower)} L ` + lowerTmp
         }
       }
 

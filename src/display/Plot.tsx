@@ -1,14 +1,14 @@
 import { OfX, OfY } from "./Plot/Simple"
 import { Parametric } from "./Plot/Parametric"
 import { VectorField } from "./Plot/VectorField"
-import { InequalityOfX } from "./Plot/Inequality"
+import { Inequality } from "./Plot/Inequality"
 
 export const Plot = {
   OfX,
   OfY,
   Parametric,
   VectorField,
-  Inequality: InequalityOfX,
+  Inequality,
 }
 
 // @ts-expect-error - setting these here to avoid invalid .d.ts output

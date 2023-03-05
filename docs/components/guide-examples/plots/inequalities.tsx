@@ -16,9 +16,9 @@ export default function InequalitiesExample() {
       <Coordinates.Cartesian />
 
       <Plot.Inequality
-        y={{
-          "<=": (x) => Math.cos(x + a.x) - a.y,
-          ">": (x) => Math.sin(x - a.x) + a.y,
+        x={{
+          "<=": (y) => Math.cos(y + a.y) - a.x,
+          ">": (y) => Math.sin(y - a.y) + a.x,
         }}
         color={Theme.blue}
       />

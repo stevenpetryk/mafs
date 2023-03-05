@@ -216,7 +216,7 @@ export interface PointSlopeProps extends Stroked {
 }
 
 // @public (undocumented)
-export function Polygon({ points, color, weight, fillOpacity, strokeOpacity, strokeStyle, svgPolygonProps, }: PolygonProps): JSX.Element;
+export function Polygon({ svgPolygonProps, ...otherProps }: PolygonProps): JSX.Element;
 
 // @public (undocumented)
 export namespace Polygon {
@@ -224,12 +224,27 @@ export namespace Polygon {
     displayName: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "PolyBaseProps" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export interface PolygonProps extends Filled {
-    // (undocumented)
-    points: vec.Vector2[];
+export interface PolygonProps extends PolyBaseProps {
     // (undocumented)
     svgPolygonProps?: React_2.SVGProps<SVGPolygonElement>;
+}
+
+// @public (undocumented)
+export function Polyline({ fillOpacity, svgPolylineProps, ...otherProps }: PolylineProps): JSX.Element;
+
+// @public (undocumented)
+export namespace Polyline {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public (undocumented)
+export interface PolylineProps extends PolyBaseProps {
+    // (undocumented)
+    svgPolylineProps?: React_2.SVGProps<SVGPolylineElement>;
 }
 
 // @public (undocumented)

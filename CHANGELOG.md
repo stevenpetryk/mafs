@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.16.0
+
+- Mafs now supports rendering a `Polyline` (previously it only supported `Polygon`). Thanks [@Mesoptier](https://github.com/Mesoptier)!
+- Mafs now has `Plot.Inequality` for rendering the area greater than, less than, or between two functions.
+
 ## 0.15.2
 
 - The `<Mafs />` component now has an `onClick` prop.

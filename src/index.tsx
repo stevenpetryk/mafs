@@ -24,6 +24,9 @@ export type { EllipseProps } from "./display/Ellipse"
 export { Polygon } from "./display/Polygon"
 export type { PolygonProps } from "./display/Polygon"
 
+export { Polyline } from "./display/Polyline"
+export type { PolylineProps } from "./display/Polyline"
+
 export { Point } from "./display/Point"
 export type { PointProps } from "./display/Point"
 

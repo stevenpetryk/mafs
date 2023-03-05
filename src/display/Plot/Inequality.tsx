@@ -3,6 +3,7 @@ import { Theme } from "../Theme"
 import { sampleInequality } from "./PlotUtils"
 import { usePaneContext } from "../../context/PaneContext"
 import invariant from "tiny-invariant"
+import { vec } from "../../vec"
 
 const enum BoundType {
   UNBOUNDED = 0,
@@ -67,8 +68,8 @@ export function Inequality({
     yPaneRange: [yMin, yMax],
   } = usePaneContext()
 
-  const range = y ? [xMin, xMax] : [yMin, yMax]
-  const domain = y ? [yMin, yMax] : [xMin, xMax]
+  const domain: vec.Vector2 = y ? [xMin, xMax] : [yMin, yMax]
+  const range: vec.Vector2 = y ? [yMin, yMax] : [xMin, xMax]
   const fn = y ? y : x
 
   invariant(
@@ -91,21 +92,23 @@ export function Inequality({
   if (">=" in fn) lowerBoundType = BoundType.EQUAL
   if (">" in fn) lowerBoundType = BoundType.INEQUAL
 
-  let greaterFn = fn["<"] ?? fn["<="] ?? (() => domain[1])
-  let lesserFn = fn[">"] ?? fn[">="] ?? (() => domain[0])
+  let greaterFn = fn["<"] ?? fn["<="] ?? (() => range[1])
+  let lesserFn = fn[">"] ?? fn[">="] ?? (() => range[0])
 
   if (typeof greaterFn === "number") {
-    greaterFn = () => greaterFn as number
+    const greater = greaterFn
+    greaterFn = () => greater
   }
   if (typeof lesserFn === "number") {
-    lesserFn = () => lesserFn as number
+    const lesser = lesserFn
+    lesserFn = () => lesser
   }
 
   const svgPath = sampleInequality(
     y ? "x" : "y",
     greaterFn,
     lesserFn,
-    [range[0], range[1]],
+    domain,
     minSamplingDepth,
     maxSamplingDepth,
     0.1

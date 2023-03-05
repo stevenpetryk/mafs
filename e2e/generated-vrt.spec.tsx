@@ -12,6 +12,7 @@ import MovableCircle from "../docs/components/guide-examples/MovableCircle"
 import MovableEllipse from "../docs/components/guide-examples/MovableEllipse"
 import PlainMafsExample from "../docs/components/guide-examples/PlainMafsExample"
 import PolygonExample from "../docs/components/guide-examples/PolygonExample"
+import PolylineExample from "../docs/components/guide-examples/PolylineExample"
 import SnapPoint from "../docs/components/guide-examples/SnapPoint"
 import TextExample from "../docs/components/guide-examples/TextExample"
 import PizzaMarch from "../docs/components/guide-examples/custom/pizza-march"
@@ -108,6 +109,15 @@ test("guide-examples/PolygonExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PolygonExample />
+    </TestContextProvider>
+  ))
+
+test("guide-examples/PolylineExample", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <PolylineExample />
     </TestContextProvider>
   ))
 

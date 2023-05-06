@@ -43,6 +43,7 @@ export { MovablePoint } from "./interaction/MovablePoint"
 export type { MovablePointProps } from "./interaction/MovablePoint"
 
 export { useMovablePoint } from "./interaction/useMovablePoint"
+export { useDragElement } from "./interaction/useDragElement"
 export type {
   ConstraintFunction,
   UseMovablePoint,

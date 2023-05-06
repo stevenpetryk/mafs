@@ -6,6 +6,8 @@ import PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
 import PointsAlongFunctionSource from "!raw-loader!guide-examples/display/PointsAlongFunction"
 import DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
 import DynamicMovablePointsSource from "!raw-loader!guide-examples/display/DynamicMovablePoints"
+import CustomMovablePoints from "guide-examples/display/CustomMovablePoints"
+import CustomMovablePointsSource from "!raw-loader!guide-examples/display/CustomMovablePoints"
 import SnapPoint from "guide-examples/SnapPoint"
 import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import { Advanced } from "components/Advanced"
@@ -114,6 +116,20 @@ function Stopwatch() {
       </p>
 
       <CodeAndExample component={<DynamicMovablePoints />} source={DynamicMovablePointsSource} />
+
+      <h2 className="flex flex-col gap-1">
+        <div>
+          <Advanced />
+        </div>
+        <span>Create movable elements</span>
+      </h2>
+
+      <p>
+        <code>useDragElement</code> is a hook that helps you creat eyour own movable element while
+        respecting a11y rules for keyboard interactions.
+      </p>
+
+      <CodeAndExample component={<CustomMovablePoints />} source={CustomMovablePointsSource} />
 
       <PropTable of={MovablePoint} />
     </>

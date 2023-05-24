@@ -3,11 +3,13 @@
 import {
   Mafs,
   LaTeX,
-  CartesianCoordinates,
+  Coordinates,
   useMovablePoint,
   Transform,
 } from "mafs"
 
+// \x is still a special case, even when using String.raw,
+// so we make a convenient pre-escaped string for it here.
 const x = "\\x"
 
 import { round } from "mafs/math"
@@ -20,9 +22,14 @@ export default function LatexExample() {
     constrain: ([x, y]) => [round(x, 1), round(y, 1)],
   })
 
+  const lx = l.x.toFixed(1)
+  const ly = l.y.toFixed(1)
+  const rx = r.x.toFixed(1)
+  const ry = r.y.toFixed(1)
+
   return (
     <Mafs>
-      <CartesianCoordinates
+      <Coordinates.Cartesian
         xAxis={{ labels: false }}
         yAxis={{ labels: false }}
       />
@@ -30,9 +37,7 @@ export default function LatexExample() {
         <LaTeX
           at={l.point}
           tex={String.raw`
-            \begin{bmatrix} ${l.x.toFixed(
-              1
-            )} \\ ${l.y.toFixed(1)} \end{bmatrix}
+            \begin{bmatrix} ${lx} \\ ${ly} \end{bmatrix}
           `}
         />
       </Transform>
@@ -41,9 +46,7 @@ export default function LatexExample() {
         <LaTeX
           at={r.point}
           tex={String.raw`
-            \begin{bmatrix} ${r.x.toFixed(
-              1
-            )} \\ ${r.y.toFixed(1)} \end{bmatrix}
+            \begin{bmatrix} ${rx} \\ ${ry} \end{bmatrix}
           `}
         />
       </Transform>
@@ -59,9 +62,7 @@ export default function LatexExample() {
             \f\hat${x}i\,e^{2 \pi i ${x}i x}
             \,d${x}i
         `}
-        macros={{
-          "\\f": "#1f(#2)",
-        }}
+        katexOptions={{ macros: { "\\f": "#1f(#2)" } }}
       />
     </Mafs>
   )

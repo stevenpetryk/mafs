@@ -60,7 +60,6 @@ export const Guides: Section[] = [
       { title: "Ellipses", icon: EllipseIcon, slug: "ellipses" },
       { title: "Plots", icon: FunctionIcon, slug: "plots" },
       { title: "Text", icon: TextIcon, slug: "text" },
-      { title: "LaTeX", icon: LatexIcon, slug: "latex" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
       { separator: true },
       { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },
@@ -81,7 +80,13 @@ export const Guides: Section[] = [
         slug: "overview",
       },
       { title: "Transform contexts", icon: TransformContextsIcon, slug: "contexts" },
-      // { title: "Panes", icon: MarginIcon, slug: "panes" },
+    ],
+  },
+  {
+    title: "Experimental",
+    guides: [
+      { title: "Animation", icon: PlayIcon, slug: "animation" },
+      { title: "LaTeX", icon: LatexIcon, slug: "latex" },
     ],
   },
   {

@@ -1,5 +1,5 @@
 import * as React from "react"
-import katex from "katex"
+import katex, { KatexOptions } from "katex"
 import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 import { Theme } from "./Theme"
@@ -7,10 +7,10 @@ import { Theme } from "./Theme"
 interface LatexProps {
   tex: string
   at: vec.Vector2
-  macros?: Record<string, string>
+  katexOptions?: KatexOptions
 }
 
-export function LaTeX({ at: center, tex, macros }: LatexProps) {
+export function LaTeX({ at: center, tex, katexOptions }: LatexProps) {
   const ref = React.useRef<HTMLSpanElement>(null)
   const { viewTransform, userTransform } = useTransformContext()
   const combinedTransform = vec.matrixMult(viewTransform, userTransform)
@@ -21,11 +21,8 @@ export function LaTeX({ at: center, tex, macros }: LatexProps) {
 
   React.useEffect(() => {
     if (!ref.current) return
-    const start = performance.now()
-    katex.render(tex, ref.current, { macros })
-    const durationMs = performance.now() - start
-    console.log(`Rendered LaTeX in ${durationMs}ms`)
-  }, [macros, tex])
+    katex.render(tex, ref.current, katexOptions)
+  }, [katexOptions, tex])
 
   const pixelCenter = vec.add(vec.transform(center, combinedTransform), [-width / 2, -height / 2])
 

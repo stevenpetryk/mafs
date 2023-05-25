@@ -8,17 +8,6 @@ function Experimental({ children }: React.PropsWithChildren) {
       </h2>
 
       {children}
-
-      <p>
-        <a
-          className="text-red-900 font-bold"
-          href="https://github.com/stevenpetryk/mafs/issues"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Make suggestions on GitHub <span aria-hidden="true">↗</span>
-        </a>
-      </p>
     </div>
   )
 }

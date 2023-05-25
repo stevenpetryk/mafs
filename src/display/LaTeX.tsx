@@ -46,6 +46,7 @@ export function LaTeX({ at: center, tex, color = Theme.foreground, katexOptions 
           justifyContent: "center",
           position: "fixed",
           color,
+          textShadow: `, 0 0 2px ${Theme.background}`.repeat(8).slice(2),
         }}
       >
         <span ref={ref} />

@@ -7,17 +7,19 @@ import { Theme } from "./Theme"
 interface LatexProps {
   tex: string
   at: vec.Vector2
+  color?: string
   katexOptions?: KatexOptions
 }
 
-export function LaTeX({ at: center, tex, katexOptions }: LatexProps) {
+export function LaTeX({ at: center, tex, color = Theme.foreground, katexOptions }: LatexProps) {
   const ref = React.useRef<HTMLSpanElement>(null)
   const { viewTransform, userTransform } = useTransformContext()
   const combinedTransform = vec.matrixMult(viewTransform, userTransform)
 
-  // TODO: there's gotta be a better way to do this lol
-  const width = 10000
-  const height = 10000
+  // TODO: there's probably a better way to do this but we want to leave plenty
+  // of room for the LaTeX to expand
+  const width = 99999
+  const height = 99999
 
   React.useEffect(() => {
     if (!ref.current) return
@@ -43,7 +45,7 @@ export function LaTeX({ at: center, tex, katexOptions }: LatexProps) {
           alignItems: "center",
           justifyContent: "center",
           position: "fixed",
-          color: Theme.foreground,
+          color,
         }}
       >
         <span ref={ref} />

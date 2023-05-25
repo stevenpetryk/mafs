@@ -20,12 +20,13 @@ export default function LatexPage() {
         <Link href="https://katex.org/" target="_blank">
           KaTeX
         </Link>{" "}
-        that allows you to embed LaTeX expressions directly in Mafs. It supports passing a `tex` raw
-        string and{" "}
+        that allows you to embed LaTeX expressions directly in Mafs. It supports passing a{" "}
+        <code>tex</code> raw string and{" "}
         <Link href="https://katex.org/docs/options.html" target="_blank">
           all KaTeX options
         </Link>
-        . A particularly useful option is `macros`, which allow you to define reusable LaTeX macros.
+        . A particularly useful option is <code>macros</code>, which allow you to define reusable
+        LaTeX macros.
       </p>
 
       <Experimental>

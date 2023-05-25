@@ -90,10 +90,6 @@ export const Guides: Section[] = [
     ],
   },
   {
-    title: "Animation",
-    guides: [{ title: "Stopwatch", icon: PlayIcon, slug: "stopwatch" }],
-  },
-  {
     title: "Examples",
     guides: [
       { title: "Bézier curves", slug: "bezier-curves" },

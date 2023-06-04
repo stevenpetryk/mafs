@@ -44,10 +44,9 @@ export type MafsProps = React.PropsWithChildren<{
   onClick?: (point: vec.Vector2, event: MouseEvent) => void
 
   /**
-   * Enable rendering on the server side. If false, an empty view will still be rendered, with
-   * nothing in it.
-   *
-   * Note that server-side rendering complicated graphs can really bloat your HTML.
+   * @deprecated this was previously used to avoid rendering Mafs on the server
+   * side. However, Mafs now avoids rendering at all until it is mounted, so
+   * this prop is now ignored.
    */
   ssr?: boolean
 }>
@@ -66,16 +65,61 @@ export function Mafs({
   const testContext = React.useContext(TestContext)
   const height = testContext.overrideHeight ?? propHeight
 
-  const [visible, setVisible] = React.useState(ssr ? true : false)
   const desiredCssWidth = propWidth === "auto" ? "100%" : `${propWidth}px`
 
   const rootRef = React.useRef<HTMLDivElement>(null)
-  const { width = ssr ? 500 : 1 } = useResizeObserver<HTMLDivElement>({ ref: rootRef })
+  const { width = propWidth === "auto" ? (ssr ? 500 : 0) : propWidth } =
+    useResizeObserver<HTMLDivElement>({
+      ref: propWidth === "auto" ? rootRef : null,
+    })
 
-  React.useEffect(() => {
-    setVisible(true)
-  }, [])
+  return (
+    <div
+      className="MafsView"
+      style={{ width: desiredCssWidth, height }}
+      tabIndex={pan || zoom ? 0 : -1}
+      ref={rootRef}
+    >
+      {width > 0 && (
+        <MafsCanvas
+          width={width}
+          height={height}
+          desiredCssWidth={desiredCssWidth}
+          rootRef={rootRef}
+          pan={pan}
+          zoom={zoom}
+          viewBox={viewBox}
+          preserveAspectRatio={preserveAspectRatio}
+          ssr={ssr}
+          onClick={onClick}
+        >
+          {children}
+        </MafsCanvas>
+      )}
+    </div>
+  )
+}
 
+type MafsCanvasProps = {
+  width: number
+  height: number
+  desiredCssWidth: string
+  rootRef: React.RefObject<HTMLDivElement>
+} & Required<Pick<MafsProps, "pan" | "zoom" | "viewBox" | "preserveAspectRatio" | "ssr">> &
+  Pick<MafsProps, "children" | "onClick">
+
+function MafsCanvas({
+  width,
+  height,
+  desiredCssWidth,
+  rootRef,
+  pan,
+  zoom,
+  viewBox,
+  preserveAspectRatio,
+  children,
+  onClick,
+}: MafsCanvasProps) {
   let minZoom = 1
   let maxZoom = 1
   if (typeof zoom === "object") {
@@ -253,39 +297,32 @@ export function Mafs({
   )
 
   return (
-    <div
-      className="MafsView"
-      style={{ width: desiredCssWidth }}
-      tabIndex={pan || zoom ? 0 : -1}
-      ref={rootRef}
-    >
-      <CoordinateContext.Provider value={coordinateContext}>
-        <SpanContext.Provider value={{ xSpan, ySpan }}>
-          <TransformContext.Provider
-            value={{ userTransform: vec.identity, viewTransform: viewTransform }}
-          >
-            <PaneManager>
-              <svg
-                width={width}
-                height={height}
-                viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
-                preserveAspectRatio="xMidYMin"
-                style={{
-                  width: desiredCssWidth,
-                  touchAction: pan ? "none" : "auto",
-                  ...({
-                    "--mafs-view-transform": viewTransformCSS,
-                    "--mafs-user-transform": "translate(0, 0)",
-                  } as React.CSSProperties),
-                }}
-              >
-                {visible && children}
-              </svg>
-            </PaneManager>
-          </TransformContext.Provider>
-        </SpanContext.Provider>
-      </CoordinateContext.Provider>
-    </div>
+    <CoordinateContext.Provider value={coordinateContext}>
+      <SpanContext.Provider value={{ xSpan, ySpan }}>
+        <TransformContext.Provider
+          value={{ userTransform: vec.identity, viewTransform: viewTransform }}
+        >
+          <PaneManager>
+            <svg
+              width={width}
+              height={height}
+              viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
+              preserveAspectRatio="xMidYMin"
+              style={{
+                width: desiredCssWidth,
+                touchAction: pan ? "none" : "auto",
+                ...({
+                  "--mafs-view-transform": viewTransformCSS,
+                  "--mafs-user-transform": "translate(0, 0)",
+                } as React.CSSProperties),
+              }}
+            >
+              {children}
+            </svg>
+          </PaneManager>
+        </TransformContext.Provider>
+      </SpanContext.Provider>
+    </CoordinateContext.Provider>
   )
 }
 

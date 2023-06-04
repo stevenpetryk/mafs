@@ -11,6 +11,7 @@ import LatexDocExample from "components/guide-examples/display/LatexDoc"
 import LatexDocExampleSource from "!raw-loader!components/guide-examples/display/LatexDoc"
 import Link from "next/link"
 import Experimental from "components/Experimental"
+import Code from "components/Code"
 
 export default function LatexPage() {
   return (
@@ -35,6 +36,17 @@ export default function LatexPage() {
       </Experimental>
 
       <PropTable of={LaTeX} />
+
+      <h2>Usage</h2>
+
+      <p>
+        Since LaTeX is a wrapper around KaTeX, you must import KaTeX's CSS for it to render
+        properly. The specific import path may differ depending on your app's underlying
+        configuration. In the future, this may change to be an import like{" "}
+        <code>mafs/latex.css</code>.
+      </p>
+
+      <Code language="css" source={`@import "katex/dist/katex.min.css";`} />
 
       <h2>Examples</h2>
 

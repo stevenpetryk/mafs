@@ -44,10 +44,9 @@ export type MafsProps = React.PropsWithChildren<{
   onClick?: (point: vec.Vector2, event: MouseEvent) => void
 
   /**
-   * Enable rendering on the server side. If false, an empty view will still be rendered, with
-   * nothing in it.
-   *
-   * Note that server-side rendering complicated graphs can really bloat your HTML.
+   * @deprecated this was previously used to avoid rendering Mafs on the server
+   * side. However, Mafs now avoids rendering at all until it is mounted, so
+   * this prop is now ignored.
    */
   ssr?: boolean
 }>
@@ -119,16 +118,8 @@ function MafsCanvas({
   viewBox,
   preserveAspectRatio,
   children,
-  ssr,
   onClick,
 }: MafsCanvasProps) {
-  // TODO: Since MafsCanvas is only rendered once width > 0, this probably isn't needed anymore?
-  const [visible, setVisible] = React.useState(ssr ? true : false)
-
-  React.useEffect(() => {
-    setVisible(true)
-  }, [])
-
   let minZoom = 1
   let maxZoom = 1
   if (typeof zoom === "object") {
@@ -326,7 +317,7 @@ function MafsCanvas({
                 } as React.CSSProperties),
               }}
             >
-              {visible && children}
+              {children}
             </svg>
           </PaneManager>
         </TransformContext.Provider>

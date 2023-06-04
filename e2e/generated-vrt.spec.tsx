@@ -19,6 +19,8 @@ import PizzaMarch from "../docs/components/guide-examples/custom/pizza-march"
 import PointCloud from "../docs/components/guide-examples/custom/point-cloud"
 import PaneVisualizerExample from "../docs/components/guide-examples/debug/PaneVisualizerExample"
 import DynamicMovablePoints from "../docs/components/guide-examples/display/DynamicMovablePoints"
+import Latex from "../docs/components/guide-examples/display/Latex"
+import LatexDoc from "../docs/components/guide-examples/display/LatexDoc"
 import PointsAlongFunction from "../docs/components/guide-examples/display/PointsAlongFunction"
 import SimplePoint from "../docs/components/guide-examples/display/SimplePoint"
 import FancyParabola from "../docs/components/guide-examples/examples/FancyParabola"
@@ -173,6 +175,24 @@ test("guide-examples/display/DynamicMovablePoints", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <DynamicMovablePoints />
+    </TestContextProvider>
+  ))
+
+test("guide-examples/display/Latex", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <Latex />
+    </TestContextProvider>
+  ))
+
+test("guide-examples/display/LatexDoc", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <LatexDoc />
     </TestContextProvider>
   ))
 

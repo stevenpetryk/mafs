@@ -12,7 +12,7 @@ import {
 // so we make a convenient pre-escaped string for it here.
 const x = "\\x"
 
-import { round } from "mafs/math"
+import { round } from "lodash"
 
 export default function LatexExample() {
   const l = useMovablePoint([-2, 1], {

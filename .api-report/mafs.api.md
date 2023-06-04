@@ -6,6 +6,7 @@
 
 /// <reference types="react" />
 
+import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
 
 // @public (undocumented)
@@ -85,6 +86,11 @@ export type Interval = [min: number, max: number];
 
 // @public (undocumented)
 export function labelPi(x: number): string;
+
+// Warning: (ae-forgotten-export) The symbol "LatexProps" needs to be exported by the entry point index.d.ts
+//
+// @public (undocumented)
+export function LaTeX({ at: center, tex, color, katexOptions }: LatexProps): JSX.Element;
 
 // @public (undocumented)
 export const Line: {

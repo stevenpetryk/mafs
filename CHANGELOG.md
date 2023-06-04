@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.0
+
+- Introduces the [LaTeX](https://mafs.dev/guides/experimental/latex) component.
+- Deprecates the `ssr` attribute in favor of never rendering Mafs until hydration.
+
 ## 0.16.0
 
 - Mafs now supports rendering a `Polyline` (previously it only supported `Polygon`). Thanks [@Mesoptier](https://github.com/Mesoptier)!

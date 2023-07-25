@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Mafs, Line, Coordinates, useMovablePoint, Plot } from "mafs";
-import "mafs/core.css";
 
 export default function PolarCoordinate() {
   const viewBox = { x: [-2, 2], y: [-4, 4] };

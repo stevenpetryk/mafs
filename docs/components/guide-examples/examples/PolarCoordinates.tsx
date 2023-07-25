@@ -5,7 +5,7 @@ import "mafs/core.css";
 export default function PolarCoordinate() {
   const viewBox = { x: [-2, 2], y: [-4, 4] };
   const point1 = useMovablePoint([-2, -1]);
-  const r = Math.sqrt(point1.point[0] ** 2 + point1.point[1] ** 2);
+  const r = vec.mag(point1.point);
   let angle = Math.atan2(point1.point[1], point1.point[0]);
 
   // Adjust angle to always be positive, between 0 to 2π
@@ -40,7 +40,7 @@ export default function PolarCoordinate() {
           <Plot.Parametric
             t={[0, angle]}
             xy={(t) => [r * Math.cos(t), r * Math.sin(t)]}
-            color="yellow"
+            color={Theme.blue}
           />
           {point1.element}
         </Mafs>

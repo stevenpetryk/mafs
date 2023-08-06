@@ -40,17 +40,17 @@ function PaneManager({ children }: { children: React.ReactNode }) {
   const xPanes = React.useMemo(
     () =>
       range(xLowerBound, xUpperBound - xPaneSize, xPaneSize).map(
-        (xMin) => [xMin, xMin + xPaneSize] as Interval
+        (xMin) => [xMin, xMin + xPaneSize] as Interval,
       ),
-    [xLowerBound, xUpperBound, xPaneSize]
+    [xLowerBound, xUpperBound, xPaneSize],
   )
 
   const yPanes = React.useMemo(
     () =>
       range(yLowerBound, yUpperBound - yPaneSize, yPaneSize).map(
-        (yMin) => [yMin, yMin + yPaneSize] as Interval
+        (yMin) => [yMin, yMin + yPaneSize] as Interval,
       ),
-    [yLowerBound, yUpperBound, yPaneSize]
+    [yLowerBound, yUpperBound, yPaneSize],
   )
 
   const context = React.useMemo(
@@ -60,7 +60,7 @@ function PaneManager({ children }: { children: React.ReactNode }) {
       xPaneRange: [xLowerBound, xUpperBound] as Interval,
       yPaneRange: [yLowerBound, yUpperBound] as Interval,
     }),
-    [xPanes, yPanes, xLowerBound, xUpperBound, yLowerBound, yUpperBound]
+    [xPanes, yPanes, xLowerBound, xUpperBound, yLowerBound, yUpperBound],
   )
 
   return <PaneContext.Provider value={context}>{children}</PaneContext.Provider>

@@ -14,7 +14,7 @@ const nextConfig = {
           tsConfigPath: path.join(__dirname, "../tsconfig.json"),
           include: [path.join(__dirname, "../src/**/*.tsx")],
           shouldRemoveUndefinedFromOptional: true,
-        })
+        }),
       )
 
       config.ignoreWarnings = [() => true]

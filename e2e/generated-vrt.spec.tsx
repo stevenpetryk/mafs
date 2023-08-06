@@ -58,7 +58,7 @@ test("guide-examples/LinePointSlopeExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <LinePointSlopeExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/LineSegmentExample", async ({ mount, page }) =>
@@ -67,7 +67,7 @@ test("guide-examples/LineSegmentExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <LineSegmentExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/LineThroughPointsExample", async ({ mount, page }) =>
@@ -76,7 +76,7 @@ test("guide-examples/LineThroughPointsExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <LineThroughPointsExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/MovableCircle", async ({ mount, page }) =>
@@ -85,7 +85,7 @@ test("guide-examples/MovableCircle", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <MovableCircle />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/MovableEllipse", async ({ mount, page }) =>
@@ -94,7 +94,7 @@ test("guide-examples/MovableEllipse", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <MovableEllipse />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/PlainMafsExample", async ({ mount, page }) =>
@@ -103,7 +103,7 @@ test("guide-examples/PlainMafsExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PlainMafsExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/PolygonExample", async ({ mount, page }) =>
@@ -112,7 +112,7 @@ test("guide-examples/PolygonExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PolygonExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/PolylineExample", async ({ mount, page }) =>
@@ -121,7 +121,7 @@ test("guide-examples/PolylineExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PolylineExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/SnapPoint", async ({ mount, page }) =>
@@ -130,7 +130,7 @@ test("guide-examples/SnapPoint", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <SnapPoint />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/TextExample", async ({ mount, page }) =>
@@ -139,7 +139,7 @@ test("guide-examples/TextExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <TextExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/custom/PizzaMarch", async ({ mount, page }) =>
@@ -148,7 +148,7 @@ test("guide-examples/custom/PizzaMarch", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PizzaMarch />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/custom/PointCloud", async ({ mount, page }) =>
@@ -157,7 +157,7 @@ test("guide-examples/custom/PointCloud", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PointCloud />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/debug/PaneVisualizerExample", async ({ mount, page }) =>
@@ -166,7 +166,7 @@ test("guide-examples/debug/PaneVisualizerExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PaneVisualizerExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/DynamicMovablePoints", async ({ mount, page }) =>
@@ -175,7 +175,7 @@ test("guide-examples/display/DynamicMovablePoints", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <DynamicMovablePoints />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/Latex", async ({ mount, page }) =>
@@ -184,7 +184,7 @@ test("guide-examples/display/Latex", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Latex />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/LatexDoc", async ({ mount, page }) =>
@@ -193,7 +193,7 @@ test("guide-examples/display/LatexDoc", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <LatexDoc />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/PointsAlongFunction", async ({ mount, page }) =>
@@ -202,7 +202,7 @@ test("guide-examples/display/PointsAlongFunction", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PointsAlongFunction />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/SimplePoint", async ({ mount, page }) =>
@@ -211,7 +211,7 @@ test("guide-examples/display/SimplePoint", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <SimplePoint />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/examples/FancyParabola", async ({ mount, page }) =>
@@ -220,7 +220,7 @@ test("guide-examples/examples/FancyParabola", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <FancyParabola />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/examples/ProjectileMotion", async ({ mount, page }) =>
@@ -229,7 +229,7 @@ test("guide-examples/examples/ProjectileMotion", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <ProjectileMotion />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/examples/Riemann", async ({ mount, page }) =>
@@ -238,7 +238,7 @@ test("guide-examples/examples/Riemann", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Riemann />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/hello-fx/Draggable", async ({ mount, page }) =>
@@ -247,7 +247,7 @@ test("guide-examples/hello-fx/Draggable", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Draggable />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/hello-fx/Plain", async ({ mount, page }) =>
@@ -256,7 +256,7 @@ test("guide-examples/hello-fx/Plain", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Plain />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/hello-fx/SinePi", async ({ mount, page }) =>
@@ -265,7 +265,7 @@ test("guide-examples/hello-fx/SinePi", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <SinePi />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/hello-fx/Sine", async ({ mount, page }) =>
@@ -274,7 +274,7 @@ test("guide-examples/hello-fx/Sine", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Sine />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/hello-fx/Subdivisions", async ({ mount, page }) =>
@@ -283,7 +283,7 @@ test("guide-examples/hello-fx/Subdivisions", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Subdivisions />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/plots/Inequalities", async ({ mount, page }) =>
@@ -292,7 +292,7 @@ test("guide-examples/plots/Inequalities", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <Inequalities />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/plots/OfXAndY", async ({ mount, page }) =>
@@ -301,7 +301,7 @@ test("guide-examples/plots/OfXAndY", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <OfXAndY />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/plots/SineStressTest", async ({ mount, page }) =>
@@ -310,7 +310,7 @@ test("guide-examples/plots/SineStressTest", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <SineStressTest />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/plots/TwistyBoi", async ({ mount, page }) =>
@@ -319,7 +319,7 @@ test("guide-examples/plots/TwistyBoi", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <TwistyBoi />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/utility/SimpleTransform", async ({ mount, page }) =>
@@ -328,7 +328,7 @@ test("guide-examples/utility/SimpleTransform", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <SimpleTransform />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/coordinates/CartesianCoordinatesConfigExample", async ({
@@ -340,7 +340,7 @@ test("guide-examples/display/coordinates/CartesianCoordinatesConfigExample", asy
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <CartesianCoordinatesConfigExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/coordinates/CartesianCoordinatesExample", async ({ mount, page }) =>
@@ -349,7 +349,7 @@ test("guide-examples/display/coordinates/CartesianCoordinatesExample", async ({ 
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <CartesianCoordinatesExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/coordinates/PolarCoordinatesExample", async ({ mount, page }) =>
@@ -358,7 +358,7 @@ test("guide-examples/display/coordinates/PolarCoordinatesExample", async ({ moun
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PolarCoordinatesExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/vectors/VectorExample", async ({ mount, page }) =>
@@ -367,7 +367,7 @@ test("guide-examples/display/vectors/VectorExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <VectorExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/viewbox/ContainViewbox", async ({ mount, page }) =>
@@ -376,7 +376,7 @@ test("guide-examples/display/viewbox/ContainViewbox", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <ContainViewbox />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/viewbox/StretchViewbox", async ({ mount, page }) =>
@@ -385,7 +385,7 @@ test("guide-examples/display/viewbox/StretchViewbox", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <StretchViewbox />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))
 
 test("guide-examples/display/viewbox/ZoomExample", async ({ mount, page }) =>
@@ -394,5 +394,5 @@ test("guide-examples/display/viewbox/ZoomExample", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <ZoomExample />
-    </TestContextProvider>
+    </TestContextProvider>,
   ))

@@ -46,7 +46,7 @@ export default function RiemannSum() {
   const partitions: Partition[] = range(
     a.x,
     b.x - dx / 2,
-    dx
+    dx,
   ).map((x) => {
     const yMid = wave(x + dx / 2)
 

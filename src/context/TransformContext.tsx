@@ -32,7 +32,7 @@ export function useTransformContext() {
 
   invariant(
     context,
-    "TransformContext is not loaded. Are you rendering a Mafs component outside of a MafsView?"
+    "TransformContext is not loaded. Are you rendering a Mafs component outside of a MafsView?",
   )
 
   return context

@@ -92,7 +92,7 @@ export namespace vec {
       m[0] * m2[1] + m[1] * m2[4],
       m[3] * m2[1] + m[4] * m2[4],
       m[0] * m2[2] + m[1] * m2[5] + m[2],
-      m[3] * m2[2] + m[4] * m2[5] + m[5]
+      m[3] * m2[2] + m[4] * m2[5] + m[5],
     )
   }
 
@@ -172,7 +172,7 @@ export namespace vec {
       invDet * -a01,
       invDet * a00,
       invDet * (a12 * a01 - a02 * a11),
-      invDet * (-a12 * a00 + a02 * a10)
+      invDet * (-a12 * a00 + a02 * a10),
     )
   }
 

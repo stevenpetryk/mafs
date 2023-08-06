@@ -15,7 +15,7 @@ export default function DynamicMovablePoints() {
 
   const length = vec.dist(start.point, end.point)
   const betweenPoints = range(1, length - 0.5, 1).map((t) =>
-    vec.lerp(start.point, end.point, t / length)
+    vec.lerp(start.point, end.point, t / length),
   )
 
   return (

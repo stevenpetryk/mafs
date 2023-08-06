@@ -102,7 +102,7 @@ export const Guides: Section[] = [
 
 export function getDocContext(
   sectionSlug: string,
-  guideSlug: string
+  guideSlug: string,
 ): {
   current: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -125,11 +125,11 @@ export function getDocContext(
   } | null
 } {
   const flatGuidesAndSections = Guides.flatMap((section) =>
-    section.guides.filter(isGuide).map((guide) => [section, guide] as const)
+    section.guides.filter(isGuide).map((guide) => [section, guide] as const),
   )
 
   const currentIndex = flatGuidesAndSections.findIndex(
-    ([section, guide]) => kebabCase(section.title) === sectionSlug && guide.slug === guideSlug
+    ([section, guide]) => kebabCase(section.title) === sectionSlug && guide.slug === guideSlug,
   )
 
   const [section, guide] = flatGuidesAndSections[currentIndex]

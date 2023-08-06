@@ -27,7 +27,7 @@ export interface UseMovablePoint {
 
 export function useMovablePoint(
   initialPoint: vec.Vector2,
-  { constrain, color = Theme.pink }: UseMovablePointArguments = {}
+  { constrain, color = Theme.pink }: UseMovablePointArguments = {},
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
   const [point, setPoint] = React.useState<vec.Vector2>(initialPoint)

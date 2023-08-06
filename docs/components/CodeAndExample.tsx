@@ -130,8 +130,45 @@ function CodeAndExample({
 async function openPlayground(source: string) {
   const functionName = source.match(/function ([A-z]+)/)?.[1]
   const prettier = await import("prettier/standalone")
-  const typescript = await import("prettier/parser-typescript")
-  const html = await import("prettier/parser-html")
+  const typescriptParser = await import("prettier/plugins/typescript")
+  const htmlParser = await import("prettier/plugins/html")
+
+  const tsx = await prettier.format(
+    endent`
+        ${source.includes("* as React") ? "" : 'import * as React from "react"'}
+        import {createRoot} from "react-dom/client"
+
+        import "mafs/core.css";
+        import "mafs/font.css";
+
+        ${source}
+
+        createRoot(document.getElementById("root")).render(<${functionName} />)
+      `,
+    { parser: "typescript", plugins: [typescriptParser] },
+  )
+
+  const html = await prettier.format(
+    endent`
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <style>
+            body {
+              background: black;
+              margin: 0;
+              padding: 0;
+            }
+          </style>
+        </head>
+
+        <body>
+          <div id="root"></div>
+        </body>
+      </html>
+    `,
+    { parser: "html", plugins: [htmlParser] },
+  )
 
   sdk.openProject({
     title: "Mafs Playground",
@@ -148,41 +185,8 @@ async function openPlayground(source: string) {
       "@types/lodash": "4.14.191",
     },
     files: {
-      "src/index.tsx": prettier.format(
-        endent`
-          ${source.includes("* as React") ? "" : 'import * as React from "react"'}
-          import {createRoot} from "react-dom/client"
-
-          import "mafs/core.css";
-          import "mafs/font.css";
-
-          ${source}
-
-          createRoot(document.getElementById("root")).render(<${functionName} />)
-        `,
-        { parser: "typescript", plugins: [typescript] }
-      ),
-      "public/index.html": prettier.format(
-        endent`
-          <!DOCTYPE html>
-          <html lang="en">
-            <head>
-              <style>
-                body {
-                  background: black;
-                  margin: 0;
-                  padding: 0;
-                }
-              </style>
-            </head>
-
-            <body>
-              <div id="root"></div>
-            </body>
-          </html>
-        `,
-        { parser: "html", plugins: [html] }
-      ),
+      "src/index.tsx": tsx,
+      "public/index.html": html,
     },
   })
 }

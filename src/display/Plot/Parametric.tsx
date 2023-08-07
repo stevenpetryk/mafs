@@ -38,7 +38,7 @@ export function Parametric({
 
   const svgPath = React.useMemo(
     () => sampleParametric(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
-    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax]
+    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax],
   )
 
   return (

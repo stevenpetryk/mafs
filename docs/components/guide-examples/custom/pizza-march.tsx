@@ -74,7 +74,7 @@ export default function Example() {
   })
 
   const points = range(-4, 0.1, 1 / 2).map(
-    (x) => [x + offset.x, fn(x + offset.x)] as const
+    (x) => [x + offset.x, fn(x + offset.x)] as const,
   )
 
   return (

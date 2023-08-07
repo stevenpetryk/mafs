@@ -186,7 +186,7 @@ function MafsCanvas({
     const rect = el.getBoundingClientRect()
     return vec.transform(
       [point[0] - rect.left + viewBoxX, point[1] - rect.top + viewBoxY],
-      inverseViewTransform
+      inverseViewTransform,
     )
   }
 
@@ -286,14 +286,14 @@ function MafsCanvas({
         eventOptions: { passive: false },
       },
       target: rootRef,
-    }
+    },
   )
 
   const viewTransformCSS = vec.toCSS(viewTransform)
 
   const coordinateContext = React.useMemo<CoordinateContextShape>(
     () => ({ xMin, xMax, yMin, yMax, height, width }),
-    [xMin, xMax, yMin, yMax, height, width]
+    [xMin, xMax, yMin, yMax, height, width],
   )
 
   return (

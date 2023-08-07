@@ -39,7 +39,7 @@ export function MovablePoint({
 
   const combinedTransform = React.useMemo(
     () => vec.matrixMult(viewTransform, userTransform),
-    [viewTransform, userTransform]
+    [viewTransform, userTransform],
   )
 
   const [dragging, setDragging] = React.useState(false)
@@ -75,8 +75,8 @@ export function MovablePoint({
           const testPoint = constrain(
             vec.transform(
               vec.add(vec.transform(point, userTransform), testMovement),
-              inverseTransform
-            )
+              inverseTransform,
+            ),
           )
 
           if (vec.dist(testPoint, point) > min) {
@@ -96,7 +96,7 @@ export function MovablePoint({
         onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
       }
     },
-    { target: ref, eventOptions: { passive: false } }
+    { target: ref, eventOptions: { passive: false } },
   )
 
   const ringSize = 15
@@ -132,7 +132,7 @@ function getInverseTransform(transform: vec.Matrix) {
   const invert = vec.matrixInvert(transform)
   invariant(
     invert !== null,
-    "Could not invert transform matrix. Your movable point's transformation matrix might be degenerative (mapping 2D space to a line)."
+    "Could not invert transform matrix. Your movable point's transformation matrix might be degenerative (mapping 2D space to a line).",
   )
   return invert
 }

@@ -74,14 +74,14 @@ export function Inequality({
 
   invariant(
     fn && (x === undefined) !== (y === undefined),
-    "You must pass either an x or y set of functions to Inequality (but not both)"
+    "You must pass either an x or y set of functions to Inequality (but not both)",
   )
 
   // Make sure only valid combinations of inequality operators are passed
   invariant(
     (fn["<"] === undefined || fn["<="] === undefined) &&
       (fn[">"] === undefined || fn[">="] === undefined),
-    "You cannot pass both an inequality and an equality operator to Inequality"
+    "You cannot pass both an inequality and an equality operator to Inequality",
   )
 
   let upperBoundType = BoundType.UNBOUNDED
@@ -111,7 +111,7 @@ export function Inequality({
     domain,
     minSamplingDepth,
     maxSamplingDepth,
-    0.1
+    0.1,
   )
 
   return (

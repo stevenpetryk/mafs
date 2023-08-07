@@ -45,7 +45,7 @@ function sample<SampledReturnType>({
     pushRight: boolean,
     depth: number,
     pMin: SampledReturnType,
-    pMax: SampledReturnType
+    pMax: SampledReturnType,
   ) {
     const t = 0.5
     const mid = min + (max - min) * t
@@ -84,7 +84,7 @@ export function sampleParametric(
   domain: vec.Vector2,
   minDepth: number,
   maxDepth: number,
-  threshold: number
+  threshold: number,
 ) {
   let result = "M "
 
@@ -113,7 +113,7 @@ export function sampleInequality(
   domain: vec.Vector2,
   minDepth: number,
   maxDepth: number,
-  threshold: number
+  threshold: number,
 ) {
   const result = { fill: "", upper: "", lower: "" }
 

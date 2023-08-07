@@ -1,9 +1,9 @@
-import type { PlaywrightTestConfig } from "@playwright/experimental-ct-react"
+import { defineConfig } from "@playwright/experimental-ct-react"
 import { devices, ViewportSize } from "@playwright/test"
 
 const viewport: ViewportSize = { width: 500, height: 500 }
 
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: "./e2e",
   timeout: 30 * 1000,
   expect: {
@@ -36,6 +36,4 @@ const config: PlaywrightTestConfig = {
     { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport } },
     { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport } },
   ],
-}
-
-export default config
+})

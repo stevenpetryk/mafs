@@ -24,7 +24,7 @@ export default function ProjectileMotion() {
   const yVelocity = initialVelocity.y * vectorScale
   const velocityAngle = Math.atan(yVelocity / xVelocity)
   const velocityMag = Math.sqrt(
-    xVelocity ** 2 + yVelocity ** 2
+    xVelocity ** 2 + yVelocity ** 2,
   )
   const timeOfFlight =
     Math.abs(2 * velocityMag * Math.sin(velocityAngle)) / g

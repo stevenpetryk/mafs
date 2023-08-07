@@ -6,6 +6,7 @@
 
 /// <reference types="react" />
 
+import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
 
@@ -13,7 +14,7 @@ import * as React_2 from 'react';
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
 
 // @public (undocumented)
-export function Circle({ radius, ...rest }: CircleProps): JSX.Element;
+export function Circle({ radius, ...rest }: CircleProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Circle {
@@ -47,7 +48,7 @@ export const Debug: {
 };
 
 // @public (undocumented)
-export function Ellipse({ center, radius, angle, strokeStyle, strokeOpacity, weight, color, fillOpacity, svgEllipseProps, }: EllipseProps): JSX.Element;
+export function Ellipse({ center, radius, angle, strokeStyle, strokeOpacity, weight, color, fillOpacity, svgEllipseProps, }: EllipseProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Ellipse {
@@ -90,7 +91,7 @@ export function labelPi(x: number): string;
 // Warning: (ae-forgotten-export) The symbol "LatexProps" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
-export function LaTeX({ at: center, tex, color, katexOptions }: LatexProps): JSX.Element;
+export function LaTeX({ at: center, tex, color, katexOptions }: LatexProps): JSX_2.Element;
 
 // @public (undocumented)
 export const Line: {
@@ -101,7 +102,7 @@ export const Line: {
 };
 
 // @public (undocumented)
-export function Mafs({ width: propWidth, height: propHeight, pan, zoom, viewBox, preserveAspectRatio, children, ssr, onClick, }: MafsProps): JSX.Element;
+export function Mafs({ width: propWidth, height: propHeight, pan, zoom, viewBox, preserveAspectRatio, children, ssr, onClick, }: MafsProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Mafs {
@@ -129,7 +130,7 @@ export type MafsProps = React_2.PropsWithChildren<{
 }>;
 
 // @public (undocumented)
-export function MovablePoint({ point, onMove, constrain, color, }: MovablePointProps): JSX.Element;
+export function MovablePoint({ point, onMove, constrain, color, }: MovablePointProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace MovablePoint {
@@ -183,7 +184,7 @@ export const Plot: {
 };
 
 // @public (undocumented)
-export function Point({ x, y, color, opacity, svgCircleProps, }: PointProps): JSX.Element;
+export function Point({ x, y, color, opacity, svgCircleProps, }: PointProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Point {
@@ -222,7 +223,7 @@ export interface PointSlopeProps extends Stroked {
 }
 
 // @public (undocumented)
-export function Polygon({ svgPolygonProps, ...otherProps }: PolygonProps): JSX.Element;
+export function Polygon({ svgPolygonProps, ...otherProps }: PolygonProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Polygon {
@@ -239,7 +240,7 @@ export interface PolygonProps extends PolyBaseProps {
 }
 
 // @public (undocumented)
-export function Polyline({ fillOpacity, svgPolylineProps, ...otherProps }: PolylineProps): JSX.Element;
+export function Polyline({ fillOpacity, svgPolylineProps, ...otherProps }: PolylineProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Polyline {
@@ -288,7 +289,7 @@ export interface Stroked {
 }
 
 // @public (undocumented)
-function Text_2({ children, x, y, color, size, svgTextProps, attach, attachDistance, }: TextProps): JSX.Element;
+function Text_2({ children, x, y, color, size, svgTextProps, attach, attachDistance, }: TextProps): JSX_2.Element;
 
 // @public (undocumented)
 namespace Text_2 {
@@ -331,7 +332,7 @@ export interface ThroughPointsProps extends Stroked {
 }
 
 // @public (undocumented)
-export function Transform(props: TransformProps): JSX.Element;
+export function Transform(props: TransformProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Transform {
@@ -422,7 +423,7 @@ export namespace vec {
 }
 
 // @public (undocumented)
-export function Vector({ tail, tip, color, weight, style, opacity, svgLineProps, }: VectorProps): JSX.Element;
+export function Vector({ tail, tip, color, weight, style, opacity, svgLineProps, }: VectorProps): JSX_2.Element;
 
 // @public (undocumented)
 export namespace Vector {

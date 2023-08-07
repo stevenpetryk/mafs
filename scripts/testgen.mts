@@ -17,6 +17,9 @@ const SKIP = [
 
   // Playwright claims components are unregistered in this one
   /LinePointAngleExample/i,
+
+  // KaTeX doesn't run correctly in the Playwright frame
+  /latex/i,
 ]
 
 const filename = url.fileURLToPath(import.meta.url)
@@ -81,8 +84,8 @@ for (const example of examples) {
   `
 }
 
-prettier.resolveConfig(process.cwd()).then((config) => {
-  const formattedTestFileContent = prettier.format(testFileContent, {
+prettier.resolveConfig(process.cwd()).then(async (config) => {
+  const formattedTestFileContent = await prettier.format(testFileContent, {
     parser: "typescript",
     ...config,
   })

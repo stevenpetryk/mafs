@@ -24,7 +24,7 @@ function xyFromBernsteinPolynomial(
   c1: vec.Vector2,
   c2: vec.Vector2,
   p2: vec.Vector2,
-  t: number
+  t: number,
 ) {
   return [
     vec.scale(p1, -(t ** 3) + 3 * t ** 2 - 3 * t + 1),
@@ -76,7 +76,7 @@ export default function BezierCurves() {
   function drawLineSegments(
     pointPath: vec.Vector2[],
     color: string,
-    customOpacity = opacity * 0.5
+    customOpacity = opacity * 0.5,
   ) {
     return inPairs(pointPath).map(([p1, p2], index) => (
       <Line.Segment
@@ -91,7 +91,7 @@ export default function BezierCurves() {
 
   function drawPoints(
     points: vec.Vector2[],
-    color: string
+    color: string,
   ) {
     return points.map((point, index) => (
       <Point
@@ -116,7 +116,7 @@ export default function BezierCurves() {
         {drawLineSegments(
           [p1.point, c1.point, c2.point, p2.point],
           Theme.pink,
-          0.5
+          0.5,
         )}
 
         {/* First-order lerps */}
@@ -137,7 +137,7 @@ export default function BezierCurves() {
               c1.point,
               c2.point,
               p2.point,
-              t
+              t,
             )
           }
         />
@@ -154,7 +154,7 @@ export default function BezierCurves() {
               c1.point,
               c2.point,
               p2.point,
-              t
+              t,
             )
           }
         />

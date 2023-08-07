@@ -3,6 +3,7 @@ import { MafsDragging } from "./components/MafsDragging"
 
 test("Panning the <Mafs /> view", async ({ mount, page }) => {
   const component = await mount(<MafsDragging />)
+  await page.waitForSelector(".MafsView")
 
   await component.focus()
   await page.keyboard.press("Alt+ArrowRight")

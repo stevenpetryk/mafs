@@ -3,6 +3,7 @@ import { MafsDragging } from "./components/MafsDragging"
 
 test("Moving MovablePoints", async ({ mount, page }) => {
   const component = await mount(<MafsDragging />)
+  await page.waitForSelector(".mafs-movable-point")
 
   const points = await component.locator(".mafs-movable-point").all()
   expect(points.length).toBe(3)

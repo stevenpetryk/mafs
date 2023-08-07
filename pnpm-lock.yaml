@@ -15,8 +15,8 @@ importers:
         specifier: ^0.5
         version: 0.5.0
       '@use-gesture/react':
-        specifier: ^10
-        version: 10.0.0(react@18.2.0)
+        specifier: ^10.2.27
+        version: 10.2.27(react@18.2.0)
       computer-modern:
         specifier: ^0.1.2
         version: 0.1.2
@@ -2168,8 +2168,8 @@ packages:
     resolution: {integrity: sha512-V4XV7hn9GAD2MYu8yBBVi5iuWBsAMfjPRMsEVzoTNGYH72tf0kFP+OKqGKc8YJFQIJx6yj+AOqxmEHOmx2/MEA==}
     dev: false
 
-  /@use-gesture/react@10.0.0(react@18.2.0):
-    resolution: {integrity: sha512-ltJ+uvrqqHyeJhA4bpSj4hi7K59ijTMcjxKoHOEQdrIw5N8RVoByEw9P5EJPGA0TSHFe01lDIA+NIOiG6oG81w==}
+  /@use-gesture/react@10.2.27(react@18.2.0):
+    resolution: {integrity: sha512-7E5vnWCxeslWlxwZ8uKIcnUZVMTRMZ8cvSnLLKF1NkyNb3PnNiAzoXM4G1vTKJKRhgOTeI6wK1YsEpwo9ABV5w==}
     peerDependencies:
       react: '>= 16.8.0'
     dependencies:

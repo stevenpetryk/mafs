@@ -37,7 +37,14 @@ export function EllipseIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function LatexIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         d="M6.97625 4L14 4V4.26667L7.05213 4.26667C6.78719 4.3422 6.78036 4.27913 6.97625 4Z"
         fill="currentColor"

@@ -23,7 +23,7 @@ module.exports = {
       },
     },
     {
-      files: ["scripts"],
+      files: ["scripts/**/*"],
       rules: {
         "no-console": "off",
       },

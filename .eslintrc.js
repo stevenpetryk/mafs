@@ -22,6 +22,12 @@ module.exports = {
         "@typescript-eslint/explicit-module-boundary-types": "off",
       },
     },
+    {
+      files: ["scripts"],
+      rules: {
+        "no-console": "off",
+      },
+    },
   ],
   settings: {
     react: {

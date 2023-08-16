@@ -41,11 +41,11 @@ function runTypeScript() {
   const tsConfigParseResult = typescript.parseJsonConfigFileContent(
     tsConfig.config,
     typescript.sys,
-    "./"
+    "./",
   )
   const program = typescript.createProgram(
     tsConfigParseResult.fileNames,
-    tsConfigParseResult.options
+    tsConfigParseResult.options,
   )
   return program.emit()
 }

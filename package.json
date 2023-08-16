@@ -9,6 +9,7 @@
   "main": "build/index.js",
   "module": "build/index.mjs",
   "types": "build/index.d.ts",
+  "type": "module",
   "files": [
     "build/",
     "core.css",
@@ -18,8 +19,8 @@
     "start": "cd docs && pnpm dev",
     "test": "pnpm -s test:unit && pnpm -s test:e2e",
     "test:unit": "jest",
-    "test:e2e": "node --loader ts-node/esm scripts/testgen.mts && playwright test",
-    "build": "ts-node scripts/build.mts",
+    "test:e2e": "node --loader ts-node/esm scripts/testgen.ts && playwright test",
+    "build": "node --loader ts-node/esm scripts/build.ts",
     "api-report:update": "pnpm tsc && api-extractor run --local",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md}\"",

@@ -1,5 +1,4 @@
-module.exports = {
-  setupFilesAfterEnv: ["./jest.setup.js"],
+export default {
   transform: {
     "^.+\\.(t|j)sx?$": ["@swc/jest", { jsc: { transform: { react: { runtime: "automatic" } } } }],
   },

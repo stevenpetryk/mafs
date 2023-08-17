@@ -5,6 +5,7 @@ import {
   useTransformContext,
   vec,
 } from "mafs"
+import type { Vector2 } from 'mafs'
 
 export default function Example() {
   return (
@@ -25,7 +26,7 @@ function PointCloud() {
   const size = 5
   const perAxis = 10
 
-  const points: { at: vec.Vector2; color: string }[] = []
+  const points: { at: Vector2; color: string }[] = []
   for (let i = 0; i <= size; i += size / perAxis) {
     for (let j = 0; j <= size; j += size / perAxis) {
       // prettier-ignore

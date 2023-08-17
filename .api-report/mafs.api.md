@@ -12,12 +12,12 @@ import * as React_2 from 'react';
 
 // @public (undocumented)
 export interface Algebra {
-    add(v1: Vector2, v2: Vector2): Vector2;
+    add(v: Vector2, v2: Vector2): Vector2;
     det(m: Matrix2x3): number;
     dist(v: Vector2, v2: Vector2): number;
     dot(v: Vector2, v2: Vector2): number;
     identity(): Matrix2x3;
-    lerp(v1: Vector2, v2: Vector2, m: number): Vector2;
+    lerp(v: Vector2, v2: Vector2, m: number): Vector2;
     mag(v: Vector2): number;
     matrixBuilder(m?: Matrix2x3): Matrix2x3Builder;
     matrixInvert(a: Matrix2x3): Matrix2x3 | null;
@@ -29,7 +29,7 @@ export interface Algebra {
     rotateAbout(v: Vector2, cp: Vector2, a: number): Vector2;
     scale(v: Vector2, sc: number): Vector2;
     squareDist(v: Vector2, v2: Vector2): number;
-    sub(v1: Vector2, v2: Vector2): Vector2;
+    sub(v: Vector2, v2: Vector2): Vector2;
     toCSS(matrix: Matrix2x3): string;
     transform(v: Vector2, m: Matrix2x3): Vector2;
     // (undocumented)
@@ -158,7 +158,7 @@ export type MafsProps = React_2.PropsWithChildren<{
 // @public
 export type Matrix2x3 = [number, number, number, number, number, number];
 
-// @public (undocumented)
+// @public
 export interface Matrix2x3Builder {
     // (undocumented)
     get(): Matrix2x3;

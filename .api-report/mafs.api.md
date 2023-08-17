@@ -11,6 +11,32 @@ import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
 
 // @public (undocumented)
+export interface Algebra {
+    add(v1: Vector2, v2: Vector2): Vector2;
+    det(m: Matrix2x3): number;
+    dist(v: Vector2, v2: Vector2): number;
+    dot(v: Vector2, v2: Vector2): number;
+    identity(): Matrix2x3;
+    lerp(v1: Vector2, v2: Vector2, m: number): Vector2;
+    mag(v: Vector2): number;
+    matrixBuilder(m?: Matrix2x3): Matrix2x3Builder;
+    matrixInvert(a: Matrix2x3): Matrix2x3 | null;
+    matrixMult(m1: Matrix2x3, m2: Matrix2x3): Matrix2x3;
+    midpoint(v: Vector2, v2: Vector2): Vector2;
+    normal(v: Vector2): Vector2;
+    normalize(v: Vector2): Vector2;
+    rotate(v: Vector2, a: number): Vector2;
+    rotateAbout(v: Vector2, cp: Vector2, a: number): Vector2;
+    scale(v: Vector2, sc: number): Vector2;
+    squareDist(v: Vector2, v2: Vector2): number;
+    sub(v1: Vector2, v2: Vector2): Vector2;
+    toCSS(matrix: Matrix2x3): string;
+    transform(v: Vector2, m: Matrix2x3): Vector2;
+    // (undocumented)
+    withMag(v: Vector2, m: number): Vector2;
+}
+
+// @public (undocumented)
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
 
 // @public (undocumented)
@@ -25,7 +51,7 @@ export namespace Circle {
 // @public (undocumented)
 export interface CircleProps extends Filled {
     // (undocumented)
-    center: vec.Vector2;
+    center: Vector2;
     // (undocumented)
     radius: number;
     // (undocumented)
@@ -33,7 +59,7 @@ export interface CircleProps extends Filled {
 }
 
 // @public (undocumented)
-export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2;
+export type ConstraintFunction = (position: Vector2) => Vector2;
 
 // @public (undocumented)
 export const Coordinates: {
@@ -61,9 +87,9 @@ export interface EllipseProps extends Filled {
     // (undocumented)
     angle?: number;
     // (undocumented)
-    center: vec.Vector2;
+    center: Vector2;
     // (undocumented)
-    radius: vec.Vector2;
+    radius: Vector2;
     // (undocumented)
     svgEllipseProps?: React_2.SVGProps<SVGEllipseElement>;
 }
@@ -120,14 +146,33 @@ export type MafsProps = React_2.PropsWithChildren<{
         max: number;
     };
     viewBox?: {
-        x?: vec.Vector2;
-        y?: vec.Vector2;
+        x?: Vector2;
+        y?: Vector2;
         padding?: number;
     };
     preserveAspectRatio?: "contain" | false;
-    onClick?: (point: vec.Vector2, event: MouseEvent) => void;
+    onClick?: (point: Vector2, event: MouseEvent) => void;
     ssr?: boolean;
 }>;
+
+// @public
+export type Matrix2x3 = [number, number, number, number, number, number];
+
+// @public (undocumented)
+export interface Matrix2x3Builder {
+    // (undocumented)
+    get(): Matrix2x3;
+    // (undocumented)
+    mult(m: Matrix2x3): Matrix2x3Builder;
+    // (undocumented)
+    rotate(a: number): Matrix2x3Builder;
+    // (undocumented)
+    scale(x: number, y: number): Matrix2x3Builder;
+    // (undocumented)
+    shear(x: number, y: number): Matrix2x3Builder;
+    // (undocumented)
+    translate(x: number, y: number): Matrix2x3Builder;
+}
 
 // @public (undocumented)
 export function MovablePoint({ point, onMove, constrain, color, }: MovablePointProps): JSX_2.Element;
@@ -144,8 +189,8 @@ export interface MovablePointProps {
     color?: string;
     // Warning: (ae-forgotten-export) The symbol "ConstraintFunction_2" needs to be exported by the entry point index.d.ts
     constrain?: ConstraintFunction_2;
-    onMove: (point: vec.Vector2) => void;
-    point: vec.Vector2;
+    onMove: (point: Vector2) => void;
+    point: Vector2;
 }
 
 // @public (undocumented)
@@ -170,8 +215,8 @@ export interface ParametricProps extends Stroked {
     minSamplingDepth?: number;
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
-    t: vec.Vector2;
-    xy: (t: number) => vec.Vector2;
+    t: Vector2;
+    xy: (t: number) => Vector2;
 }
 
 // @public (undocumented)
@@ -197,7 +242,7 @@ export interface PointAngleProps extends Stroked {
     // (undocumented)
     angle: number;
     // (undocumented)
-    point: vec.Vector2;
+    point: Vector2;
 }
 
 // @public (undocumented)
@@ -217,7 +262,7 @@ export interface PointProps {
 // @public (undocumented)
 export interface PointSlopeProps extends Stroked {
     // (undocumented)
-    point: vec.Vector2;
+    point: Vector2;
     // (undocumented)
     slope: number;
 }
@@ -257,9 +302,9 @@ export interface PolylineProps extends PolyBaseProps {
 // @public (undocumented)
 export interface SegmentProps extends Stroked {
     // (undocumented)
-    point1: vec.Vector2;
+    point1: Vector2;
     // (undocumented)
-    point2: vec.Vector2;
+    point2: Vector2;
 }
 
 // @public (undocumented)
@@ -326,9 +371,9 @@ export const Theme: {
 // @public (undocumented)
 export interface ThroughPointsProps extends Stroked {
     // (undocumented)
-    point1: vec.Vector2;
+    point1: Vector2;
     // (undocumented)
-    point2: vec.Vector2;
+    point2: Vector2;
 }
 
 // @public (undocumented)
@@ -342,11 +387,11 @@ export namespace Transform {
 
 // @public (undocumented)
 export type TransformProps = React_2.PropsWithChildren<{
-    matrix?: vec.Matrix;
-    translate?: vec.Vector2;
-    scale?: number | vec.Vector2;
+    matrix?: Matrix2x3;
+    translate?: Vector2;
+    scale?: number | Vector2;
     rotate?: number;
-    shear?: vec.Vector2;
+    shear?: Vector2;
 }>;
 
 // @public (undocumented)
@@ -354,9 +399,9 @@ export interface UseMovablePoint {
     // (undocumented)
     element: React_2.ReactElement;
     // (undocumented)
-    point: vec.Vector2;
+    point: Vector2;
     // (undocumented)
-    setPoint: (point: vec.Vector2) => void;
+    setPoint: (point: Vector2) => void;
     // (undocumented)
     x: number;
     // (undocumented)
@@ -364,7 +409,7 @@ export interface UseMovablePoint {
 }
 
 // @public (undocumented)
-export function useMovablePoint(initialPoint: vec.Vector2, { constrain, color }?: UseMovablePointArguments): UseMovablePoint;
+export function useMovablePoint(initialPoint: Vector2, { constrain, color }?: UseMovablePointArguments): UseMovablePoint;
 
 // @public (undocumented)
 export interface UseMovablePointArguments {
@@ -387,40 +432,7 @@ export function useStopwatch(options?: StopwatchArguments): Stopwatch;
 export function useTransformContext(): TransformContextShape;
 
 // @public (undocumented)
-export namespace vec {
-    export function add(v: Vector2, v2: Vector2): Vector2;
-    export function det(m: Matrix): number;
-    export function dist(v: Vector2, v2: Vector2): number;
-    export function dot(v: Vector2, v2: Vector2): number;
-    export function lerp(v1: Vector2, v2: Vector2, t: number): Vector2;
-    export function mag(v: Vector2): number;
-    export type Matrix = [number, number, number, number, number, number];
-    export function matrixBuilder(m?: Matrix | null): {
-        mult: (m: Matrix) => any;
-        translate: (x: number, y: number) => any;
-        rotate: (a: number) => any;
-        scale: (x: number, y: number) => any;
-        shear: (x: number, y: number) => any;
-        get: () => Matrix;
-    };
-    export function matrixInvert(a: Matrix): Matrix | null;
-    export function matrixMult(m: Matrix, m2: Matrix): Matrix;
-    export function midpoint(v: Vector2, v2: Vector2): Vector2;
-    export function normal(v: Vector2): Vector2;
-    export function normalize(v: Vector2): Vector2;
-    export function rotate(v: Vector2, a: number): Vector2;
-    export function rotateAbout(v: Vector2, cp: Vector2, a: number): Vector2;
-    export function scale(v: Vector2, sc: number): Vector2;
-    export function squareDist(v: Vector2, v2: Vector2): number;
-    export function sub(v: Vector2, v2: Vector2): Vector2;
-    export function toCSS(matrix: Matrix): string;
-    export function transform(v: Vector2, m: Matrix): Vector2;
-    export type Vector2 = [x: number, y: number];
-    // (undocumented)
-    export function withMag(v: Vector2, m: number): Vector2;
-    const // (undocumented)
-    identity: Matrix;
-}
+export const vec: Algebra;
 
 // @public (undocumented)
 export function Vector({ tail, tip, color, weight, style, opacity, svgLineProps, }: VectorProps): JSX_2.Element;
@@ -431,6 +443,9 @@ export namespace Vector {
     displayName: string;
 }
 
+// @public
+export type Vector2 = [x: number, y: number];
+
 // @public (undocumented)
 export interface VectorFieldProps {
     // (undocumented)
@@ -440,9 +455,9 @@ export interface VectorFieldProps {
     // (undocumented)
     step: number;
     // (undocumented)
-    xy: (point: vec.Vector2) => vec.Vector2;
+    xy: (point: Vector2) => Vector2;
     // (undocumented)
-    xyOpacity?: (point: vec.Vector2) => number;
+    xyOpacity?: (point: Vector2) => number;
 }
 
 // @public (undocumented)
@@ -450,9 +465,9 @@ export interface VectorProps extends Stroked {
     // (undocumented)
     svgLineProps?: React_2.SVGProps<SVGLineElement>;
     // (undocumented)
-    tail?: vec.Vector2;
+    tail?: Vector2;
     // (undocumented)
-    tip: vec.Vector2;
+    tip: Vector2;
 }
 
 // Warnings were encountered during analysis:

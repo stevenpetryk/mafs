@@ -1,4 +1,5 @@
-import { vec } from "../../vec"
+import { vec } from "../../algebra"
+import type { Vector2 } from "../../algebra/types"
 
 interface SampleParams<P> {
   /** The function to sample */
@@ -80,8 +81,8 @@ function sample<SampledReturnType>({
 }
 
 export function sampleParametric(
-  fn: (t: number) => vec.Vector2,
-  domain: vec.Vector2,
+  fn: (t: number) => Vector2,
+  domain: Vector2,
   minDepth: number,
   maxDepth: number,
   threshold: number,
@@ -110,7 +111,7 @@ export function sampleInequality(
   rangeAxis: "x" | "y",
   upper: (t: number) => number,
   lower: (t: number) => number,
-  domain: vec.Vector2,
+  domain: Vector2,
   minDepth: number,
   maxDepth: number,
   threshold: number,
@@ -129,7 +130,7 @@ export function sampleInequality(
     return rangeAxis === "x" ? `${x} ${y}` : `${y} ${x}`
   }
 
-  sample<[vec.Vector2, vec.Vector2]>({
+  sample<[Vector2, Vector2]>({
     domain,
     minDepth,
     maxDepth,

@@ -1,7 +1,7 @@
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
 import { range } from "../../math"
-import { vec } from "../../vec"
+import { vec } from "../../algebra/"
 import { XLabels, YLabels, defaultLabelMaker, AxisOptions, defaultAxisOptions } from "./Axes"
 
 const thetas = range(0, 2 * Math.PI, Math.PI / 12)

@@ -1,13 +1,13 @@
 import * as React from "react"
 import invariant from "tiny-invariant"
-import { vec } from "../vec"
+import type { Matrix2x3 } from "../algebra/types"
 
 interface TransformContextShape {
   /**
    * The resulting transformation matrix from any user-provided transforms (via
    * the `<Transform />` component).
    */
-  userTransform: vec.Matrix
+  userTransform: Matrix2x3
 
   /**
    * A transformation that maps "math" space to pixel space. Note that, in many
@@ -15,7 +15,7 @@ interface TransformContextShape {
    * `var(--mafs-view-transform)` CSS custom property in combination with the
    * SVG `transform` prop.
    */
-  viewTransform: vec.Matrix
+  viewTransform: Matrix2x3
 }
 
 export const TransformContext = React.createContext<TransformContextShape | null>(null)

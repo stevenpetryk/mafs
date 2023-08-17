@@ -3,7 +3,7 @@ import { Theme } from "../Theme"
 import { sampleInequality } from "./PlotUtils"
 import { usePaneContext } from "../../context/PaneContext"
 import invariant from "tiny-invariant"
-import { vec } from "../../vec"
+import type { Vector2 } from "../../algebra/types"
 
 const enum BoundType {
   UNBOUNDED = 0,
@@ -68,8 +68,8 @@ export function Inequality({
     yPaneRange: [yMin, yMax],
   } = usePaneContext()
 
-  const domain: vec.Vector2 = y ? [xMin, xMax] : [yMin, yMax]
-  const range: vec.Vector2 = y ? [yMin, yMax] : [xMin, xMax]
+  const domain: Vector2 = y ? [xMin, xMax] : [yMin, yMax]
+  const range: Vector2 = y ? [yMin, yMax] : [xMin, xMax]
   const fn = y ? y : x
 
   invariant(

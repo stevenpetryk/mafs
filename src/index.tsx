@@ -53,7 +53,8 @@ export { useStopwatch } from "./animation/useStopwatch"
 export type { Stopwatch, StopwatchArguments } from "./animation/useStopwatch"
 
 export type { Interval } from "./math"
-export { vec } from "./vec"
+export { vec } from "./algebra"
+export type * from "./algebra/types"
 
 export { Transform, type TransformProps } from "./display/Transform"
 

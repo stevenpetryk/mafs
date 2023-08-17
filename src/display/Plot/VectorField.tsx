@@ -1,12 +1,13 @@
 import { clamp } from "../../math"
-import { vec } from "../../vec"
+import { vec } from "../../algebra/"
+import type { Vector2 } from "../../algebra/types"
 import { usePaneContext } from "../../context/PaneContext"
 import { Theme } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
 
 export interface VectorFieldProps {
-  xy: (point: vec.Vector2) => vec.Vector2
-  xyOpacity?: (point: vec.Vector2) => number
+  xy: (point: Vector2) => Vector2
+  xyOpacity?: (point: Vector2) => number
   step: number
   opacityStep?: number
   color?: string
@@ -34,7 +35,7 @@ export function VectorField({
   function fieldForRegion(xMin: number, xMax: number, yMin: number, yMax: number) {
     for (let x = Math.floor(xMin); x <= Math.ceil(xMax); x += step) {
       for (let y = Math.floor(yMin); y <= Math.ceil(yMax); y += step) {
-        const tail: vec.Vector2 = [x, y]
+        const tail: Vector2 = [x, y]
         const trueOffset = xy([x, y])
         const trueMag = vec.mag(trueOffset)
         const scaledOffset = vec.scale(vec.normalize(trueOffset), Math.min(trueMag, step * 0.75))

@@ -1,6 +1,6 @@
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
-import { vec } from "../../vec"
+import { vec } from "../../algebra"
 import { snappedRange } from "./Cartesian"
 
 export type LabelMaker = (value: number) => React.ReactNode

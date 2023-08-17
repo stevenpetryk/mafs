@@ -1,7 +1,7 @@
 import * as React from "react"
 import { usePaneContext } from "../../context/PaneContext"
 import { Parametric, ParametricProps } from "./Parametric"
-import { vec } from "../../vec"
+import type { Vector2 } from "../../algebra/types"
 
 export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
   y: (x: number) => number
@@ -14,7 +14,7 @@ export function OfX({ y, ...props }: OfXProps) {
   } = usePaneContext()
 
   const xy = React.useCallback<ParametricProps["xy"]>((x) => [x, y(x)], [y])
-  const t = React.useMemo<vec.Vector2>(() => [xMin, xMax], [xMin, xMax])
+  const t = React.useMemo<Vector2>(() => [xMin, xMax], [xMin, xMax])
 
   return <Parametric xy={xy} t={t} {...props} />
 }
@@ -30,7 +30,7 @@ export function OfY({ x, ...props }: OfYProps) {
   } = usePaneContext()
 
   const xy = React.useCallback<ParametricProps["xy"]>((y) => [x(y), y], [x])
-  const t = React.useMemo<vec.Vector2>(() => [yMin, yMax], [yMin, yMax])
+  const t = React.useMemo<Vector2>(() => [yMin, yMax], [yMin, yMax])
 
   return <Parametric xy={xy} t={t} {...props} />
 }

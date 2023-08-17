@@ -1,13 +1,14 @@
 import * as React from "react"
-import { vec } from "../vec"
+import { vec } from "../algebra"
+import type { Matrix2x3, Vector2 } from "../algebra/types"
 import { TransformContext, useTransformContext } from "../context/TransformContext"
 
 export type TransformProps = React.PropsWithChildren<{
-  matrix?: vec.Matrix
-  translate?: vec.Vector2
-  scale?: number | vec.Vector2
+  matrix?: Matrix2x3
+  translate?: Vector2
+  scale?: number | Vector2
   rotate?: number
-  shear?: vec.Vector2
+  shear?: Vector2
 }>
 
 export function Transform(props: TransformProps) {
@@ -24,14 +25,14 @@ export function Transform(props: TransformProps) {
     if (value == null) continue
     switch (name) {
       case "translate":
-        builder = builder.translate(...(value as vec.Vector2))
+        builder = builder.translate(...(value as Vector2))
         break
       case "scale":
         if (typeof value === "number") builder = builder.scale(value, value)
-        else builder = builder.scale(...(value as vec.Vector2))
+        else builder = builder.scale(...(value as Vector2))
         break
       case "shear":
-        builder = builder.shear(...(value as vec.Vector2))
+        builder = builder.shear(...(value as Vector2))
         break
       case "rotate":
         builder = builder.rotate(value as number)

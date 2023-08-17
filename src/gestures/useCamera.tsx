@@ -1,17 +1,19 @@
 import * as React from "react"
 import { clamp } from "../math"
-import { vec } from "../vec"
+
+import { vec } from "../algebra"
+import type { Matrix2x3, Vector2 } from "../algebra/types"
 
 export function useCamera({ minZoom, maxZoom }: { minZoom: number; maxZoom: number }) {
-  const [matrix, setMatrix] = React.useState<vec.Matrix>(vec.identity)
-  const initialMatrix = React.useRef<vec.Matrix>(vec.identity)
+  const [matrix, setMatrix] = React.useState<Matrix2x3>(vec.identity())
+  const initialMatrix = React.useRef<Matrix2x3>(vec.identity())
 
   return {
     matrix: matrix,
     setBase() {
       initialMatrix.current = matrix
     },
-    move({ zoom, pan }: { zoom?: { at: vec.Vector2; scale?: number }; pan?: vec.Vector2 }) {
+    move({ zoom, pan }: { zoom?: { at: Vector2; scale?: number }; pan?: Vector2 }) {
       const scale = 1 / (zoom?.scale ?? 1)
       const zoomAt = zoom?.at ?? [0, 0]
 

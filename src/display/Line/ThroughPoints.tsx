@@ -1,12 +1,14 @@
 import { Stroked, Theme } from "../../display/Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { round } from "../../math"
-import { vec } from "../../vec"
+
+import { vec } from "../../algebra"
+import type { Vector2 } from "../../algebra/types"
 import { usePaneContext } from "../../context/PaneContext"
 
 export interface ThroughPointsProps extends Stroked {
-  point1: vec.Vector2
-  point2: vec.Vector2
+  point1: Vector2
+  point2: Vector2
 }
 
 export function ThroughPoints({
@@ -28,8 +30,8 @@ export function ThroughPoints({
 
   const slope = (tPoint2[1] - tPoint1[1]) / (tPoint2[0] - tPoint1[0])
 
-  let offscreen1: vec.Vector2
-  let offscreen2: vec.Vector2
+  let offscreen1: Vector2
+  let offscreen2: Vector2
 
   if (Math.abs(Math.atan(slope)) > Math.PI / 4) {
     offscreen1 = [(yMin - tPoint1[1]) / slope + tPoint1[0], yMin]

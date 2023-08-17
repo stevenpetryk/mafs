@@ -1,9 +1,10 @@
 import { Stroked } from "../../display/Theme"
-import { vec } from "../../vec"
+import { vec } from "../../algebra"
+import type { Vector2 } from "../../algebra/types"
 import { ThroughPoints } from "./ThroughPoints"
 
 export interface PointAngleProps extends Stroked {
-  point: vec.Vector2
+  point: Vector2
   angle: number
 }
 

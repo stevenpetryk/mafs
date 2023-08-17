@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Filled, Theme } from "./Theme"
-import { vec } from "../vec"
+import { vec } from "../algebra"
+import type { Vector2 } from "../algebra/types"
 import { useTransformContext } from "../context/TransformContext"
 
 type SVGPolyProps<T extends "polygon" | "polyline"> = T extends "polygon"
@@ -8,7 +9,7 @@ type SVGPolyProps<T extends "polygon" | "polyline"> = T extends "polygon"
   : React.SVGProps<SVGPolylineElement>
 
 export interface PolyBaseProps extends Filled {
-  points: vec.Vector2[]
+  points: Vector2[]
 }
 
 interface PolyBaseInternalProps<T extends "polygon" | "polyline"> extends PolyBaseProps {

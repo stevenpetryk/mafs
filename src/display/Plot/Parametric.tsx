@@ -1,14 +1,15 @@
 import * as React from "react"
-import { vec } from "../../vec"
+import { vec } from "../../algebra"
+import type { Vector2 } from "../../algebra/types"
 import { Stroked } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { sampleParametric } from "./PlotUtils"
 
 export interface ParametricProps extends Stroked {
   /** A function that takes a `t` value and returns a point. */
-  xy: (t: number) => vec.Vector2
+  xy: (t: number) => Vector2
   /** The domain `t` between which to evaluate `xy`. */
-  t: vec.Vector2
+  t: Vector2
   /** The minimum recursive depth of the sampling algorithm. */
   minSamplingDepth?: number
   /** The maximum recursive depth of the sampling algorithm. */

@@ -1,11 +1,12 @@
 import * as React from "react"
 import { Filled, Theme } from "./Theme"
 import { useTransformContext } from "../context/TransformContext"
-import { vec } from "../vec"
+import { vec } from "../algebra"
+import type { Vector2 } from "../algebra/types"
 
 export interface EllipseProps extends Filled {
-  center: vec.Vector2
-  radius: vec.Vector2
+  center: Vector2
+  radius: Vector2
   angle?: number
   svgEllipseProps?: React.SVGProps<SVGEllipseElement>
 }

@@ -1,12 +1,13 @@
 import * as React from "react"
 import katex, { KatexOptions } from "katex"
-import { vec } from "../vec"
+import { vec } from "../algebra"
+import type { Vector2 } from "../algebra/types"
 import { useTransformContext } from "../context/TransformContext"
 import { Theme } from "./Theme"
 
 interface LatexProps {
   tex: string
-  at: vec.Vector2
+  at: Vector2
   color?: string
   katexOptions?: KatexOptions
 }

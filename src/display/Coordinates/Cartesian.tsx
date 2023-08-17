@@ -1,7 +1,7 @@
 import { range, round } from "../../math"
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
-import { vec } from "../../vec"
+import { vec } from "../../algebra"
 import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.

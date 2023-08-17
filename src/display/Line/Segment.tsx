@@ -1,11 +1,12 @@
 import { Stroked, Theme } from "../../display/Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { round } from "../../math"
-import { vec } from "../../vec"
+import { vec } from "../../algebra"
+import type { Vector2 } from "../../algebra/types"
 
 export interface SegmentProps extends Stroked {
-  point1: vec.Vector2
-  point2: vec.Vector2
+  point1: Vector2
+  point2: Vector2
 }
 
 export function Segment({

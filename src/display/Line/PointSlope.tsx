@@ -1,9 +1,9 @@
 import { Stroked } from "../../display/Theme"
-import { vec } from "../../vec"
+import type { Vector2 } from "../../algebra/types"
 import { PointAngle } from "./PointAngle"
 
 export interface PointSlopeProps extends Stroked {
-  point: vec.Vector2
+  point: Vector2
   slope: number
 }
 

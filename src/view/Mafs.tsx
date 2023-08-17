@@ -5,13 +5,14 @@ import useResizeObserver from "use-resize-observer"
 
 import { useGesture } from "@use-gesture/react"
 import { round } from "../math"
-import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
 import invariant from "tiny-invariant"
 import { useCamera } from "../gestures/useCamera"
 import { useWheelEnabler } from "../gestures/useWheelEnabler"
 import { TestContext } from "../context/TestContext"
+import { vec } from "../algebra"
+import type { Vector2 } from "../algebra/types"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -33,7 +34,7 @@ export type MafsProps = React.PropsWithChildren<{
    * A way to declare the "area of interest" of your visualizations. Mafs will center and zoom to
    * this area.
    */
-  viewBox?: { x?: vec.Vector2; y?: vec.Vector2; padding?: number }
+  viewBox?: { x?: Vector2; y?: Vector2; padding?: number }
   /**
    * Whether to squish the graph to fill the Mafs viewport or to preserve the aspect ratio of the
    * coordinate space.
@@ -41,7 +42,7 @@ export type MafsProps = React.PropsWithChildren<{
   preserveAspectRatio?: "contain" | false
 
   /** Called when the view is clicked on, and passed the point where it was clicked. */
-  onClick?: (point: vec.Vector2, event: MouseEvent) => void
+  onClick?: (point: Vector2, event: MouseEvent) => void
 
   /**
    * @deprecated this was previously used to avoid rendering Mafs on the server
@@ -175,10 +176,10 @@ function MafsCanvas({
 
   const inverseViewTransform = vec.matrixInvert(viewTransform)
 
-  const pickupOrigin = React.useRef<vec.Vector2>([0, 0])
-  const pickupPoint = React.useRef<vec.Vector2>([0, 0])
+  const pickupOrigin = React.useRef<Vector2>([0, 0])
+  const pickupPoint = React.useRef<Vector2>([0, 0])
 
-  function mapGesturePoint(point: vec.Vector2): vec.Vector2 {
+  function mapGesturePoint(point: Vector2): Vector2 {
     const el = rootRef.current
     invariant(el, "SVG is not mounted")
     invariant(inverseViewTransform, "View transform is not invertible")
@@ -225,7 +226,7 @@ function MafsCanvas({
             : [(xMin + xMax) / 2, (yMin + yMax) / 2]
         }
 
-        let offset: vec.Vector2 = [0, 0]
+        let offset: Vector2 = [0, 0]
         if (pan) {
           offset = vec.transform(vec.sub(origin, pickupOrigin.current), inverseViewTransform)
         }
@@ -257,7 +258,7 @@ function MafsCanvas({
         if (event.shiftKey) multiplier = 0.3
 
         const scale = 1 + base * multiplier
-        const center: vec.Vector2 = [(xMax + xMin) / 2, (yMax + yMin) / 2]
+        const center: Vector2 = [(xMax + xMin) / 2, (yMax + yMin) / 2]
 
         camera.setBase()
         camera.move({ zoom: { at: center, scale } })
@@ -300,7 +301,7 @@ function MafsCanvas({
     <CoordinateContext.Provider value={coordinateContext}>
       <SpanContext.Provider value={{ xSpan, ySpan }}>
         <TransformContext.Provider
-          value={{ userTransform: vec.identity, viewTransform: viewTransform }}
+          value={{ userTransform: vec.identity(), viewTransform: viewTransform }}
         >
           <PaneManager>
             <svg

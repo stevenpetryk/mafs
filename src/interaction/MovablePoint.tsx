@@ -3,17 +3,18 @@ import * as React from "react"
 import invariant from "tiny-invariant"
 import { Theme } from "../display/Theme"
 import { range } from "../math"
-import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 import { useSpanContext } from "../context/SpanContext"
+import { vec } from "../algebra"
+import type { Matrix2x3, Vector2 } from "../algebra/types"
 
-export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
+export type ConstraintFunction = (position: Vector2) => Vector2
 
 export interface MovablePointProps {
   /** The current position `[x, y]` of the point. */
-  point: vec.Vector2
+  point: Vector2
   /** A callback that is called as the user moves the point. */
-  onMove: (point: vec.Vector2) => void
+  onMove: (point: Vector2) => void
   /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
    *
@@ -45,7 +46,7 @@ export function MovablePoint({
   const [dragging, setDragging] = React.useState(false)
   const [displayX, displayY] = vec.transform(point, combinedTransform)
 
-  const pickup = React.useRef<vec.Vector2>([0, 0])
+  const pickup = React.useRef<Vector2>([0, 0])
 
   const ref = React.useRef<SVGGElement>(null)
 
@@ -59,7 +60,7 @@ export function MovablePoint({
         event?.preventDefault()
         const { direction: yDownDirection, altKey, metaKey, shiftKey } = state
 
-        const direction = [yDownDirection[0], -yDownDirection[1]] as vec.Vector2
+        const direction = [yDownDirection[0], -yDownDirection[1]] as Vector2
         const span = Math.abs(direction[0]) ? xSpan : ySpan
 
         let divisions = 50
@@ -128,7 +129,7 @@ export function MovablePoint({
 
 MovablePoint.displayName = "MovablePoint"
 
-function getInverseTransform(transform: vec.Matrix) {
+function getInverseTransform(transform: Matrix2x3) {
   const invert = vec.matrixInvert(transform)
   invariant(
     invert !== null,

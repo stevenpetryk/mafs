@@ -43,6 +43,7 @@ jobs:
         with:
           version: 8
       - run: pnpm install
+      - run: pnpm playwright install
       - run: pnpm test:e2e
 
   check-format:

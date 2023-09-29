@@ -43,7 +43,7 @@ jobs:
           node-version: 20
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm playwright install
+      - run: pnpm playwright install --with-deps
       - run: pnpm test:e2e
       - uses: actions/upload-artifact@v3
         with:

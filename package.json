@@ -10,6 +10,7 @@
   "module": "build/index.mjs",
   "types": "build/index.d.ts",
   "type": "module",
+  "packageManager": "pnpm@8.7.6",
   "files": [
     "build/",
     "core.css",

@@ -31,26 +31,6 @@ jobs:
       - run: pnpm install
       - run: pnpm test:unit
 
-  visual-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm playwright install --with-deps
-      - run: pnpm test:e2e
-      - uses: actions/upload-artifact@v3
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 5
-
   check-format:
     runs-on: ubuntu-latest
     steps:

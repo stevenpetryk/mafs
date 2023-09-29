@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - run: pnpm install
       - run: pnpm build
 
@@ -21,13 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - run: pnpm install
       - run: pnpm test:unit
 
@@ -35,13 +35,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - run: pnpm install
       - run: pnpm playwright install
       - run: pnpm test:e2e
@@ -55,13 +55,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - run: pnpm install
       - run: pnpm format:check
 
@@ -69,13 +69,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - run: pnpm install
       - run: pnpm lint
 
@@ -83,12 +83,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: "pnpm"
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - run: pnpm install
       - run: pnpm tsc

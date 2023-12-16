@@ -1,5 +1,3 @@
-"use client"
-
 import CodeAndExample from "../../../../components/CodeAndExample"
 
 import Plain from "../../../../components/guide-examples/hello-fx/plain"
@@ -12,6 +10,11 @@ import SinePi from "../../../../components/guide-examples/hello-fx/sine-pi"
 import SinePiSource from "!raw-loader!../../../../components/guide-examples/hello-fx/sine-pi"
 import Draggable from "../../../../components/guide-examples/hello-fx/draggable"
 import DraggableSource from "!raw-loader!../../../../components/guide-examples/hello-fx/draggable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Hello f(x)",
+}
 
 function Page() {
   return (

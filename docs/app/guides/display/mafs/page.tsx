@@ -1,5 +1,3 @@
-"use client"
-
 import { Mafs } from "mafs"
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
@@ -16,6 +14,12 @@ import ZoomExampleSource from "!raw-loader!guide-examples/display/viewbox/ZoomEx
 import StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
 import StretchViewboxExampleSource from "!raw-loader!guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
+
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Mafs",
+}
 
 function MafsPage() {
   return (

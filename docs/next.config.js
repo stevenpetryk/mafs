@@ -3,9 +3,6 @@ const path = require("path")
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   transpilePackages: ["mafs"],
   webpack(config) {
     if (process.env.NODE_ENV === "production" || Number(process.env.DOCGEN) === 1) {

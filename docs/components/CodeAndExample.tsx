@@ -1,7 +1,7 @@
 "use client"
 
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import * as React from "react"
+import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { HighlightedCode } from "./Code"
 import { StackBlitzIcon } from "./icons"
 

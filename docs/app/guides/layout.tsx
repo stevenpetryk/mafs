@@ -1,18 +1,27 @@
-"use client"
+import Link from "next/link"
+import NextHead from "next/head"
 
 import GuidesSidebar from "./sidebar"
-import { getDocContext } from "./guides"
-import { useSelectedLayoutSegments } from "next/navigation"
-import Link from "next/link"
 import fancyFx from "../../helpers/fancyFx"
 import ScrollTop from "components/ScrollTop"
+import Head from "./head"
+import { Title } from "./title"
+import { NextPrevButtons } from "./next-prev-buttons"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Guides | Mafs",
+    absolute: "Guides | Mafs",
+  },
+}
 
 export default function GuidesLayout({ children }: { children: React.ReactNode }) {
-  const [sectionTitleKebab, guideTitleKebab] = useSelectedLayoutSegments()
-  const { current, next, previous } = getDocContext(sectionTitleKebab, guideTitleKebab)
-
   return (
     <>
+      <NextHead>
+        <Head />
+      </NextHead>
       <div className="max-w-5xl p-6 py-12 mx-auto md:flex space-y-6 md:space-y-0 md:space-x-6">
         <div
           className={`
@@ -30,78 +39,16 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
 
         <main id="main" className="space-y-6 flex-grow md:w-0">
           <h1 className="flex items-center gap-3">
-            {current.icon && (
-              <div className="bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-100 p-1 rounded-lg">
-                <current.icon className="block w-[30px] h-[30px]" />
-              </div>
-            )}
-            {fancyFx(current.guideTitle)}
+            <Title />
           </h1>
 
           <div className="prose space-y-6">{children}</div>
 
-          {/* A little next/prev button set  (but only if those links exist) */}
-          <div className="hidden sm:flex gap-4 pt-6">
-            {previous && <NavButton dir="prev" href={previous.url} {...previous} />}
-            <div className="ml-auto" />
-            {next && <NavButton dir="next" href={next.url} {...next} />}
-          </div>
-
-          <div className="flex sm:hidden flex-col gap-4">
-            {next && <NavButton dir="next" href={next.url} {...next} />}
-            {previous && <NavButton dir="prev" href={previous.url} {...previous} />}
-          </div>
+          <NextPrevButtons />
         </main>
       </div>
 
       <ScrollTop />
     </>
-  )
-}
-
-function NavButton({
-  href,
-  sectionTitle,
-  guideTitle,
-  dir,
-}: {
-  href: string
-  sectionTitle: string
-  guideTitle: string
-  dir: "prev" | "next"
-}) {
-  return (
-    <Link
-      href={href}
-      className={`
-        py-3 px-6
-        no-underline rounded-lg font-semibold border-2 border-transparent
-        bg-gray-50 text-gray-800 hover:bg-gray-100 hover:border-gray-200
-        dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800 dark:hover:border-slate-700
-      `}
-    >
-      <div className="flex items-center justify-between sm:gap-4 leading-tight">
-        {dir === "prev" && (
-          <div className="text-lg" aria-hidden="true">
-            ←
-          </div>
-        )}
-
-        <div className="flex flex-col overflow-hidden">
-          <div className="text-sm font-normal text-ellipsis  overflow-hidden whitespace-nowrap">
-            {sectionTitle}
-          </div>
-          <div className="min-w-[10ch] text-ellipsis  overflow-hidden whitespace-nowrap">
-            {fancyFx(guideTitle)}
-          </div>
-        </div>
-
-        {dir === "next" && (
-          <div className="text-lg" aria-hidden="true">
-            →
-          </div>
-        )}
-      </div>
-    </Link>
   )
 }

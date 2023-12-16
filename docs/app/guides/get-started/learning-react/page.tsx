@@ -1,8 +1,11 @@
-"use client"
+const REACT_DOCS = "https://react.dev/"
+const REACT_GET_STARTED = "https://react.dev/learn"
+const REACT_CRA = "https://react.dev/learn/start-a-new-react-project"
+import type { Metadata } from "next"
 
-const REACT_DOCS = "https://reactjs.org"
-const REACT_GET_STARTED = "https://reactjs.org/docs/getting-started.html"
-const REACT_CRA = "https://reactjs.org/docs/create-a-new-react-app.html"
+export const metadata: Metadata = {
+  title: "Learning React",
+}
 
 function Page() {
   return (

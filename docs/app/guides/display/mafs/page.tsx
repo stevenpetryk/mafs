@@ -1,4 +1,3 @@
-import { Mafs } from "mafs"
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
@@ -15,10 +14,10 @@ import StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox
 import StretchViewboxExampleSource from "!raw-loader!guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
 
-import type { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "Mafs",
+export async function generateMetadata() {
+  return {
+    title: "Mafs",
+  }
 }
 
 function MafsPage() {
@@ -30,7 +29,7 @@ function MafsPage() {
       </p>
 
       <CodeAndExample component={<PlainMafsExample />} source={PlainMafsExampleSource} />
-      <PropTable of={Mafs} />
+      <PropTable of="Mafs" />
 
       <h2>Sizing</h2>
 

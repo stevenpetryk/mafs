@@ -35,7 +35,7 @@ export default function LatexPage() {
         the SVG foreignObject element.
       </Experimental>
 
-      <PropTable of={LaTeX} />
+      <PropTable of={"LaTeX"} />
 
       <h2>Usage</h2>
 

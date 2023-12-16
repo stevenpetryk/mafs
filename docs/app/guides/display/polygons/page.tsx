@@ -16,11 +16,11 @@ function Polygons() {
 
       <CodeAndExample component={<PolygonExample />} source={PolygonExampleSource} />
 
-      <PropTable of={Polygon} />
+      <PropTable of={"Polygon"} />
 
       <CodeAndExample component={<PolylineExample />} source={PolylineExampleSource} />
 
-      <PropTable of={Polyline} />
+      <PropTable of={"Polyline"} />
     </>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { Mafs, Coordinates } from "mafs"
 
 export default function Example() {

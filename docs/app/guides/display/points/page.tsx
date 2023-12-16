@@ -15,7 +15,7 @@ function Points() {
 
       <CodeAndExample component={<SimplePoint />} source={SimplePointSource} />
 
-      <PropTable of={Point} />
+      <PropTable of={"Point"} />
     </>
   )
 }

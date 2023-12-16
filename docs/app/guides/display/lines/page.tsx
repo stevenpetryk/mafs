@@ -21,7 +21,7 @@ function Lines() {
       <h2>Line segment</h2>
 
       <CodeAndExample component={<LineSegmentExample />} source={LineSegmentExampleSource} />
-      <PropTable of={Line.Segment} />
+      <PropTable of={"Line.Segment"} />
 
       <h2>Line through two points</h2>
 
@@ -29,17 +29,17 @@ function Lines() {
         component={<LineThroughPointsExample />}
         source={LineThroughPointsExampleSource}
       />
-      <PropTable of={Line.ThroughPoints} />
+      <PropTable of={"Line.ThroughPoints"} />
 
       <h2>Point and slope</h2>
 
       <CodeAndExample component={<LinePointSlopeExample />} source={LinePointSlopeExampleSource} />
-      <PropTable of={Line.PointSlope} />
+      <PropTable of={"Line.PointSlope"} />
 
       <h2>Point and angle</h2>
 
       <CodeAndExample component={<LinePointAngleExample />} source={LinePointAngleExampleSource} />
-      <PropTable of={Line.PointAngle} />
+      <PropTable of={"Line.PointAngle"} />
     </>
   )
 }

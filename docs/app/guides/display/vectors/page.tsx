@@ -19,7 +19,7 @@ function Vectors() {
 
       <CodeAndExample component={<VectorExample />} source={VectorExampleSource} />
 
-      <PropTable of={Vector} />
+      <PropTable of={"Vector"} />
     </>
   )
 }

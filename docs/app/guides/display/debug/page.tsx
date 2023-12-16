@@ -34,7 +34,7 @@ export default function DebugPage() {
 
       <CodeAndExample component={<PizzaSliceExample />} source={PizzaSliceExampleSource} />
 
-      <PropTable of={Debug.TransformWidget} />
+      <PropTable of={"Debug.TransformWidget"} />
 
       <h2>Viewport info</h2>
 
@@ -46,7 +46,7 @@ export default function DebugPage() {
 
       <CodeAndExample component={<Example />} source={PaneVisualizerExampleSource} />
 
-      <PropTable of={Debug.ViewportInfo} />
+      <PropTable of={"Debug.ViewportInfo"} />
     </>
   )
 }

@@ -31,8 +31,8 @@ function Functions() {
         Functions of <em className="font-display">x</em> and <em className="font-display">y</em>
       </h2>
       <CodeAndExample component={<OfXAndY />} source={OfXAndYSource} />
-      <PropTable of={Plot.OfX} />
-      <PropTable of={Plot.OfY} />
+      <PropTable of={"Plot.OfX"} />
+      <PropTable of={"Plot.OfY"} />
 
       <h2>
         Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>
@@ -52,11 +52,11 @@ function Functions() {
       </p>
 
       <CodeAndExample component={<InequalitiesExample />} source={InequalitiesExampleSource} />
-      <PropTable of={Plot.Inequality} />
+      <PropTable of={"Plot.Inequality"} />
 
       <h2>Parametric functions</h2>
       <CodeAndExample component={<TwistyBoi />} source={TwistyBoiSource} />
-      <PropTable of={Plot.Parametric} />
+      <PropTable of={"Plot.Parametric"} />
 
       <h2>Vector fields</h2>
 
@@ -68,7 +68,7 @@ function Functions() {
       </p>
 
       <CodeAndExample component={<VectorFieldExample />} source={VectorFieldExampleSource} />
-      <PropTable of={Plot.VectorField} />
+      <PropTable of={"Plot.VectorField"} />
 
       <h2>Render quality</h2>
 

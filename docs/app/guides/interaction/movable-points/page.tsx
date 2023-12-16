@@ -115,7 +115,7 @@ function Stopwatch() {
 
       <CodeAndExample component={<DynamicMovablePoints />} source={DynamicMovablePointsSource} />
 
-      <PropTable of={MovablePoint} />
+      <PropTable of={"MovablePoint"} />
     </>
   )
 }

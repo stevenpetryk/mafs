@@ -1,3 +1,5 @@
+'use client'
+
 import { Mafs, Coordinates, Debug } from "mafs"
 import * as React from "react"
 

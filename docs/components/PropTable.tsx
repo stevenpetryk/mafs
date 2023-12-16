@@ -1,5 +1,9 @@
+"use client"
+
 import * as React from "react"
+import * as Mafs from "mafs"
 import ReactMarkdown from "react-markdown"
+import { get } from "lodash"
 
 export interface Docgen {
   filePath: string
@@ -22,11 +26,12 @@ export type DocgenPropType =
   | { name: string }
 
 interface PropTableProps {
-  of: { displayName: string } | unknown
+  of: string
 }
 
-export function PropTable({ of: component }: PropTableProps) {
-  const docgenInfo = (component as { __docgenInfo: Docgen })?.__docgenInfo
+export function PropTable({ of: componentName }: PropTableProps) {
+  const component = get(Mafs, componentName)
+  const docgenInfo = (component as unknown as { __docgenInfo: Docgen })?.__docgenInfo
 
   if (process.env.NODE_ENV === "development" && docgenInfo == null) {
     return (

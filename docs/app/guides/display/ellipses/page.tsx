@@ -16,7 +16,7 @@ export default function Page() {
 
       <CodeAndExample component={<MovableEllipse />} source={MovableEllipseSource} />
 
-      <PropTable of={Ellipse} />
+      <PropTable of={"Ellipse"} />
 
       <WIP>
         <p>

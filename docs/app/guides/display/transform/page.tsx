@@ -20,7 +20,7 @@ export default function Page() {
         source={SimpleTransformExampleSource}
       />
 
-      <PropTable of={Transform} />
+      <PropTable of={"Transform"} />
 
       <h2>Transformation types</h2>
 

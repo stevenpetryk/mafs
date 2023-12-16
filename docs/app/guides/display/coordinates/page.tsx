@@ -32,7 +32,7 @@ function CoordinatesPage() {
         source={CartesianCoordinatesExampleSource}
       />
 
-      <PropTable of={Coordinates.Cartesian} />
+      <PropTable of={"Coordinates.Cartesian"} />
 
       <h3>Axis options</h3>
 
@@ -79,7 +79,7 @@ function CoordinatesPage() {
         source={PolarCoordinatesExampleSource}
       />
 
-      <PropTable of={Coordinates.Polar} />
+      <PropTable of={"Coordinates.Polar"} />
 
       <h3>Axis options</h3>
 

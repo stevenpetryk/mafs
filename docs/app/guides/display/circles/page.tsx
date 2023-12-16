@@ -14,7 +14,7 @@ export default function Page() {
 
       <CodeAndExample component={<MovableCircle />} source={MovableCircleSource} />
 
-      <PropTable of={Circle} />
+      <PropTable of={"Circle"} />
     </>
   )
 }

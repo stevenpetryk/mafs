@@ -1,8 +1,5 @@
-"use client"
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
-
-import { LaTeX } from "mafs"
 
 import LatexExample from "components/guide-examples/display/Latex"
 import LatexExampleSource from "!raw-loader!components/guide-examples/display/Latex"

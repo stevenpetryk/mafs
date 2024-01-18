@@ -1,8 +1,5 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
-import { Line } from "mafs"
 
 import LineSegmentExample from "guide-examples/LineSegmentExample"
 import LineSegmentExampleSource from "!raw-loader!guide-examples/LineSegmentExample"

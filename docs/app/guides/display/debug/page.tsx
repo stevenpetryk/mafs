@@ -1,8 +1,5 @@
-"use client"
-
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"
-import { Debug } from "mafs"
 import Link from "next/link"
 
 import CodeAndExample from "components/CodeAndExample"

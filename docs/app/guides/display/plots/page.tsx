@@ -1,5 +1,3 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import OfXAndY from "guide-examples/plots/of-x-and-y"
@@ -15,7 +13,6 @@ import SineStressTest from "guide-examples/plots/sine-stress-test"
 import SineStressTestSource from "!raw-loader!guide-examples/plots/sine-stress-test.tsx"
 
 import { PropTable } from "components/PropTable"
-import { Plot } from "mafs"
 import InequalitiesExample from "guide-examples/plots/inequalities"
 import InequalitiesExampleSource from "!raw-loader!guide-examples/plots/inequalities.tsx"
 

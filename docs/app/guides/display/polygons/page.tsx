@@ -1,5 +1,3 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import PolygonExample from "guide-examples/PolygonExample"
@@ -7,7 +5,6 @@ import PolygonExampleSource from "!raw-loader!guide-examples/PolygonExample"
 import PolylineExample from "guide-examples/PolylineExample"
 import PolylineExampleSource from "!raw-loader!guide-examples/PolylineExample"
 import { PropTable } from "components/PropTable"
-import { Polygon, Polyline } from "mafs"
 
 function Polygons() {
   return (

@@ -1,10 +1,5 @@
-import Link from "next/link"
-import NextHead from "next/head"
-
 import GuidesSidebar from "./sidebar"
-import fancyFx from "../../helpers/fancyFx"
 import ScrollTop from "components/ScrollTop"
-import Head from "./head"
 import { Title } from "./title"
 import { NextPrevButtons } from "./next-prev-buttons"
 import type { Metadata } from "next"
@@ -19,9 +14,6 @@ export const metadata: Metadata = {
 export default function GuidesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NextHead>
-        <Head />
-      </NextHead>
       <div className="max-w-5xl p-6 py-12 mx-auto md:flex space-y-6 md:space-y-0 md:space-x-6">
         <div
           className={`

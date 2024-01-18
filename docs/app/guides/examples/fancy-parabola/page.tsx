@@ -1,5 +1,3 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 import FancyParabola from "guide-examples/examples/FancyParabola"
 import FancyParabolaSource from "!raw-loader!guide-examples/examples/FancyParabola.tsx"

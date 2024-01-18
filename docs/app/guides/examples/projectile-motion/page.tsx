@@ -1,5 +1,3 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
 import ProjectileMotionSource from "!raw-loader!guide-examples/examples/ProjectileMotion.tsx"

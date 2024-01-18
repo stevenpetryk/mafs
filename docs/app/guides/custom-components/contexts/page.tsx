@@ -1,5 +1,3 @@
-"use client"
-
 import PizzaSlice from "guide-examples/custom/pizza-slice"
 import PizzaSliceSource from "!raw-loader!guide-examples/custom/pizza-slice"
 

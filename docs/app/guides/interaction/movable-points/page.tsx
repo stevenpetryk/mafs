@@ -1,5 +1,3 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
@@ -11,7 +9,6 @@ import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import { Advanced } from "components/Advanced"
 import Code from "components/Code"
 import Link from "next/link"
-import { MovablePoint } from "mafs"
 import { PropTable } from "components/PropTable"
 
 function Stopwatch() {

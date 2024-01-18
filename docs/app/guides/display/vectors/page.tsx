@@ -1,6 +1,3 @@
-"use client"
-
-import { Vector } from "mafs"
 import { PropTable } from "components/PropTable"
 
 import CodeAndExample from "components/CodeAndExample"

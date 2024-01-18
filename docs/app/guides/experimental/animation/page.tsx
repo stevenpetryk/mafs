@@ -1,5 +1,3 @@
-"use client"
-
 import WIP from "components/WIP"
 import CodeAndExample from "components/CodeAndExample"
 

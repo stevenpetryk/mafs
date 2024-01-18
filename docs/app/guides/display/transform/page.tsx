@@ -1,11 +1,8 @@
-"use client"
-
 import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
 import SimpleTransformExampleSource from "!raw-loader!guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"
-import { Transform } from "mafs"
 
 export default function Page() {
   return (

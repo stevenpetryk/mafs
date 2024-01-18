@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { Mafs, Text } from "mafs"
 

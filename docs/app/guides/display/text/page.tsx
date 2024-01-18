@@ -1,6 +1,3 @@
-"use client"
-
-import { Text as T } from "mafs"
 import CodeAndExample from "components/CodeAndExample"
 
 import TextExample from "guide-examples/TextExample"

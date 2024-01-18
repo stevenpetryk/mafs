@@ -1,12 +1,9 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import SimplePoint from "guide-examples/display/SimplePoint"
 import SimplePointSource from "!raw-loader!guide-examples/display/SimplePoint"
 
 import { PropTable } from "components/PropTable"
-import { Point } from "mafs"
 
 function Points() {
   return (

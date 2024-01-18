@@ -1,5 +1,3 @@
-"use client"
-
 import PizzaMarch from "guide-examples/custom/pizza-march"
 
 export default function CustomPage() {

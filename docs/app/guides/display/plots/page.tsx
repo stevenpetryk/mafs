@@ -92,17 +92,29 @@ function Functions() {
         <code>minSamplingDepth</code> and <code>maxSamplingDepth</code> props can be tuned.
         Increasing <code>minSamplingDepth</code> can help when you want to ensure more subdivisions
         and improve accuracy, and lowering <code>maxSamplingDepth</code> can help improve
-        performance. These two props should be tuned to meet your needs.
+        performance.
       </p>
 
       <p>
-        Here's an example of a common "stress test" function for plotters, sin(1/x). The top plot
-        has the default sampling depths, while the bottom has <code>minSamplingDepth</code>{" "}
-        increased to <code>15</code>. Neither approach is perfect, but the bottom render is
-        indistinguishable from a perfect plot.
+        Here's an example of a common "stress test" function for plotters, sin(1/x). This function
+        exhibits an infinite oscillation frequency as x approaches 0, requiring theoretically
+        infinite sampling to render perfectly.
+      </p>
+
+      <p>
+        The top plot has the default sampling depths, while the bottom has{" "}
+        <code>minSamplingDepth</code> increased to <code>16</code>. More samples still doesn't
+        render the function perfectly, but it's much closer (at the cost of performance: the bottom
+        plot has nearly 3 megabytes of SVG path data).
       </p>
 
       <CodeAndExample component={<SineStressTest />} source={SineStressTestSource} />
+
+      <p>
+        If you pan this example around, you may see a considerably slow framerate. Interestingly,
+        this slowness is happening in the browser code itself, not in JavaScript (and therefore not
+        in Mafs). It would seem that merely rendering large SVG paths is expensive.
+      </p>
 
       <h3>Vector fields</h3>
 

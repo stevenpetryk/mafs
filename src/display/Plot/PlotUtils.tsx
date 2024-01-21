@@ -20,13 +20,22 @@ interface SampleParams<P> {
 }
 
 /**
+ * Cheap psuedo-random hash function to consistently generate randomness when
+ * sampling functions. This return a value between 0.4 and 0.6.
+ */
+function cheapHash(min: number, max: number) {
+  const result = Math.sin(min * 12.9898 + max * 78.233) * 43758.5453
+  return 0.4 + 0.2 * (result - Math.floor(result))
+}
+
+/**
  * A relatively generic internal function which, given a function, domain, and
  * an error function, will recursively subdivide the domain until sampling said
  * function at each point in the domain yields an error less than the supplied
  * threshold. Importantly, this makes no assumptions about the return type of
  * the sampled function.
  */
-function sample<SampledReturnType>({
+export function sample<SampledReturnType>({
   domain,
   minDepth,
   maxDepth,
@@ -41,42 +50,32 @@ function sample<SampledReturnType>({
   function subdivide(
     min: number,
     max: number,
-    pushLeft: boolean,
-    pushRight: boolean,
     depth: number,
     pMin: SampledReturnType,
     pMax: SampledReturnType,
   ) {
-    const t = 0.5
+    const t = cheapHash(min, max)
     const mid = min + (max - min) * t
     const pMid = fn(mid)
 
-    if (depth < minDepth) {
-      subdivide(min, mid, true, false, depth + 1, pMin, pMid)
-      subdivide(mid, max, false, true, depth + 1, pMid, pMax)
-      return
+    function deepen() {
+      subdivide(min, mid, depth + 1, pMin, pMid)
+      onPoint(mid, pMid)
+      subdivide(mid, max, depth + 1, pMid, pMax)
     }
 
-    if (depth < maxDepth) {
+    if (depth < minDepth) {
+      deepen()
+    } else if (depth < maxDepth) {
       const fnMidpoint = midpoint(pMin, pMax)
       const e = error(pMid, fnMidpoint)
-      if (e > threshold) {
-        subdivide(min, mid, true, false, depth + 1, pMin, pMid)
-        subdivide(mid, max, false, true, depth + 1, pMid, pMax)
-        return
-      }
-    }
-
-    if (pushLeft) {
-      onPoint(min, pMin)
-    }
-    onPoint(mid, pMid)
-    if (pushRight) {
-      onPoint(max, pMax)
+      if (e > threshold) deepen()
     }
   }
 
-  subdivide(min, max, true, true, 0, fn(min), fn(max))
+  onPoint(min, fn(min))
+  subdivide(min, max, 0, fn(min), fn(max))
+  onPoint(max, fn(max))
 }
 
 export function sampleParametric(
@@ -91,7 +90,7 @@ export function sampleParametric(
   sample({
     fn,
     error: (a, b) => vec.squareDist(a, b),
-    onPoint: (_t, [x, y]) => {
+    onPoint: (t, [x, y]) => {
       if (Number.isFinite(x) && Number.isFinite(y)) {
         result += `${x} ${y} L `
       }

@@ -90,7 +90,7 @@ export function sampleParametric(
   sample({
     fn,
     error: (a, b) => vec.squareDist(a, b),
-    onPoint: (t, [x, y]) => {
+    onPoint: (_t, [x, y]) => {
       if (Number.isFinite(x) && Number.isFinite(y)) {
         result += `${x} ${y} L `
       }

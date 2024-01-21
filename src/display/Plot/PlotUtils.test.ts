@@ -9,7 +9,7 @@ test("sample", () => {
     maxDepth: 3,
     error: () => Number.POSITIVE_INFINITY,
     fn: (t) => t,
-    midpoint: () => 0,
+    lerp: () => 0,
     onPoint(t) {
       ts.push(t)
     },

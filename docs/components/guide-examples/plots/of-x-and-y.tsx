@@ -1,15 +1,38 @@
 "use client"
 
-import { Mafs, Coordinates, Plot, Theme } from "mafs"
+import { range } from "lodash"
+import {
+  Mafs,
+  Coordinates,
+  Plot,
+  Theme,
+  useMovablePoint,
+} from "mafs"
 
 export default function FunctionsOfXAndY() {
-  const sigmoid1 = (x: number) => 2 / (1 + Math.exp(-x)) - 1
+  const { x, y, element } = useMovablePoint([-0.5, 1])
 
   return (
-    <Mafs height={300}>
+    <Mafs height={500}>
       <Coordinates.Cartesian />
-      <Plot.OfX y={Math.sin} color={Theme.blue} />
-      <Plot.OfY x={sigmoid1} color={Theme.pink} />
+      {/* <Plot.OfX
+        y={(x) => ((2 * x + 2) * (x + 0.5)) / (x + 0.5)}
+        keyPoints={() => [
+          { type: "hole", at: [x - 1, y + 1] },
+        ]}
+        color={Theme.blue}
+      /> */}
+      <Plot.OfX
+        y={(x) => Math.tan(x * Math.PI)}
+        keyPoints={() =>
+          range(-10.5, 10.5, 1).map((x) => ({
+            type: "jump",
+            at: x,
+          }))
+        }
+        color={Theme.pink}
+      />
+      {element}
     </Mafs>
   )
 }

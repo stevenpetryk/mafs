@@ -41,8 +41,7 @@ function sample<SampledReturnType>({
   function subdivide(
     min: number,
     max: number,
-    pushLeft: boolean,
-    pushRight: boolean,
+    pushOuter: boolean,
     depth: number,
     pMin: SampledReturnType,
     pMax: SampledReturnType,
@@ -52,8 +51,8 @@ function sample<SampledReturnType>({
     const pMid = fn(mid)
 
     if (depth < minDepth) {
-      subdivide(min, mid, true, false, depth + 1, pMin, pMid)
-      subdivide(mid, max, false, true, depth + 1, pMid, pMax)
+      subdivide(min, mid, false, depth + 1, pMin, pMid)
+      subdivide(mid, max, false, depth + 1, pMid, pMax)
       return
     }
 
@@ -61,22 +60,22 @@ function sample<SampledReturnType>({
       const fnMidpoint = midpoint(pMin, pMax)
       const e = error(pMid, fnMidpoint)
       if (e > threshold) {
-        subdivide(min, mid, true, false, depth + 1, pMin, pMid)
-        subdivide(mid, max, false, true, depth + 1, pMid, pMax)
+        subdivide(min, mid, false, depth + 1, pMin, pMid)
+        subdivide(mid, max, false, depth + 1, pMid, pMax)
         return
       }
     }
 
-    if (pushLeft) {
+    if (pushOuter) {
       onPoint(min, pMin)
     }
     onPoint(mid, pMid)
-    if (pushRight) {
+    if (pushOuter) {
       onPoint(max, pMax)
     }
   }
 
-  subdivide(min, max, true, true, 0, fn(min), fn(max))
+  subdivide(min, max, true, 0, fn(min), fn(max))
 }
 
 export function sampleParametric(
@@ -85,16 +84,36 @@ export function sampleParametric(
   minDepth: number,
   maxDepth: number,
   threshold: number,
+  keyPoints: any[],
 ) {
   let result = "M "
+
+  const jumps = keyPoints.filter((kp) => kp.type === "jump")
+
+  // We'll pop this list as we traverse the path
+  const jumpsList = jumps
+    .map((kp) => kp.at)
+    .sort((a, b) => a - b)
+    .filter((x) => x >= domain[0] && x <= domain[1])
+
+  let previousT: number | null = null
 
   sample({
     fn,
     error: (a, b) => vec.squareDist(a, b),
-    onPoint: (_t, [x, y]) => {
-      if (Number.isFinite(x) && Number.isFinite(y)) {
+    onPoint: (t, [x, y]) => {
+      if (Number.isFinite(x) && Number.isFinite(y) && Math.abs(y) < 1e14) {
+        const currentJump = jumpsList[0]
+
+        if (previousT !== null && previousT <= currentJump && currentJump <= t) {
+          result = result.substring(0, result.length - 2) + " M "
+          jumpsList.shift()
+        }
+
         result += `${x} ${y} L `
       }
+
+      previousT = t
     },
     midpoint: (p1, p2) => vec.midpoint(p1, p2),
     domain,

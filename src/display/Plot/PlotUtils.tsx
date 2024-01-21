@@ -5,8 +5,8 @@ interface SampleParams<P> {
   fn: (t: number) => P
   /** A function that computes the error between a real sample function output and a midpoint output */
   error: (real: P, estimate: P) => number
-  /** A function that computes the midpoint of two sample function outputs */
-  midpoint: (p1: P, p2: P) => P
+  /** A function that computes the lerp of two sample function outputs, for purpose of comparing to the function's real output */
+  lerp: (p1: P, p2: P, t: number) => P
   /** A function that is called whenever a point should be part of the sample */
   onPoint: (t: number, p: P) => void
   /** The domain to sample */
@@ -43,7 +43,7 @@ export function sample<SampledReturnType>({
   fn,
   error,
   onPoint,
-  midpoint,
+  lerp,
 }: SampleParams<SampledReturnType>) {
   const [min, max] = domain
 
@@ -67,7 +67,7 @@ export function sample<SampledReturnType>({
     if (depth < minDepth) {
       deepen()
     } else if (depth < maxDepth) {
-      const fnMidpoint = midpoint(pMin, pMax)
+      const fnMidpoint = lerp(pMin, pMax, t)
       const e = error(pMid, fnMidpoint)
       if (e > threshold) deepen()
     }
@@ -95,7 +95,7 @@ export function sampleParametric(
         result += `${x} ${y} L `
       }
     },
-    midpoint: (p1, p2) => vec.midpoint(p1, p2),
+    lerp: (p1, p2, t) => vec.lerp(p1, p2, t),
     domain,
     minDepth,
     maxDepth,
@@ -140,8 +140,8 @@ export function sampleInequality(
     error: ([realLower, realUpper], [estLower, estUpper]) => {
       return Math.max(vec.squareDist(realLower, estLower), vec.squareDist(realUpper, estUpper))
     },
-    midpoint: ([aLower, aUpper], [bLower, bUpper]) => {
-      return [vec.midpoint(aLower, bLower), vec.midpoint(aUpper, bUpper)]
+    lerp: ([aLower, aUpper], [bLower, bUpper], t) => {
+      return [vec.lerp(aLower, bLower, t), vec.lerp(aUpper, bUpper, t)]
     },
     onPoint: (x, [[, lower], [, upper]]) => {
       // TODO: these inequality operators should reflect the props, perhaps

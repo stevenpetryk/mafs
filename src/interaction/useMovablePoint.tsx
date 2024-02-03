@@ -50,7 +50,7 @@ export function useMovablePoint(
   const element = React.useMemo(() => {
     if (disable) return <Point {...{ point, color }} x={x} y={y} />
     else return <MovablePoint {...{ point, color }} constrain={constraintFunction} onMove={setPoint} />
-  }, [point, color, constraintFunction])
+  }, [point, color, constraintFunction, disable])
 
   return {
     x,

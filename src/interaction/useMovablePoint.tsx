@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Point } from "../display/Point"
 import { Theme } from "../display/Theme"
 import { vec } from "../vec"
 import { MovablePoint } from "./MovablePoint"
@@ -7,6 +8,7 @@ export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
 export interface UseMovablePointArguments {
   color?: string
+  disable?: boolean
 
   /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
@@ -27,7 +29,7 @@ export interface UseMovablePoint {
 
 export function useMovablePoint(
   initialPoint: vec.Vector2,
-  { constrain, color = Theme.pink }: UseMovablePointArguments = {},
+  { constrain, disable = false, color = Theme.pink }: UseMovablePointArguments = {},
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
   const [point, setPoint] = React.useState<vec.Vector2>(initialPoint)
@@ -46,7 +48,8 @@ export function useMovablePoint(
   }, [constrain, initialX, initialY])
 
   const element = React.useMemo(() => {
-    return <MovablePoint {...{ point, color }} constrain={constraintFunction} onMove={setPoint} />
+    if (disable) return <Point {...{ point, color }} x={x} y={y} />
+    else return <MovablePoint {...{ point, color }} constrain={constraintFunction} onMove={setPoint} />
   }, [point, color, constraintFunction])
 
   return {

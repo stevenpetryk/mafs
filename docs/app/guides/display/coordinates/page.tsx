@@ -1,18 +1,21 @@
 "use client"
 
-import { Coordinates } from "mafs"
-import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
+import { PropTable } from "components/PropTable"
+import { Coordinates } from "mafs"
 
-import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"
+import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 
-import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import Code from "components/Code"
+import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 
-import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
 import PolarCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/PolarCoordinatesExample"
+import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
+
+import DotCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/DotCoordinatesExample"
+import DotCoordinatesExample from "guide-examples/display/coordinates/DotCoordinatesExample"
 
 function CoordinatesPage() {
   return (
@@ -88,6 +91,13 @@ function CoordinatesPage() {
         <code>lines</code> and <code>subdivisions</code> affects the radial rather than the{" "}
         <code>x</code> and <code>y</code> axes.
       </p>
+
+      <h2>Dot coordinates</h2>
+
+      <CodeAndExample
+        component={<DotCoordinatesExample />}
+        source={DotCoordinatesExampleSource}
+      />
     </>
   )
 }

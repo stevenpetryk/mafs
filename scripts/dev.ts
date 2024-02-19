@@ -39,7 +39,7 @@ function startTSDocgen() {
     const programFiles = program
       .getSourceFiles()
       .map((sf) => sf.fileName)
-      .filter((f) => f.startsWith(srcRoot))
+      .filter((f) => f.startsWith(srcRoot) && !f.includes("src/index.tsx"))
 
     const docgenInfo = parse(programFiles, () => program.getProgram())
     writeDocgenResults(docgenInfo)

@@ -1,5 +1,3 @@
 {
-  "buildCommand": "pnpm -s docgen && cd docs && pnpm -s build",
-  "outputDirectory": "docs/build",
-  "framework": "nextjs"
+  "buildCommand": "cd .. && pnpm -s docgen && cd docs && pnpm -s build"
 }

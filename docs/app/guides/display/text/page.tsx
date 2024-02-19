@@ -15,7 +15,7 @@ function Text() {
 
       <CodeAndExample component={<TextExample />} source={TextExampleSource} />
 
-      <PropTable of={"T"} />
+      <PropTable of={"Text"} />
     </>
   )
 }

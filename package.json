@@ -17,11 +17,12 @@
     "font.css"
   ],
   "scripts": {
-    "start": "cd docs && pnpm dev",
+    "start": "pnpm -s docgen && cd docs && pnpm -s dev",
     "test": "pnpm -s test:unit && pnpm -s test:e2e",
     "test:unit": "jest",
-    "test:e2e": "node --loader ts-node/esm scripts/testgen.ts && playwright test",
-    "build": "node --loader ts-node/esm scripts/build.ts",
+    "test:e2e": "tsx scripts/testgen.ts && playwright test",
+    "build": "tsx scripts/build.ts",
+    "docgen": "tsx scripts/docgen.ts",
     "api-report:update": "pnpm tsc && api-extractor run --local",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
@@ -55,9 +56,11 @@
     "jest-image-snapshot": "^6.2.0",
     "prettier": "^3",
     "react": "^18.2.0",
+    "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
     "ts-node": "^10.9.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.1.6",
     "vite": "^4.4.9"
   },

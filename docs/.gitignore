@@ -32,3 +32,6 @@ npm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated documentation metadata
+generated-docgen.tsx

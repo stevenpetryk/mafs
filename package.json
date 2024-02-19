@@ -17,7 +17,7 @@
     "font.css"
   ],
   "scripts": {
-    "start": "pnpm -s docgen && cd docs && pnpm -s dev",
+    "start": "tsx scripts/dev.ts",
     "test": "pnpm -s test:unit && pnpm -s test:e2e",
     "test:unit": "jest",
     "test:e2e": "tsx scripts/testgen.ts && playwright test",

@@ -16,7 +16,7 @@ const writePath = path.join(projectRoot, "docs/generated-docgen.tsx")
 
 const contents = `
 // prettier-ignore
-const docgenInfo = ${JSON.stringify(docgenInfo)} as const;
+const docgenInfo = ${JSON.stringify(docgenInfo, null, 2)} as const;
 export default docgenInfo;
 `
 

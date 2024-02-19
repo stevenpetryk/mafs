@@ -60,3 +60,5 @@ export function Parametric({
     />
   )
 }
+
+Parametric.displayName = "Plot.Parametric"

@@ -58,3 +58,5 @@ export function TransformWidget({ children }: TransformWidgetProps) {
     </>
   )
 }
+
+TransformWidget.displayName = "Debug.TransformWidget"

@@ -110,6 +110,8 @@ export function Cartesian({
   )
 }
 
+Cartesian.displayName = "Coordinates.Cartesian"
+
 export function snappedRange(min: number, max: number, step: number) {
   const roundMin = Math.floor(min / step) * step
   const roundMax = Math.ceil(max / step) * step

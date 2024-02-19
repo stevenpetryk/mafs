@@ -169,3 +169,5 @@ export function Inequality({
     </g>
   )
 }
+
+Inequality.displayName = "Plot.Inequality"

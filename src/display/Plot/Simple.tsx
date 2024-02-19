@@ -19,6 +19,8 @@ export function OfX({ y, ...props }: OfXProps) {
   return <Parametric xy={xy} t={t} {...props} />
 }
 
+OfX.displayName = "Plot.OfX"
+
 export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
   x: (y: number) => number
   svgPathProps?: React.SVGProps<SVGPathElement>
@@ -34,3 +36,5 @@ export function OfY({ x, ...props }: OfYProps) {
 
   return <Parametric xy={xy} t={t} {...props} />
 }
+
+OfY.displayName = "Plot.OfY"

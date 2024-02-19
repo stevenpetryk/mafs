@@ -36,4 +36,4 @@ export function Segment({
   )
 }
 
-export default Segment
+Segment.displayName = "Line.Segment"

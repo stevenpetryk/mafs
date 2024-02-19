@@ -1,8 +1,6 @@
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
 
-import { Coordinates } from "mafs"
-
 import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"
 
@@ -26,12 +24,12 @@ function CoordinatesPage() {
 
       <h2>Cartesian coordinates</h2>
 
-      {/* <CodeAndExample
+      <CodeAndExample
         component={<CartesianCoordinatesExample />}
         source={CartesianCoordinatesExampleSource}
-      /> */}
+      />
 
-      <PropTable of={Coordinates.Cartesian} />
+      <PropTable of={"Coordinates.Cartesian"} />
 
       <h3>Axis options</h3>
 
@@ -66,19 +64,19 @@ function CoordinatesPage() {
         <code>labels</code> to render in terms of π.
       </p>
 
-      {/* <CodeAndExample
+      <CodeAndExample
         component={<CartesianCoordinatesConfigExample />}
         source={CartesianCoordinatesConfigExampleSource}
-      /> */}
+      />
 
       <h2>Polar coordinates</h2>
 
-      {/* <CodeAndExample
+      <CodeAndExample
         component={<PolarCoordinatesExample />}
         source={PolarCoordinatesExampleSource}
-      /> */}
+      />
 
-      {/* <PropTable of={Coordinates.Polar} /> */}
+      <PropTable of={"Coordinates.Polar"} />
 
       <h3>Axis options</h3>
 

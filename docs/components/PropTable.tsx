@@ -2,6 +2,9 @@
 
 import * as React from "react"
 import ReactMarkdown from "react-markdown"
+import { get } from "lodash"
+
+import * as Mafs from "mafs"
 
 export interface Docgen {
   filePath: string
@@ -24,10 +27,13 @@ export type DocgenPropType =
   | { name: string }
 
 interface PropTableProps {
-  of: { displayName: string } | unknown
+  of: string
 }
 
-export function PropTable({ of: component }: PropTableProps) {
+export function PropTable({ of: componentAccessor }: PropTableProps) {
+  // Turn "Coordinates.Cartesian" into the actual component Mafs.Coordinates.Cartesian
+  const component = get(Mafs, componentAccessor)
+
   const docgenInfo = (component as { __docgenInfo: Docgen })?.__docgenInfo
 
   if (process.env.NODE_ENV === "development" && docgenInfo == null) {

@@ -1,8 +1,10 @@
-import path from "path"
+import path from "node:path"
 import { spawn } from "node:child_process"
-import { fileURLToPath } from "url"
+import { fileURLToPath } from "node:url"
+
 import ts from "typescript"
 import docgen from "react-docgen-typescript"
+
 import { writeDocgenResults } from "./docgen"
 
 const dirname = path.join(fileURLToPath(import.meta.url), "..")
@@ -12,9 +14,10 @@ const docsRoot = path.join(projectRoot, "docs")
 
 const tsconfig = path.join(projectRoot, "tsconfig.json")
 const customDocgen = docgen.withCustomConfig(tsconfig, {})
+const parse = customDocgen.parseWithProgramProvider
 
 function startTSDocgen() {
-  const configPath = ts.findConfigFile("./", ts.sys.fileExists, "tsconfig.json")
+  const configPath = ts.findConfigFile(tsconfig, ts.sys.fileExists, "tsconfig.json")
   if (!configPath) {
     throw new Error("Could not find a valid 'tsconfig.json'.")
   }
@@ -38,12 +41,9 @@ function startTSDocgen() {
       .map((sf) => sf.fileName)
       .filter((f) => f.startsWith(srcRoot))
 
-    const docgenInfo = customDocgen.parseWithProgramProvider(programFiles, () => {
-      return program.getProgram()
-    })
-
+    const docgenInfo = parse(programFiles, () => program.getProgram())
     writeDocgenResults(docgenInfo)
-    origPostProgramCreate!(program)
+    origPostProgramCreate?.(program)
   }
 
   return ts.createWatchProgram(host)

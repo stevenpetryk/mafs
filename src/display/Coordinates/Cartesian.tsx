@@ -1,24 +1,28 @@
-import { range, round } from "../../math"
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
+import { range, round } from "../../math"
 import { vec } from "../../vec"
-import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
+import { AxisOptions, XLabels, YLabels, defaultAxisOptions } from "./Axes"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0
 
 type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
 
+type GridStyle = "lines" | "dots"
+
 export interface CartesianCoordinatesProps {
   xAxis?: GridAxisOptions | false
   yAxis?: GridAxisOptions | false
   subdivisions?: number | false
+  gridStyle?: GridStyle
 }
 
 export function Cartesian({
   xAxis: xAxisOverrides,
   yAxis: yAxisOverrides,
   subdivisions = false,
+  gridStyle = "lines"
 }: CartesianCoordinatesProps) {
   const xAxisEnabled = xAxisOverrides !== false
   const yAxisEnabled = yAxisOverrides !== false
@@ -48,6 +52,9 @@ export function Cartesian({
   const subUnitW = unitW / xSubs
   const subUnitH = unitH / ySubs
 
+  const dotRadius = 1.5
+  const subDotRadius = 0.7
+
   return (
     <g fill="none">
       <pattern x={0} y={0} width={unitW} height={unitH} id={id} patternUnits="userSpaceOnUse">
@@ -57,37 +64,53 @@ export function Cartesian({
           id={`${id}-subdivision`}
           patternUnits="userSpaceOnUse"
         >
-          <g stroke="var(--grid-line-subdivision-color)">
-            {xAxisEnabled !== false && xSubs > 1 && (
+          <g stroke="var(--grid-line-subdivision-color)" fill="var(--grid-line-subdivision-color)">
+            {gridStyle === "lines" && xAxisEnabled !== false && xSubs > 1 && (
               <>
                 <line x1={0} y1={0} x2={0} y2={subUnitH} />
                 <line x1={subUnitW} y1={0} x2={subUnitW} y2={subUnitH} />
               </>
             )}
-            {yAxisEnabled !== false && ySubs > 1 && (
+            {gridStyle === "lines" && yAxisEnabled !== false && ySubs > 1 && (
               <>
                 <line x1={0} y1={0} x2={subUnitW} y2={0} />
                 <line x1={0} y1={subUnitH} x2={subUnitW} y2={subUnitH} />
               </>
             )}
+            {gridStyle === "dots" &&
+              <>
+                <circle cx={0} cy={0} r={subDotRadius} />
+                <circle cx={subUnitW} cy={0} r={subDotRadius} />
+                <circle cx={0} cy={subUnitH} r={subDotRadius} />
+                <circle cx={subUnitW} cy={subUnitH} r={subDotRadius} />
+              </>
+            }
           </g>
         </pattern>
 
         <rect width={unitW} height={unitH} fill={`url(#${id}-subdivision)`} />
 
-        <g stroke="var(--mafs-line-color)">
-          {yAxisEnabled && xAxis.lines && (
+        <g stroke="var(--mafs-line-color)" fill="var(--mafs-line-color)">
+          {gridStyle === "lines" && yAxisEnabled && xAxis.lines && (
             <>
               <line x1={0} y1={0} x2={unitW} y2={0} />
               <line x1={0} y1={unitH} x2={unitW} y2={unitH} />
             </>
           )}
-          {xAxisEnabled && yAxis.lines && (
+          {gridStyle === "lines" && xAxisEnabled && yAxis.lines && (
             <>
               <line x1={0} y1={0} x2={0} y2={unitH} />
               <line x1={unitW} y1={0} x2={unitW} y2={unitH} />
             </>
           )}
+          {gridStyle === "dots" &&
+            <>
+              <circle cx={0} cy={0} r={dotRadius} />
+              <circle cx={unitW} cy={0} r={dotRadius} />
+              <circle cx={0} cy={unitH} r={dotRadius} />
+              <circle cx={unitW} cy={unitH} r={dotRadius} />
+            </>
+          }
         </g>
       </pattern>
 

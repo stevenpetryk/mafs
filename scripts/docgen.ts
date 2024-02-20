@@ -1,8 +1,9 @@
-import docgen from "react-docgen-typescript"
 import fg from "fast-glob"
 import fs from "node:fs"
-import path from "path"
-import { fileURLToPath } from "url"
+import { fileURLToPath } from "node:url"
+import path from "node:path"
+
+import docgen from "react-docgen-typescript"
 
 const projectRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), "..")
 const tsConfigPath = path.join(projectRoot, "tsconfig.json")

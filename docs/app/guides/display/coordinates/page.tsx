@@ -1,18 +1,21 @@
 "use client"
 
-import { Coordinates } from "mafs"
-import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
+import { PropTable } from "components/PropTable"
+import { Coordinates } from "mafs"
 
-import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"
+import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
 
-import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import Code from "components/Code"
+import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 
-import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
 import PolarCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/PolarCoordinatesExample"
+import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
+
+import CartesianDotCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianDotCoordinatesExample"
+import CartesianDotCoordinatesExample from "guide-examples/display/coordinates/CartesianDotCoordinatesExample"
 
 function CoordinatesPage() {
   return (
@@ -70,6 +73,13 @@ function CoordinatesPage() {
       <CodeAndExample
         component={<CartesianCoordinatesConfigExample />}
         source={CartesianCoordinatesConfigExampleSource}
+      />
+
+      <h2>Dot coordinates</h2>
+
+      <CodeAndExample
+        component={<CartesianDotCoordinatesExample />}
+        source={CartesianDotCoordinatesExampleSource}
       />
 
       <h2>Polar coordinates</h2>

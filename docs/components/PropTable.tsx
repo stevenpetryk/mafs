@@ -91,7 +91,18 @@ export function PropTable({ of: displayName }: PropTableProps) {
 }
 
 function PropName({ prop }: { prop: DocgenProp }) {
-  const formattedName = <code>{prop.name}</code>
+  const formattedName = (
+    <code>
+      {prop.name}
+      {prop.required ? (
+        <sup aria-label="required" className="text-red-400">
+          *
+        </sup>
+      ) : (
+        ""
+      )}
+    </code>
+  )
   return <span className="font-semibold p-1 rounded-md">{formattedName}</span>
 }
 

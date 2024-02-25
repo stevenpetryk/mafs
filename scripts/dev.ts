@@ -13,7 +13,7 @@ const srcRoot = path.join(projectRoot, "src")
 const docsRoot = path.join(projectRoot, "docs")
 
 const tsconfig = path.join(projectRoot, "tsconfig.json")
-const customDocgen = docgen.withCustomConfig(tsconfig, {})
+const customDocgen = docgen.withCustomConfig(tsconfig, { shouldRemoveUndefinedFromOptional: true })
 const parse = customDocgen.parseWithProgramProvider
 
 function startTSDocgen() {

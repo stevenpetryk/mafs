@@ -7,7 +7,9 @@ import docgen from "react-docgen-typescript"
 
 const projectRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), "..")
 const tsConfigPath = path.join(projectRoot, "tsconfig.json")
-const parse = docgen.withCustomConfig(tsConfigPath, {}).parseWithProgramProvider
+const parse = docgen.withCustomConfig(tsConfigPath, {
+  shouldRemoveUndefinedFromOptional: true,
+}).parseWithProgramProvider
 
 export function writeDocgenResults(docgenInfo: docgen.ComponentDoc[]) {
   const writePath = path.join(projectRoot, "docs/generated-docgen.tsx")

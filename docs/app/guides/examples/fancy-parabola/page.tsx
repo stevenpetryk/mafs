@@ -1,13 +1,12 @@
 import CodeAndExample from "components/CodeAndExample"
-import FancyParabola from "guide-examples/examples/FancyParabola"
-import FancyParabolaSource from "!raw-loader!guide-examples/examples/FancyParabola.tsx"
+import * as FancyParabola from "guide-examples/examples/FancyParabola"
 
 export default function ProjectilePage() {
   return (
     <>
       <p></p>
 
-      <CodeAndExample source={FancyParabolaSource} component={<FancyParabola />} />
+      <CodeAndExample example={FancyParabola} />
     </>
   )
 }

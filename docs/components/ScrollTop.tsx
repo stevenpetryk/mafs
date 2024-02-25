@@ -2,7 +2,6 @@
 
 import { useSelectedLayoutSegments } from "next/navigation"
 import * as React from "react"
-
 export default function ScrollTop() {
   const [sectionTitleKebab, guideTitleKebab] = useSelectedLayoutSegments()
 

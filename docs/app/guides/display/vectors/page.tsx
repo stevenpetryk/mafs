@@ -1,9 +1,7 @@
 import { PropTable } from "components/PropTable"
 
 import CodeAndExample from "components/CodeAndExample"
-import VectorExample from "guide-examples/display/vectors/VectorExample"
-import VectorExampleSource from "!raw-loader!guide-examples/display/vectors/VectorExample"
-
+import * as VectorExample from "guide-examples/display/vectors/VectorExample"
 function Vectors() {
   return (
     <>
@@ -14,7 +12,7 @@ function Vectors() {
         matrices), exposing them as <code>vec</code>. Those utilities are used extensively here.
       </p>
 
-      <CodeAndExample component={<VectorExample />} source={VectorExampleSource} />
+      <CodeAndExample example={VectorExample} />
 
       <PropTable of={"Vector"} />
     </>

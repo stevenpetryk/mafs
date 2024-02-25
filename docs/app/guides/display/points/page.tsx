@@ -1,6 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import SimplePoint from "guide-examples/display/SimplePoint"
+import * as SimplePoint from "guide-examples/display/SimplePoint"
 import SimplePointSource from "!raw-loader!guide-examples/display/SimplePoint"
 
 import { PropTable } from "components/PropTable"
@@ -10,7 +10,7 @@ function Points() {
     <>
       <p>Points are dots that can be rendered at a location (x, y).</p>
 
-      <CodeAndExample component={<SimplePoint />} source={SimplePointSource} />
+      <CodeAndExample example={SimplePoint} />
 
       <PropTable of={"Point"} />
     </>

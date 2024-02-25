@@ -1,7 +1,7 @@
 import WIP from "components/WIP"
 import CodeAndExample from "components/CodeAndExample"
 
-import AnimatedPoint from "guide-examples/animation/AnimatedPoint"
+import * as AnimatedPoint from "guide-examples/animation/AnimatedPoint"
 import AnimatedPointSource from "!raw-loader!guide-examples/animation/AnimatedPoint"
 
 function Stopwatch() {
@@ -24,7 +24,7 @@ function Stopwatch() {
         </p>
       </WIP>
 
-      <CodeAndExample component={<AnimatedPoint />} source={AnimatedPointSource} />
+      <CodeAndExample example={AnimatedPoint} />
     </>
   )
 }

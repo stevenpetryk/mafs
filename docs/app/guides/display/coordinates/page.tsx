@@ -1,16 +1,11 @@
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
 
-import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
-import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"
-
-import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
-import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
+import * as CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
+import * as CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import Code from "components/Code"
 
-import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
-import PolarCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/PolarCoordinatesExample"
-
+import * as PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
 function CoordinatesPage() {
   return (
     <>
@@ -24,10 +19,7 @@ function CoordinatesPage() {
 
       <h2>Cartesian coordinates</h2>
 
-      <CodeAndExample
-        component={<CartesianCoordinatesExample />}
-        source={CartesianCoordinatesExampleSource}
-      />
+      <CodeAndExample example={CartesianCoordinatesExample} />
 
       <PropTable of={"Coordinates.Cartesian"} />
 
@@ -64,17 +56,11 @@ function CoordinatesPage() {
         <code>labels</code> to render in terms of π.
       </p>
 
-      <CodeAndExample
-        component={<CartesianCoordinatesConfigExample />}
-        source={CartesianCoordinatesConfigExampleSource}
-      />
+      <CodeAndExample example={CartesianCoordinatesConfigExample} />
 
       <h2>Polar coordinates</h2>
 
-      <CodeAndExample
-        component={<PolarCoordinatesExample />}
-        source={PolarCoordinatesExampleSource}
-      />
+      <CodeAndExample example={PolarCoordinatesExample} />
 
       <PropTable of={"Coordinates.Polar"} />
 

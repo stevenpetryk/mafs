@@ -4,12 +4,8 @@ import Link from "next/link"
 
 import CodeAndExample from "components/CodeAndExample"
 
-import PizzaSliceExample from "guide-examples/custom/pizza-slice"
-import PizzaSliceExampleSource from "!raw-loader!guide-examples/custom/pizza-slice"
-
-import Example from "guide-examples/debug/PaneVisualizerExample"
-import PaneVisualizerExampleSource from "!raw-loader!guide-examples/debug/PaneVisualizerExample"
-
+import * as PizzaSliceExample from "guide-examples/custom/pizza-slice"
+import * as Example from "guide-examples/debug/PaneVisualizerExample"
 export default function DebugPage() {
   return (
     <>
@@ -29,7 +25,7 @@ export default function DebugPage() {
         <Link href="/guides/custom-components/overview">custom components</Link>.
       </p>
 
-      <CodeAndExample component={<PizzaSliceExample />} source={PizzaSliceExampleSource} />
+      <CodeAndExample example={PizzaSliceExample} />
 
       <PropTable of={"Debug.TransformWidget"} />
 
@@ -41,7 +37,7 @@ export default function DebugPage() {
         pane context.
       </p>
 
-      <CodeAndExample component={<Example />} source={PaneVisualizerExampleSource} />
+      <CodeAndExample example={Example} />
 
       <PropTable of={"Debug.ViewportInfo"} />
     </>

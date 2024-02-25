@@ -1,15 +1,10 @@
-import CodeAndExample from "../../../../components/CodeAndExample"
+import CodeAndExample from "components/CodeAndExample"
 
-import Plain from "../../../../components/guide-examples/hello-fx/plain"
-import PlainSource from "!raw-loader!../../../../components/guide-examples/hello-fx/plain"
-import Subdivions from "../../../../components/guide-examples/hello-fx/subdivisions"
-import SubdivionsSource from "!raw-loader!../../../../components/guide-examples/hello-fx/subdivisions"
-import Sine from "../../../../components/guide-examples/hello-fx/sine"
-import SineSource from "!raw-loader!../../../../components/guide-examples/hello-fx/sine"
-import SinePi from "../../../../components/guide-examples/hello-fx/sine-pi"
-import SinePiSource from "!raw-loader!../../../../components/guide-examples/hello-fx/sine-pi"
-import Draggable from "../../../../components/guide-examples/hello-fx/draggable"
-import DraggableSource from "!raw-loader!../../../../components/guide-examples/hello-fx/draggable"
+import * as Plain from "guide-examples/hello-fx/plain"
+import * as Subdivions from "guide-examples/hello-fx/subdivisions"
+import * as Sine from "guide-examples/hello-fx/sine"
+import * as SinePi from "guide-examples/hello-fx/sine-pi"
+import * as Draggable from "guide-examples/hello-fx/draggable"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -33,14 +28,14 @@ function Page() {
         nothing too interesting on it.
       </p>
 
-      <CodeAndExample collapsible={false} component={<Plain />} source={PlainSource} />
+      <CodeAndExample collapsible={false} example={Plain} />
 
       <p>
         <code>CartesianCoordinates</code> is pretty customizable. Let's make our graph a little bit
         more sophisticated-looking by adding some subdivisions.
       </p>
 
-      <CodeAndExample collapsible={false} component={<Subdivions />} source={SubdivionsSource} />
+      <CodeAndExample collapsible={false} example={Subdivions} />
 
       <h2>Plotting a function</h2>
 
@@ -49,7 +44,7 @@ function Page() {
         <code>Math.sin(x)</code>.
       </p>
 
-      <CodeAndExample collapsible={false} component={<Sine />} source={SineSource} />
+      <CodeAndExample collapsible={false} example={Sine} />
 
       <p>
         We've passed a plain JavaScript function, and Mafs evaluated it and plotted it across the
@@ -69,7 +64,7 @@ function Page() {
         <li>Tell Mafs to let us squish the viewport</li>
       </ul>
 
-      <CodeAndExample collapsible={false} component={<SinePi />} source={SinePiSource} />
+      <CodeAndExample collapsible={false} example={SinePi} />
 
       <p>
         At this point, it's worth noting that you haven't <em>instructed</em> the library to do
@@ -85,7 +80,7 @@ function Page() {
         to our function.
       </p>
 
-      <CodeAndExample collapsible={false} component={<Draggable />} source={DraggableSource} />
+      <CodeAndExample collapsible={false} example={Draggable} />
 
       <p>
         There are a few noteworthy things here: one is how we declared our point. We start centered

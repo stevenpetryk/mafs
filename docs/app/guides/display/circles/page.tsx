@@ -1,6 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import MovableCircle from "guide-examples/MovableCircle"
+import * as MovableCircle from "guide-examples/MovableCircle"
 import MovableCircleSource from "!raw-loader!guide-examples/MovableCircle"
 
 import { PropTable } from "components/PropTable"
@@ -10,7 +10,7 @@ export default function Page() {
     <>
       <p>Circles take a center vector and a radius.</p>
 
-      <CodeAndExample component={<MovableCircle />} source={MovableCircleSource} />
+      <CodeAndExample example={MovableCircle} />
 
       <PropTable of={"Circle"} />
     </>

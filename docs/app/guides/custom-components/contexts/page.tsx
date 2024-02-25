@@ -1,8 +1,5 @@
-import PizzaSlice from "guide-examples/custom/pizza-slice"
-import PizzaSliceSource from "!raw-loader!guide-examples/custom/pizza-slice"
-
-import PointCloud from "guide-examples/custom/point-cloud"
-import PointCloudSource from "!raw-loader!guide-examples/custom/point-cloud"
+import * as PizzaSlice from "guide-examples/custom/pizza-slice"
+import * as PointCloud from "guide-examples/custom/point-cloud"
 
 import CodeAndExample from "components/CodeAndExample"
 import Link from "next/link"
@@ -62,7 +59,7 @@ export default function TransformContextsPage() {
         transforms it.
       </p>
 
-      <CodeAndExample component={<PizzaSlice />} source={PizzaSliceSource} />
+      <CodeAndExample example={PizzaSlice} />
 
       <p>
         This is an example of a component that gets entirely transformed by the user and view
@@ -82,7 +79,7 @@ export default function TransformContextsPage() {
         the CSS transforms approach here, because that would distort each circle.
       </p>
 
-      <CodeAndExample component={<PointCloud />} source={PointCloudSource} />
+      <CodeAndExample example={PointCloud} />
     </>
   )
 }

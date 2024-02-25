@@ -1,8 +1,7 @@
-import Code from "../../../../components/Code"
-import CodeAndExample from "../../../../components/CodeAndExample"
+import Code from "components/Code"
+import CodeAndExample from "components/CodeAndExample"
 
-import Plain from "../../../../components/guide-examples/hello-fx/plain"
-import PlainSource from "!raw-loader!../../../../components/guide-examples/hello-fx/plain"
+import * as Plain from "guide-examples/hello-fx/plain"
 import endent from "endent"
 import type { Metadata } from "next"
 
@@ -35,7 +34,7 @@ function Page() {
 
       <p>Now, in your React app, you should be able to render a Mafs view.</p>
 
-      <CodeAndExample component={<Plain />} source={PlainSource} />
+      <CodeAndExample example={Plain} />
 
       <h2>Fancy math font</h2>
 

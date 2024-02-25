@@ -1,5 +1,4 @@
-import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
-import SimpleTransformExampleSource from "!raw-loader!guide-examples/utility/SimpleTransform"
+import * as SimpleTransformExample from "guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"
@@ -12,10 +11,7 @@ export default function Page() {
         collectively. This is where <code>Transform</code> comes in handy.
       </p>
 
-      <CodeAndExample
-        component={<SimpleTransformExample />}
-        source={SimpleTransformExampleSource}
-      />
+      <CodeAndExample example={SimpleTransformExample} />
 
       <PropTable of={"Transform"} />
 

@@ -1,11 +1,9 @@
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
-import LatexExample from "components/guide-examples/display/Latex"
-import LatexExampleSource from "!raw-loader!components/guide-examples/display/Latex"
+import * as LatexExample from "components/guide-examples/display/Latex"
+import * as LatexDocExample from "components/guide-examples/display/LatexDoc"
 
-import LatexDocExample from "components/guide-examples/display/LatexDoc"
-import LatexDocExampleSource from "!raw-loader!components/guide-examples/display/LatexDoc"
 import Link from "next/link"
 import Experimental from "components/Experimental"
 import Code from "components/Code"
@@ -57,8 +55,8 @@ export default function LatexPage() {
         <code>x</code> variable in the following code).
       </p>
 
-      <CodeAndExample component={<LatexExample />} source={LatexExampleSource} />
-      <CodeAndExample component={<LatexDocExample />} source={LatexDocExampleSource} />
+      <CodeAndExample example={LatexExample} />
+      <CodeAndExample example={LatexDocExample} />
     </>
   )
 }

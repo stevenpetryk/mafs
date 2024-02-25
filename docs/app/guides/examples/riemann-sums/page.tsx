@@ -1,6 +1,5 @@
 import CodeAndExample from "components/CodeAndExample"
-import Riemann from "guide-examples/examples/Riemann"
-import RiemannSource from "!raw-loader!guide-examples/examples/Riemann.tsx"
+import * as Riemann from "guide-examples/examples/Riemann"
 
 function RiemannPage() {
   return (
@@ -17,7 +16,7 @@ function RiemannPage() {
         provide inputs to Mafs.
       </p>
 
-      <CodeAndExample source={RiemannSource} component={<Riemann />} />
+      <CodeAndExample example={Riemann} />
     </>
   )
 }

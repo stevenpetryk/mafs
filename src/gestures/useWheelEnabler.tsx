@@ -1,5 +1,4 @@
 import * as React from "react"
-
 /**
  * A custom hook that makes the `wheel` event not interrupt scrolling. It will
  * only allow the Mafs viewport to be zoomed using the wheel if the user hasn't

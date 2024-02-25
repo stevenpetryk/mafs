@@ -1,15 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
-import LineSegmentExample from "guide-examples/LineSegmentExample"
-import LineSegmentExampleSource from "!raw-loader!guide-examples/LineSegmentExample"
-import LineThroughPointsExample from "guide-examples/LineThroughPointsExample"
-import LineThroughPointsExampleSource from "!raw-loader!guide-examples/LineThroughPointsExample"
-import LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
-import LinePointSlopeExampleSource from "!raw-loader!guide-examples/LinePointSlopeExample"
-import LinePointAngleExample from "guide-examples/LinePointAngleExample"
-import LinePointAngleExampleSource from "!raw-loader!guide-examples/LinePointAngleExample"
-
+import * as LineSegmentExample from "guide-examples/LineSegmentExample"
+import * as LineThroughPointsExample from "guide-examples/LineThroughPointsExample"
+import * as LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
+import * as LinePointAngleExample from "guide-examples/LinePointAngleExample"
 function Lines() {
   return (
     <>
@@ -17,25 +12,22 @@ function Lines() {
 
       <h2>Line segment</h2>
 
-      <CodeAndExample component={<LineSegmentExample />} source={LineSegmentExampleSource} />
+      <CodeAndExample example={LineSegmentExample} />
       <PropTable of={"Line.Segment"} />
 
       <h2>Line through two points</h2>
 
-      <CodeAndExample
-        component={<LineThroughPointsExample />}
-        source={LineThroughPointsExampleSource}
-      />
+      <CodeAndExample example={LineThroughPointsExample} />
       <PropTable of={"Line.ThroughPoints"} />
 
       <h2>Point and slope</h2>
 
-      <CodeAndExample component={<LinePointSlopeExample />} source={LinePointSlopeExampleSource} />
+      <CodeAndExample example={LinePointSlopeExample} />
       <PropTable of={"Line.PointSlope"} />
 
       <h2>Point and angle</h2>
 
-      <CodeAndExample component={<LinePointAngleExample />} source={LinePointAngleExampleSource} />
+      <CodeAndExample example={LinePointAngleExample} />
       <PropTable of={"Line.PointAngle"} />
     </>
   )

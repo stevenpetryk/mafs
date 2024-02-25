@@ -1,7 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import TextExample from "guide-examples/TextExample"
-import TextExampleSource from "!raw-loader!guide-examples/TextExample"
+import * as TextExample from "guide-examples/TextExample"
 import { PropTable } from "components/PropTable"
 
 function Text() {
@@ -13,7 +12,7 @@ function Text() {
         <code>attach</code> will orient the text along a cardinal direction ("n", "s", "nw", etc.)
       </p>
 
-      <CodeAndExample component={<TextExample />} source={TextExampleSource} />
+      <CodeAndExample example={TextExample} />
 
       <PropTable of={"Text"} />
     </>

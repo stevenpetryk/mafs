@@ -9,18 +9,15 @@ import sdk from "@stackblitz/sdk"
 import endent from "endent"
 
 interface Props {
-  source: string
-  component: React.ReactNode
+  example: { default: React.ComponentType; sourceCode?: string }
   clean?: boolean
   collapsible?: boolean
 }
 
-function CodeAndExample({
-  collapsible: collapsibleProp = true,
-  source,
-  component,
-  clean = true,
-}: Props) {
+function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = true }: Props) {
+  const Component = example.default
+  let source = example.sourceCode!
+
   if (clean) {
     const remove = [
       /\s+height=\{[^}]*\}/g,
@@ -49,7 +46,7 @@ function CodeAndExample({
 
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
-      <div className={`unround-mafs z-10`}>{component}</div>
+      <div className={`unround-mafs z-10`}>{<Component />}</div>
 
       <div className="relative">
         <div

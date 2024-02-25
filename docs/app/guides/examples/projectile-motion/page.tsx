@@ -1,6 +1,5 @@
 import CodeAndExample from "components/CodeAndExample"
-import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
-import ProjectileMotionSource from "!raw-loader!guide-examples/examples/ProjectileMotion.tsx"
+import * as ProjectileMotion from "guide-examples/examples/ProjectileMotion"
 
 function ProjectilePage() {
   return (
@@ -11,7 +10,7 @@ function ProjectilePage() {
         the animation.
       </p>
 
-      <CodeAndExample source={ProjectileMotionSource} component={<ProjectileMotion />} />
+      <CodeAndExample example={ProjectileMotion} />
     </>
   )
 }

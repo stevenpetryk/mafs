@@ -1,9 +1,7 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import PolygonExample from "guide-examples/PolygonExample"
-import PolygonExampleSource from "!raw-loader!guide-examples/PolygonExample"
-import PolylineExample from "guide-examples/PolylineExample"
-import PolylineExampleSource from "!raw-loader!guide-examples/PolylineExample"
+import * as PolygonExample from "guide-examples/PolygonExample"
+import * as PolylineExample from "guide-examples/PolylineExample"
 import { PropTable } from "components/PropTable"
 
 function Polygons() {
@@ -11,11 +9,11 @@ function Polygons() {
     <>
       <p>Polygons take a number of points and create a closed shape.</p>
 
-      <CodeAndExample component={<PolygonExample />} source={PolygonExampleSource} />
+      <CodeAndExample example={PolygonExample} />
 
       <PropTable of={"Polygon"} />
 
-      <CodeAndExample component={<PolylineExample />} source={PolylineExampleSource} />
+      <CodeAndExample example={PolylineExample} />
 
       <PropTable of={"Polyline"} />
     </>

@@ -1,6 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import MovableEllipse from "guide-examples/MovableEllipse"
+import * as MovableEllipse from "guide-examples/MovableEllipse"
 import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
 import WIP from "components/WIP"
 import Link from "next/link"
@@ -12,7 +12,7 @@ export default function Page() {
     <>
       <p>Ellipses take a center vector, radius vector, and an angle.</p>
 
-      <CodeAndExample component={<MovableEllipse />} source={MovableEllipseSource} />
+      <CodeAndExample example={MovableEllipse} />
 
       <PropTable of={"Ellipse"} />
 

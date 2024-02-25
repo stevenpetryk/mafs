@@ -1,10 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
+import * as PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
 import PointsAlongFunctionSource from "!raw-loader!guide-examples/display/PointsAlongFunction"
-import DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
+import * as DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
 import DynamicMovablePointsSource from "!raw-loader!guide-examples/display/DynamicMovablePoints"
-import SnapPoint from "guide-examples/SnapPoint"
+import * as SnapPoint from "guide-examples/SnapPoint"
 import SnapPointSource from "!raw-loader!guide-examples/SnapPoint"
 import { Advanced } from "components/Advanced"
 import Code from "components/Code"
@@ -24,7 +24,7 @@ function Stopwatch() {
         or constrained to an arbitrary function. This example constrains movement horizontally:
       </p>
 
-      <CodeAndExample component={<PointsAlongFunction />} source={PointsAlongFunctionSource} />
+      <CodeAndExample example={PointsAlongFunction} />
 
       <h2>Constraints</h2>
 
@@ -94,7 +94,7 @@ function Stopwatch() {
         circle.
       </p>
 
-      <CodeAndExample component={<SnapPoint />} source={SnapPointSource} />
+      <CodeAndExample example={SnapPoint} />
 
       <h2 className="flex flex-col gap-1">
         <div>
@@ -110,7 +110,7 @@ function Stopwatch() {
         (since the React "rules of hooks" ban you from dynamically calling hooks).
       </p>
 
-      <CodeAndExample component={<DynamicMovablePoints />} source={DynamicMovablePointsSource} />
+      <CodeAndExample example={DynamicMovablePoints} />
 
       <PropTable of={"MovablePoint"} />
     </>

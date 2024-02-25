@@ -1,13 +1,13 @@
 module.exports = function guideExampleLoader(source) {
-  source = source.replace(/export default/g, "const $component =")
+  source = source.replace(/export default/g, "const $default =")
 
   return `
     ${source}
     ;
     const $source = ${JSON.stringify(source)};
 
-    $component.$source = $source;
-    $component.$component = $component;
-    export default $component;
+    $default.$source = $source;
+    $default.$component = $component;
+    export default $default;
   `
 }

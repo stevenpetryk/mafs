@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 module.exports = function guideExampleLoader(source) {
-  source = source.replace(/export default/g, "const $default =")
-
   return `
-    ${source}
+    ${source.replace(/export default/g, "const $default =")}
     ;
     const $source = ${JSON.stringify(source)};
 

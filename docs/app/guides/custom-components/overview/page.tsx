@@ -1,6 +1,9 @@
-"use client"
-
 import PizzaMarch from "guide-examples/custom/pizza-march"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Custom components",
+}
 
 export default function CustomPage() {
   return (

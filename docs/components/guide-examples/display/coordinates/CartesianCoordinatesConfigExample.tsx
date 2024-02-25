@@ -1,3 +1,5 @@
+"use client"
+
 import { Mafs, Coordinates, labelPi } from "mafs"
 
 export default function CartesianCoordinatesExample() {

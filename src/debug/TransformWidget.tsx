@@ -1,5 +1,4 @@
 import * as React from "react"
-
 import { vec } from "../vec"
 import { Theme } from "../display/Theme"
 import { useMovablePoint } from "../interaction/useMovablePoint"
@@ -58,3 +57,5 @@ export function TransformWidget({ children }: TransformWidgetProps) {
     </>
   )
 }
+
+TransformWidget.displayName = "Debug.TransformWidget"

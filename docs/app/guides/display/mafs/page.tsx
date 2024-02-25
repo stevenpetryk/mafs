@@ -1,21 +1,16 @@
-"use client"
-
-import { Mafs } from "mafs"
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
 import PlainMafsExample from "guide-examples/PlainMafsExample"
-import PlainMafsExampleSource from "!raw-loader!guide-examples/PlainMafsExample"
-
 import ContainViewboxExample from "guide-examples/display/viewbox/ContainViewbox"
-import ContainViewboxExampleSource from "!raw-loader!guide-examples/display/viewbox/ContainViewbox"
-
 import ZoomExample from "guide-examples/display/viewbox/ZoomExample"
-import ZoomExampleSource from "!raw-loader!guide-examples/display/viewbox/ZoomExample"
-
 import StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
-import StretchViewboxExampleSource from "!raw-loader!guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Mafs",
+}
 
 function MafsPage() {
   return (
@@ -25,8 +20,8 @@ function MafsPage() {
         components. On its own, it renders a blank canvas.
       </p>
 
-      <CodeAndExample component={<PlainMafsExample />} source={PlainMafsExampleSource} />
-      <PropTable of={Mafs} />
+      <CodeAndExample example={PlainMafsExample} />
+      <PropTable of="Mafs" />
 
       <h2>Sizing</h2>
 
@@ -60,7 +55,7 @@ function MafsPage() {
         <code>0.5-5</code>
       </p>
 
-      <CodeAndExample component={<ZoomExample />} source={ZoomExampleSource} />
+      <CodeAndExample example={ZoomExample} />
 
       <h2>Viewbox</h2>
 
@@ -70,7 +65,7 @@ function MafsPage() {
         to specify this with the <code>viewBox</code> prop.
       </p>
 
-      <CodeAndExample component={<ContainViewboxExample />} source={ContainViewboxExampleSource} />
+      <CodeAndExample example={ContainViewboxExample} />
 
       <h3>Aspect ratio preservation</h3>
 
@@ -80,7 +75,7 @@ function MafsPage() {
         tossing aside the aspect ratio preservation.
       </p>
 
-      <CodeAndExample component={<StretchViewboxExample />} source={StretchViewboxExampleSource} />
+      <CodeAndExample example={StretchViewboxExample} />
 
       <p>
         The only other option is <code>"contain"</code> for now, which is also the default.

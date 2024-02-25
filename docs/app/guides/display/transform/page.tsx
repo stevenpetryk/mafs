@@ -1,11 +1,12 @@
-"use client"
-
 import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
-import SimpleTransformExampleSource from "!raw-loader!guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"
-import { Transform } from "mafs"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Transform",
+}
 
 export default function Page() {
   return (
@@ -15,12 +16,9 @@ export default function Page() {
         collectively. This is where <code>Transform</code> comes in handy.
       </p>
 
-      <CodeAndExample
-        component={<SimpleTransformExample />}
-        source={SimpleTransformExampleSource}
-      />
+      <CodeAndExample example={SimpleTransformExample} />
 
-      <PropTable of={Transform} />
+      <PropTable of={"Transform"} />
 
       <h2>Transformation types</h2>
 

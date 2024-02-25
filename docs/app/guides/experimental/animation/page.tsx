@@ -1,10 +1,12 @@
-"use client"
-
 import WIP from "components/WIP"
 import CodeAndExample from "components/CodeAndExample"
 
 import AnimatedPoint from "guide-examples/animation/AnimatedPoint"
-import AnimatedPointSource from "!raw-loader!guide-examples/animation/AnimatedPoint"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Animation",
+}
 
 function Stopwatch() {
   return (
@@ -26,7 +28,7 @@ function Stopwatch() {
         </p>
       </WIP>
 
-      <CodeAndExample component={<AnimatedPoint />} source={AnimatedPointSource} />
+      <CodeAndExample example={AnimatedPoint} />
     </>
   )
 }

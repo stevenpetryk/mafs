@@ -1,8 +1,10 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 import Riemann from "guide-examples/examples/Riemann"
-import RiemannSource from "!raw-loader!guide-examples/examples/Riemann.tsx"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Riemann sums",
+}
 
 function RiemannPage() {
   return (
@@ -19,7 +21,7 @@ function RiemannPage() {
         provide inputs to Mafs.
       </p>
 
-      <CodeAndExample source={RiemannSource} component={<Riemann />} />
+      <CodeAndExample example={Riemann} />
     </>
   )
 }

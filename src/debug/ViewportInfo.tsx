@@ -35,3 +35,5 @@ export function ViewportInfo({ precision = 3 }: PaneVisualizerProps) {
     </g>
   )
 }
+
+ViewportInfo.displayName = "Debug.ViewportInfo"

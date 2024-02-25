@@ -1,5 +1,4 @@
 import * as React from "react"
-
 export default function fancyFx(title: string): React.ReactNode {
   function FOfX() {
     return (

@@ -1,6 +1,8 @@
 import * as React from "react"
 import ReactMarkdown from "react-markdown"
 
+import DocgenInfo from "../generated-docgen"
+
 export interface Docgen {
   filePath: string
   displayName: string
@@ -22,30 +24,20 @@ export type DocgenPropType =
   | { name: string }
 
 interface PropTableProps {
-  of: { displayName: string } | unknown
+  // Get literal displayName union from DocgenInfo (an array of objects with displayName values)
+  of: (typeof DocgenInfo)[number]["displayName"]
 }
 
-export function PropTable({ of: component }: PropTableProps) {
-  const docgenInfo = (component as { __docgenInfo: Docgen })?.__docgenInfo
-
-  if (process.env.NODE_ENV === "development" && docgenInfo == null) {
-    return (
-      <p className="text-sm">
-        Props are not loaded by default in development to keep hot reloading fast. Set{" "}
-        <code>DOCGEN=1</code> to compile with type data.
-      </p>
-    )
-  }
+export function PropTable({ of: displayName }: PropTableProps) {
+  // Turn "Coordinates.Cartesian" into the actual component Mafs.Coordinates.Cartesian
+  const docgenInfo = DocgenInfo?.find((info) => info.displayName === displayName)
 
   if (docgenInfo == null || docgenInfo.props == null) {
-    throw new Error("Non-docgen object passed to PropTable")
+    throw new Error(`Could not find documentation for ${displayName}`)
   }
 
-  const displayName =
-    // eslint-disable-next-line
-    (component as any)?.displayName ?? docgenInfo.displayName
-
   const props = docgenInfo.props
+  const hasChildren = "children" in props
 
   return (
     <div>
@@ -55,8 +47,8 @@ export function PropTable({ of: component }: PropTableProps) {
         <code className="font-medium mr-1 text-sm text-purple-600 dark:text-purple-300">
           <span className="opacity-50">{"<"}</span>
           {typeof displayName === "string" ? displayName : docgenInfo.displayName}
-          <span className="opacity-50">{props.children ? ">...</" : " ... />"}</span>
-          {props.children && (
+          <span className="opacity-50">{hasChildren ? ">...</" : " ... />"}</span>
+          {hasChildren && (
             <>
               {typeof displayName === "string" ? displayName : docgenInfo.displayName}
               <span className="opacity-50">{">"}</span>

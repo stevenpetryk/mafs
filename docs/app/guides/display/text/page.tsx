@@ -1,11 +1,12 @@
-"use client"
-
-import { Text as T } from "mafs"
 import CodeAndExample from "components/CodeAndExample"
 
 import TextExample from "guide-examples/TextExample"
-import TextExampleSource from "!raw-loader!guide-examples/TextExample"
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Text",
+}
 
 function Text() {
   return (
@@ -16,9 +17,9 @@ function Text() {
         <code>attach</code> will orient the text along a cardinal direction ("n", "s", "nw", etc.)
       </p>
 
-      <CodeAndExample component={<TextExample />} source={TextExampleSource} />
+      <CodeAndExample example={TextExample} />
 
-      <PropTable of={T} />
+      <PropTable of={"Text"} />
     </>
   )
 }

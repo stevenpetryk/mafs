@@ -1,5 +1,4 @@
 import * as React from "react"
-
 export interface StopwatchArguments {
   /** The start time in seconds */
   startTime?: number

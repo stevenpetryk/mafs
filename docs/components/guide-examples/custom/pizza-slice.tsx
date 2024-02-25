@@ -1,6 +1,7 @@
+"use client"
+
 import { Mafs, Coordinates, Debug } from "mafs"
 import * as React from "react"
-
 export default function Example() {
   return (
     <Mafs height={300} viewBox={{ y: [-1, 1], x: [-1, 1] }}>

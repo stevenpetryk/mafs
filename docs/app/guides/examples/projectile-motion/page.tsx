@@ -1,8 +1,10 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
-import ProjectileMotionSource from "!raw-loader!guide-examples/examples/ProjectileMotion.tsx"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Projectile motion",
+}
 
 function ProjectilePage() {
   return (
@@ -13,7 +15,7 @@ function ProjectilePage() {
         the animation.
       </p>
 
-      <CodeAndExample source={ProjectileMotionSource} component={<ProjectileMotion />} />
+      <CodeAndExample example={ProjectileMotion} />
     </>
   )
 }

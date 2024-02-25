@@ -1,3 +1,5 @@
+"use client"
+
 import { Mafs, Text } from "mafs"
 
 export default function Example() {

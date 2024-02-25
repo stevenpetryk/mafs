@@ -1,3 +1,5 @@
+"use client"
+
 import { Mafs, Coordinates, Circle, Text } from "mafs"
 
 export default function ZoomExample() {

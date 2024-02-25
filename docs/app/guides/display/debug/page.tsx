@@ -1,17 +1,16 @@
-"use client"
-
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"
-import { Debug } from "mafs"
 import Link from "next/link"
 
 import CodeAndExample from "components/CodeAndExample"
 
 import PizzaSliceExample from "guide-examples/custom/pizza-slice"
-import PizzaSliceExampleSource from "!raw-loader!guide-examples/custom/pizza-slice"
-
 import Example from "guide-examples/debug/PaneVisualizerExample"
-import PaneVisualizerExampleSource from "!raw-loader!guide-examples/debug/PaneVisualizerExample"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Debug",
+}
 
 export default function DebugPage() {
   return (
@@ -32,9 +31,9 @@ export default function DebugPage() {
         <Link href="/guides/custom-components/overview">custom components</Link>.
       </p>
 
-      <CodeAndExample component={<PizzaSliceExample />} source={PizzaSliceExampleSource} />
+      <CodeAndExample example={PizzaSliceExample} />
 
-      <PropTable of={Debug.TransformWidget} />
+      <PropTable of={"Debug.TransformWidget"} />
 
       <h2>Viewport info</h2>
 
@@ -44,9 +43,9 @@ export default function DebugPage() {
         pane context.
       </p>
 
-      <CodeAndExample component={<Example />} source={PaneVisualizerExampleSource} />
+      <CodeAndExample example={Example} />
 
-      <PropTable of={Debug.ViewportInfo} />
+      <PropTable of={"Debug.ViewportInfo"} />
     </>
   )
 }

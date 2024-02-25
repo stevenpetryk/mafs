@@ -1,3 +1,5 @@
+"use client"
+
 export { Mafs } from "./view/Mafs"
 export type { MafsProps } from "./view/Mafs"
 

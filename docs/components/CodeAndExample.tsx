@@ -1,7 +1,7 @@
 "use client"
 
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import * as React from "react"
+import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { HighlightedCode } from "./Code"
 import { StackBlitzIcon } from "./icons"
 
@@ -9,18 +9,21 @@ import sdk from "@stackblitz/sdk"
 import endent from "endent"
 
 interface Props {
-  source: string
-  component: React.ReactNode
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  example: any
   clean?: boolean
   collapsible?: boolean
 }
 
-function CodeAndExample({
-  collapsible: collapsibleProp = true,
-  source,
-  component,
-  clean = true,
-}: Props) {
+function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = true }: Props) {
+  const typedExample = example as { $component: React.ComponentType; $source: string }
+  const Component = typedExample.$component
+  let source = typedExample.$source
+
+  if (typeof Component !== "function") {
+    throw new Error(`CodeAndExample: expected example to be a component ${source}`)
+  }
+
   if (clean) {
     const remove = [
       /\s+height=\{[^}]*\}/g,
@@ -49,7 +52,7 @@ function CodeAndExample({
 
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
-      <div className={`unround-mafs z-10`}>{component}</div>
+      <div className={`unround-mafs z-10`}>{<Component />}</div>
 
       <div className="relative">
         <div

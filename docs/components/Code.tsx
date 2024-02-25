@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-
 import endent from "endent"
 import { toH } from "hast-to-hyperscript"
 

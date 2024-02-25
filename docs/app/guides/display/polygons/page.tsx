@@ -1,26 +1,26 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import PolygonExample from "guide-examples/PolygonExample"
-import PolygonExampleSource from "!raw-loader!guide-examples/PolygonExample"
 import PolylineExample from "guide-examples/PolylineExample"
-import PolylineExampleSource from "!raw-loader!guide-examples/PolylineExample"
 import { PropTable } from "components/PropTable"
-import { Polygon, Polyline } from "mafs"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Polygons",
+}
 
 function Polygons() {
   return (
     <>
       <p>Polygons take a number of points and create a closed shape.</p>
 
-      <CodeAndExample component={<PolygonExample />} source={PolygonExampleSource} />
+      <CodeAndExample example={PolygonExample} />
 
-      <PropTable of={Polygon} />
+      <PropTable of={"Polygon"} />
 
-      <CodeAndExample component={<PolylineExample />} source={PolylineExampleSource} />
+      <CodeAndExample example={PolylineExample} />
 
-      <PropTable of={Polyline} />
+      <PropTable of={"Polyline"} />
     </>
   )
 }

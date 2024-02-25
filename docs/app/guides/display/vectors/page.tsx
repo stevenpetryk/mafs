@@ -1,11 +1,12 @@
-"use client"
-
-import { Vector } from "mafs"
 import { PropTable } from "components/PropTable"
 
 import CodeAndExample from "components/CodeAndExample"
 import VectorExample from "guide-examples/display/vectors/VectorExample"
-import VectorExampleSource from "!raw-loader!guide-examples/display/vectors/VectorExample"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Vectors",
+}
 
 function Vectors() {
   return (
@@ -17,9 +18,9 @@ function Vectors() {
         matrices), exposing them as <code>vec</code>. Those utilities are used extensively here.
       </p>
 
-      <CodeAndExample component={<VectorExample />} source={VectorExampleSource} />
+      <CodeAndExample example={VectorExample} />
 
-      <PropTable of={Vector} />
+      <PropTable of={"Vector"} />
     </>
   )
 }

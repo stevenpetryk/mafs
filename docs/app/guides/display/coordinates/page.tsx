@@ -1,18 +1,17 @@
-"use client"
-
-import { Coordinates } from "mafs"
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
 
 import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
-import CartesianCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesExample"
-
 import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
-import CartesianCoordinatesConfigExampleSource from "!raw-loader!guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import Code from "components/Code"
 
 import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
-import PolarCoordinatesExampleSource from "!raw-loader!guide-examples/display/coordinates/PolarCoordinatesExample"
+
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Coordinates",
+}
 
 function CoordinatesPage() {
   return (
@@ -27,12 +26,9 @@ function CoordinatesPage() {
 
       <h2>Cartesian coordinates</h2>
 
-      <CodeAndExample
-        component={<CartesianCoordinatesExample />}
-        source={CartesianCoordinatesExampleSource}
-      />
+      <CodeAndExample example={CartesianCoordinatesExample} />
 
-      <PropTable of={Coordinates.Cartesian} />
+      <PropTable of={"Coordinates.Cartesian"} />
 
       <h3>Axis options</h3>
 
@@ -67,19 +63,13 @@ function CoordinatesPage() {
         <code>labels</code> to render in terms of π.
       </p>
 
-      <CodeAndExample
-        component={<CartesianCoordinatesConfigExample />}
-        source={CartesianCoordinatesConfigExampleSource}
-      />
+      <CodeAndExample example={CartesianCoordinatesConfigExample} />
 
       <h2>Polar coordinates</h2>
 
-      <CodeAndExample
-        component={<PolarCoordinatesExample />}
-        source={PolarCoordinatesExampleSource}
-      />
+      <CodeAndExample example={PolarCoordinatesExample} />
 
-      <PropTable of={Coordinates.Polar} />
+      <PropTable of={"Coordinates.Polar"} />
 
       <h3>Axis options</h3>
 

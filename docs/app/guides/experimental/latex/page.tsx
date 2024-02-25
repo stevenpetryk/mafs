@@ -1,17 +1,17 @@
-"use client"
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
-import { LaTeX } from "mafs"
-
 import LatexExample from "components/guide-examples/display/Latex"
-import LatexExampleSource from "!raw-loader!components/guide-examples/display/Latex"
-
 import LatexDocExample from "components/guide-examples/display/LatexDoc"
-import LatexDocExampleSource from "!raw-loader!components/guide-examples/display/LatexDoc"
+
 import Link from "next/link"
 import Experimental from "components/Experimental"
 import Code from "components/Code"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "LaTeX",
+}
 
 export default function LatexPage() {
   return (
@@ -35,7 +35,7 @@ export default function LatexPage() {
         the SVG foreignObject element.
       </Experimental>
 
-      <PropTable of={LaTeX} />
+      <PropTable of={"LaTeX"} />
 
       <h2>Usage</h2>
 
@@ -60,8 +60,8 @@ export default function LatexPage() {
         <code>x</code> variable in the following code).
       </p>
 
-      <CodeAndExample component={<LatexExample />} source={LatexExampleSource} />
-      <CodeAndExample component={<LatexDocExample />} source={LatexDocExampleSource} />
+      <CodeAndExample example={LatexExample} />
+      <CodeAndExample example={LatexDocExample} />
     </>
   )
 }

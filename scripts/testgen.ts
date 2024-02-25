@@ -3,7 +3,6 @@ import path from "path"
 import fs from "fs-extra"
 import prettier from "prettier"
 import * as url from "url"
-
 const SKIP = [
   // Animations are flaky
   /animated/i,

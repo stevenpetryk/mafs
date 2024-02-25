@@ -10,3 +10,5 @@ export interface PointSlopeProps extends Stroked {
 export function PointSlope({ point, slope, ...rest }: PointSlopeProps) {
   return <PointAngle point={point} angle={Math.atan(slope)} {...rest} />
 }
+
+PointSlope.displayName = "Line.PointSlope"

@@ -459,17 +459,17 @@ export interface VectorProps extends Stroked {
 //
 // src/debug/index.tsx:4:19 - (ae-forgotten-export) The symbol "ViewportInfo" needs to be exported by the entry point index.d.ts
 // src/debug/index.tsx:4:19 - (ae-forgotten-export) The symbol "TransformWidget" needs to be exported by the entry point index.d.ts
-// src/display/Coordinates/index.tsx:9:25 - (ae-forgotten-export) The symbol "Cartesian" needs to be exported by the entry point index.d.ts
-// src/display/Coordinates/index.tsx:9:25 - (ae-forgotten-export) The symbol "PolarCoordinates" needs to be exported by the entry point index.d.ts
+// src/display/Coordinates/index.tsx:4:25 - (ae-forgotten-export) The symbol "Cartesian" needs to be exported by the entry point index.d.ts
+// src/display/Coordinates/index.tsx:4:25 - (ae-forgotten-export) The symbol "PolarCoordinates" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointAngle" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointSlope" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "ThroughPoints" needs to be exported by the entry point index.d.ts
 // src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "Segment" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "VectorField" needs to be exported by the entry point index.d.ts
-// src/display/Plot.tsx:6:18 - (ae-forgotten-export) The symbol "Inequality" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "VectorField" needs to be exported by the entry point index.d.ts
+// src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "Inequality" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

@@ -1,23 +1,17 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import OfXAndY from "guide-examples/plots/of-x-and-y"
-import OfXAndYSource from "!raw-loader!guide-examples/plots/of-x-and-y.tsx"
-
 import TwistyBoi from "guide-examples/plots/twisty-boi"
-import TwistyBoiSource from "!raw-loader!guide-examples/plots/twisty-boi.tsx"
-
 import VectorFieldExample from "guide-examples/VectorFieldExample"
-import VectorFieldExampleSource from "!raw-loader!guide-examples/VectorFieldExample"
-
 import SineStressTest from "guide-examples/plots/sine-stress-test"
-import SineStressTestSource from "!raw-loader!guide-examples/plots/sine-stress-test.tsx"
 
 import { PropTable } from "components/PropTable"
-import { Plot } from "mafs"
 import InequalitiesExample from "guide-examples/plots/inequalities"
-import InequalitiesExampleSource from "!raw-loader!guide-examples/plots/inequalities.tsx"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Plots",
+}
 
 function Functions() {
   return (
@@ -30,9 +24,9 @@ function Functions() {
       <h2>
         Functions of <em className="font-display">x</em> and <em className="font-display">y</em>
       </h2>
-      <CodeAndExample component={<OfXAndY />} source={OfXAndYSource} />
-      <PropTable of={Plot.OfX} />
-      <PropTable of={Plot.OfY} />
+      <CodeAndExample example={OfXAndY} />
+      <PropTable of={"Plot.OfX"} />
+      <PropTable of={"Plot.OfY"} />
 
       <h2>
         Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>
@@ -51,12 +45,12 @@ function Functions() {
         <code>&lt;</code> <em>and</em> <code>≤</code>.
       </p>
 
-      <CodeAndExample component={<InequalitiesExample />} source={InequalitiesExampleSource} />
-      <PropTable of={Plot.Inequality} />
+      <CodeAndExample example={InequalitiesExample} />
+      <PropTable of={"Plot.Inequality"} />
 
       <h2>Parametric functions</h2>
-      <CodeAndExample component={<TwistyBoi />} source={TwistyBoiSource} />
-      <PropTable of={Plot.Parametric} />
+      <CodeAndExample example={TwistyBoi} />
+      <PropTable of={"Plot.Parametric"} />
 
       <h2>Vector fields</h2>
 
@@ -67,8 +61,8 @@ function Functions() {
         vector field is.
       </p>
 
-      <CodeAndExample component={<VectorFieldExample />} source={VectorFieldExampleSource} />
-      <PropTable of={Plot.VectorField} />
+      <CodeAndExample example={VectorFieldExample} />
+      <PropTable of={"Plot.VectorField"} />
 
       <h2>Render quality</h2>
 
@@ -108,7 +102,7 @@ function Functions() {
         plot has nearly 3 megabytes of SVG path data).
       </p>
 
-      <CodeAndExample component={<SineStressTest />} source={SineStressTestSource} />
+      <CodeAndExample example={SineStressTest} />
 
       <p>
         If you pan this example around, you may see a considerably slow framerate. Interestingly,

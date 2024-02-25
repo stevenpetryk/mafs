@@ -1,21 +1,22 @@
-"use client"
-
 import CodeAndExample from "components/CodeAndExample"
 
 import SimplePoint from "guide-examples/display/SimplePoint"
-import SimplePointSource from "!raw-loader!guide-examples/display/SimplePoint"
 
 import { PropTable } from "components/PropTable"
-import { Point } from "mafs"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Points",
+}
 
 function Points() {
   return (
     <>
       <p>Points are dots that can be rendered at a location (x, y).</p>
 
-      <CodeAndExample component={<SimplePoint />} source={SimplePointSource} />
+      <CodeAndExample example={SimplePoint} />
 
-      <PropTable of={Point} />
+      <PropTable of={"Point"} />
     </>
   )
 }

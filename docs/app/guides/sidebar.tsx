@@ -1,5 +1,6 @@
-import * as React from "react"
+"use client"
 
+import * as React from "react"
 import fancyFx from "../../helpers/fancyFx"
 
 import { Guides } from "./guides"

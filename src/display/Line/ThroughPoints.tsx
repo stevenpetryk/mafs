@@ -56,3 +56,5 @@ export function ThroughPoints({
     />
   )
 }
+
+ThroughPoints.displayName = "Line.ThroughPoints"

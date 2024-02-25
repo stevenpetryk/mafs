@@ -2,11 +2,19 @@ import { AnalyticsWrapper } from "components/analytics"
 import Link from "next/link"
 import { MafsLogo } from "../components/MafsLogo"
 import "./globals.css"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Mafs: React components for interactive math",
+  description: "Use React to create interactive math visualizations.",
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta name="description" content="React components for interactive math" />
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </head>
       <body className="flex flex-col min-h-screen items-stretch dark:bg-gray-900">

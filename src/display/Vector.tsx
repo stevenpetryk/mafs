@@ -16,7 +16,7 @@ export interface VectorProps extends Stroked {
 export function Vector({
   tail = [0, 0],
   tip,
-  color = Theme.foreground,
+  color = Theme.red,
   weight = 2,
   style = "solid",
   opacity = 1.0,
@@ -34,7 +34,7 @@ export function Vector({
     <>
       <defs>
         <marker id={id} markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
-          <path d="M 0 0 L 8 4 L 0 8 z" fill={color || "var(--mafs-fg)"} />
+          <path d="M 0 0 L 8 4 L 0 8 z" fill={color || "var(--mafs-fg)"} strokeWidth={0} />
         </marker>
       </defs>
       <line
@@ -48,6 +48,7 @@ export function Vector({
         {...svgLineProps}
         style={{
           stroke: color || "var(--mafs-fg)",
+          fill: color,
           strokeOpacity: opacity,
           ...(svgLineProps?.style || {}),
           vectorEffect: "non-scaling-stroke",

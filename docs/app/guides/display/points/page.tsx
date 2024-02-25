@@ -1,7 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
 import * as SimplePoint from "guide-examples/display/SimplePoint"
-import SimplePointSource from "!raw-loader!guide-examples/display/SimplePoint"
 
 import { PropTable } from "components/PropTable"
 

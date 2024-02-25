@@ -2,7 +2,6 @@ import WIP from "components/WIP"
 import CodeAndExample from "components/CodeAndExample"
 
 import * as AnimatedPoint from "guide-examples/animation/AnimatedPoint"
-import AnimatedPointSource from "!raw-loader!guide-examples/animation/AnimatedPoint"
 
 function Stopwatch() {
   return (

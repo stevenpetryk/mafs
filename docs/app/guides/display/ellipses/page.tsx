@@ -1,7 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
 import * as MovableEllipse from "guide-examples/MovableEllipse"
-import MovableEllipseSource from "!raw-loader!guide-examples/MovableEllipse"
 import WIP from "components/WIP"
 import Link from "next/link"
 

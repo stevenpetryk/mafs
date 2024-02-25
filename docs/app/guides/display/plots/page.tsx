@@ -1,14 +1,9 @@
 import CodeAndExample from "components/CodeAndExample"
 
 import * as OfXAndY from "guide-examples/plots/of-x-and-y"
-import OfXAndYSource from "!raw-loader!guide-examples/plots/of-x-and-y.tsx"
-
 import * as TwistyBoi from "guide-examples/plots/twisty-boi"
-import TwistyBoiSource from "!raw-loader!guide-examples/plots/twisty-boi.tsx"
-
 import * as VectorFieldExample from "guide-examples/VectorFieldExample"
 import * as SineStressTest from "guide-examples/plots/sine-stress-test"
-import SineStressTestSource from "!raw-loader!guide-examples/plots/sine-stress-test.tsx"
 
 import { PropTable } from "components/PropTable"
 import * as InequalitiesExample from "guide-examples/plots/inequalities"

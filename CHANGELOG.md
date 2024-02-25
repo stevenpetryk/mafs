@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.1
+
+- Vectors no longer render a white outline, allowing them to be recolored correctly (see [#137](https://github.com/stevenpetryk/mafs/issues/137)).
+
 ## 0.18.0
 
 - In [#135](https://github.com/stevenpetryk/mafs/pull/135), the adaptive plotter was improved to more accurately plot highly periodic functions, and also to avoid plotting duplicate points. This should give a quality boost to most plots, but may slightly alter some. The sampling depth parameters are now "one lower", meaning that if you were previously passing `maxSamplingDepth={15}`, for example, you should now pass `maxSamplingDepth={16}`. Change is annoying, but the depth made no sense before, and now it does (a depth of 16 means 2¹⁶ subdivisions).

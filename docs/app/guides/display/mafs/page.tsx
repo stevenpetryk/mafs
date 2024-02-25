@@ -6,12 +6,11 @@ import ContainViewboxExample from "guide-examples/display/viewbox/ContainViewbox
 import ZoomExample from "guide-examples/display/viewbox/ZoomExample"
 import StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
+import type { Metadata } from "next"
 
-// export async function generateMetadata() {
-//   return {
-//     title: "Mafs",
-//   }
-// }
+export const metadata: Metadata = {
+  title: "Mafs",
+}
 
 function MafsPage() {
   return (

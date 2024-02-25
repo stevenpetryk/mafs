@@ -2,6 +2,11 @@ import WIP from "components/WIP"
 import CodeAndExample from "components/CodeAndExample"
 
 import AnimatedPoint from "guide-examples/animation/AnimatedPoint"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Animation",
+}
 
 function Stopwatch() {
   return (

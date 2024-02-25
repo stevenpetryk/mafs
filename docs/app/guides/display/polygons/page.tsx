@@ -3,6 +3,11 @@ import CodeAndExample from "components/CodeAndExample"
 import PolygonExample from "guide-examples/PolygonExample"
 import PolylineExample from "guide-examples/PolylineExample"
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Polygons",
+}
 
 function Polygons() {
   return (

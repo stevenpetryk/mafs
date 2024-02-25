@@ -6,6 +6,12 @@ import CodeAndExample from "components/CodeAndExample"
 
 import PizzaSliceExample from "guide-examples/custom/pizza-slice"
 import Example from "guide-examples/debug/PaneVisualizerExample"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Debug",
+}
+
 export default function DebugPage() {
   return (
     <>

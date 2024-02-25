@@ -2,6 +2,11 @@ import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Transform",
+}
 
 export default function Page() {
   return (

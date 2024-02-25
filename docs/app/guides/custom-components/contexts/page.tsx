@@ -3,6 +3,11 @@ import PointCloud from "guide-examples/custom/point-cloud"
 
 import CodeAndExample from "components/CodeAndExample"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Transform contexts",
+}
 
 export default function TransformContextsPage() {
   return (

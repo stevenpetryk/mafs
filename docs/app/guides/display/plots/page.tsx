@@ -7,6 +7,12 @@ import SineStressTest from "guide-examples/plots/sine-stress-test"
 
 import { PropTable } from "components/PropTable"
 import InequalitiesExample from "guide-examples/plots/inequalities"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Plots",
+}
+
 function Functions() {
   return (
     <>

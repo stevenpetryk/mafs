@@ -2,6 +2,12 @@ import { PropTable } from "components/PropTable"
 
 import CodeAndExample from "components/CodeAndExample"
 import VectorExample from "guide-examples/display/vectors/VectorExample"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Vectors",
+}
+
 function Vectors() {
   return (
     <>

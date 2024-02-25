@@ -3,6 +3,11 @@ import CodeAndExample from "components/CodeAndExample"
 import SimplePoint from "guide-examples/display/SimplePoint"
 
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Points",
+}
 
 function Points() {
   return (

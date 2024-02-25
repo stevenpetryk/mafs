@@ -7,6 +7,11 @@ import LatexDocExample from "components/guide-examples/display/LatexDoc"
 import Link from "next/link"
 import Experimental from "components/Experimental"
 import Code from "components/Code"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "LaTeX",
+}
 
 export default function LatexPage() {
   return (

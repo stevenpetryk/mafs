@@ -6,6 +6,13 @@ import CartesianCoordinatesConfigExample from "guide-examples/display/coordinate
 import Code from "components/Code"
 
 import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
+
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Coordinates",
+}
+
 function CoordinatesPage() {
   return (
     <>

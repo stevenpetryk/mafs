@@ -2,6 +2,11 @@ import CodeAndExample from "components/CodeAndExample"
 
 import TextExample from "guide-examples/TextExample"
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Text",
+}
 
 function Text() {
   return (

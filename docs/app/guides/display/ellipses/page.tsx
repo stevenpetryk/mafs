@@ -5,6 +5,11 @@ import WIP from "components/WIP"
 import Link from "next/link"
 
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Ellipses",
+}
 
 export default function Page() {
   return (

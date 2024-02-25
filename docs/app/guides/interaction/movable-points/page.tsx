@@ -8,6 +8,11 @@ import { Advanced } from "components/Advanced"
 import Code from "components/Code"
 import Link from "next/link"
 import { PropTable } from "components/PropTable"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Movable points",
+}
 
 function Stopwatch() {
   return (

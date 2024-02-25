@@ -1,5 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Projectile motion",
+}
 
 function ProjectilePage() {
   return (

@@ -5,6 +5,12 @@ import LineSegmentExample from "guide-examples/LineSegmentExample"
 import LineThroughPointsExample from "guide-examples/LineThroughPointsExample"
 import LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
 import LinePointAngleExample from "guide-examples/LinePointAngleExample"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Lines",
+}
+
 function Lines() {
   return (
     <>

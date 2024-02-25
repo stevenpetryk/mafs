@@ -1,6 +1,11 @@
 import CodeAndExample from "components/CodeAndExample"
 import BezierCurves from "guide-examples/examples/BezierCurves"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Bezier curves",
+}
 
 export default function BezierCurvesPage() {
   return (

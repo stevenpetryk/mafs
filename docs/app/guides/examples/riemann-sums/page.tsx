@@ -1,5 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 import Riemann from "guide-examples/examples/Riemann"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Riemann sums",
+}
 
 function RiemannPage() {
   return (

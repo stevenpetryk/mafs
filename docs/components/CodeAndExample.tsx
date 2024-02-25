@@ -16,7 +16,7 @@ interface Props {
 
 function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = true }: Props) {
   const Component = example.default
-  let source = example.sourceCode!
+  let source = example.sourceCode ?? ""
 
   if (clean) {
     const remove = [

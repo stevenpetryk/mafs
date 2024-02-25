@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["mafs"],
-  webpack: (config, { isServer }) => {
-    // Add a loader that attaches source code to files in guide-examples
+
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.tsx?$/,
       include: /guide-examples/,

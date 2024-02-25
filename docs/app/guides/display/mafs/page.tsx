@@ -7,11 +7,11 @@ import * as ZoomExample from "guide-examples/display/viewbox/ZoomExample"
 import * as StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
 
-export async function generateMetadata() {
-  return {
-    title: "Mafs",
-  }
-}
+// export async function generateMetadata() {
+//   return {
+//     title: "Mafs",
+//   }
+// }
 
 function MafsPage() {
   return (

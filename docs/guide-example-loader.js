@@ -8,7 +8,7 @@ module.exports = function guideExampleLoader(source) {
     const $source = ${JSON.stringify(source)};
 
     $default.$source = $source;
-    $default.$component = $component;
+    $default.$component = $default;
     export default $default;
   `
 }

@@ -1,6 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as MovableEllipse from "guide-examples/MovableEllipse"
+import MovableEllipse from "guide-examples/MovableEllipse"
 import WIP from "components/WIP"
 import Link from "next/link"
 

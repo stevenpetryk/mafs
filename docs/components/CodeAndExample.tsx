@@ -9,14 +9,20 @@ import sdk from "@stackblitz/sdk"
 import endent from "endent"
 
 interface Props {
-  example: { default: React.ComponentType; sourceCode?: string }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  example: any
   clean?: boolean
   collapsible?: boolean
 }
 
 function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = true }: Props) {
-  const Component = example.default
-  let source = example.sourceCode ?? ""
+  const typedExample = example as { $component: React.ComponentType; $source: string }
+  const Component = typedExample.$component
+  let source = typedExample.$source
+
+  if (typeof Component !== "function") {
+    throw new Error(`CodeAndExample: expected example to be a component ${source}`)
+  }
 
   if (clean) {
     const remove = [

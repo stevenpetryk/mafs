@@ -1,5 +1,5 @@
 import CodeAndExample from "components/CodeAndExample"
-import * as Riemann from "guide-examples/examples/Riemann"
+import Riemann from "guide-examples/examples/Riemann"
 
 function RiemannPage() {
   return (

@@ -1,7 +1,7 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as PolygonExample from "guide-examples/PolygonExample"
-import * as PolylineExample from "guide-examples/PolylineExample"
+import PolygonExample from "guide-examples/PolygonExample"
+import PolylineExample from "guide-examples/PolylineExample"
 import { PropTable } from "components/PropTable"
 
 function Polygons() {

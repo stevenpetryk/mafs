@@ -1,11 +1,11 @@
 import { PropTable } from "components/PropTable"
 import CodeAndExample from "components/CodeAndExample"
 
-import * as CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
-import * as CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
+import CartesianCoordinatesExample from "guide-examples/display/coordinates/CartesianCoordinatesExample"
+import CartesianCoordinatesConfigExample from "guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import Code from "components/Code"
 
-import * as PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
+import PolarCoordinatesExample from "guide-examples/display/coordinates/PolarCoordinatesExample"
 function CoordinatesPage() {
   return (
     <>

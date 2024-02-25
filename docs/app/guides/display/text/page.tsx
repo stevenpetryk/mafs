@@ -1,6 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as TextExample from "guide-examples/TextExample"
+import TextExample from "guide-examples/TextExample"
 import { PropTable } from "components/PropTable"
 
 function Text() {

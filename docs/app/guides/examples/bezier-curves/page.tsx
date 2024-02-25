@@ -1,5 +1,5 @@
 import CodeAndExample from "components/CodeAndExample"
-import * as BezierCurves from "guide-examples/examples/BezierCurves"
+import BezierCurves from "guide-examples/examples/BezierCurves"
 import Link from "next/link"
 
 export default function BezierCurvesPage() {

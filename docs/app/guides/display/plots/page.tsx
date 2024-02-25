@@ -1,12 +1,12 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as OfXAndY from "guide-examples/plots/of-x-and-y"
-import * as TwistyBoi from "guide-examples/plots/twisty-boi"
-import * as VectorFieldExample from "guide-examples/VectorFieldExample"
-import * as SineStressTest from "guide-examples/plots/sine-stress-test"
+import OfXAndY from "guide-examples/plots/of-x-and-y"
+import TwistyBoi from "guide-examples/plots/twisty-boi"
+import VectorFieldExample from "guide-examples/VectorFieldExample"
+import SineStressTest from "guide-examples/plots/sine-stress-test"
 
 import { PropTable } from "components/PropTable"
-import * as InequalitiesExample from "guide-examples/plots/inequalities"
+import InequalitiesExample from "guide-examples/plots/inequalities"
 function Functions() {
   return (
     <>

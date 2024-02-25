@@ -1,10 +1,13 @@
-const path = require("node:path")
-
 module.exports = function guideExampleLoader(source) {
-  // const filename = path.basename(this.resourcePath, path.extname(this.resourcePath))
+  source = source.replace(/export default/g, "const $component =")
 
   return `
     ${source}
-    ; export const sourceCode = ${JSON.stringify(source)};
+    ;
+    const $source = ${JSON.stringify(source)};
+
+    $component.$source = $source;
+    $component.$component = $component;
+    export default $component;
   `
 }

@@ -1,7 +1,7 @@
 import { PropTable } from "components/PropTable"
 
 import CodeAndExample from "components/CodeAndExample"
-import * as VectorExample from "guide-examples/display/vectors/VectorExample"
+import VectorExample from "guide-examples/display/vectors/VectorExample"
 function Vectors() {
   return (
     <>

@@ -1,4 +1,4 @@
-import * as SimpleTransformExample from "guide-examples/utility/SimpleTransform"
+import SimpleTransformExample from "guide-examples/utility/SimpleTransform"
 import CodeAndExample from "components/CodeAndExample"
 import Code from "components/Code"
 import { PropTable } from "components/PropTable"

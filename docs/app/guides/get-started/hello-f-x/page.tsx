@@ -1,10 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as Plain from "guide-examples/hello-fx/plain"
-import * as Subdivions from "guide-examples/hello-fx/subdivisions"
-import * as Sine from "guide-examples/hello-fx/sine"
-import * as SinePi from "guide-examples/hello-fx/sine-pi"
-import * as Draggable from "guide-examples/hello-fx/draggable"
+import Plain from "guide-examples/hello-fx/plain"
+import Subdivions from "guide-examples/hello-fx/subdivisions"
+import Sine from "guide-examples/hello-fx/sine"
+import SinePi from "guide-examples/hello-fx/sine-pi"
+import Draggable from "guide-examples/hello-fx/draggable"
 
 import type { Metadata } from "next"
 

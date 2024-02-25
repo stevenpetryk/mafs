@@ -4,8 +4,8 @@ import Link from "next/link"
 
 import CodeAndExample from "components/CodeAndExample"
 
-import * as PizzaSliceExample from "guide-examples/custom/pizza-slice"
-import * as Example from "guide-examples/debug/PaneVisualizerExample"
+import PizzaSliceExample from "guide-examples/custom/pizza-slice"
+import Example from "guide-examples/debug/PaneVisualizerExample"
 export default function DebugPage() {
   return (
     <>

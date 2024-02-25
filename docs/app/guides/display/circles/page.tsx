@@ -1,6 +1,6 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as MovableCircle from "guide-examples/MovableCircle"
+import MovableCircle from "guide-examples/MovableCircle"
 
 import { PropTable } from "components/PropTable"
 

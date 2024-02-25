@@ -1,8 +1,8 @@
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
-import * as LatexExample from "components/guide-examples/display/Latex"
-import * as LatexDocExample from "components/guide-examples/display/LatexDoc"
+import LatexExample from "components/guide-examples/display/Latex"
+import LatexDocExample from "components/guide-examples/display/LatexDoc"
 
 import Link from "next/link"
 import Experimental from "components/Experimental"

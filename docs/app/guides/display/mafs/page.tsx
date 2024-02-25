@@ -1,10 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
-import * as PlainMafsExample from "guide-examples/PlainMafsExample"
-import * as ContainViewboxExample from "guide-examples/display/viewbox/ContainViewbox"
-import * as ZoomExample from "guide-examples/display/viewbox/ZoomExample"
-import * as StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
+import PlainMafsExample from "guide-examples/PlainMafsExample"
+import ContainViewboxExample from "guide-examples/display/viewbox/ContainViewbox"
+import ZoomExample from "guide-examples/display/viewbox/ZoomExample"
+import StretchViewboxExample from "guide-examples/display/viewbox/StretchViewbox"
 import Code from "components/Code"
 
 // export async function generateMetadata() {

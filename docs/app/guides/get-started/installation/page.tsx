@@ -1,7 +1,7 @@
 import Code from "components/Code"
 import CodeAndExample from "components/CodeAndExample"
 
-import * as Plain from "guide-examples/hello-fx/plain"
+import Plain from "guide-examples/hello-fx/plain"
 import endent from "endent"
 import type { Metadata } from "next"
 

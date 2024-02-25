@@ -1,5 +1,5 @@
 import CodeAndExample from "components/CodeAndExample"
-import * as ProjectileMotion from "guide-examples/examples/ProjectileMotion"
+import ProjectileMotion from "guide-examples/examples/ProjectileMotion"
 
 function ProjectilePage() {
   return (

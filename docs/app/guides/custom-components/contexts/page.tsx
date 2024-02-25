@@ -1,5 +1,5 @@
-import * as PizzaSlice from "guide-examples/custom/pizza-slice"
-import * as PointCloud from "guide-examples/custom/point-cloud"
+import PizzaSlice from "guide-examples/custom/pizza-slice"
+import PointCloud from "guide-examples/custom/point-cloud"
 
 import CodeAndExample from "components/CodeAndExample"
 import Link from "next/link"

@@ -1,8 +1,8 @@
 import CodeAndExample from "components/CodeAndExample"
 
-import * as PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
-import * as DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
-import * as SnapPoint from "guide-examples/SnapPoint"
+import PointsAlongFunction from "guide-examples/display/PointsAlongFunction"
+import DynamicMovablePoints from "guide-examples/display/DynamicMovablePoints"
+import SnapPoint from "guide-examples/SnapPoint"
 
 import { Advanced } from "components/Advanced"
 import Code from "components/Code"

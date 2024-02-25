@@ -1,10 +1,10 @@
 import CodeAndExample from "components/CodeAndExample"
 import { PropTable } from "components/PropTable"
 
-import * as LineSegmentExample from "guide-examples/LineSegmentExample"
-import * as LineThroughPointsExample from "guide-examples/LineThroughPointsExample"
-import * as LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
-import * as LinePointAngleExample from "guide-examples/LinePointAngleExample"
+import LineSegmentExample from "guide-examples/LineSegmentExample"
+import LineThroughPointsExample from "guide-examples/LineThroughPointsExample"
+import LinePointSlopeExample from "guide-examples/LinePointSlopeExample"
+import LinePointAngleExample from "guide-examples/LinePointAngleExample"
 function Lines() {
   return (
     <>

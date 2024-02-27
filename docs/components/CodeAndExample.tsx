@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
-import { HighlightedCode } from "./Code"
 import { StackBlitzIcon } from "./icons"
 
 import sdk from "@stackblitz/sdk"
@@ -16,9 +15,14 @@ interface Props {
 }
 
 function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = true }: Props) {
-  const typedExample = example as { $component: React.ComponentType; $source: string }
+  const typedExample = example as {
+    $component: React.ComponentType
+    $source: string
+    $reactNode: React.ReactNode
+  }
   const Component = typedExample.$component
   let source = typedExample.$source
+  const reactNode = typedExample.$reactNode
 
   if (typeof Component !== "function") {
     throw new Error(`CodeAndExample: expected example to be a component ${source}`)
@@ -74,9 +78,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = 
               `}
             >
               <pre className={`transition ${expanded ? "" : "opacity-40"}`}>
-                <code className="language-tsx">
-                  <HighlightedCode source={source} language="tsx" />
-                </code>
+                <code className="language language-tsx">{reactNode}</code>
               </pre>
             </div>
 

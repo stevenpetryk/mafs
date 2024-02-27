@@ -44,6 +44,7 @@ export default Code
 
 export function HighlightedCode({ source, language }: { language: string; source: string }) {
   const tree = refractor.highlight(source, language)
+  // @ts-expect-error - idk
   const node = toH(React.createElement, tree)
 
   return node

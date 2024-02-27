@@ -10,44 +10,21 @@ import endent from "endent"
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   example: any
-  clean?: boolean
   collapsible?: boolean
 }
 
-function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = true }: Props) {
+function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props) {
   const typedExample = example as {
     $component: React.ComponentType
     $source: string
     $highlightedSource: React.ReactNode
   }
   const Component = typedExample.$component
-  let source = typedExample.$source
+  const source = typedExample.$source
   const highlightedSource = typedExample.$highlightedSource
 
   if (typeof Component !== "function") {
     throw new Error(`CodeAndExample: expected example to be a component ${source}`)
-  }
-
-  if (clean) {
-    const remove = [
-      /\s+height=\{[^}]*\}/g,
-      /\s+width=\{.*\}\s*/g,
-      /.*prettier-ignore.*\n/gm,
-      /^import React.* from "react"/gm,
-      /^export default [A-z]+$\n/gm,
-      /^export default /m,
-      /"use client"/m,
-    ]
-
-    remove.forEach((regex) => {
-      source = source.replace(regex, "")
-    })
-
-    source = source.replaceAll(/import \{(.|\n)*?\} from "mafs"/gm, (match) => {
-      return match.replaceAll(/\s+/g, " ").replace(", }", " }")
-    })
-
-    source = source.trim()
   }
 
   const collapsible = collapsibleProp && source.split("\n").length > 10

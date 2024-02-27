@@ -2,6 +2,8 @@ import { AnalyticsWrapper } from "components/analytics"
 import Link from "next/link"
 import { MafsLogo } from "../components/MafsLogo"
 import "./globals.css"
+import "../node_modules/@wooorm/starry-night/style/core.css"
+import "../node_modules/@wooorm/starry-night/style/dark.css"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {

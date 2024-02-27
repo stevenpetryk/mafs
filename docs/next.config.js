@@ -6,7 +6,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.tsx?$/,
       include: /guide-examples/,
-      use: [{ loader: require.resolve("./guide-example-loader") }],
+      use: require.resolve("./guide-example-loader.mjs"),
     })
 
     return config

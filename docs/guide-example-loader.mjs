@@ -60,7 +60,7 @@ export default async function guideExampleLoader(source) {
 
     $default.$source = ${JSON.stringify(cleanedSource)};
     $default.$component = $default;
-    $default.$reactNode = toJsxRuntime(${JSON.stringify(tree)}, { Fragment, jsx, jsxs });
+    $default.$highlightedSource = toJsxRuntime(${JSON.stringify(tree)}, { Fragment, jsx, jsxs });
     export default $default;
   `
 }

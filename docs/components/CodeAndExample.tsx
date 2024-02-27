@@ -18,11 +18,11 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = 
   const typedExample = example as {
     $component: React.ComponentType
     $source: string
-    $reactNode: React.ReactNode
+    $highlightedSource: React.ReactNode
   }
   const Component = typedExample.$component
   let source = typedExample.$source
-  const reactNode = typedExample.$reactNode
+  const highlightedSource = typedExample.$highlightedSource
 
   if (typeof Component !== "function") {
     throw new Error(`CodeAndExample: expected example to be a component ${source}`)
@@ -78,7 +78,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example, clean = 
               `}
             >
               <pre className={`transition ${expanded ? "" : "opacity-40"}`}>
-                <code className="language language-tsx">{reactNode}</code>
+                <code className="language language-tsx">{highlightedSource}</code>
               </pre>
             </div>
 

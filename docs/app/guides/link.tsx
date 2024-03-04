@@ -23,6 +23,8 @@ export function GuideLink({ sectionTitle, guideSlug, children }: GuideLinkProps)
           hover:text-blue-700 focus:text-blue-700
           focus:z-10
           dark:text-slate-300 dark:focus:text-blue-300 dark:hover:text-blue-300
+          transition
+          active:scale-[0.99]
           ${
             active
               ? "text-blue-700 dark:text-blue-400 dark:focus:text-blue-400 dark:hover:text-blue-400 font-bold md:bg-slate-100 md:dark:bg-slate-800"

@@ -14,6 +14,11 @@ const parse = docgen.withCustomConfig(tsConfigPath, {
 export function writeDocgenResults(docgenInfo: docgen.ComponentDoc[]) {
   const writePath = path.join(projectRoot, "docs/generated-docgen.tsx")
 
+  docgenInfo = docgenInfo.map((inf) => ({
+    ...inf,
+    filePath: path.relative(projectRoot, inf.filePath),
+  }))
+
   fs.writeFileSync(
     writePath,
     [
@@ -26,7 +31,7 @@ export function writeDocgenResults(docgenInfo: docgen.ComponentDoc[]) {
   console.log(`Docgen updated ${writePath}`)
 }
 
-const paths = fg.sync("src/**/*.tsx")
+const paths = fg.sync("src/**/*.tsx", { ignore: ["src/index.tsx"] })
 
 const docgenInfo = parse(paths)
 writeDocgenResults(docgenInfo)

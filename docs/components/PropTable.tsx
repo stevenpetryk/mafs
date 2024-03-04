@@ -2,6 +2,7 @@ import * as React from "react"
 import ReactMarkdown from "react-markdown"
 
 import DocgenInfo from "../generated-docgen"
+import Link from "next/link"
 
 export interface Docgen {
   filePath: string
@@ -55,6 +56,16 @@ export function PropTable({ of: displayName }: PropTableProps) {
             </>
           )}
         </code>
+
+        <div className="flex-1"></div>
+
+        <Link
+          target="_blank"
+          className="text-sm"
+          href={`https://github.com/stevenpetryk/mafs/tree/main/${docgenInfo.filePath}`}
+        >
+          View on GitHub
+        </Link>
       </header>
 
       <div className="overflow-x-auto text-sm">

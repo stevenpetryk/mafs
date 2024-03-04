@@ -5,6 +5,7 @@ import "./globals.css"
 import "../node_modules/@wooorm/starry-night/style/core.css"
 import "../node_modules/@wooorm/starry-night/style/dark.css"
 import { Metadata } from "next"
+import mafsPkg from "../../package.json"
 
 export const metadata: Metadata = {
   title: "Mafs: React components for interactive math",
@@ -21,8 +22,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="flex flex-col min-h-screen items-stretch dark:bg-gray-900">
         <header className="sm:flex sm:space-x-6 sm:space-y-0 space-y-6 items-center p-6 self-center w-full max-w-5xl">
-          <div className="flex-shrink-0 flex justify-center md:block md:w-56 mx-auto lg:mx-0">
+          <div className="flex-shrink-0 flex justify-center items-center md:block md:w-56 mx-auto lg:mx-0 gap-4">
             <Logo />
+
+            <Link
+              href={`https://github.com/stevenpetryk/mafs/releases`}
+              target="_blank"
+              className="text-sm px-3 py-1 bg-gray-100 rounded-lg text-gray-700 dark:text-gray-300 dark:bg-gray-800"
+            >
+              v{mafsPkg.version}
+            </Link>
           </div>
           <div className="flex-grow">
             {/* The world isn't ready for search */}

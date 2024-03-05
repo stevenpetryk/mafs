@@ -24,30 +24,27 @@ export interface MovablePointProps {
   color?: string
 }
 
-export function MovablePoint({
-  point,
+export function useMovementInteraction({
+  target,
   onMove,
-  constrain = (point) => point,
-  color = Theme.pink,
-}: MovablePointProps) {
-  const { viewTransform, userTransform } = useTransformContext()
+  point,
+  constrain,
+}: {
+  target: React.RefObject<Element>
+  onMove: (point: vec.Vector2) => unknown
+  point: vec.Vector2
+  constrain: (point: vec.Vector2) => vec.Vector2
+}): { dragging: boolean } {
+  const [dragging, setDragging] = React.useState(false)
   const { xSpan, ySpan } = useSpanContext()
+  const { viewTransform, userTransform } = useTransformContext()
+
   const inverseViewTransform = vec.matrixInvert(viewTransform)
   invariant(inverseViewTransform, "The view transform must be invertible.")
 
   const inverseTransform = React.useMemo(() => getInverseTransform(userTransform), [userTransform])
 
-  const combinedTransform = React.useMemo(
-    () => vec.matrixMult(viewTransform, userTransform),
-    [viewTransform, userTransform],
-  )
-
-  const [dragging, setDragging] = React.useState(false)
-  const [displayX, displayY] = vec.transform(point, combinedTransform)
-
   const pickup = React.useRef<vec.Vector2>([0, 0])
-
-  const ref = React.useRef<SVGGElement>(null)
 
   useDrag(
     (state) => {
@@ -96,33 +93,71 @@ export function MovablePoint({
         onMove(constrain(vec.transform(vec.add(pickup.current, movement), inverseTransform)))
       }
     },
-    { target: ref, eventOptions: { passive: false } },
+    { target, eventOptions: { passive: false } },
   )
+  return { dragging }
+}
 
-  const ringSize = 15
+export interface MovablePointSVGProps {
+  color: string
+  ringRadiusPx: number
+  dragging: boolean
+  point: vec.Vector2
+}
+
+export const MovablePointSVG = React.forwardRef<SVGGElement, MovablePointSVGProps>(
+  (props: MovablePointSVGProps, ref) => {
+    const { color, ringRadiusPx, dragging, point } = props
+
+    const { viewTransform, userTransform } = useTransformContext()
+
+    const combinedTransform = React.useMemo(
+      () => vec.matrixMult(viewTransform, userTransform),
+      [viewTransform, userTransform],
+    )
+
+    const [xPx, yPx] = vec.transform(point, combinedTransform)
+
+    return (
+      <g
+        ref={ref}
+        style={
+          {
+            "--movable-point-color": color,
+            "--movable-point-ring-size": `${ringRadiusPx}px`,
+          } as React.CSSProperties
+        }
+        className={`mafs-movable-point ${dragging ? "mafs-movable-point-dragging" : ""}`}
+        tabIndex={0}
+      >
+        <circle className="mafs-movable-point-hitbox" r={30} cx={xPx} cy={yPx}></circle>
+        <circle
+          className="mafs-movable-point-focus"
+          r={ringRadiusPx + 1}
+          cx={xPx}
+          cy={yPx}
+        ></circle>
+        <circle className="mafs-movable-point-ring" r={ringRadiusPx} cx={xPx} cy={yPx}></circle>
+        <circle className="mafs-movable-point-point" r={6} cx={xPx} cy={yPx}></circle>
+      </g>
+    )
+  },
+)
+
+MovablePointSVG.displayName = "MovablePointSVG"
+
+export function MovablePoint({
+  point,
+  onMove,
+  constrain = (point) => point,
+  color = Theme.pink,
+}: MovablePointProps) {
+  const ref = React.useRef<SVGGElement>(null)
+
+  const { dragging } = useMovementInteraction({ target: ref, onMove, point, constrain })
 
   return (
-    <g
-      ref={ref}
-      style={
-        {
-          "--movable-point-color": color,
-          "--movable-point-ring-size": `${ringSize}px`,
-        } as React.CSSProperties
-      }
-      className={`mafs-movable-point ${dragging ? "mafs-movable-point-dragging" : ""}`}
-      tabIndex={0}
-    >
-      <circle className="mafs-movable-point-hitbox" r={30} cx={displayX} cy={displayY}></circle>
-      <circle
-        className="mafs-movable-point-focus"
-        r={ringSize + 1}
-        cx={displayX}
-        cy={displayY}
-      ></circle>
-      <circle className="mafs-movable-point-ring" r={ringSize} cx={displayX} cy={displayY}></circle>
-      <circle className="mafs-movable-point-point" r={6} cx={displayX} cy={displayY}></circle>
-    </g>
+    <MovablePointSVG ref={ref} point={point} color={color} ringRadiusPx={15} dragging={dragging} />
   )
 }
 

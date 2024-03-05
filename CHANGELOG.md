@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.2
+
+- Vectors are no longer always red. This was a silly mistake introduced in v0.18.1 as I was trying to test that alternate Vector colors work. Mafs has automated visual regression tests, but they don't run in CI, and I believe they should.
+
 ## 0.18.1
 
 - Vectors no longer render a white outline, allowing them to be recolored correctly (see [#137](https://github.com/stevenpetryk/mafs/issues/137)).

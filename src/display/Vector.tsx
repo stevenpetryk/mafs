@@ -16,7 +16,7 @@ export interface VectorProps extends Stroked {
 export function Vector({
   tail = [0, 0],
   tip,
-  color = Theme.red,
+  color = Theme.foreground,
   weight = 2,
   style = "solid",
   opacity = 1.0,

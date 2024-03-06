@@ -41,8 +41,17 @@ export type { TextProps, CardinalDirection } from "./display/Text"
 export { Theme } from "./display/Theme"
 export type { Filled, Stroked } from "./display/Theme"
 
-export { MovablePoint, MovablePointSVG, useMovementInteraction } from "./interaction/MovablePoint"
-export type { MovablePointProps, MovablePointSVGProps } from "./interaction/MovablePoint"
+export { MovablePoint } from "./interaction/MovablePoint"
+export type { MovablePointProps } from "./interaction/MovablePoint"
+
+export { MovablePointDisplay } from "./display/MovablePointDisplay"
+export type { MovablePointDisplayProps } from "./display/MovablePointDisplay"
+
+export { useMovementInteraction } from "./interaction/useMovementInteraction"
+export type {
+  UseMovementInteraction,
+  UseMovementInteractionArguments,
+} from "./interaction/useMovementInteraction"
 
 export { useMovablePoint } from "./interaction/useMovablePoint"
 export type {

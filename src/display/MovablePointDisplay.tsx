@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 import { Theme } from "./Theme"

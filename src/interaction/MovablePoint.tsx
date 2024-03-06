@@ -31,14 +31,7 @@ export function MovablePoint({
 
   const { dragging } = useMovementInteraction({ gestureTarget: ref, onMove, point, constrain })
 
-  return (
-    <MovablePointDisplay
-      ref={ref}
-      point={point}
-      color={color}
-      dragging={dragging}
-    />
-  )
+  return <MovablePointDisplay ref={ref} point={point} color={color} dragging={dragging} />
 }
 
 MovablePoint.displayName = "MovablePoint"

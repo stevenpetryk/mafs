@@ -139,6 +139,21 @@ export namespace MovablePoint {
 }
 
 // @public (undocumented)
+export const MovablePointDisplay: React_2.ForwardRefExoticComponent<MovablePointDisplayProps & React_2.RefAttributes<SVGGElement>>;
+
+// @public (undocumented)
+export interface MovablePointDisplayProps {
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    dragging: boolean;
+    // (undocumented)
+    point: vec.Vector2;
+    // (undocumented)
+    ringRadiusPx?: number;
+}
+
+// @public (undocumented)
 export interface MovablePointProps {
     // (undocumented)
     color?: string;
@@ -146,21 +161,6 @@ export interface MovablePointProps {
     constrain?: ConstraintFunction_2;
     onMove: (point: vec.Vector2) => void;
     point: vec.Vector2;
-}
-
-// @public (undocumented)
-export const MovablePointSVG: React_2.ForwardRefExoticComponent<MovablePointSVGProps & React_2.RefAttributes<SVGGElement>>;
-
-// @public (undocumented)
-export interface MovablePointSVGProps {
-    // (undocumented)
-    color: string;
-    // (undocumented)
-    dragging: boolean;
-    // (undocumented)
-    point: vec.Vector2;
-    // (undocumented)
-    ringRadiusPx: number;
 }
 
 // @public (undocumented)
@@ -389,14 +389,25 @@ export interface UseMovablePointArguments {
 }
 
 // @public (undocumented)
-export function useMovementInteraction({ target, onMove, point, constrain, }: {
-    target: React_2.RefObject<Element>;
-    onMove: (point: vec.Vector2) => unknown;
-    point: vec.Vector2;
-    constrain: (point: vec.Vector2) => vec.Vector2;
-}): {
+export interface UseMovementInteraction {
+    // (undocumented)
     dragging: boolean;
-};
+}
+
+// @public (undocumented)
+export function useMovementInteraction(args: UseMovementInteractionArguments): UseMovementInteraction;
+
+// @public (undocumented)
+export interface UseMovementInteractionArguments {
+    // (undocumented)
+    constrain: (point: vec.Vector2) => vec.Vector2;
+    // (undocumented)
+    gestureTarget: React_2.RefObject<Element>;
+    // (undocumented)
+    onMove: (point: vec.Vector2) => unknown;
+    // (undocumented)
+    point: vec.Vector2;
+}
 
 // Warning: (ae-forgotten-export) The symbol "PaneContextShape" needs to be exported by the entry point index.d.ts
 //

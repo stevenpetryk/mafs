@@ -149,6 +149,21 @@ export interface MovablePointProps {
 }
 
 // @public (undocumented)
+export const MovablePointSVG: React_2.ForwardRefExoticComponent<MovablePointSVGProps & React_2.RefAttributes<SVGGElement>>;
+
+// @public (undocumented)
+export interface MovablePointSVGProps {
+    // (undocumented)
+    color: string;
+    // (undocumented)
+    dragging: boolean;
+    // (undocumented)
+    point: vec.Vector2;
+    // (undocumented)
+    ringRadiusPx: number;
+}
+
+// @public (undocumented)
 export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
@@ -372,6 +387,16 @@ export interface UseMovablePointArguments {
     color?: string;
     constrain?: "horizontal" | "vertical" | ConstraintFunction;
 }
+
+// @public (undocumented)
+export function useMovementInteraction({ target, onMove, point, constrain, }: {
+    target: React_2.RefObject<Element>;
+    onMove: (point: vec.Vector2) => unknown;
+    point: vec.Vector2;
+    constrain: (point: vec.Vector2) => vec.Vector2;
+}): {
+    dragging: boolean;
+};
 
 // Warning: (ae-forgotten-export) The symbol "PaneContextShape" needs to be exported by the entry point index.d.ts
 //

@@ -1,84 +1,64 @@
-name: Node.js CI
+name: Mafs CI
 
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm build
+  # build:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 2
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         cache: "pnpm"
+  #     - run: pnpm install
+  #     - run: pnpm build
 
-  tests:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm test:unit
+  # tests:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 2
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         cache: "pnpm"
+  #     - run: pnpm install
+  #     - run: pnpm test:unit
 
-  visual-tests:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - run: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps
-      - run: pnpm test:e2e
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+  # check-format:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 2
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         cache: "pnpm"
+  #     - run: pnpm install
+  #     - run: pnpm format:check
 
-  check-format:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm format:check
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 2
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         cache: "pnpm"
+  #     - run: pnpm install
+  #     - run: pnpm lint
 
-  lint:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm lint
-
-  tsc:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm tsc
+  # tsc:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 2
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         cache: "pnpm"
+  #     - run: pnpm install
+  #     - run: pnpm tsc

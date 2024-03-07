@@ -14,9 +14,5 @@
     "allowJs": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "e2e"],
-  "ts-node": {
-    "swc": true,
-    "esm": true
-  }
+  "include": ["src/**/*", "e2e"]
 }

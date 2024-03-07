@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.3
+
+- As of [#144](https://github.com/stevenpetryk/mafs/pull/144), there is a new hook, `useMovable`, that has been extracted out of `useMovablePoint`, and will eventually be used for being able to move various Mafs elements.
+
 ## 0.18.2
 
 - Vectors are no longer always red. This was a silly mistake introduced in v0.18.1 as I was trying to test that alternate Vector colors work. Mafs has automated visual regression tests, but they don't run in CI, and I believe they should.

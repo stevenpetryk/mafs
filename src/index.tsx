@@ -44,6 +44,12 @@ export type { Filled, Stroked } from "./display/Theme"
 export { MovablePoint } from "./interaction/MovablePoint"
 export type { MovablePointProps } from "./interaction/MovablePoint"
 
+export { MovablePointDisplay } from "./display/MovablePointDisplay"
+export type { MovablePointDisplayProps } from "./display/MovablePointDisplay"
+
+export { useMovable } from "./interaction/useMovable"
+export type { UseMovable, UseMovableArguments } from "./interaction/useMovable"
+
 export { useMovablePoint } from "./interaction/useMovablePoint"
 export type {
   ConstraintFunction,

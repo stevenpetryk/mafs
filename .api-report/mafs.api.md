@@ -139,6 +139,21 @@ export namespace MovablePoint {
 }
 
 // @public (undocumented)
+export const MovablePointDisplay: React_2.ForwardRefExoticComponent<MovablePointDisplayProps & React_2.RefAttributes<SVGGElement>>;
+
+// @public (undocumented)
+export interface MovablePointDisplayProps {
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    dragging: boolean;
+    // (undocumented)
+    point: vec.Vector2;
+    // (undocumented)
+    ringRadiusPx?: number;
+}
+
+// @public (undocumented)
 export interface MovablePointProps {
     // (undocumented)
     color?: string;
@@ -348,6 +363,27 @@ export type TransformProps = React_2.PropsWithChildren<{
     rotate?: number;
     shear?: vec.Vector2;
 }>;
+
+// @public (undocumented)
+export interface UseMovable {
+    // (undocumented)
+    dragging: boolean;
+}
+
+// @public (undocumented)
+export function useMovable(args: UseMovableArguments): UseMovable;
+
+// @public (undocumented)
+export interface UseMovableArguments {
+    // (undocumented)
+    constrain: (point: vec.Vector2) => vec.Vector2;
+    // (undocumented)
+    gestureTarget: React_2.RefObject<Element>;
+    // (undocumented)
+    onMove: (point: vec.Vector2) => unknown;
+    // (undocumented)
+    point: vec.Vector2;
+}
 
 // @public (undocumented)
 export interface UseMovablePoint {

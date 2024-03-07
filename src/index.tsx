@@ -47,10 +47,10 @@ export type { MovablePointProps } from "./interaction/MovablePoint"
 export { MovablePointDisplay } from "./display/MovablePointDisplay"
 export type { MovablePointDisplayProps } from "./display/MovablePointDisplay"
 
-export { useMovementInteraction } from "./interaction/useMovementInteraction"
+export { useMovable } from "./interaction/useMovementInteraction"
 export type {
-  UseMovementInteraction,
-  UseMovementInteractionArguments,
+  UseMovable,
+  UseMovableArguments,
 } from "./interaction/useMovementInteraction"
 
 export { useMovablePoint } from "./interaction/useMovablePoint"

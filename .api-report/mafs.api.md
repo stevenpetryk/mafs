@@ -365,6 +365,27 @@ export type TransformProps = React_2.PropsWithChildren<{
 }>;
 
 // @public (undocumented)
+export interface UseMovable {
+    // (undocumented)
+    dragging: boolean;
+}
+
+// @public (undocumented)
+export function useMovable(args: UseMovableArguments): UseMovable;
+
+// @public (undocumented)
+export interface UseMovableArguments {
+    // (undocumented)
+    constrain: (point: vec.Vector2) => vec.Vector2;
+    // (undocumented)
+    gestureTarget: React_2.RefObject<Element>;
+    // (undocumented)
+    onMove: (point: vec.Vector2) => unknown;
+    // (undocumented)
+    point: vec.Vector2;
+}
+
+// @public (undocumented)
 export interface UseMovablePoint {
     // (undocumented)
     element: React_2.ReactElement;
@@ -386,27 +407,6 @@ export interface UseMovablePointArguments {
     // (undocumented)
     color?: string;
     constrain?: "horizontal" | "vertical" | ConstraintFunction;
-}
-
-// @public (undocumented)
-export interface UseMovementInteraction {
-    // (undocumented)
-    dragging: boolean;
-}
-
-// @public (undocumented)
-export function useMovementInteraction(args: UseMovementInteractionArguments): UseMovementInteraction;
-
-// @public (undocumented)
-export interface UseMovementInteractionArguments {
-    // (undocumented)
-    constrain: (point: vec.Vector2) => vec.Vector2;
-    // (undocumented)
-    gestureTarget: React_2.RefObject<Element>;
-    // (undocumented)
-    onMove: (point: vec.Vector2) => unknown;
-    // (undocumented)
-    point: vec.Vector2;
 }
 
 // Warning: (ae-forgotten-export) The symbol "PaneContextShape" needs to be exported by the entry point index.d.ts

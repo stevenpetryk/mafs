@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Theme } from "../display/Theme"
 import { vec } from "../vec"
-import { useMovementInteraction } from "./useMovementInteraction"
+import { useMovable } from "./useMovementInteraction"
 import { MovablePointDisplay } from "../display/MovablePointDisplay"
 
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
@@ -29,7 +29,7 @@ export function MovablePoint({
 }: MovablePointProps) {
   const ref = React.useRef<SVGGElement>(null)
 
-  const { dragging } = useMovementInteraction({ gestureTarget: ref, onMove, point, constrain })
+  const { dragging } = useMovable({ gestureTarget: ref, onMove, point, constrain })
 
   return <MovablePointDisplay ref={ref} point={point} color={color} dragging={dragging} />
 }

@@ -6,20 +6,18 @@ import { useSpanContext } from "../context/SpanContext"
 import { useTransformContext } from "../context/TransformContext"
 import { range } from "../math"
 
-export interface UseMovementInteractionArguments {
+export interface UseMovableArguments {
   gestureTarget: React.RefObject<Element>
   onMove: (point: vec.Vector2) => unknown
   point: vec.Vector2
   constrain: (point: vec.Vector2) => vec.Vector2
 }
 
-export interface UseMovementInteraction {
+export interface UseMovable {
   dragging: boolean
 }
 
-export function useMovementInteraction(
-  args: UseMovementInteractionArguments,
-): UseMovementInteraction {
+export function useMovable(args: UseMovableArguments): UseMovable {
   const { gestureTarget: target, onMove, point, constrain } = args
   const [dragging, setDragging] = React.useState(false)
   const { xSpan, ySpan } = useSpanContext()

@@ -16,10 +16,17 @@ jobs:
         with:
           cache: "pnpm"
       - run: pnpm install
-      # TODO: cache this step, it takes forever. Playwright puts the browsers in ~/.cache somewhere.
-      # It also doesn't feel very reproducible.
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps
+      - name: Get Playwright Version
+        id: playwright-version
+        run: echo ::set-output name=playwright-version::$(pnpm playwright --version)
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.playwright-version }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
       - run: pnpm test:e2e
       - uses: actions/upload-artifact@v4
         if: always()

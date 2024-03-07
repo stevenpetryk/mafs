@@ -1,14 +1,14 @@
-name: Mafs Visual Tests
+name: Mafs End-to-End (E2E) Tests
 
 on:
   pull_request:
     types: [labeled, synchronize]
 
 jobs:
-  visual-tests:
+  e2e-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: contains(github.event.pull_request.labels.*.name, 'visual-changes')
+    if: contains(github.event.pull_request.labels.*.name, 'run-e2e-tests')
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
@@ -16,6 +16,8 @@ jobs:
         with:
           cache: "pnpm"
       - run: pnpm install
+      # TODO: cache this step, it takes forever. Playwright puts the browsers in ~/.cache somewhere.
+      # It also doesn't feel very reproducible.
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps
       - run: pnpm test:e2e

@@ -3,62 +3,62 @@ name: Mafs CI
 on: [push]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 2
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         cache: "pnpm"
-  #     - run: pnpm install
-  #     - run: pnpm build
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm build
 
-  # tests:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 2
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         cache: "pnpm"
-  #     - run: pnpm install
-  #     - run: pnpm test:unit
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm test:unit
 
-  # check-format:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 2
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         cache: "pnpm"
-  #     - run: pnpm install
-  #     - run: pnpm format:check
+  check-format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm format:check
 
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 2
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         cache: "pnpm"
-  #     - run: pnpm install
-  #     - run: pnpm lint
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm lint
 
-  # tsc:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 2
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         cache: "pnpm"
-  #     - run: pnpm install
-  #     - run: pnpm tsc
+  tsc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm tsc

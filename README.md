@@ -16,6 +16,11 @@ pnpm install
 pnpm start
 ```
 
+The version of `pnpm` in use can be viewed by checking the `packageManager`
+field of `package.json`. Using `corepack` to install pnpm will keep this
+up-to-date automatically. Mafs pins pnpm to a precise version to avoid spurious
+pnpm-lock.yaml changes.
+
 Then visit [localhost:3000](http://localhost:3000).
 
 ## Tests

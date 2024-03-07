@@ -3,8 +3,6 @@ import { devices, ViewportSize } from "@playwright/test"
 
 const viewport: ViewportSize = { width: 500, height: 500 }
 
-const CI = process.env.CI === "true"
-
 export default defineConfig({
   testDir: "./e2e",
   timeout: 30 * 1000,
@@ -31,13 +29,11 @@ export default defineConfig({
       },
     },
   },
-  projects: CI
-    ? [{ name: "chromium", use: { ...devices["Desktop Chrome"], viewport } }]
-    : [
-        { name: "chromium", use: { ...devices["Desktop Chrome"], viewport } },
-        { name: "firefox", use: { ...devices["Desktop Firefox"], viewport } },
-        { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport } },
-        { name: "webkit", use: { ...devices["Desktop Safari"], viewport } },
-        { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport } },
-      ],
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"], viewport } },
+    { name: "firefox", use: { ...devices["Desktop Firefox"], viewport } },
+    { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport } },
+    { name: "webkit", use: { ...devices["Desktop Safari"], viewport } },
+    { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport } },
+  ],
 })

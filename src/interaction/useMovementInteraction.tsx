@@ -88,7 +88,7 @@ function getInverseTransform(transform: vec.Matrix) {
   const invert = vec.matrixInvert(transform)
   invariant(
     invert !== null,
-    "Could not invert transform matrix. Your movable point's transformation matrix might be degenerative (mapping 2D space to a line).",
+    "Could not invert transform matrix. A parent transformation matrix might be degenerative (mapping 2D space to a line).",
   )
   return invert
 }

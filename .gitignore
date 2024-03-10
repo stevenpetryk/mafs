@@ -11,3 +11,5 @@ __diff_output__
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+.direnv

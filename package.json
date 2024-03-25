@@ -30,7 +30,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm test && pnpm lint && pnpm build"
+    "prepublishOnly": "pnpm test && pnpm lint && pnpm build",
+    "publish-branch": "tsx scripts/publish-branch.ts"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.40.2",

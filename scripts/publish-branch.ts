@@ -7,6 +7,8 @@ const version = `0.0.0-${shortCommit}`
 
 console.log(`Publishing ${version} to npm...`)
 
+console.log("NPM_TOKEN", process.env.NPM_TOKEN?.length)
+
 const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"))
 packageJson.version = version
 fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2))

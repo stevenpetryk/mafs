@@ -57,3 +57,17 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
       - run: pnpm tsc
+
+  publish-branch:
+    runs-on: ubuntu-latest
+    environment: publish
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm publish-branch

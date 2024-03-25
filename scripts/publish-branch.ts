@@ -11,4 +11,7 @@ const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"))
 packageJson.version = version
 fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2))
 
-childProcess.execSync("npm publish --access public --tag experimental", { stdio: "inherit" })
+childProcess.execSync("npm publish --access public --tag experimental", {
+  stdio: "inherit",
+  env: { ...process.env, SKIP_E2E: "true" },
+})

@@ -22,7 +22,7 @@
     "start": "tsx scripts/dev.ts",
     "test": "pnpm -s test:unit && pnpm -s test:e2e",
     "test:unit": "jest",
-    "test:e2e": "tsx scripts/testgen.ts && playwright test",
+    "test:e2e": "if [ -z \"$SKIP_E2E\" ]; then tsx scripts/testgen.ts && playwright test; fi",
     "build": "tsx scripts/build.ts",
     "build:docs": "pnpm -s docgen && cd docs && pnpm -s build",
     "docgen": "tsx scripts/docgen.ts",

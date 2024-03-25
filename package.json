@@ -9,7 +9,6 @@
   "main": "build/index.js",
   "module": "build/index.mjs",
   "types": "build/index.d.ts",
-  "type": "module",
   "packageManager": "pnpm@8.15.4",
   "engines": {
     "node": ">=18.0.0"

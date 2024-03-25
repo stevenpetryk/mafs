@@ -35,3 +35,7 @@ pnpm test:unit # to run just the Jest tests
 pnpm test:e2e  # to run Playwright (end-to-end and visual tests)
 pnpm test -- --update-snapshots # to update the visual test baselines
 ```
+
+## Contributros
+
+- @andrewhamon for helping test github actions

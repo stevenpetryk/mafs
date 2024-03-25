@@ -14,7 +14,10 @@ packageJson.version = version
 fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2))
 
 childProcess.execSync("pnpm build", { stdio: "inherit" })
-childProcess.execSync("npm publish --ignore-scripts --access public --tag experimental", {
-  stdio: "inherit",
-  env: { ...process.env },
-})
+childProcess.execSync(
+  "npm publish --ignore-scripts --access public --tag experimental --registry //registry.npmjs.org/:_authToken=${NPM_TOKEN}",
+  {
+    stdio: "inherit",
+    env: { ...process.env },
+  },
+)

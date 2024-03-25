@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.4
+
+- This version is published without `"type": "module"` in package.json to improve compatibility with some environments.
+
 ## 0.18.3
 
 - As of [#144](https://github.com/stevenpetryk/mafs/pull/144), there is a new hook, `useMovable`, that has been extracted out of `useMovablePoint`, and will eventually be used for being able to move various Mafs elements.

@@ -60,7 +60,6 @@ jobs:
 
   publish-branch:
     runs-on: ubuntu-latest
-    environment: publish
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3

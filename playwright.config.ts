@@ -32,8 +32,8 @@ export default defineConfig({
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"], viewport } },
     { name: "firefox", use: { ...devices["Desktop Firefox"], viewport } },
-    { name: "webkit", use: { ...devices["Desktop Safari"], viewport } },
     { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport } },
+    { name: "webkit", use: { ...devices["Desktop Safari"], viewport } },
     { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport } },
   ],
 })

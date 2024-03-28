@@ -75,8 +75,8 @@ function Functions() {
       </p>
 
       <p>
-        Mafs samples functions by by recursively subdividing the domain until an estimated error
-        threshold is met (or the recursion limit limit is reached).
+        Mafs samples functions by recursively subdividing the domain until an estimated error
+        threshold is met (or the recursion limit is reached).
       </p>
 
       <h4>Sampling depth</h4>

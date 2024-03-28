@@ -107,7 +107,7 @@ function Stopwatch() {
       </h2>
 
       <p>
-        <code>useMovablePoint</code> is a hook that helps you instantiate and manage the state of a
+        <code>useMovablePoint</code> is a hook that helps you instantiate and manage the state of a{" "}
         <code>MovablePoint</code>. However, if need be, you can also use <code>MovablePoint</code>{" "}
         directly. This can be useful if you need to work with a dynamic number of movable points
         (since the React "rules of hooks" ban you from dynamically calling hooks).

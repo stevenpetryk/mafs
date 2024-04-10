@@ -3,7 +3,7 @@ import { spawn } from "node:child_process"
 import { fileURLToPath } from "node:url"
 
 import ts from "typescript"
-import docgen from "react-docgen-typescript"
+import * as docgen from "react-docgen-typescript"
 
 import { writeDocgenResults } from "./docgen"
 

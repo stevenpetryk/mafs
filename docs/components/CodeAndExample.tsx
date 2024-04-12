@@ -114,6 +114,7 @@ async function openPlayground(source: string) {
   const prettier = await import("prettier/standalone")
   const typescriptParser = await import("prettier/plugins/typescript")
   const htmlParser = await import("prettier/plugins/html")
+  const { default: prettierPluginEstree } = await import("prettier/plugins/estree")
 
   const tsx = await prettier.format(
     endent`
@@ -127,7 +128,7 @@ async function openPlayground(source: string) {
 
         createRoot(document.getElementById("root")).render(<${functionName} />)
       `,
-    { parser: "typescript", plugins: [typescriptParser] },
+    { parser: "typescript", plugins: [typescriptParser, prettierPluginEstree] },
   )
 
   const html = await prettier.format(

@@ -129,7 +129,7 @@ async function openPlayground(source: string) {
 
         createRoot(document.getElementById("root")).render(<${functionName} />)
       `,
-    { parser: "typescript", plugins: [typescriptParser, prettierPluginEstree as {}] },
+    { parser: "typescript", plugins: [typescriptParser, prettierPluginEstree] },
   )
 
   const html = await prettier.format(

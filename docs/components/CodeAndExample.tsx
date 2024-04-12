@@ -114,8 +114,7 @@ async function openPlayground(source: string) {
   const prettier = await import("prettier/standalone")
   const typescriptParser = await import("prettier/plugins/typescript")
   const htmlParser = await import("prettier/plugins/html")
-  // @ts-expect-error - https://github.com/prettier/prettier/issues/15473
-  const prettierPluginEstree = await import("prettier/plugins/estree")
+  const { default: prettierPluginEstree } = await import("prettier/plugins/estree")
 
   const tsx = await prettier.format(
     endent`

@@ -37,13 +37,14 @@ export function PolyBase({
       points={scaledPoints}
       strokeWidth={weight}
       fillOpacity={fillOpacity}
-      strokeDasharray={strokeStyle === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined}
       strokeLinejoin="round"
       {...svgPolyProps}
       style={{
         fill: color,
         fillOpacity,
         stroke: color,
+        strokeDasharray:
+          strokeStyle === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
         strokeOpacity,
         vectorEffect: "non-scaling-stroke",
         transform: "var(--mafs-view-transform)",

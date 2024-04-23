@@ -48,11 +48,11 @@ export function Parametric({
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeDasharray={style === "dashed" ? "1,10" : undefined}
       {...svgPathProps}
       style={{
         stroke: color || "var(--mafs-fg)",
         strokeOpacity: opacity,
+        strokeDasharray: style === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
         vectorEffect: "non-scaling-stroke",
         transform: "var(--mafs-view-transform)",
         ...(svgPathProps.style || {}),

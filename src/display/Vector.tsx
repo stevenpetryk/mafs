@@ -44,10 +44,10 @@ export function Vector({
         y2={pixelTip[1]}
         strokeWidth={weight}
         markerEnd={`url(#${id})`}
-        strokeDasharray={style === "dashed" ? "4,3" : undefined}
         {...svgLineProps}
         style={{
           stroke: color || "var(--mafs-fg)",
+          strokeDasharray: style === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
           fill: color,
           strokeOpacity: opacity,
           ...(svgLineProps?.style || {}),

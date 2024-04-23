@@ -14,6 +14,7 @@
 
   --mafs-origin-color: var(--mafs-fg);
   --mafs-line-color: #555;
+  --mafs-line-stroke-dash-style: 4, 3;
   --grid-line-subdivision-color: #222;
 
   --mafs-red: #f11d0e;

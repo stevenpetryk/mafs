@@ -44,11 +44,12 @@ export function Ellipse({
       rx={radius[0]}
       ry={radius[1]}
       strokeWidth={weight}
-      strokeDasharray={strokeStyle === "dashed" ? "4,3" : undefined}
       transform={cssTransform}
       {...svgEllipseProps}
       style={{
         stroke: color,
+        strokeDasharray:
+          strokeStyle === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
         fill: color,
         fillOpacity,
         strokeOpacity,

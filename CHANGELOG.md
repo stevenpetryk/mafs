@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.5
+
+- The appearance of dashed lines has been unified across various components, and is now accessible via `var(----mafs-line-stroke-dash-style)`. Thanks [@jeremywiebe](https://github.com/jeremywiebe)! [#153](https://github.com/stevenpetryk/mafs/pull/153).
+
 ## 0.18.4
 
 - This version is published without `"type": "module"` in package.json to improve compatibility with some environments.

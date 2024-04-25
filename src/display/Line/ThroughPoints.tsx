@@ -47,12 +47,12 @@ export function ThroughPoints({
       y2={round(offscreen2[1], 2)}
       style={{
         stroke: color,
+        strokeDasharray: style === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
         transform: "var(--mafs-view-transform)",
         vectorEffect: "non-scaling-stroke",
       }}
       strokeWidth={weight}
       opacity={opacity}
-      strokeDasharray={style === "dashed" ? "4,3" : undefined}
     />
   )
 }

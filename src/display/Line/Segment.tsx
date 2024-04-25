@@ -28,10 +28,12 @@ export function Segment({
       y1={round(scaledPoint1[1], 2)}
       x2={round(scaledPoint2[0], 2)}
       y2={round(scaledPoint2[1], 2)}
-      style={{ stroke: color }}
+      style={{
+        stroke: color,
+        strokeDasharray: style === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
+      }}
       strokeWidth={weight}
       opacity={opacity}
-      strokeDasharray={style === "dashed" ? "1,10" : undefined}
     />
   )
 }

@@ -5,6 +5,7 @@ import { Page } from "@playwright/test"
 type Mount = ComponentFixtures["mount"]
 import { TestContextProvider } from "../src/context/TestContext"
 
+import LinePointAngleExample from "../docs/components/guide-examples/LinePointAngleExample"
 import LinePointSlopeExample from "../docs/components/guide-examples/LinePointSlopeExample"
 import LineSegmentExample from "../docs/components/guide-examples/LineSegmentExample"
 import LineThroughPointsExample from "../docs/components/guide-examples/LineThroughPointsExample"
@@ -15,7 +16,9 @@ import PolygonExample from "../docs/components/guide-examples/PolygonExample"
 import PolylineExample from "../docs/components/guide-examples/PolylineExample"
 import SnapPoint from "../docs/components/guide-examples/SnapPoint"
 import TextExample from "../docs/components/guide-examples/TextExample"
+import VectorFieldExample from "../docs/components/guide-examples/VectorFieldExample"
 import PizzaMarch from "../docs/components/guide-examples/custom/pizza-march"
+import PizzaSlice from "../docs/components/guide-examples/custom/pizza-slice"
 import PointCloud from "../docs/components/guide-examples/custom/point-cloud"
 import PaneVisualizerExample from "../docs/components/guide-examples/debug/PaneVisualizerExample"
 import DynamicMovablePoints from "../docs/components/guide-examples/display/DynamicMovablePoints"
@@ -49,6 +52,15 @@ async function visualTest(mount: Mount, page: Page, node: React.ReactElement) {
     : await expect(component.locator(".MafsView")).toHaveClass("MafsView")
   await expect(page).toHaveScreenshot()
 }
+
+test("guide-examples/LinePointAngleExample", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <LinePointAngleExample />
+    </TestContextProvider>,
+  ))
 
 test("guide-examples/LinePointSlopeExample", async ({ mount, page }) =>
   await visualTest(
@@ -140,12 +152,30 @@ test("guide-examples/TextExample", async ({ mount, page }) =>
     </TestContextProvider>,
   ))
 
+test("guide-examples/VectorFieldExample", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <VectorFieldExample />
+    </TestContextProvider>,
+  ))
+
 test("guide-examples/custom/PizzaMarch", async ({ mount, page }) =>
   await visualTest(
     mount,
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PizzaMarch />
+    </TestContextProvider>,
+  ))
+
+test("guide-examples/custom/PizzaSlice", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <PizzaSlice />
     </TestContextProvider>,
   ))
 

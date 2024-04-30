@@ -8,15 +8,6 @@ const SKIP = [
   /animated/i,
   /bezier/i,
 
-  // Unclear why this fails on webkit
-  /vectorfield/i,
-
-  // Uses React 18 features (which Playwright doesn't support yet https://github.com/microsoft/playwright/issues/19923)
-  /pizza-slice/i,
-
-  // Playwright claims components are unregistered in this one
-  /LinePointAngleExample/i,
-
   // KaTeX doesn't run correctly in the Playwright frame
   /latex/i,
 ]

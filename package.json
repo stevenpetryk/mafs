@@ -9,9 +9,9 @@
   "main": "build/index.js",
   "module": "build/index.mjs",
   "types": "build/index.d.ts",
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@9.0.6",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "^20.11"
   },
   "files": [
     "build/",
@@ -44,7 +44,7 @@
     "@types/jest-environment-puppeteer": "^5.0.3",
     "@types/jest-image-snapshot": "^6.2.0",
     "@types/katex": "^0.16.2",
-    "@types/node": "^20",
+    "@types/node": "^20.12.7",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
@@ -63,7 +63,7 @@
     "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
-    "tsx": "^4.7.1",
+    "tsx": "^4.7.3",
     "typescript": "^5.1.6",
     "vite": "^4.4.9"
   },

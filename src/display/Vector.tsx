@@ -3,9 +3,7 @@ import { Stroked } from "../display/Theme"
 import { Theme } from "./Theme"
 import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
-
-// This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
-let incrementer = 0
+import { useId } from "../context/IdContext"
 
 export interface VectorProps extends Stroked {
   tail?: vec.Vector2
@@ -22,13 +20,14 @@ export function Vector({
   opacity = 1.0,
   svgLineProps = {},
 }: VectorProps) {
+  const idNumber = useId("vector")
   const { userTransform, viewTransform } = useTransformContext()
   const combinedTransform = vec.matrixMult(viewTransform, userTransform)
 
   const pixelTail = vec.transform(tail, combinedTransform)
   const pixelTip = vec.transform(tip, combinedTransform)
 
-  const id = React.useMemo(() => `mafs-triangle-${incrementer++}`, [])
+  const id = React.useMemo(() => `mafs-triangle-${idNumber}`, [idNumber])
 
   return (
     <>

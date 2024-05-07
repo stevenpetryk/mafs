@@ -3,9 +3,7 @@ import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
 import { vec } from "../../vec"
 import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
-
-// This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
-let incrementer = 0
+import { useId } from "../../context/IdContext"
 
 type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
 
@@ -20,13 +18,14 @@ export function Cartesian({
   yAxis: yAxisOverrides,
   subdivisions = false,
 }: CartesianCoordinatesProps) {
+  const idNumber = useId("cartesian")
   const xAxisEnabled = xAxisOverrides !== false
   const yAxisEnabled = yAxisOverrides !== false
 
   const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as GridAxisOptions
   const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as GridAxisOptions
 
-  const id = `cartesian-${incrementer++}`
+  const id = `cartesian-${idNumber}`
 
   const { viewTransform } = useTransformContext()
   const { xPaneRange, yPaneRange } = usePaneContext()

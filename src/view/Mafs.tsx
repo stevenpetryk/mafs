@@ -12,6 +12,7 @@ import invariant from "tiny-invariant"
 import { useCamera } from "../gestures/useCamera"
 import { useWheelEnabler } from "../gestures/useWheelEnabler"
 import { TestContext } from "../context/TestContext"
+import IdContext from "../context/IdContext"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -302,24 +303,26 @@ function MafsCanvas({
         <TransformContext.Provider
           value={{ userTransform: vec.identity, viewTransform: viewTransform }}
         >
-          <PaneManager>
-            <svg
-              width={width}
-              height={height}
-              viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
-              preserveAspectRatio="xMidYMin"
-              style={{
-                width: desiredCssWidth,
-                touchAction: pan ? "none" : "auto",
-                ...({
-                  "--mafs-view-transform": viewTransformCSS,
-                  "--mafs-user-transform": "translate(0, 0)",
-                } as React.CSSProperties),
-              }}
-            >
-              {children}
-            </svg>
-          </PaneManager>
+          <IdContext.Provider value={{}}>
+            <PaneManager>
+              <svg
+                width={width}
+                height={height}
+                viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
+                preserveAspectRatio="xMidYMin"
+                style={{
+                  width: desiredCssWidth,
+                  touchAction: pan ? "none" : "auto",
+                  ...({
+                    "--mafs-view-transform": viewTransformCSS,
+                    "--mafs-user-transform": "translate(0, 0)",
+                  } as React.CSSProperties),
+                }}
+              >
+                {children}
+              </svg>
+            </PaneManager>
+          </IdContext.Provider>
         </TransformContext.Provider>
       </SpanContext.Provider>
     </CoordinateContext.Provider>

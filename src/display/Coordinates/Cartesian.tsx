@@ -1,3 +1,4 @@
+import * as React from "react"
 import { range, round } from "../../math"
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
@@ -26,7 +27,7 @@ export function Cartesian({
   const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as GridAxisOptions
   const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as GridAxisOptions
 
-  const id = `cartesian-${incrementer++}`
+  const id = React.useMemo(() => `cartesian-${incrementer++}`, [])
 
   const { viewTransform } = useTransformContext()
   const { xPaneRange, yPaneRange } = usePaneContext()

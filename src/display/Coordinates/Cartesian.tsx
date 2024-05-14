@@ -94,7 +94,7 @@ export function Cartesian({
 
       <rect x={vxMin} y={vyMax} width={vxMax - vxMin} height={vyMin - vyMax} fill={`url(#${id})`} />
 
-      <g stroke="var(--mafs-origin-color)">
+      <g stroke="var(--mafs-origin-color)" strokeWidth="var(--mafs-axis-stroke-width)">
         {xAxisEnabled && xAxis.axis && <line x1={vxMin} y1={0} x2={vxMax} y2={0} />}
         {yAxisEnabled && yAxis.axis && <line x1={0} y1={vyMin} x2={0} y2={vyMax} />}
       </g>

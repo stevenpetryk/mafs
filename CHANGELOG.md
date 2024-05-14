@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.18.6
+
+- The stroke width of axes on `Coordinates.Cartesian` have now been parameterized via the `--mafs-axis-stroke-width` CSS custom property. ([#160](https://github.com/stevenpetryk/mafs/pull/160))
+- A bug that caused `Coordinates.Cartesian` to re-render frequently due to a changing ID has been fixed ([#159](https://github.com/stevenpetryk/mafs/pull/159)).
+
 ## 0.18.5
 
 - The appearance of dashed lines has been unified across various components, and is now accessible via `var(----mafs-line-stroke-dash-style)`. Thanks [@jeremywiebe](https://github.com/jeremywiebe)! [#153](https://github.com/stevenpetryk/mafs/pull/153).

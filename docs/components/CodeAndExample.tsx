@@ -160,8 +160,8 @@ async function openPlayground(source: string) {
     dependencies: {
       mafs: "latest",
       typescript: "4.9.4",
-      react: "18.2.0",
-      "react-dom": "18.2.0",
+      react: ">=18",
+      "react-dom": ">=18",
       "@types/react": "18.0.27",
       "@types/react-dom": "18.0.10",
       lodash: "4.17.21",

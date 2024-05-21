@@ -1,3 +1,3 @@
 {
-  "buildCommand": "pwd && cd .. && pnpm -s docgen && cd docs && pnpm -s build"
+  "buildCommand": "pwd && ls && ls .. && cd .. && pnpm -s docgen && cd docs && pnpm -s build"
 }

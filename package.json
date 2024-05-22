@@ -11,7 +11,7 @@
   "types": "build/index.d.ts",
   "packageManager": "pnpm@9.0.6",
   "engines": {
-    "node": "^20.11"
+    "node": ">=20"
   },
   "files": [
     "build/",

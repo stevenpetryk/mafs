@@ -1,6 +1,6 @@
 {
   "name": "mafs",
-  "version": "0.18.6",
+  "version": "0.18.7",
   "license": "MIT",
   "author": "Steven Petryk (https://stevenpetryk.com)",
   "homepage": "https://mafs.dev",
@@ -11,7 +11,7 @@
   "types": "build/index.d.ts",
   "packageManager": "pnpm@9.0.6",
   "engines": {
-    "node": "^20.11"
+    "node": ">=20"
   },
   "files": [
     "build/",

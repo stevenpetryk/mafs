@@ -37,6 +37,10 @@ export function VectorField({
         const tail: vec.Vector2 = [x, y]
         const trueOffset = xy([x, y])
         const trueMag = vec.mag(trueOffset)
+
+        // Avoid rendering zero-length vectors
+        if (trueMag === 0) continue
+
         const scaledOffset = vec.scale(vec.normalize(trueOffset), Math.min(trueMag, step * 0.75))
         const tip = vec.add(tail, scaledOffset)
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.8
+
+- VectorField no longer breaks when rendering the vector `[0, 0]` ([#164](https://github.com/stevenpetryk/mafs/issues/164)).
+
+## 0.18.7
+
+- Mafs no longer declares a dependency on Node 20.11, instead depending on Node 20. In the future, the published version of Mafs will not declare an `engines` field at all, since Mafs is, of course, just a frontend project.
+
 ## 0.18.6
 
 - The stroke width of axes on `Coordinates.Cartesian` have now been parameterized via the `--mafs-axis-stroke-width` CSS custom property. ([#160](https://github.com/stevenpetryk/mafs/pull/160))

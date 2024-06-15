@@ -1,15 +1,9 @@
-import fg from "fast-glob"
 import fs from "node:fs"
 import { fileURLToPath } from "node:url"
 import path from "node:path"
+import type * as docgen from "react-docgen-typescript"
 
-import * as docgen from "react-docgen-typescript"
-
-const projectRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), "..")
-const tsConfigPath = path.join(projectRoot, "tsconfig.json")
-const parse = docgen.withCustomConfig(tsConfigPath, {
-  shouldRemoveUndefinedFromOptional: true,
-}).parseWithProgramProvider
+export const projectRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), "..")
 
 export function writeDocgenResults(docgenInfo: docgen.ComponentDoc[]) {
   const writePath = path.join(projectRoot, "docs/generated-docgen.tsx")
@@ -28,10 +22,5 @@ export function writeDocgenResults(docgenInfo: docgen.ComponentDoc[]) {
     ].join("\n") + "\n",
   )
 
-  console.log(`Docgen updated ${writePath}`)
+  console.error(`Docgen updated ${writePath}`)
 }
-
-const paths = fg.sync("src/**/*.tsx", { ignore: ["src/index.tsx"] })
-
-const docgenInfo = parse(paths)
-writeDocgenResults(docgenInfo)

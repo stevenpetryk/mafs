@@ -25,7 +25,7 @@
     "test:e2e": "tsx scripts/testgen.ts && playwright test",
     "build": "tsx scripts/build.ts",
     "build:docs": "pnpm -s docgen && cd docs && pnpm -s build",
-    "docgen": "tsx scripts/docgen.ts",
+    "docgen": "tsx scripts/docgen-cli.ts",
     "api-report:update": "pnpm tsc && api-extractor run --local",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",

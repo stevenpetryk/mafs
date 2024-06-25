@@ -4,10 +4,14 @@ import { Stroked } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { sampleParametric } from "./PlotUtils"
 
-export interface ParametricProps extends Stroked {
+interface ParametricPropsLegacy extends Stroked {
   /** A function that takes a `t` value and returns a point. */
   xy: (t: number) => vec.Vector2
-  /** The domain `t` between which to evaluate `xy`. */
+  /** The domain between which to evaluate `xy`. */
+  domain?: never
+  /**
+   * @deprecated - use the `domain` prop.
+   */
   t: vec.Vector2
   /** The minimum recursive depth of the sampling algorithm. */
   minSamplingDepth?: number
@@ -17,8 +21,28 @@ export interface ParametricProps extends Stroked {
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
+interface ParametricPropsNew extends Stroked {
+  /** A function that takes a `t` value and returns a point. */
+  xy: (t: number) => vec.Vector2
+  /** The domain between which to evaluate `xy`. */
+  domain: vec.Vector2
+  /**
+   * @deprecated - use the `domain` prop.
+   */
+  t?: never
+  /** The minimum recursive depth of the sampling algorithm. */
+  minSamplingDepth?: number
+  /** The maximum recursive depth of the sampling algorithm. */
+  maxSamplingDepth?: number
+
+  svgPathProps?: React.SVGProps<SVGPathElement>
+}
+
+export type ParametricProps = ParametricPropsNew | ParametricPropsLegacy
+
 export function Parametric({
   xy,
+  domain,
   t,
   color,
   style = "solid",
@@ -33,7 +57,7 @@ export function Parametric({
   // Negative because the y-axis is flipped in the SVG coordinate system.
   const pixelsPerSquare = -vec.det(viewTransform)
 
-  const [tMin, tMax] = t
+  const [tMin, tMax] = domain || t
   const errorThreshold = 0.1 / pixelsPerSquare
 
   const svgPath = React.useMemo(

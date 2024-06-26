@@ -4,6 +4,10 @@ import { Stroked } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
 import { sampleParametric } from "./PlotUtils"
 
+// TODO: In 1-year's time from this change (written 6/26/2024),
+//          remove the Legacy interface and just have the new props interface (renamed, of course).
+//       Also, remove the `t` property at that time.
+//       The 1 year timeline gives consumers time to update their code.
 interface ParametricPropsLegacy extends Stroked {
   /** A function that takes a `t` value and returns a point. */
   xy: (t: number) => vec.Vector2

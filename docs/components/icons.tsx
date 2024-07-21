@@ -257,3 +257,30 @@ export function StackBlitzIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function LinearAlgebraIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M3.5 10.5L8.5 5.5M8.5 5.5H6.5M8.5 5.5V7.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.5 10.5H12.5M12.5 10.5L11.5 9.5M12.5 10.5L11.5 11.5"
+        stroke="currentColor"
+        strokeOpacity="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}

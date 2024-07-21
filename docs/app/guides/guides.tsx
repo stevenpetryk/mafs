@@ -20,6 +20,7 @@ import {
   CustomComponentsIcon,
   TransformContextsIcon,
   DebugIcon,
+  LinearAlgebraIcon,
 } from "components/icons"
 
 type Section = {
@@ -65,6 +66,10 @@ export const Guides: Section[] = [
       { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },
       { title: "Debug", icon: DebugIcon, slug: "debug" },
     ],
+  },
+  {
+    title: "Utility",
+    guides: [{ title: "Linear algebra", icon: LinearAlgebraIcon, slug: "vec" }],
   },
   {
     title: "Interaction",

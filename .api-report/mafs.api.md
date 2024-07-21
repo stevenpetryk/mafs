@@ -164,7 +164,9 @@ export interface MovablePointProps {
 }
 
 // @public (undocumented)
-export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
+export interface OfXProps extends Omit<ParametricProps, "xy" | "domain" | "t"> {
+    // (undocumented)
+    domain?: vec.Vector2;
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     // (undocumented)
@@ -172,22 +174,20 @@ export interface OfXProps extends Omit<ParametricProps, "xy" | "t"> {
 }
 
 // @public (undocumented)
-export interface OfYProps extends Omit<ParametricProps, "xy" | "t"> {
+export interface OfYProps extends Omit<ParametricProps, "xy" | "domain" | "t"> {
+    // (undocumented)
+    domain?: vec.Vector2;
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
     // (undocumented)
     x: (y: number) => number;
 }
 
+// Warning: (ae-forgotten-export) The symbol "ParametricPropsNew" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "ParametricPropsLegacy" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export interface ParametricProps extends Stroked {
-    maxSamplingDepth?: number;
-    minSamplingDepth?: number;
-    // (undocumented)
-    svgPathProps?: React_2.SVGProps<SVGPathElement>;
-    t: vec.Vector2;
-    xy: (t: number) => vec.Vector2;
-}
+export type ParametricProps = ParametricPropsNew | ParametricPropsLegacy;
 
 // @public (undocumented)
 export const Plot: {

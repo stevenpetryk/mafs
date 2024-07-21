@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.19.0
+
+- All plots (OfX, OfY, and Parametric) now support a `domain` prop. Previously, only the `Parametric` component supported setting a domain, and the prop to do so was called `t`, but this prop has been deprecated in favor of the new `domain` prop across all three plot components. Eventually, `t` will be removed.
+
 ## 0.18.8
 
 - VectorField no longer breaks when rendering the vector `[0, 0]` ([#164](https://github.com/stevenpetryk/mafs/issues/164)).

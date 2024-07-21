@@ -75,7 +75,7 @@ export default function ProjectileMotion() {
           <>
             <Plot.Parametric
               xy={positionAtTime}
-              t={[0, timeOfFlight]}
+              domain={[0, timeOfFlight]}
               opacity={0.4}
               style="dashed"
             />

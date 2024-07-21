@@ -20,7 +20,7 @@ export default function TwistyBoi() {
       <Coordinates.Cartesian subdivisions={4} />
 
       <Plot.Parametric
-        t={[0, k]}
+        domain={[0, k]}
         xy={(t) => [Math.cos(t), (t / k) * Math.sin(t)]}
       />
 

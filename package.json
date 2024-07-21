@@ -9,7 +9,7 @@
   "main": "build/index.js",
   "module": "build/index.mjs",
   "types": "build/index.d.ts",
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": ">=20"
   },

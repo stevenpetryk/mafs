@@ -38,6 +38,17 @@ export function useMovable(args: UseMovableArguments): UseMovable {
       const isKeyboard = type.includes("key")
       if (isKeyboard) {
         event?.preventDefault()
+
+        // When a key is held down, we see multiple "keydown" events,
+        // followed by a single "keyup" event.
+        // For a single keypress, we only see a "keydown" event, no
+        // "keyup".
+        // We never want to process the keyup event as an intent to
+        // move so we bail on further processing here.
+        if (type === "keyup") {
+          return
+        }
+
         const { direction: yDownDirection, altKey, metaKey, shiftKey } = state
 
         const direction = [yDownDirection[0], -yDownDirection[1]] as vec.Vector2

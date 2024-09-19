@@ -5,7 +5,8 @@ import typescript from "typescript"
 import invariant from "tiny-invariant"
 
 const packageJson = fs.readJsonSync("./package.json")
-const { main: cjsOutFile, module: esmOutFile, peerDependencies, dependencies } = packageJson
+const { exports, peerDependencies, dependencies } = packageJson
+const { import: esmOutFile, require: cjsOutFile } = exports["."]
 
 async function main() {
   fs.emptyDirSync("build")

@@ -6,8 +6,15 @@
   "homepage": "https://mafs.dev",
   "repository": "github:stevenpetryk/mafs",
   "source": "src/index.tsx",
-  "main": "build/index.js",
-  "module": "build/index.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "require": "./build/index.cjs"
+    },
+    "./core.css": "./core.css",
+    "./font.css": "./font.css"
+  },
   "types": "build/index.d.ts",
   "packageManager": "pnpm@9.5.0",
   "engines": {

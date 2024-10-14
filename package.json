@@ -3,6 +3,14 @@
   "version": "0.20.0",
   "license": "MIT",
   "author": "Steven Petryk (https://stevenpetryk.com)",
+  "description": "React components for interactive, animated math visualizations.",
+  "keywords": [
+    "math",
+    "visualization",
+    "react",
+    "interactive",
+    "animation"
+  ],
   "homepage": "https://mafs.dev",
   "repository": "github:stevenpetryk/mafs",
   "source": "src/index.tsx",

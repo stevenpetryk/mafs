@@ -13,6 +13,7 @@
       "require": "./build/index.cjs"
     }
   },
+  "types": "build/index.d.ts",
   "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": ">=20"

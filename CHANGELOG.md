@@ -1,10 +1,6 @@
 # Changelog
 
-## 0.20.0
-
-- Use package entrypoints, correctly tag this package as ESM using "type": "module".
-
-## 0.19.0
+# 0.19.0
 
 - All plots (OfX, OfY, and Parametric) now support a `domain` prop. Previously, only the `Parametric` component supported setting a domain, and the prop to do so was called `t`, but this prop has been deprecated in favor of the new `domain` prop across all three plot components. Eventually, `t` will be removed.
 

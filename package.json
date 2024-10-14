@@ -11,7 +11,9 @@
     ".": {
       "import": "./build/index.js",
       "require": "./build/index.cjs"
-    }
+    },
+    "./core.css": "./core.css",
+    "./font.css": "./font.css"
   },
   "types": "build/index.d.ts",
   "packageManager": "pnpm@9.5.0",

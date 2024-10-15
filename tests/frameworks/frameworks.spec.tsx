@@ -6,7 +6,7 @@ import { setTimeout } from "node:timers/promises"
 import { test, expect } from "@playwright/test"
 
 test("vite", async ({ page }) => {
-  let errors: string[] = []
+  const errors: string[] = []
   page.on("console", (msg) => {
     if (msg.type() === "error") {
       errors.push(msg.text())
@@ -63,7 +63,7 @@ async function getFreePort(): Promise<number> {
     srv.listen(0, () => {
       // @ts-expect-error - don't care lol
       const port = srv.address().port
-      srv.close((err) => res(port))
+      srv.close(() => res(port))
     })
   })
 }

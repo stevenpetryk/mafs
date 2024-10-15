@@ -1,11 +1,39 @@
-import { spawn } from "node:child_process"
+import { ChildProcessWithoutNullStreams, execSync, spawn } from "node:child_process"
 import path from "node:path"
 import net from "node:net"
 import { setTimeout } from "node:timers/promises"
 
-import { test, expect } from "@playwright/test"
+import { test, expect, Page } from "@playwright/test"
 
 test("vite", async ({ page }) => {
+  await testDevServer(page, "./vite", "pnpm", (port) => ["run", "dev", "--port", port])
+})
+
+test("vite - prod", async ({ page }) => {
+  execSync("pnpm run build", { cwd: path.join(import.meta.dirname, "./vite") })
+  await testDevServer(page, "./vite", "pnpm", (port) => ["run", "preview", "--port", port])
+})
+
+test("nextjs", async ({ page }) => {
+  await testDevServer(page, "./nextjs", "pnpm", (port) => ["run", "dev", "--port", port], {
+    NODE_ENV: "development",
+  })
+})
+
+test("nextjs - prod", async ({ page }) => {
+  execSync("pnpm run build", { cwd: path.join(import.meta.dirname, "./nextjs") })
+  await testDevServer(page, "./nextjs", "pnpm", (port) => ["run", "start", "--port", port], {
+    NODE_ENV: "production",
+  })
+})
+
+async function testDevServer(
+  page: Page,
+  dirname: string,
+  command: string,
+  args: (port) => string[],
+  extraEnv: Record<string, string> = {},
+) {
   const errors: string[] = []
   page.on("console", (msg) => {
     if (msg.type() === "error") {
@@ -15,10 +43,13 @@ test("vite", async ({ page }) => {
 
   const port = await getFreePort()
 
-  const pd = spawn("npm", ["run", "dev", "--", "--port", String(port)], {
-    cwd: path.join(import.meta.dirname, "./vite"),
-    stdio: "pipe",
+  console.log(command, args(port))
+
+  const pd = spawn(command, args(port), {
+    cwd: path.join(import.meta.dirname, dirname),
+    stdio: "inherit",
     shell: true,
+    env: { ...process.env, NODE_ENV: undefined, ...extraEnv } as any,
   })
 
   pd.on("exit", (code, signal) => {
@@ -38,7 +69,7 @@ test("vite", async ({ page }) => {
   }
 
   await expect(errors).toEqual([])
-})
+}
 
 async function waitForPort(port: number, timeout: number) {
   const start = performance.now()

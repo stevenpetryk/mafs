@@ -47,6 +47,8 @@ export default defineConfig({
       testDir: "./tests",
       testMatch: "tests/frameworks/*.spec.tsx",
       dependencies: ["frameworks-setup"],
+      // Since these tests operate on the actual file system, parallelism messes them up.
+      fullyParallel: false,
     },
   ],
 })

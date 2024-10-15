@@ -43,8 +43,6 @@ async function testDevServer(
 
   const port = await getFreePort()
 
-  console.log(command, args(port))
-
   const pd = spawn(command, args(port), {
     cwd: path.join(import.meta.dirname, dirname),
     stdio: "inherit",

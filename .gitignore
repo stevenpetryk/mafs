@@ -14,4 +14,6 @@ __diff_output__
 
 .direnv
 
+# Some tests involve packing Mafs and using the tarball as a dependency.
+mafs-*.tgz
 tests/frameworks/mafs.tgz

@@ -8,3 +8,6 @@ docs/public
 
 pnpm-lock.yaml
 .api-report
+
+tests/frameworks/nextjs/.next
+tests/frameworks/vite/dist

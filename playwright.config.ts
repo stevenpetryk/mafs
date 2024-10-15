@@ -4,7 +4,6 @@ import { devices, ViewportSize } from "@playwright/test"
 const viewport: ViewportSize = { width: 500, height: 500 }
 
 export default defineConfig({
-  testDir: "./e2e",
   timeout: 30 * 1000,
   expect: {
     timeout: 5000,
@@ -30,10 +29,24 @@ export default defineConfig({
     },
   },
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"], viewport } },
-    { name: "firefox", use: { ...devices["Desktop Firefox"], viewport } },
-    { name: "webkit", use: { ...devices["Desktop Safari"], viewport } },
-    { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport } },
-    { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport } },
+    { name: "chromium", use: { ...devices["Desktop Chrome"], viewport }, testDir: "./e2e" },
+    { name: "firefox", use: { ...devices["Desktop Firefox"], viewport }, testDir: "./e2e" },
+    { name: "webkit", use: { ...devices["Desktop Safari"], viewport }, testDir: "./e2e" },
+    { name: "Mobile Chrome", use: { ...devices["Pixel 5"], viewport }, testDir: "./e2e" },
+    { name: "Mobile Safari", use: { ...devices["iPhone 12"], viewport }, testDir: "./e2e" },
+
+    {
+      name: "frameworks-setup",
+      use: { ...devices["Desktop Chrome"], viewport },
+      testDir: "./tests",
+      testMatch: "tests/frameworks/setup.ts",
+    },
+    {
+      name: "frameworks",
+      use: { ...devices["Desktop Chrome"], viewport },
+      testDir: "./tests",
+      testMatch: "tests/frameworks/*.spec.tsx",
+      dependencies: ["frameworks-setup"],
+    },
   ],
 })

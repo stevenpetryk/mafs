@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.20.1
+
+- Fixes 'overhandling' of arrow keypresses ([#169](https://github.com/stevenpetryk/mafs/pull/169))
+
 ## 0.20.0
 
 - Use package entrypoints, correctly tag this package as ESM using "type": "module" ([#170](https://github.com/stevenpetryk/mafs/pull/170/)).

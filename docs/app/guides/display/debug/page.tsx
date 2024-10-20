@@ -42,8 +42,8 @@ export default function DebugPage() {
 
       <p>
         This is a little widget that allows you to test applying transforms (translation, rotation,
-        and scale) to components by wrapping them in <code>Debug.TransformWrapper</code>. It's
-        mainly useful when building new{" "}
+        and scale) to components by wrapping them in <code>Debug.TransformWidget</code>. It's mainly
+        useful when building new{" "}
         <Link href="/guides/custom-components/overview">custom components</Link>.
       </p>
 

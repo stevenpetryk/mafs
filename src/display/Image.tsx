@@ -21,27 +21,42 @@ export function Image({
   preserveAspectRatio,
   svgImageProps,
 }: ImageProps) {
-  const [actualX, actualY] = computeAnchor(anchor, x, y, width, height)
+  const [anchorX, anchorY] = computeAnchor(anchor, x, y, width, height)
 
-  const scaleX = width < 0 ? -1 : 1
-  const scaleY = height < 0 ? -1 : 1
+  const transform = [
+    "var(--mafs-view-transform)",
+    "var(--mafs-user-transform)",
+    // Ensure the image is not upside down (since Mafs has the y-axis pointing,
+    // while SVG has it pointing down)
+    "scaleY(-1)",
+  ].join(" ")
 
-  console.log(actualX - (width < 0 ? -width : 0))
+  const debug = false
 
   return (
-    <image
-      href={src}
-      x={actualX - (width < 0 ? -width : 0)}
-      y={actualY - (height < 0 ? -height : 0)}
-      width={Math.abs(width)}
-      height={Math.abs(height)}
-      preserveAspectRatio={preserveAspectRatio}
-      {...svgImageProps}
-      style={{
-        transform: [`var(--mafs-view-transform)`, `var(--mafs-user-transform)`, `scaleY(-1) `].join(
-          " ",
-        ),
-      }}
-    />
+    <>
+      {debug && (
+        <rect
+          x={anchorX}
+          y={-anchorY}
+          width={width}
+          height={height}
+          fill="none"
+          stroke="red"
+          vectorEffect={"non-scaling-stroke"}
+          style={{ transform }}
+        />
+      )}
+      <image
+        href={src}
+        x={anchorX}
+        y={-anchorY}
+        width={width}
+        height={height}
+        preserveAspectRatio={preserveAspectRatio}
+        {...svgImageProps}
+        style={{ transform }}
+      />
+    </>
   )
 }

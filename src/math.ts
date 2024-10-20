@@ -43,39 +43,39 @@ export function computeAnchor(
   switch (anchor) {
     case "tl":
       actualX = x
-      actualY = -y
+      actualY = y
       break
     case "tc":
       actualX = x - width / 2
-      actualY = -y
+      actualY = y
       break
     case "tr":
       actualX = x - width
-      actualY = -y
+      actualY = y
       break
     case "cl":
       actualX = x
-      actualY = -y - height / 2
+      actualY = y + height / 2
       break
     case "cc":
       actualX = x - width / 2
-      actualY = -y - height / 2
+      actualY = y + height / 2
       break
     case "cr":
       actualX = x - width
-      actualY = -y - height / 2
+      actualY = y + height / 2
       break
     case "bl":
       actualX = x
-      actualY = -y - height
+      actualY = y + height
       break
     case "bc":
       actualX = x - width / 2
-      actualY = -y - height
+      actualY = y + height
       break
     case "br":
       actualX = x - width
-      actualY = -y - height
+      actualY = y + height
       break
   }
 

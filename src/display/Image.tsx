@@ -19,7 +19,7 @@ export interface ImageProps {
    * This is passed directly to the `preserveAspectRatio` attribute of the SVG
    * `<image>` element.
    *
-   * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio
+   * See [preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio) on MDN.
    */
   preserveAspectRatio?: string
 

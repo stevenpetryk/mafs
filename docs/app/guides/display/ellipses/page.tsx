@@ -21,7 +21,6 @@ export default function Page() {
       <PropTable of={"Ellipse"} />
 
       <WIP>
-        {/* @ts-expect-error */}
         <p>
           Support for defining ellipses in terms of two foci is planned. In the meantime, you can
           accomplish this using a{" "}

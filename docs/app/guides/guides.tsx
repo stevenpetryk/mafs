@@ -9,6 +9,8 @@ import {
   RotateCounterClockwiseIcon,
   TextIcon,
   CursorArrowIcon,
+  ViewNoneIcon,
+  EnterFullScreenIcon,
   PlayIcon,
 } from "@radix-ui/react-icons"
 
@@ -21,6 +23,7 @@ import {
   TransformContextsIcon,
   DebugIcon,
   LinearAlgebraIcon,
+  SceneIcon,
 } from "components/icons"
 
 type Section = {
@@ -53,6 +56,7 @@ export const Guides: Section[] = [
     guides: [
       { title: "Mafs", icon: CardStackIcon, slug: "mafs" },
       { title: "Coordinates", icon: GridIcon, slug: "coordinates" },
+      { title: "Scenes", icon: SceneIcon, slug: "scenes" },
       { separator: true },
       { title: "Points", icon: DotFilledIcon, slug: "points" },
       { title: "Lines", icon: LinesIcon, slug: "lines" },

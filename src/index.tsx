@@ -6,6 +6,8 @@ export type { MafsProps } from "./view/Mafs"
 export { Coordinates } from "./display/Coordinates"
 export { autoPi as labelPi } from "./display/Coordinates/Cartesian"
 
+export { Scene } from "./display/Scene"
+
 export { Plot } from "./display/Plot"
 export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"
 

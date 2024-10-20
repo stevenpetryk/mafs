@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
@@ -80,6 +78,29 @@ export interface Filled {
     strokeStyle?: "solid" | "dashed";
     // (undocumented)
     weight?: number;
+}
+
+// @public (undocumented)
+function Image_2({ href, x, y, width, height, anchor, preserveAspectRatio, svgImageProps, }: ImageProps): JSX_2.Element;
+export { Image_2 as Image }
+
+// @public (undocumented)
+export interface ImageProps {
+    // Warning: (ae-forgotten-export) The symbol "Anchor" needs to be exported by the entry point index.d.ts
+    anchor?: Anchor;
+    // (undocumented)
+    height: number;
+    // (undocumented)
+    href: string;
+    preserveAspectRatio?: string;
+    // (undocumented)
+    svgImageProps?: React.SVGProps<SVGImageElement>;
+    // (undocumented)
+    width: number;
+    // (undocumented)
+    x: number;
+    // (undocumented)
+    y: number;
 }
 
 // @public (undocumented)

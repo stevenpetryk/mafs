@@ -41,6 +41,8 @@ import SimpleTransform from "../docs/components/guide-examples/utility/SimpleTra
 import CartesianCoordinatesConfigExample from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesConfigExample"
 import CartesianCoordinatesExample from "../docs/components/guide-examples/display/coordinates/CartesianCoordinatesExample"
 import PolarCoordinatesExample from "../docs/components/guide-examples/display/coordinates/PolarCoordinatesExample"
+import ImageAnchorExample from "../docs/components/guide-examples/display/images/ImageAnchorExample"
+import ImageExample from "../docs/components/guide-examples/display/images/ImageExample"
 import VectorExample from "../docs/components/guide-examples/display/vectors/VectorExample"
 import ContainViewbox from "../docs/components/guide-examples/display/viewbox/ContainViewbox"
 import StretchViewbox from "../docs/components/guide-examples/display/viewbox/StretchViewbox"
@@ -378,6 +380,24 @@ test("guide-examples/display/coordinates/PolarCoordinatesExample", async ({ moun
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PolarCoordinatesExample />
+    </TestContextProvider>,
+  ))
+
+test("guide-examples/display/images/ImageAnchorExample", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <ImageAnchorExample />
+    </TestContextProvider>,
+  ))
+
+test("guide-examples/display/images/ImageExample", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <ImageExample />
     </TestContextProvider>,
   ))
 

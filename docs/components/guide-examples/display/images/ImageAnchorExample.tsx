@@ -7,7 +7,7 @@ import {
   useMovablePoint,
 } from "mafs"
 
-import mafs from "./mafs.png"
+import image from "./mafs.png"
 
 export default function VectorExample() {
   const center = useMovablePoint([2, 2])
@@ -15,7 +15,7 @@ export default function VectorExample() {
     <Mafs viewBox={{ x: [-1, 7], y: [-1, 5] }}>
       <Coordinates.Cartesian />
       <Image
-        src={mafs.src}
+        href={image.src ?? image}
         anchor="tl"
         x={center.x + 0.1}
         y={center.y - 0.1}
@@ -23,7 +23,7 @@ export default function VectorExample() {
         height={1}
       />
       <Image
-        src={mafs.src}
+        href={image.src ?? image}
         anchor="tr"
         x={center.x - 0.1}
         y={center.y - 0.1}
@@ -31,7 +31,7 @@ export default function VectorExample() {
         height={1}
       />
       <Image
-        src={mafs.src}
+        href={image.src ?? image}
         anchor="bl"
         x={center.x + 0.1}
         y={center.y + 0.1}
@@ -39,7 +39,7 @@ export default function VectorExample() {
         height={1}
       />
       <Image
-        src={mafs.src}
+        href={image.src ?? image}
         anchor="br"
         x={center.x - 0.1}
         y={center.y + 0.1}

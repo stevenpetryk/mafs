@@ -5,6 +5,7 @@ import Link from "next/link"
 import CodeAndExample from "components/CodeAndExample"
 
 import PizzaSliceExample from "guide-examples/custom/pizza-slice"
+import DebugExample from "guide-examples/debug/DebugExample"
 import Example from "guide-examples/debug/PaneVisualizerExample"
 import type { Metadata } from "next"
 
@@ -16,8 +17,23 @@ export default function DebugPage() {
   return (
     <>
       <p>
-        Mafs provides a few utilities for debugging or experimentation, underneath the{" "}
-        <code>Debug</code> namespace.
+        Mafs provides several utilities for debugging your visualizations. Perhaps the most useful
+        utility the <code>debug</code> prop on <code>Mafs</code>. Adding this prop will force a
+        larger SVG viewBox and add a red border around the <em>actual</em> viewBox.
+      </p>
+
+      <CodeAndExample example={DebugExample} />
+
+      <p>
+        In the above example, you can gain an insight into how Mafs lazy-loads the coordinate grid
+        and the function being visualized. In the bottom left corner, there is also some debug
+        information pinned to the viewport. More on that below.
+      </p>
+
+      <h2>Other utilities</h2>
+
+      <p>
+        Mafs also provides some debug components under the <code>Debug</code> namespace.
       </p>
 
       <Code source={`import { Debug } from "mafs"`} language="tsx" />

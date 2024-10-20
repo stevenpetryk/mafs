@@ -12,6 +12,7 @@ import invariant from "tiny-invariant"
 import { useCamera } from "../gestures/useCamera"
 import { useWheelEnabler } from "../gestures/useWheelEnabler"
 import { TestContext } from "../context/TestContext"
+import { Debug } from "../debug"
 
 export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
@@ -49,6 +50,9 @@ export type MafsProps = React.PropsWithChildren<{
    * this prop is now ignored.
    */
   ssr?: boolean
+
+  /** Take a peek outside the viewbox to make sure things are rendering properly. */
+  debug?: boolean
 }>
 
 export function Mafs({
@@ -60,6 +64,7 @@ export function Mafs({
   preserveAspectRatio = "contain",
   children,
   ssr = false,
+  debug = false,
   onClick = undefined,
 }: MafsProps) {
   const testContext = React.useContext(TestContext)
@@ -92,6 +97,7 @@ export function Mafs({
           preserveAspectRatio={preserveAspectRatio}
           ssr={ssr}
           onClick={onClick}
+          debug={debug}
         >
           {children}
         </MafsCanvas>
@@ -105,7 +111,9 @@ type MafsCanvasProps = {
   height: number
   desiredCssWidth: string
   rootRef: React.RefObject<HTMLDivElement>
-} & Required<Pick<MafsProps, "pan" | "zoom" | "viewBox" | "preserveAspectRatio" | "ssr">> &
+} & Required<
+  Pick<MafsProps, "pan" | "zoom" | "viewBox" | "preserveAspectRatio" | "ssr" | "debug">
+> &
   Pick<MafsProps, "children" | "onClick">
 
 function MafsCanvas({
@@ -119,6 +127,7 @@ function MafsCanvas({
   preserveAspectRatio,
   children,
   onClick,
+  debug,
 }: MafsCanvasProps) {
   let minZoom = 1
   let maxZoom = 1
@@ -306,7 +315,12 @@ function MafsCanvas({
             <svg
               width={width}
               height={height}
-              viewBox={`${viewBoxX} ${viewBoxY} ${width} ${height}`}
+              viewBox={[
+                viewBoxX - (debug ? 150 : 0),
+                viewBoxY - (debug ? 150 : 0),
+                width + (debug ? 300 : 0),
+                height + (debug ? 300 : 0),
+              ].join(" ")}
               preserveAspectRatio="xMidYMin"
               style={{
                 width: desiredCssWidth,
@@ -318,6 +332,18 @@ function MafsCanvas({
               }}
             >
               {children}
+              {debug && (
+                <rect
+                  x={viewBoxX}
+                  y={viewBoxY}
+                  width={width}
+                  height={height}
+                  fill="none"
+                  stroke="red"
+                  style={{ outline: "9999px solid #f002" }}
+                />
+              )}
+              {debug && <Debug.ViewportInfo />}
             </svg>
           </PaneManager>
         </TransformContext.Provider>

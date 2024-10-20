@@ -20,6 +20,7 @@ import VectorFieldExample from "../docs/components/guide-examples/VectorFieldExa
 import PizzaMarch from "../docs/components/guide-examples/custom/pizza-march"
 import PizzaSlice from "../docs/components/guide-examples/custom/pizza-slice"
 import PointCloud from "../docs/components/guide-examples/custom/point-cloud"
+import DebugExample from "../docs/components/guide-examples/debug/DebugExample"
 import PaneVisualizerExample from "../docs/components/guide-examples/debug/PaneVisualizerExample"
 import DynamicMovablePoints from "../docs/components/guide-examples/display/DynamicMovablePoints"
 import PointsAlongFunction from "../docs/components/guide-examples/display/PointsAlongFunction"
@@ -185,6 +186,15 @@ test("guide-examples/custom/PointCloud", async ({ mount, page }) =>
     page,
     <TestContextProvider value={{ overrideHeight: 500 }}>
       <PointCloud />
+    </TestContextProvider>,
+  ))
+
+test("guide-examples/debug/DebugExample", async ({ mount, page }) =>
+  await visualTest(
+    mount,
+    page,
+    <TestContextProvider value={{ overrideHeight: 500 }}>
+      <DebugExample />
     </TestContextProvider>,
   ))
 

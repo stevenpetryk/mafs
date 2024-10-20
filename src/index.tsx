@@ -35,6 +35,9 @@ export type { PointProps } from "./display/Point"
 export { Vector } from "./display/Vector"
 export type { VectorProps } from "./display/Vector"
 
+export { Image } from "./display/Image"
+export type { ImageProps } from "./display/Image"
+
 export { Text } from "./display/Text"
 export type { TextProps, CardinalDirection } from "./display/Text"
 

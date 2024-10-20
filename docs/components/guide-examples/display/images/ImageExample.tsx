@@ -1,12 +1,6 @@
 "use client"
 
-import {
-  Coordinates,
-  Debug,
-  Image,
-  Mafs,
-  useMovablePoint,
-} from "mafs"
+import { Coordinates, Image, Mafs } from "mafs"
 
 import mafs from "./mafs.png"
 

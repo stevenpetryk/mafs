@@ -977,7 +977,7 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
   mafs@file:mafs.tgz:
-    resolution: {integrity: sha512-AyLu9cKkFYc11fgJnuOXhBJPvyPuzQCsImsvmr/6KARMQTsFLk5UnphfQmQVWAXwDVA0lv1ed52FoMRXf3vmwA==, tarball: file:mafs.tgz}
+    resolution: {integrity: sha512-8qf2JGfWlhUmpBeEebD2bi/6itiIRibSqEH2zMW6cMfHW9mn/Rov9X5WBdOQovIcrDeG0OLsaetcOl/xu8vYSQ==, tarball: file:mafs.tgz}
     version: 0.20.1
     engines: {node: '>=20.11.0'}
     peerDependencies:

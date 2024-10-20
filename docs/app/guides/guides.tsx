@@ -10,6 +10,7 @@ import {
   TextIcon,
   CursorArrowIcon,
   PlayIcon,
+  ImageIcon,
 } from "@radix-ui/react-icons"
 
 import {
@@ -62,6 +63,7 @@ export const Guides: Section[] = [
       { title: "Plots", icon: FunctionIcon, slug: "plots" },
       { title: "Text", icon: TextIcon, slug: "text" },
       { title: "Vectors", icon: ArrowTopRightIcon, slug: "vectors" },
+      { title: "Images", icon: ImageIcon, slug: "images" },
       { separator: true },
       { title: "Transform", icon: RotateCounterClockwiseIcon, slug: "transform" },
       { title: "Debug", icon: DebugIcon, slug: "debug" },

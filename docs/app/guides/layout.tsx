@@ -20,7 +20,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
             rounded-md
             flex-shrink-0
 
-            bg-gray-200 dark:bg-gray-800 dark:border-gray-700 border md:bg-transparent md:border-none
+            bg-gray-200 dark:bg-gray-800 dark:border-gray-700 border md:bg-transparent md:dark:bg-transparent md:border-none
             md:w-56 mb-12
 
             md:pb-12 md:pr-4

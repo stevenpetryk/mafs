@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.21.0
+
+- Adds an `Image` component for embedding images in your visualizations. ([#174](https://github.com/stevenpetryk/mafs/pull/174)).
+- Adds a `debug` prop to `Mafs` to make it easy to peek outside the current camera's view for debugging lazy-loaded visualizations.
+
 ## 0.20.1
 
 - Fixes 'overhandling' of arrow keypresses ([#169](https://github.com/stevenpetryk/mafs/pull/169))

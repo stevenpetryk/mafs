@@ -174,13 +174,13 @@ function MafsCanvas({
   const ySpan = yMax - yMin
 
   const viewTransform = React.useMemo(() => {
-    const scaleX = (1 / xSpan) * width
-    const scaleY = (-1 / ySpan) * height
+    const scaleX = round((1 / xSpan) * width, 5)
+    const scaleY = round((-1 / ySpan) * height, 5)
     return vec.matrixBuilder().scale(scaleX, scaleY).get()
   }, [height, width, xSpan, ySpan])
 
-  const viewBoxX = (xMin / (xMax - xMin)) * width
-  const viewBoxY = (yMax / (yMin - yMax)) * height
+  const viewBoxX = round((xMin / (xMax - xMin)) * width, 10)
+  const viewBoxY = round((yMax / (yMin - yMax)) * height, 10)
 
   const inverseViewTransform = vec.matrixInvert(viewTransform)
 

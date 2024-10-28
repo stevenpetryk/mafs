@@ -6,6 +6,23 @@ export function round(value: number, precision = 0): number {
   return Math.round(value * multiplier) / multiplier
 }
 
+// TODO: Maybe better name (even though this one perfectly describes its purpose)
+export function roundToNearestPowerOf10(value: number): number {
+  return 10 ** Math.floor(Math.log10(value))
+}
+
+export function pickClosestToValue(value: number, options: number[]) {
+  // [Distance from value to option, index of option]
+  const distanceMap = options
+    .map((option, i) => [Math.abs(option - value), i])
+    .sort((a, b) => a[0] - b[0])
+
+	const closest = distanceMap[0];
+
+	// [value, index]
+  return [options[closest[1]], closest[1]];
+}
+
 export function range(min: number, max: number, step = 1): number[] {
   const result = []
   for (let i = min; i < max - step / 2; i += step) {

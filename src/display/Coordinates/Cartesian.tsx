@@ -1,9 +1,11 @@
 import * as React from "react"
-import { range, round } from "../../math"
+import { pickClosestToValue, range, round, roundToNearestPowerOf10 } from "../../math"
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
 import { vec } from "../../vec"
 import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
+import { useCoordinateContext } from "../../context/CoordinateContext"
+import { useSpanContext } from "../../context/SpanContext"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
 let incrementer = 0
@@ -11,21 +13,60 @@ let incrementer = 0
 type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
 
 export interface CartesianCoordinatesProps {
-  xAxis?: GridAxisOptions | false
-  yAxis?: GridAxisOptions | false
+  xAxis?: GridAxisOptions | false | "auto"
+  yAxis?: GridAxisOptions | false | "auto"
   subdivisions?: number | false
 }
 
 export function Cartesian({
-  xAxis: xAxisOverrides,
-  yAxis: yAxisOverrides,
+  xAxis: xAxisProp,
+  yAxis: yAxisProp,
   subdivisions = false,
 }: CartesianCoordinatesProps) {
-  const xAxisEnabled = xAxisOverrides !== false
-  const yAxisEnabled = yAxisOverrides !== false
+  const xAxisEnabled = xAxisProp !== false
+  const yAxisEnabled = yAxisProp !== false
 
-  const xAxis = { subdivisions, ...defaultAxisOptions, ...xAxisOverrides } as GridAxisOptions
-  const yAxis = { subdivisions, ...defaultAxisOptions, ...yAxisOverrides } as GridAxisOptions
+  // Better name? Also `3.5` is a magic number that makes it feel right to me,
+  // it could have any other value (and perhaps it should be computed).
+  // It *kind of* represents how many major grid lines can be on screen at once,
+  // e.g. if it's 4 then there can be at most 4 major gridlines on the canvas.
+  //
+  // it seems like its behavior isn't quite that simple but it roughly explains why we divide at all here
+
+  const mathWidth = useSpanContext().xSpan / 3.5
+
+  const nearestPowerOf10 = roundToNearestPowerOf10(mathWidth)
+
+  // This should be a prop or something later, just a constant right now
+  const multiples = [
+    { value: 1, subdivisions: 5 },
+    { value: 2, subdivisions: 4 },
+    { value: 5, subdivisions: 5 },
+  ]
+
+  const autoClosest = pickClosestToValue(
+    mathWidth,
+    multiples.map((multiple) => nearestPowerOf10 * multiple.value),
+  )
+
+	const autoLines = autoClosest[0];
+  const autoSubdivisions = multiples[autoClosest[1]].subdivisions
+
+  const xAxisOverrides =
+    xAxisProp === "auto" ? { lines: autoLines, subdivisions: autoSubdivisions } : xAxisProp !== false ? xAxisProp : false
+  const yAxisOverrides =
+    yAxisProp === "auto" ? { lines: autoLines, subdivisions: autoSubdivisions } : yAxisProp !== false ? yAxisProp : false
+
+  const xAxis = {
+    subdivisions,
+    ...defaultAxisOptions,
+    ...xAxisOverrides,
+  } as GridAxisOptions
+  const yAxis = {
+    subdivisions,
+    ...defaultAxisOptions,
+    ...yAxisOverrides,
+  } as GridAxisOptions
 
   const id = React.useMemo(() => `cartesian-${incrementer++}`, [])
 

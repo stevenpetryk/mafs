@@ -17,10 +17,10 @@ export function pickClosestToValue(value: number, options: number[]) {
     .map((option, i) => [Math.abs(option - value), i])
     .sort((a, b) => a[0] - b[0])
 
-	const closest = distanceMap[0];
+  const closest = distanceMap[0]
 
-	// [value, index]
-  return [options[closest[1]], closest[1]];
+  // [value, index]
+  return [options[closest[1]], closest[1]]
 }
 
 export function range(min: number, max: number, step = 1): number[] {

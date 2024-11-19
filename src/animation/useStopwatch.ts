@@ -15,6 +15,10 @@ export interface Stopwatch {
   start: () => void
   /** Stops and resets the timer. */
   stop: () => void
+  /** Pauses the timer. */
+  pause: () => void
+  /** Resumes the timer. */
+  resume: () => void
 
   /** Sets the current time to a certain value.
    * @throws an error if the time is outside of the given range.
@@ -45,7 +49,7 @@ export function useStopwatch(options?: StopwatchArguments): Stopwatch {
         return
       }
 
-      setTime(Math.min(deltaTime, endTime))
+      setTime(Math.min(time + deltaTime, endTime))
       request = window.requestAnimationFrame(tick)
     }
 
@@ -58,12 +62,21 @@ export function useStopwatch(options?: StopwatchArguments): Stopwatch {
     return () => window.cancelAnimationFrame(request)
   }, [playing, endTime])
 
-  const start = React.useCallback(() => setPlaying(true), [])
+  const start = React.useCallback(() => {
+    setTime(startTime)
+    startClockTime.current = null
+    setPlaying(true)
+  }, [startTime])
+  const pause = React.useCallback(() => setPlaying(false), [])
+  const resume = React.useCallback(() => {
+    startClockTime.current = null
+    setPlaying(true)
+  }, [])
   const stop = React.useCallback(() => {
     startClockTime.current = null
     setPlaying(false)
     setTime(startTime)
   }, [startTime])
 
-  return { time, setTime: (time) => setTime(time * 1000), start, stop }
+  return {time, setTime: (time) => setTime(time * 1000), start, stop, pause, resume}
 }

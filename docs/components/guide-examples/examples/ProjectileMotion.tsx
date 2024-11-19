@@ -32,11 +32,14 @@ export default function ProjectileMotion() {
     return [xVelocity * t, yVelocity * t - 0.5 * g * t ** 2]
   }
   const [restingX, restingY] = positionAtTime(timeOfFlight)
+  const [paused, setPaused] = React.useState(false)
 
   const {
     time: t,
     start,
     stop,
+    pause,
+    resume
   } = useStopwatch({
     endTime: timeOfFlight,
   })
@@ -110,14 +113,43 @@ export default function ProjectileMotion() {
       <div className="p-4 bg-black border-t border-gray-900 space-x-4">
         <button
           className="bg-gray-200 text-black font-bold px-4 py-1 rounded-sm"
-          onClick={start}
+          onClick={() => {
+            start()
+            setPaused(false)
+          }}
           disabled={yVelocity <= 0}
         >
           Start
         </button>
+        {
+          paused ? (
+            <button
+              className="bg-gray-200 text-black font-bold px-4 py-1 rounded-sm"
+              onClick={() => {
+                resume()
+                setPaused(false)
+              }}
+            >
+              Resume
+            </button>
+          ) : (
+            <button
+              className="bg-gray-200 text-black font-bold px-4 py-1 rounded-sm"
+              onClick={() => {
+                pause()
+                setPaused(true)
+              }}
+            >
+              Pause
+            </button>
+          )
+        }
         <button
           className="bg-gray-200 text-black font-bold px-4 py-1 rounded-sm"
-          onClick={stop}
+          onClick={() => {
+            stop()
+            setPaused(false)
+          }}
         >
           Reset
         </button>

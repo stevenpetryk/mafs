@@ -4,7 +4,6 @@ import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
 import { vec } from "../../vec"
 import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
-import { useCoordinateContext } from "../../context/CoordinateContext"
 import { useSpanContext } from "../../context/SpanContext"
 
 // This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
@@ -49,13 +48,21 @@ export function Cartesian({
     multiples.map((multiple) => nearestPowerOf10 * multiple.value),
   )
 
-	const autoLines = autoClosest[0];
+  const autoLines = autoClosest[0]
   const autoSubdivisions = multiples[autoClosest[1]].subdivisions
 
   const xAxisOverrides =
-    xAxisProp === "auto" ? { lines: autoLines, subdivisions: autoSubdivisions } : xAxisProp !== false ? xAxisProp : false
+    xAxisProp === "auto"
+      ? { lines: autoLines, subdivisions: autoSubdivisions }
+      : xAxisProp !== false
+        ? xAxisProp
+        : false
   const yAxisOverrides =
-    yAxisProp === "auto" ? { lines: autoLines, subdivisions: autoSubdivisions } : yAxisProp !== false ? yAxisProp : false
+    yAxisProp === "auto"
+      ? { lines: autoLines, subdivisions: autoSubdivisions }
+      : yAxisProp !== false
+        ? yAxisProp
+        : false
 
   const xAxis = {
     subdivisions,

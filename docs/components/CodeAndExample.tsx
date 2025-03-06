@@ -3,9 +3,25 @@
 import * as React from "react"
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { StackBlitzIcon } from "./icons"
+import { createStarryNight } from "@wooorm/starry-night"
+import Editor from "react-simple-code-editor"
+import { useRunner } from "react-runner"
+
+// @ts-expect-error this works but typescript doesn't like it lol
+import tsx from "@wooorm/starry-night/source.tsx"
+import { toJsxRuntime } from "hast-util-to-jsx-runtime"
+
+// @ts-expect-error yk how it is
+import { Fragment, jsx, jsxs } from "react/jsx-runtime"
+
+const starryNightPromise = createStarryNight([tsx])
 
 import sdk from "@stackblitz/sdk"
 import endent from "endent"
+
+import * as mafs from "mafs"
+
+import "./CodeAndExample.css"
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,10 +34,51 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
     $component: React.ComponentType
     $source: string
     $highlightedSource: React.ReactNode
+    $width: number
+    $height: number
   }
+
+  const runnerScope = React.useMemo(
+    () => ({
+      import: {
+        mafs: {
+          ...mafs,
+          Mafs: (props: mafs.MafsProps) => (
+            <mafs.Mafs
+              {...props}
+              width={
+                props.width
+                  ? props.width
+                  : isNaN(typedExample.$width)
+                    ? undefined
+                    : typedExample.$width
+              }
+              height={
+                props.height
+                  ? props.height
+                  : isNaN(typedExample.$height)
+                    ? undefined
+                    : typedExample.$height
+              }
+            />
+          ),
+        },
+      },
+    }),
+    [],
+  )
+
+  const starryNight = React.use(starryNightPromise)
+  const scope = starryNight.flagToScope("tsx")!
+
   const Component = typedExample.$component
-  const source = typedExample.$source
+  const [source, setSource] = React.useState(typedExample.$source)
   const highlightedSource = typedExample.$highlightedSource
+
+  const [clientLoaded, setClientLoaded] = React.useState(false)
+  React.useEffect(() => {
+    setClientLoaded(true)
+  }, [])
 
   if (typeof Component !== "function") {
     throw new Error(`CodeAndExample: expected example to be a component ${source}`)
@@ -31,9 +88,23 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
   const [expandedState, setExpanded] = React.useState(false)
   const expanded = collapsible ? expandedState : true
 
+  const { element, error } = useRunner({ code: source, scope: runnerScope })
+
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
-      <div className={`unround-mafs z-10`}>{<Component />}</div>
+      <div className={`unround-mafs z-10 relative`}>
+        {!clientLoaded ? <Component /> : element}
+        <div
+          className="w-full h-full absolute top-0 left-0 bg-black/50 p-12"
+          style={{ display: error ? "block" : "none" }}
+        >
+          <div className="w-full h-full bg-gray-900 dark:bg-black text-gray-100 rounded-lg border-[1px] border-red-300 p-4">
+            <h4 className="text-gray-100">An error occured in your code!</h4>
+            <hr className="my-2" />
+            <code>{error}</code>
+          </div>
+        </div>
+      </div>
 
       <div className="relative">
         <div
@@ -55,7 +126,18 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
               `}
             >
               <pre className={`transition ${expanded ? "" : "opacity-40"}`}>
-                <code className="language language-tsx">{highlightedSource}</code>
+                {!clientLoaded ? (
+                  <code className="language language-tsx">{highlightedSource}</code>
+                ) : (
+                  <Editor
+                    textareaClassName="simple-code-editor-textarea"
+                    value={source}
+                    onValueChange={(code) => setSource(code)}
+                    highlight={(code) =>
+                      toJsxRuntime(starryNight.highlight(code, scope), { Fragment, jsx, jsxs })
+                    }
+                  />
+                )}
               </pre>
             </div>
 
@@ -64,6 +146,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
                 sticky flex text-sm items-center justify-center gap-4 bottom-0 p-4
                 ${collapsible && expanded ? "pt-0" : ""}
                 row-start-2 row-span-1 col-start-1 col-span-1
+                pointer-events-none
               `}
               aria-hidden="true"
             >
@@ -77,7 +160,9 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
                 font-semibold
                 flex gap-2 items-center
                 shadow-xl
-                px-4 py-2 rounded-full`}
+                px-4 py-2 rounded-full
+                pointer-events-auto
+                `}
                 >
                   <span>Show {expanded ? "less" : "all"}</span>
                   {expanded ? <MinusIcon /> : <PlusIcon />}
@@ -93,6 +178,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
                   flex gap-2 items-center  px-4 py-2 rounded-full
                   bg-slate-800 hover:bg-slate-700 focus:bg-slate-700
                   dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700
+                  pointer-events-auto
                 "
               >
                 <StackBlitzIcon className="text-[#1389fd]" />

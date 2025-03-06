@@ -19,15 +19,19 @@ const starryNightPromise = createStarryNight(all)
 export default async function guideExampleLoader(source) {
   let cleanedSource = source
 
+  const heightRegex = /\s+height=\{([^}]*)\}/g
+  const widthRegex = /\s+width=\{([^}]*)\}/g
+
   const remove = [
-    /\s+height=\{[^}]*\}/g,
-    /\s+width=\{.*\}\s*/g,
+    heightRegex,
+    widthRegex,
     /.*prettier-ignore.*\n/gm,
     /^import React.* from "react"/gm,
-    /^export default [A-z]+$\n/gm,
-    /^export default /m,
     /"use client"/m,
   ]
+
+  const height = parseFloat(heightRegex.exec(cleanedSource)?.[1] || "300");
+  const width = parseFloat(widthRegex.exec(cleanedSource)?.[1] || "NaN");
 
   remove.forEach((regex) => {
     cleanedSource = cleanedSource.replace(regex, "")
@@ -45,7 +49,7 @@ export default async function guideExampleLoader(source) {
 
   const useClientRegex = /'use client'|"use client"/
   const usesClient = useClientRegex.test(source)
-
+  
   const transformedSource = source
     .replace(/export default/g, "const $default =")
     .replace(useClientRegex, "")
@@ -61,6 +65,8 @@ export default async function guideExampleLoader(source) {
     $default.$source = ${JSON.stringify(cleanedSource)};
     $default.$component = $default;
     $default.$highlightedSource = toJsxRuntime(${JSON.stringify(tree)}, { Fragment, jsx, jsxs });
+    $default.$width = ${isNaN(width) ? "undefined" : JSON.stringify(width)};
+    $default.$height = ${isNaN(width) ? "300" : JSON.stringify(height)};
     export default $default;
   `
 }

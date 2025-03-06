@@ -3,6 +3,8 @@ import BezierCurves from "guide-examples/examples/BezierCurves"
 import Link from "next/link"
 import type { Metadata } from "next"
 
+import * as easingFunctions from "js-easing-functions"
+
 export const metadata: Metadata = {
   title: "Bezier curves",
 }
@@ -15,7 +17,12 @@ export default function BezierCurvesPage() {
         <Link href="https://www.youtube.com/watch?v=aVwxzDHniEw">video on Bézier curves</Link>.
       </p>
 
-      <CodeAndExample example={BezierCurves} />
+      <CodeAndExample
+        example={BezierCurves}
+        extraImports={{
+          "js-easing-functions": easingFunctions,
+        }}
+      />
     </>
   )
 }

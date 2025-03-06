@@ -5,6 +5,8 @@ import ImageExample from "guide-examples/display/images/ImageExample"
 import ImageAnchorExample from "guide-examples/display/images/ImageAnchorExample"
 import type { Metadata } from "next"
 
+import mafsImage from "../../../../components/guide-examples/display/images/mafs.png"
+
 export const metadata: Metadata = {
   title: "Images",
 }
@@ -17,7 +19,12 @@ function Images() {
         quality of life improvements tacked on (see below).
       </p>
 
-      <CodeAndExample example={ImageExample} />
+      <CodeAndExample
+        example={ImageExample}
+        extraImports={{
+          "./mafs.png": mafsImage,
+        }}
+      />
 
       <PropTable of={"Image"} />
 
@@ -48,7 +55,12 @@ function Images() {
         the image.
       </p>
 
-      <CodeAndExample example={ImageAnchorExample} />
+      <CodeAndExample
+        example={ImageAnchorExample}
+        extraImports={{
+          "./mafs.png": mafsImage,
+        }}
+      />
     </>
   )
 }

@@ -2,7 +2,7 @@
 
 // prettier-ignore
 import { Mafs, Plot, Point, Coordinates, useMovablePoint } from "mafs"
-import range from "lodash/range"
+import { range } from "lodash"
 
 export default function PointsAlongFunction() {
   const fn = (x: number) => (x / 2) ** 2

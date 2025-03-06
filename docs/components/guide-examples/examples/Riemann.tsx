@@ -10,8 +10,7 @@ import {
   Coordinates,
 } from "mafs"
 
-import sumBy from "lodash/sumBy"
-import range from "lodash/range"
+import {range, sumBy} from "lodash"
 
 interface Partition {
   polygon: [number, number][]

@@ -2,7 +2,7 @@
 
 // prettier-ignore
 import { Mafs, Coordinates, MovablePoint, useMovablePoint, Line, Theme, vec } from "mafs"
-import range from "lodash/range"
+import { range } from "lodash"
 
 export default function DynamicMovablePoints() {
   const start = useMovablePoint([-3, -1])

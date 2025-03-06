@@ -2,7 +2,7 @@
 
 // prettier-ignore
 import { Mafs, Transform, Vector, Coordinates, useMovablePoint, Circle, Polygon, vec, Theme } from "mafs"
-import clamp from "lodash/clamp"
+import { clamp } from "lodash"
 
 export default function SnapPoint() {
   return (

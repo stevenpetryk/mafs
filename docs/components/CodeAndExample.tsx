@@ -28,15 +28,14 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   example: any
   collapsible?: boolean
+  extraImports?: Record<string, any>
 }
 
-function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props) {
+function CodeAndExample({ collapsible: collapsibleProp = true, extraImports = {}, example }: Props) {
   const typedExample = example as {
     $component: React.ComponentType
     $source: string
     $highlightedSource: React.ReactNode
-    $width: number
-    $height: number
   }
 
   const runnerScope = React.useMemo(
@@ -44,28 +43,10 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
       import: {
         react: React,
         mafs: {
-          ...mafs,
-          Mafs: (props: mafs.MafsProps) => (
-            <mafs.Mafs
-              {...props}
-              width={
-                props.width
-                  ? props.width
-                  : isNaN(typedExample.$width)
-                    ? undefined
-                    : typedExample.$width
-              }
-              height={
-                props.height
-                  ? props.height
-                  : isNaN(typedExample.$height)
-                    ? undefined
-                    : typedExample.$height
-              }
-            />
-          ),
+          ...mafs
         },
-        lodash
+        lodash,
+        ...extraImports
       },
     }),
     [],
@@ -95,13 +76,13 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
 
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
-      <div className={`unround-mafs z-10 relative`} style={{ minHeight: isNaN(typedExample.$height) ? 300 : typedExample.$height }}>
+      <div className={`unround-mafs z-10 relative`} style={{ minHeight: 100 }}>
         {!clientLoaded ? <Component /> : element}
         <div
-          className="w-full h-full absolute top-0 left-0 bg-black/50 p-12"
+          className="w-full h-full absolute top-0 left-0 bg-black/50 p-6"
           style={{ display: error ? "block" : "none" }}
         >
-          <div className="w-full h-full bg-gray-900 dark:bg-black text-gray-100 rounded-lg border-[1px] border-red-300 p-4">
+          <div className="w-full h-full overflow-y-auto bg-gray-900 dark:bg-black text-gray-100 rounded-lg border-[1px] border-red-300 p-4">
             <h4 className="text-gray-100">An error occured in your code!</h4>
             <hr className="my-2" />
             <code>{error}</code>

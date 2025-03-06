@@ -11,7 +11,7 @@ import {
   ConstraintFunction,
 } from "mafs"
 
-import range from "lodash/range"
+import { range } from "lodash"
 import { easeInOutCubic } from "js-easing-functions"
 
 interface Partition {

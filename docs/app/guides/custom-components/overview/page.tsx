@@ -2,7 +2,7 @@ import PizzaMarch from "guide-examples/custom/pizza-march"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Custom components",
+  title: "Overview",
 }
 
 export default function CustomPage() {

@@ -20,6 +20,7 @@ import sdk from "@stackblitz/sdk"
 import endent from "endent"
 
 import * as mafs from "mafs"
+import * as lodash from "lodash";
 
 import "./CodeAndExample.css"
 
@@ -63,6 +64,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
             />
           ),
         },
+        lodash
       },
     }),
     [],

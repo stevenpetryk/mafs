@@ -42,6 +42,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
   const runnerScope = React.useMemo(
     () => ({
       import: {
+        react: React,
         mafs: {
           ...mafs,
           Mafs: (props: mafs.MafsProps) => (
@@ -94,7 +95,7 @@ function CodeAndExample({ collapsible: collapsibleProp = true, example }: Props)
 
   return (
     <div className="w-auto sm:text-base text-sm -m-6 md:m-0 dark:shadow-xl">
-      <div className={`unround-mafs z-10 relative`}>
+      <div className={`unround-mafs z-10 relative`} style={{ minHeight: isNaN(typedExample.$height) ? 300 : typedExample.$height }}>
         {!clientLoaded ? <Component /> : element}
         <div
           className="w-full h-full absolute top-0 left-0 bg-black/50 p-12"

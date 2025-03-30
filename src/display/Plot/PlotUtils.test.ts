@@ -1,3 +1,4 @@
+import { test, expect } from "vitest"
 import { sample } from "./PlotUtils"
 
 test("sample", () => {

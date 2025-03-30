@@ -11,7 +11,7 @@
       {
         devShells.default = pkgs.mkShell {
           packages = [
-            pkgs.nodejs_20
+            pkgs.nodejs_22
 
             (pkgs.writeScriptBin "pnpm" ''
               corepack pnpm "$@"

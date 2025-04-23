@@ -284,3 +284,22 @@ export function LinearAlgebraIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function SceneIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect x="0.5" y="1.5" width="14" height="12" rx="1" stroke="currentColor" />
+      <path
+        d="M7.25423 5.3511L4.33043 9.52796C4.19124 9.72679 4.33349 10 4.5762 10H10.4238C10.6665 10 10.8088 9.72679 10.6696 9.52796L7.74577 5.3511C7.62634 5.18048 7.37366 5.18048 7.25423 5.3511Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}

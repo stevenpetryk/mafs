@@ -22,7 +22,10 @@ function evaluateLogical(expr: string, vars: Record<string, boolean>): boolean {
   // Replace variable names with their boolean values (longest first to avoid partial matches)
   const sortedVarNames = Object.keys(vars).sort((a, b) => b.length - a.length)
   for (const varName of sortedVarNames) {
-    processed = processed.replace(new RegExp(`\\b${escapeRegex(varName)}\\b`, "g"), vars[varName] ? "T" : "F")
+    processed = processed.replace(
+      new RegExp(`\\b${escapeRegex(varName)}\\b`, "g"),
+      vars[varName] ? "T" : "F",
+    )
   }
 
   // Parse with recursive descent
@@ -130,7 +133,7 @@ export function TruthTable({
     for (let i = 0; i < numRows; i++) {
       const assignment: Record<string, boolean> = {}
       for (let j = 0; j < variables.length; j++) {
-        assignment[variables[j]] = !!(i >> (variables.length - 1 - j) & 1)
+        assignment[variables[j]] = !!((i >> (variables.length - 1 - j)) & 1)
       }
       result.push([assignment])
     }
@@ -139,9 +142,7 @@ export function TruthTable({
 
   // Compute correct answers
   const correctAnswers = React.useMemo(() => {
-    return rows.map((assignment) =>
-      expressions.map((expr) => evaluateLogical(expr, assignment)),
-    )
+    return rows.map((assignment) => expressions.map((expr) => evaluateLogical(expr, assignment)))
   }, [rows, expressions])
 
   // Interactive mode state: user's answers

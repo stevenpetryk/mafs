@@ -126,13 +126,13 @@
   width: 100%;
   height: 6px;
   border-radius: 3px;
-  background:
-    linear-gradient(
-      to right,
-      var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) 0%,
-      var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) var(--mafs-slider-percent, 50%),
-      #ddd var(--mafs-slider-percent, 50%),
-      #ddd 100%);
+  background: linear-gradient(
+    to right,
+    var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) 0%,
+    var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) var(--mafs-slider-percent, 50%),
+    #ddd var(--mafs-slider-percent, 50%),
+    #ddd 100%
+  );
   outline: none;
   cursor: pointer;
 }
@@ -358,10 +358,7 @@
   overflow: visible;
 }
 .mathflow-renderer {
-  font-family:
-    "Computer Modern",
-    Georgia,
-    serif;
+  font-family: "Computer Modern", Georgia, serif;
   font-variant-numeric: tabular-nums;
   max-width: 800px;
   margin: 0 auto;
@@ -378,7 +375,7 @@
   --grid-line-subdivision-color: #f0f0f0;
   --mafs-origin-color: #888;
 }
-.mathflow-renderer[data-theme=dark] {
+.mathflow-renderer[data-theme="dark"] {
   --mafs-bg: #1a1a2e;
   --mafs-fg: #e0e0e0;
   --mafs-line-color: #333;

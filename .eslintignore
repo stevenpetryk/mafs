@@ -1,5 +1,6 @@
 node_modules
 build
 *.config.js
+demo/demo-bundle.*
 
 tests/frameworks/

@@ -65,7 +65,10 @@ export function compileWithParams(
  * @param params - Current parameter values
  * @returns The numeric result, or NaN on failure
  */
-export function evaluateNumeric(expression: string | number, params: Record<string, number>): number {
+export function evaluateNumeric(
+  expression: string | number,
+  params: Record<string, number>,
+): number {
   if (typeof expression === "number") return expression
 
   const substituted = substituteParams(expression, params)

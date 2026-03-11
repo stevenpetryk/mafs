@@ -1,137 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MathFlow — Interactive Math Visualization Showcase</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
-  <link rel="stylesheet" href="./demo-bundle.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MathFlow — Interactive Math Visualization Showcase</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <link rel="stylesheet" href="./demo-bundle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: "DM Sans", "Computer Modern", Georgia, "Times New Roman", serif;
-      background: #FAF8F5;
-      color: #1a1a1a;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+      body {
+        font-family: "DM Sans", "Computer Modern", Georgia, "Times New Roman", serif;
+        background: #faf8f5;
+        color: #1a1a1a;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    .demo-app {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 24px 20px 60px;
-    }
+      .demo-app {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 24px 20px 60px;
+      }
 
-    .demo-header {
-      text-align: center;
-      padding: 40px 0 24px;
-    }
+      .demo-header {
+        text-align: center;
+        padding: 40px 0 24px;
+      }
 
-    .demo-logo {
-      font-size: 2.4em;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #7c58ff, #58a6ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+      .demo-logo {
+        font-size: 2.4em;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #7c58ff, #58a6ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
 
-    .demo-tagline {
-      font-size: 1em;
-      color: #666;
-      margin-top: 4px;
-    }
+      .demo-tagline {
+        font-size: 1em;
+        color: #666;
+        margin-top: 4px;
+      }
 
-    .demo-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #eee;
-    }
+      .demo-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
 
-    .demo-tab {
-      padding: 6px 14px;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      background: white;
-      color: #555;
-      font-size: 13px;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
+      .demo-tab {
+        padding: 6px 14px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        background: white;
+        color: #555;
+        font-size: 13px;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
 
-    .demo-tab:hover {
-      border-color: #aaa;
-      color: #1a1a1a;
-    }
+      .demo-tab:hover {
+        border-color: #aaa;
+        color: #1a1a1a;
+      }
 
-    .demo-tab-active {
-      background: #7c58ff;
-      border-color: #7c58ff;
-      color: white;
-    }
+      .demo-tab-active {
+        background: #7c58ff;
+        border-color: #7c58ff;
+        color: white;
+      }
 
-    .demo-tab-active:hover {
-      color: white;
-      border-color: #6a48e0;
-    }
+      .demo-tab-active:hover {
+        color: white;
+        border-color: #6a48e0;
+      }
 
-    .demo-controls {
-      display: flex;
-      justify-content: flex-end;
-      padding: 12px 0;
-    }
+      .demo-controls {
+        display: flex;
+        justify-content: flex-end;
+        padding: 12px 0;
+      }
 
-    .demo-json-toggle {
-      padding: 4px 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background: white;
-      color: #555;
-      font-size: 12px;
-      font-family: monospace;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
+      .demo-json-toggle {
+        padding: 4px 14px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: white;
+        color: #555;
+        font-size: 12px;
+        font-family: monospace;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
 
-    .demo-json-toggle:hover {
-      border-color: #999;
-      color: #1a1a1a;
-    }
+      .demo-json-toggle:hover {
+        border-color: #999;
+        color: #1a1a1a;
+      }
 
-    .demo-json {
-      padding: 16px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      background: #f8f8f8;
-      font-family: "SF Mono", "Fira Code", monospace;
-      font-size: 11px;
-      line-height: 1.5;
-      overflow-x: auto;
-      max-height: 400px;
-      margin-bottom: 16px;
-      color: #333;
-    }
+      .demo-json {
+        padding: 16px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: #f8f8f8;
+        font-family: "SF Mono", "Fira Code", monospace;
+        font-size: 11px;
+        line-height: 1.5;
+        overflow-x: auto;
+        max-height: 400px;
+        margin-bottom: 16px;
+        color: #333;
+      }
 
-    .demo-renderer {
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 14px;
-      padding: 24px;
-      margin-top: 8px;
-    }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="./demo-bundle.js"></script>
-</body>
+      .demo-renderer {
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 14px;
+        padding: 24px;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./demo-bundle.js"></script>
+  </body>
 </html>

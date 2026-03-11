@@ -27,8 +27,24 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
           config: {
             sliders: [
               { id: "a", name: "a", min: -3, max: 3, step: 0.1, default: 1, label: "Stretch (a)" },
-              { id: "h", name: "h", min: -5, max: 5, step: 0.1, default: 0, label: "Horizontal shift (h)" },
-              { id: "k", name: "k", min: -5, max: 5, step: 0.1, default: 0, label: "Vertical shift (k)" },
+              {
+                id: "h",
+                name: "h",
+                min: -5,
+                max: 5,
+                step: 0.1,
+                default: 0,
+                label: "Horizontal shift (h)",
+              },
+              {
+                id: "k",
+                name: "k",
+                min: -5,
+                max: 5,
+                step: 0.1,
+                default: 0,
+                label: "Vertical shift (k)",
+              },
             ],
           },
         },
@@ -52,7 +68,8 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
       steps: [
         {
           title: "The basic parabola",
-          description: "Start with $a=1$, $h=0$, $k=0$. This gives us the standard parabola $y = x^2$.",
+          description:
+            "Start with $a=1$, $h=0$, $k=0$. This gives us the standard parabola $y = x^2$.",
         },
         {
           title: "Vertical stretch",
@@ -66,14 +83,19 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
         },
         {
           title: "Vertical shift",
-          description: "Change $k$ to shift the vertex up and down. The vertex is always at $(h, k)$.",
+          description:
+            "Change $k$ to shift the vertex up and down. The vertex is always at $(h, k)$.",
         },
       ],
       challenge: {
         prompt: "Set the sliders so the vertex is at (2, -3) with the parabola opening downward.",
         type: "slider_target",
         validation: { target: [2, -3], tolerance: 0.2 },
-        hints: ["h controls the x-coordinate of the vertex", "k controls the y-coordinate", "Make a negative to flip the parabola"],
+        hints: [
+          "h controls the x-coordinate of the vertex",
+          "k controls the y-coordinate",
+          "Make a negative to flip the parabola",
+        ],
       },
     },
   },
@@ -139,15 +161,18 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
       steps: [
         {
           title: "Intersection",
-          description: "The intersection $A \\cap B$ contains elements in BOTH sets: $\\{3, 5, 9\\}$.",
+          description:
+            "The intersection $A \\cap B$ contains elements in BOTH sets: $\\{3, 5, 9\\}$.",
         },
         {
           title: "Union",
-          description: "The union $A \\cup B$ contains elements in EITHER set: $\\{1, 2, 3, 5, 7, 8, 9\\}$.",
+          description:
+            "The union $A \\cup B$ contains elements in EITHER set: $\\{1, 2, 3, 5, 7, 8, 9\\}$.",
         },
         {
           title: "Difference",
-          description: "The difference $A \\setminus B$ contains elements in A but NOT in B: $\\{1, 7\\}$.",
+          description:
+            "The difference $A \\setminus B$ contains elements in A but NOT in B: $\\{1, 7\\}$.",
         },
       ],
     },
@@ -166,11 +191,13 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
           config: {
             steps: [
               {
-                expression: "\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix} \\cdot \\begin{pmatrix} 5 \\\\ 6 \\end{pmatrix}",
+                expression:
+                  "\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix} \\cdot \\begin{pmatrix} 5 \\\\ 6 \\end{pmatrix}",
                 annotation: "Start with the matrix and vector",
               },
               {
-                expression: "\\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 6 \\\\ 3 \\cdot 5 + 4 \\cdot 6 \\end{pmatrix}",
+                expression:
+                  "\\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 6 \\\\ 3 \\cdot 5 + 4 \\cdot 6 \\end{pmatrix}",
                 annotation: "Multiply row by column",
                 highlight: "both",
               },
@@ -218,7 +245,8 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
                 annotation: "Given first was red, probability of red again (without replacement)",
               },
               {
-                expression: "P(\\text{Both Red}) = \\frac{3}{5} \\times \\frac{1}{2} = \\frac{3}{10}",
+                expression:
+                  "P(\\text{Both Red}) = \\frac{3}{5} \\times \\frac{1}{2} = \\frac{3}{10}",
                 annotation: "Multiply along the path",
                 highlight: "result",
               },
@@ -240,7 +268,8 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
       blocks: [
         {
           type: "text",
-          content: "Fill in the truth table for the given logical expressions. Click cells to toggle T/F.",
+          content:
+            "Fill in the truth table for the given logical expressions. Click cells to toggle T/F.",
         },
         {
           type: "truth_table",
@@ -470,26 +499,15 @@ function App() {
       </nav>
 
       <div className="demo-controls">
-        <button
-          className="demo-json-toggle"
-          onClick={() => setShowJson(!showJson)}
-        >
+        <button className="demo-json-toggle" onClick={() => setShowJson(!showJson)}>
           {showJson ? "Hide JSON" : "View JSON"}
         </button>
       </div>
 
-      {showJson && (
-        <pre className="demo-json">
-          {JSON.stringify(current.payload, null, 2)}
-        </pre>
-      )}
+      {showJson && <pre className="demo-json">{JSON.stringify(current.payload, null, 2)}</pre>}
 
       <div className="demo-renderer">
-        <MathFlowRenderer
-          key={current.payload.id}
-          payload={current.payload}
-          theme="light"
-        />
+        <MathFlowRenderer key={current.payload.id} payload={current.payload} theme="light" />
       </div>
     </div>
   )

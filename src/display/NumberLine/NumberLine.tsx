@@ -254,7 +254,11 @@ export function NumberLine({
             <g
               key={`point-${i}`}
               className={point.draggable ? "mafs-movable-point" : ""}
-              style={point.draggable ? ({ "--movable-point-color": pointColor, cursor: "grab" } as React.CSSProperties) : undefined}
+              style={
+                point.draggable
+                  ? ({ "--movable-point-color": pointColor, cursor: "grab" } as React.CSSProperties)
+                  : undefined
+              }
               onPointerDown={point.draggable ? () => handlePointerDown(i) : undefined}
               tabIndex={point.draggable ? 0 : undefined}
               role={point.draggable ? "slider" : undefined}
@@ -263,9 +267,7 @@ export function NumberLine({
               aria-valuemax={rangeMax}
               aria-valuenow={point.value}
             >
-              {point.draggable && (
-                <circle cx={px} cy={lineY} r={15} fill="transparent" />
-              )}
+              {point.draggable && <circle cx={px} cy={lineY} r={15} fill="transparent" />}
               <circle cx={px} cy={lineY} r={6} fill={pointColor} />
               {point.label && (
                 <text

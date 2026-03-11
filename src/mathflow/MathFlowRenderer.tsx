@@ -309,10 +309,7 @@ function ChallengeUI({
           Submit
         </button>
         {challenge.hints && showHint < challenge.hints.length && (
-          <button
-            className="mafs-challenge-hint-btn"
-            onClick={() => setShowHint((h) => h + 1)}
-          >
+          <button className="mafs-challenge-hint-btn" onClick={() => setShowHint((h) => h + 1)}>
             Hint ({showHint}/{challenge.hints.length})
           </button>
         )}
@@ -461,11 +458,7 @@ export function MathFlowRenderer({
 
       {/* Challenge */}
       {payload.challenge && (
-        <ChallengeUI
-          challenge={payload.challenge}
-          params={params}
-          onSubmit={onChallengeSubmit}
-        />
+        <ChallengeUI challenge={payload.challenge} params={params} onSubmit={onChallengeSubmit} />
       )}
     </div>
   )
@@ -486,11 +479,7 @@ function renderBlockContent(
 
     case "slider_group":
       return (
-        <SliderGroupRenderer
-          config={block.config}
-          params={params}
-          onParamChange={onParamChange}
-        />
+        <SliderGroupRenderer config={block.config} params={params} onParamChange={onParamChange} />
       )
 
     case "venn":

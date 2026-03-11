@@ -112,7 +112,14 @@ function UnitCircleInner({
       <Coordinates.Cartesian />
 
       {/* Unit circle */}
-      <Circle center={[0, 0]} radius={1} color={Theme.foreground} weight={1.5} fillOpacity={0} strokeOpacity={0.3} />
+      <Circle
+        center={[0, 0]}
+        radius={1}
+        color={Theme.foreground}
+        weight={1.5}
+        fillOpacity={0}
+        strokeOpacity={0.3}
+      />
 
       {/* Special angle markers */}
       {specialAngles &&
@@ -128,22 +135,12 @@ function UnitCircleInner({
         ))}
 
       {/* Radius line */}
-      <Line.Segment
-        point1={[0, 0]}
-        point2={[px, py]}
-        color={Theme.blue}
-        weight={2}
-      />
+      <Line.Segment point1={[0, 0]} point2={[px, py]} color={Theme.blue} weight={2} />
 
       {/* Cos line (horizontal projection) */}
       {showCos && (
         <>
-          <Line.Segment
-            point1={[0, 0]}
-            point2={[px, 0]}
-            color={Theme.red}
-            weight={3}
-          />
+          <Line.Segment point1={[0, 0]} point2={[px, 0]} color={Theme.red} weight={3} />
           <Text x={px / 2} y={-0.12} size={14} color={Theme.red} attach="s">
             cos
           </Text>
@@ -153,12 +150,7 @@ function UnitCircleInner({
       {/* Sin line (vertical projection) */}
       {showSin && (
         <>
-          <Line.Segment
-            point1={[px, 0]}
-            point2={[px, py]}
-            color={Theme.green}
-            weight={3}
-          />
+          <Line.Segment point1={[px, 0]} point2={[px, py]} color={Theme.green} weight={3} />
           <Text x={px + 0.12} y={py / 2} size={14} color={Theme.green} attach="e">
             sin
           </Text>
@@ -168,13 +160,8 @@ function UnitCircleInner({
       {/* Tan line */}
       {showTan && Math.abs(px) > 0.01 && (
         <>
-          <Line.Segment
-            point1={[1, 0]}
-            point2={[1, py / px]}
-            color={Theme.orange}
-            weight={3}
-          />
-          <Text x={1.15} y={(py / px) / 2} size={14} color={Theme.orange} attach="e">
+          <Line.Segment point1={[1, 0]} point2={[1, py / px]} color={Theme.orange} weight={3} />
+          <Text x={1.15} y={py / px / 2} size={14} color={Theme.orange} attach="e">
             tan
           </Text>
         </>
@@ -227,11 +214,7 @@ function UnitCircleInner({
  * Shows a draggable point on the circumference with sin, cos, and tan lines.
  * Wraps a Mafs canvas internally.
  */
-export function UnitCircle({
-  width = 400,
-  height = 400,
-  ...props
-}: UnitCircleProps) {
+export function UnitCircle({ width = 400, height = 400, ...props }: UnitCircleProps) {
   return (
     <Mafs
       width={width}

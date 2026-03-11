@@ -111,7 +111,14 @@ export function Annotation({
             fill={color}
             opacity={0.15}
           />
-          <circle cx={px} cy={py} r={Math.max(12, label.length * 4 + 4)} fill="none" stroke={color} strokeWidth={1.5} />
+          <circle
+            cx={px}
+            cy={py}
+            r={Math.max(12, label.length * 4 + 4)}
+            fill="none"
+            stroke={color}
+            strokeWidth={1.5}
+          />
           <text
             x={px}
             y={py + 1}

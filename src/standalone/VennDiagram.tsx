@@ -132,9 +132,24 @@ export function VennDiagram({
     React.useMemo(() => {
       if (is3Set) {
         return [
-          { id: "onlyA", x: circles[0].x - r * 0.35, y: circles[0].y, elements: regionElements.onlyA },
-          { id: "onlyB", x: circles[1].x + r * 0.35, y: circles[1].y, elements: regionElements.onlyB },
-          { id: "onlyC", x: circles[2].x, y: circles[2].y + r * 0.4, elements: regionElements.onlyC },
+          {
+            id: "onlyA",
+            x: circles[0].x - r * 0.35,
+            y: circles[0].y,
+            elements: regionElements.onlyA,
+          },
+          {
+            id: "onlyB",
+            x: circles[1].x + r * 0.35,
+            y: circles[1].y,
+            elements: regionElements.onlyB,
+          },
+          {
+            id: "onlyC",
+            x: circles[2].x,
+            y: circles[2].y + r * 0.4,
+            elements: regionElements.onlyC,
+          },
           { id: "ab", x: cx, y: cy - r * 0.35, elements: regionElements.ab },
           { id: "ac", x: cx - r * 0.3, y: cy + r * 0.15, elements: regionElements.ac },
           { id: "bc", x: cx + r * 0.3, y: cy + r * 0.15, elements: regionElements.bc },
@@ -214,9 +229,7 @@ export function VennDiagram({
                 onClick={() => handleRegionClick(region.id)}
                 style={{ cursor: interactive ? "pointer" : "default" }}
               >
-                {interactive && (
-                  <circle cx={region.x} cy={region.y} r={20} fill="transparent" />
-                )}
+                {interactive && <circle cx={region.x} cy={region.y} r={20} fill="transparent" />}
                 <text
                   x={region.x}
                   y={region.y}

@@ -74,3 +74,67 @@ export { usePaneContext } from "./context/PaneContext"
 export { Debug } from "./debug"
 
 export { LaTeX } from "./display/LaTeX"
+
+// ─── New MathFlow components ────────────────────────────────────────
+
+// Core components
+export { Slider } from "./display/Slider"
+export type { SliderProps } from "./display/Slider"
+
+export { NumberLine } from "./display/NumberLine"
+export type {
+  NumberLineProps,
+  NumberLinePoint,
+  NumberLineInterval,
+  NumberLineTicks,
+} from "./display/NumberLine"
+
+export { Annotation } from "./display/Annotation"
+export type { AnnotationProps, AnnotationStyle } from "./display/Annotation"
+
+export { Region } from "./display/Region"
+export type { RegionProps, RegionPattern } from "./display/Region"
+
+// Standalone visualizations
+export { VennDiagram } from "./standalone/VennDiagram"
+export type { VennDiagramProps, VennSet, VennHighlight } from "./standalone/VennDiagram"
+
+export { UnitCircle } from "./standalone/UnitCircle"
+export type { UnitCircleProps, UnitCircleLabelMode } from "./standalone/UnitCircle"
+
+export { EquationSteps } from "./standalone/EquationSteps"
+export type { EquationStepsProps, EquationStep } from "./standalone/EquationSteps"
+
+export { TruthTable } from "./standalone/TruthTable"
+export type { TruthTableProps } from "./standalone/TruthTable"
+
+// JSON Renderer
+export { MathFlowRenderer } from "./mathflow/MathFlowRenderer"
+export type { MathFlowRendererProps } from "./mathflow/MathFlowRenderer"
+export type {
+  MathFlowPayload,
+  MathFlowBlock,
+  MathFlowStep,
+  MathFlowChallenge,
+  GraphConfig,
+  GraphFunction,
+  GraphPoint,
+  GraphLine,
+  GraphAnnotation,
+  SliderGroupConfig,
+  SliderConfig,
+  VennConfig,
+  TruthTableConfig,
+  UnitCircleConfig,
+  EquationStepsConfig,
+  NumberLineConfig,
+  ValueTableConfig,
+} from "./mathflow/types"
+
+// Expression utilities
+export {
+  substituteParams,
+  compileExpression,
+  compileWithParams,
+  evaluateNumeric,
+} from "./mathflow/ExpressionParser"

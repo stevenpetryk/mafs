@@ -73349,8 +73349,7 @@ function Region({
   pattern = "solid"
 }) {
   const {
-    xPaneRange: [xPaneMin, xPaneMax],
-    yPaneRange: [yPaneMin, yPaneMax]
+    xPaneRange: [xPaneMin, xPaneMax]
   } = usePaneContext();
   const patternId = React23.useMemo(() => `mafs-region-pattern-${patternIdCounter.current++}`, []);
   const [xMin, xMax] = bounds.x;
@@ -74594,13 +74593,12 @@ function StepNavigation({
   onStepChange
 }) {
   const step = steps[currentStep];
-  if (!step)
-    return null;
   const descRef = React30.useRef(null);
+  const description = step?.description;
   React30.useEffect(() => {
-    if (!descRef.current)
+    if (!descRef.current || !description)
       return;
-    const html = step.description.replace(/\$([^$]+)\$/g, (_, tex) => {
+    const html = description.replace(/\$([^$]+)\$/g, (_, tex) => {
       try {
         return katex.renderToString(tex, { throwOnError: false });
       } catch {
@@ -74608,7 +74606,9 @@ function StepNavigation({
       }
     });
     descRef.current.innerHTML = html;
-  }, [step.description]);
+  }, [description]);
+  if (!step)
+    return null;
   return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mafs-step-nav", children: [
     /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mafs-step-nav-header", children: [
       /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("h3", { className: "mafs-step-nav-title", children: step.title }),

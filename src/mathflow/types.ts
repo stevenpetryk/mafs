@@ -1,5 +1,3 @@
-import type { vec } from "../vec"
-
 // ─── Top-level payload ──────────────────────────────────────────────
 
 /** The complete JSON payload that drives the MathFlow renderer */

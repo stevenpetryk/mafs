@@ -41,7 +41,6 @@ export function Region({
 }: RegionProps) {
   const {
     xPaneRange: [xPaneMin, xPaneMax],
-    yPaneRange: [yPaneMin, yPaneMax],
   } = usePaneContext()
 
   const patternId = React.useMemo(() => `mafs-region-pattern-${patternIdCounter.current++}`, [])

@@ -210,12 +210,12 @@ function StepNavigation({
   onStepChange: (step: number) => void
 }) {
   const step = steps[currentStep]
-  if (!step) return null
-
   const descRef = React.useRef<HTMLDivElement>(null)
+  const description = step?.description
+
   React.useEffect(() => {
-    if (!descRef.current) return
-    const html = step.description.replace(/\$([^$]+)\$/g, (_, tex) => {
+    if (!descRef.current || !description) return
+    const html = description.replace(/\$([^$]+)\$/g, (_, tex) => {
       try {
         return katex.renderToString(tex, { throwOnError: false })
       } catch {
@@ -223,7 +223,9 @@ function StepNavigation({
       }
     })
     descRef.current.innerHTML = html
-  }, [step.description])
+  }, [description])
+
+  if (!step) return null
 
   return (
     <div className="mafs-step-nav">

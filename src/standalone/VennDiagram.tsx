@@ -34,15 +34,6 @@ export interface VennDiagramProps {
   onHighlightChange?: (highlights: VennHighlight[]) => void
 }
 
-interface RegionInfo {
-  id: string
-  label: string
-  elements: (string | number)[]
-  path: string
-  cx: number
-  cy: number
-}
-
 function computeSetElements(sets: VennSet[]): {
   onlyA: (string | number)[]
   onlyB: (string | number)[]

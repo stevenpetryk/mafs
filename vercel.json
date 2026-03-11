@@ -1,3 +1,0 @@
-{
-  "buildCommand": "cd .. && pnpm -s docgen && cd docs && pnpm -s build"
-}

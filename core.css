@@ -120,3 +120,629 @@
 .mafs-movable-point:focus-visible .mafs-movable-point-focus {
   stroke-opacity: 1;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Slider
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mafs-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.mafs-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.mafs-slider-label {
+  font-weight: 600;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-slider-value {
+  font-size: 12px;
+  color: var(--mafs-fg, #1a1a1a);
+  opacity: 0.7;
+}
+
+.mafs-slider-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) 0%,
+    var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) var(--mafs-slider-percent, 50%),
+    #ddd var(--mafs-slider-percent, 50%),
+    #ddd 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+
+.mafs-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--mafs-slider-color, var(--mafs-indigo, #7c58ff));
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+}
+
+.mafs-slider-input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--mafs-slider-color, var(--mafs-indigo, #7c58ff));
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+}
+
+.mafs-slider-input:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+
+.mafs-slider-input:focus-visible {
+  outline: 2px solid var(--mafs-slider-color, var(--mafs-indigo, #7c58ff));
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Number Line
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mafs-numberline {
+  overflow: visible;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Truth Table
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mafs-truth-table {
+  overflow: auto;
+  padding: 12px;
+}
+
+.mafs-truth-table-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mafs-truth-table-grid th {
+  padding: 8px 14px;
+  border-bottom: 2px solid var(--mafs-fg, #1a1a1a);
+  font-weight: 600;
+  text-align: center;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-truth-table-expr-header {
+  border-left: 1px solid var(--mafs-fg, #1a1a1a);
+  opacity: 0.5;
+}
+
+.mafs-truth-table-grid td {
+  padding: 6px 14px;
+  text-align: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-truth-table-expr-cell {
+  border-left: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.mafs-truth-table-row-highlight {
+  background: var(--mafs-blue, #58a6ff);
+  background: rgba(88, 166, 255, 0.1);
+}
+
+.mafs-truth-table-interactive-cell {
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-left: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.mafs-truth-table-interactive-cell:hover {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.mafs-truth-table-correct {
+  background: rgba(21, 226, 114, 0.15);
+}
+
+.mafs-truth-table-incorrect {
+  background: rgba(241, 29, 14, 0.15);
+}
+
+.mafs-truth-table-correction {
+  display: inline-block;
+  margin-left: 4px;
+  font-weight: bold;
+  color: var(--mafs-green, #15e272);
+}
+
+.mafs-truth-table-submit {
+  display: block;
+  margin: 12px auto 0;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  background: var(--mafs-blue, #58a6ff);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.mafs-truth-table-submit:hover {
+  opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Equation Steps
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mafs-equation-steps {
+  padding: 16px;
+  overflow: visible;
+}
+
+.mafs-equation-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mafs-equation-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.mafs-equation-step-active {
+  background: rgba(88, 166, 255, 0.08);
+}
+
+.mafs-equation-step-number {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--mafs-blue, #58a6ff);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mafs-equation-step-content {
+  flex: 1;
+  font-size: 1.2em;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-equation-step-code {
+  font-family: "Computer Modern", serif;
+  font-size: 1.1em;
+}
+
+.mafs-equation-step-annotation {
+  font-size: 12px;
+  color: var(--mafs-fg, #1a1a1a);
+  opacity: 0.6;
+  font-style: italic;
+  padding-top: 4px;
+}
+
+.mafs-equation-step-connector {
+  position: absolute;
+  left: 25px;
+  bottom: -8px;
+  width: 2px;
+  height: 8px;
+  background: rgba(128, 128, 128, 0.3);
+}
+
+.mafs-equation-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.mafs-equation-nav-btn {
+  padding: 6px 16px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--mafs-fg, #1a1a1a);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.mafs-equation-nav-btn:hover:not(:disabled) {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.mafs-equation-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.mafs-equation-nav-info {
+  font-size: 12px;
+  color: var(--mafs-fg, #1a1a1a);
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Value Table
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mafs-value-table {
+  overflow: auto;
+  padding: 12px;
+}
+
+.mafs-value-table-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mafs-value-table-header {
+  padding: 8px 14px;
+  border-bottom: 2px solid var(--mafs-fg, #1a1a1a);
+  font-weight: 600;
+  text-align: center;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-value-table-cell {
+  padding: 6px 14px;
+  text-align: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-value-table-row-highlight {
+  background: rgba(88, 166, 255, 0.12);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Venn Diagram
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mafs-venn {
+  overflow: visible;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MathFlow Renderer
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mathflow-renderer {
+  font-family: "Computer Modern", Georgia, serif;
+  font-variant-numeric: tabular-nums;
+  max-width: 800px;
+  margin: 0 auto;
+
+  --mafs-bg: white;
+  --mafs-fg: #1a1a1a;
+  --mafs-line-color: #ddd;
+  --grid-line-subdivision-color: #f0f0f0;
+  --mafs-origin-color: #888;
+}
+
+.mathflow-renderer[data-theme="dark"] {
+  --mafs-bg: #1a1a2e;
+  --mafs-fg: #e0e0e0;
+  --mafs-line-color: #333;
+  --grid-line-subdivision-color: #222;
+  --mafs-origin-color: #666;
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+.mathflow-header {
+  padding: 24px 0 16px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  margin-bottom: 20px;
+}
+
+.mathflow-title {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--mafs-fg, #1a1a1a);
+  margin: 0 0 4px;
+}
+
+.mathflow-subtitle {
+  font-size: 1em;
+  color: var(--mafs-fg, #1a1a1a);
+  opacity: 0.65;
+  margin: 0;
+}
+
+.mathflow-difficulty {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mathflow-difficulty-basic {
+  background: rgba(21, 226, 114, 0.15);
+  color: #0a8a3a;
+}
+
+.mathflow-difficulty-intermediate {
+  background: rgba(88, 166, 255, 0.15);
+  color: #2563eb;
+}
+
+.mathflow-difficulty-advanced {
+  background: rgba(241, 29, 14, 0.15);
+  color: #dc2626;
+}
+
+.mathflow-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mafs-block {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.mafs-block-highlighted {
+  box-shadow: 0 0 0 2px var(--mafs-blue, #58a6ff);
+}
+
+.mafs-block-text {
+  padding: 8px 0;
+  font-size: 1em;
+  line-height: 1.65;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+/* ── Block error ── */
+
+.mafs-block-error {
+  padding: 16px;
+  border: 1px solid rgba(241, 29, 14, 0.3);
+  border-radius: 8px;
+  background: rgba(241, 29, 14, 0.05);
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-block-error-icon {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+
+.mafs-block-error-message {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.mafs-block-error-details {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.mafs-block-error-details pre {
+  margin: 8px 0 0;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.mafs-block-unknown {
+  padding: 16px;
+  text-align: center;
+  color: var(--mafs-fg, #1a1a1a);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* ── Step navigation ── */
+
+.mafs-step-nav {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 8px;
+  background: rgba(88, 166, 255, 0.03);
+}
+
+.mafs-step-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.mafs-step-nav-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--mafs-fg, #1a1a1a);
+  margin: 0;
+}
+
+.mafs-step-nav-counter {
+  font-size: 12px;
+  opacity: 0.5;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-step-nav-description {
+  font-size: 0.95em;
+  line-height: 1.6;
+  color: var(--mafs-fg, #1a1a1a);
+  margin-bottom: 12px;
+}
+
+.mafs-step-nav-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.mafs-step-nav-btn {
+  padding: 6px 20px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--mafs-fg, #1a1a1a);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.mafs-step-nav-btn:hover:not(:disabled) {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.mafs-step-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── Challenge ── */
+
+.mafs-challenge {
+  margin-top: 24px;
+  padding: 20px;
+  border: 2px solid var(--mafs-indigo, #7c58ff);
+  border-radius: 8px;
+  background: rgba(124, 88, 255, 0.03);
+}
+
+.mafs-challenge-prompt {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-challenge-input {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  margin-bottom: 12px;
+  background: var(--mafs-bg, white);
+  color: var(--mafs-fg, #1a1a1a);
+  box-sizing: border-box;
+}
+
+.mafs-challenge-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mafs-challenge-submit {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  background: var(--mafs-indigo, #7c58ff);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.mafs-challenge-submit:hover {
+  opacity: 0.85;
+}
+
+.mafs-challenge-hint-btn {
+  padding: 8px 16px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--mafs-fg, #1a1a1a);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mafs-challenge-hint {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--mafs-yellow, #ffe44a);
+  background: rgba(255, 228, 74, 0.08);
+  font-size: 13px;
+  color: var(--mafs-fg, #1a1a1a);
+}
+
+.mafs-challenge-result {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mafs-challenge-result-correct {
+  background: rgba(21, 226, 114, 0.15);
+  color: #0a8a3a;
+}
+
+.mafs-challenge-result-incorrect {
+  background: rgba(241, 29, 14, 0.1);
+  color: #dc2626;
+}

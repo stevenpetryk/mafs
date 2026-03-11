@@ -8,6 +8,30 @@ import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
 
+// @public
+export function Annotation({ position, label, arrow, style, color, }: AnnotationProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace Annotation {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface AnnotationProps {
+    arrow?: {
+        from: vec.Vector2;
+        to: vec.Vector2;
+    };
+    color?: string;
+    label: string;
+    position: vec.Vector2;
+    style?: AnnotationStyle;
+}
+
+// @public
+export type AnnotationStyle = "callout" | "badge" | "minimal";
+
 // @public (undocumented)
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
 
@@ -29,6 +53,12 @@ export interface CircleProps extends Filled {
     // (undocumented)
     svgEllipseProps?: React_2.SVGProps<SVGEllipseElement>;
 }
+
+// @public
+export function compileExpression(expression: string): (x: number) => number;
+
+// @public
+export function compileWithParams(expression: string, params: Record<string, number>): (x: number) => number;
 
 // @public (undocumented)
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2;
@@ -66,6 +96,45 @@ export interface EllipseProps extends Filled {
     svgEllipseProps?: React_2.SVGProps<SVGEllipseElement>;
 }
 
+// @public
+export interface EquationStep {
+    annotation?: string;
+    expression: string;
+    highlight?: "left" | "right" | "both" | "result";
+}
+
+// @public
+export function EquationSteps({ steps, animated, currentStep, katex: useKatex, onStepChange, }: EquationStepsProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace EquationSteps {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface EquationStepsConfig {
+    animated?: boolean;
+    katex?: boolean;
+    steps: Array<{
+        expression: string;
+        annotation?: string;
+        highlight?: "left" | "right" | "both" | "result";
+    }>;
+}
+
+// @public
+export interface EquationStepsProps {
+    animated?: boolean;
+    currentStep?: number;
+    katex?: boolean;
+    onStepChange?: (step: number) => void;
+    steps: EquationStep[];
+}
+
+// @public
+export function evaluateNumeric(expression: string | number, params: Record<string, number>): number;
+
 // @public (undocumented)
 export interface Filled {
     // (undocumented)
@@ -78,6 +147,54 @@ export interface Filled {
     strokeStyle?: "solid" | "dashed";
     // (undocumented)
     weight?: number;
+}
+
+// @public
+export interface GraphAnnotation {
+    color?: string;
+    label: string;
+    position: [number, number];
+    style?: "callout" | "badge" | "minimal";
+}
+
+// @public
+export interface GraphConfig {
+    annotations?: GraphAnnotation[];
+    functions?: GraphFunction[];
+    height?: number;
+    lines?: GraphLine[];
+    pan?: boolean;
+    points?: GraphPoint[];
+    viewBox?: {
+        x?: [number, number];
+        y?: [number, number];
+    };
+    zoom?: boolean;
+}
+
+// @public
+export interface GraphFunction {
+    color?: string;
+    domain?: [number, number];
+    expression: string;
+    style?: "solid" | "dashed";
+    weight?: number;
+}
+
+// @public
+export interface GraphLine {
+    color?: string;
+    from: [number | string, number | string];
+    style?: "solid" | "dashed";
+    to: [number | string, number | string];
+}
+
+// @public
+export interface GraphPoint {
+    color?: string;
+    label?: string;
+    x: number | string;
+    y: number | string;
 }
 
 // @public (undocumented)
@@ -151,6 +268,67 @@ export type MafsProps = React_2.PropsWithChildren<{
     debug?: boolean;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "TextBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "GraphBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "SliderGroupBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "VennBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "TruthTableBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "UnitCircleBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "EquationStepsBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "NumberLineBlock" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "ValueTableBlock" needs to be exported by the entry point index.d.ts
+//
+// @public
+export type MathFlowBlock = TextBlock | GraphBlock | SliderGroupBlock | VennBlock | TruthTableBlock | UnitCircleBlock | EquationStepsBlock | NumberLineBlock | ValueTableBlock;
+
+// @public
+export interface MathFlowChallenge {
+    hints?: string[];
+    prompt: string;
+    type: "slider_target" | "point_target" | "multiple_choice" | "free_input";
+    validation: {
+        target: number | string | number[];
+        tolerance?: number;
+    };
+}
+
+// @public
+export interface MathFlowPayload {
+    blocks: MathFlowBlock[];
+    challenge?: MathFlowChallenge;
+    difficulty?: "basic" | "intermediate" | "advanced";
+    id: string;
+    steps?: MathFlowStep[];
+    subtitle?: string;
+    title: string;
+}
+
+// @public
+export function MathFlowRenderer({ payload, currentStep: controlledStep, onStepChange: onStepChangeProp, onChallengeSubmit, theme, }: MathFlowRendererProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace MathFlowRenderer {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface MathFlowRendererProps {
+    currentStep?: number;
+    onChallengeSubmit?: (answer: unknown) => void;
+    onStepChange?: (step: number) => void;
+    payload: MathFlowPayload;
+    theme?: "light" | "dark";
+}
+
+// @public
+export interface MathFlowStep {
+    blockOverrides?: Record<string, Record<string, unknown>>;
+    description: string;
+    highlightBlock?: string;
+    title: string;
+}
+
 // @public (undocumented)
 export function MovablePoint({ point, onMove, constrain, color, }: MovablePointProps): JSX_2.Element;
 
@@ -183,6 +361,76 @@ export interface MovablePointProps {
     constrain?: ConstraintFunction_2;
     onMove: (point: vec.Vector2) => void;
     point: vec.Vector2;
+}
+
+// @public
+export function NumberLine({ range, points, intervals, ticks, height, width: widthProp, }: NumberLineProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace NumberLine {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface NumberLineConfig {
+    height?: number;
+    intervals?: Array<{
+        start: number;
+        end: number;
+        color?: string;
+        opacity?: number;
+        label?: string;
+        startInclusive?: boolean;
+        endInclusive?: boolean;
+    }>;
+    points?: Array<{
+        value: number;
+        label?: string;
+        color?: string;
+        draggable?: boolean;
+    }>;
+    range: [number, number];
+    ticks?: {
+        step: number;
+        labels?: boolean;
+    };
+}
+
+// @public
+export interface NumberLineInterval {
+    color?: string;
+    end: number;
+    endInclusive?: boolean;
+    label?: string;
+    opacity?: number;
+    start: number;
+    startInclusive?: boolean;
+}
+
+// @public
+export interface NumberLinePoint {
+    color?: string;
+    draggable?: boolean;
+    label?: string;
+    onChange?: (value: number) => void;
+    value: number;
+}
+
+// @public
+export interface NumberLineProps {
+    height?: number;
+    intervals?: NumberLineInterval[];
+    points?: NumberLinePoint[];
+    range: [number, number];
+    ticks?: NumberLineTicks;
+    width?: number | "auto";
+}
+
+// @public
+export interface NumberLineTicks {
+    labels?: boolean;
+    step: number;
 }
 
 // @public (undocumented)
@@ -291,12 +539,75 @@ export interface PolylineProps extends PolyBaseProps {
     svgPolylineProps?: React_2.SVGProps<SVGPolylineElement>;
 }
 
+// @public
+export function Region({ bounds, color, opacity, label, pattern, }: RegionProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace Region {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export type RegionPattern = "solid" | "hatched" | "dotted";
+
+// @public
+export interface RegionProps {
+    bounds: {
+        x: vec.Vector2;
+        y: vec.Vector2 | ((x: number) => number) | [((x: number) => number), ((x: number) => number)];
+    };
+    color?: string;
+    label?: string;
+    opacity?: number;
+    pattern?: RegionPattern;
+}
+
 // @public (undocumented)
 export interface SegmentProps extends Stroked {
     // (undocumented)
     point1: vec.Vector2;
     // (undocumented)
     point2: vec.Vector2;
+}
+
+// @public
+export function Slider({ name, min, max, step, value, onChange, label, showValue, color, }: SliderProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace Slider {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface SliderConfig {
+    color?: string;
+    default: number;
+    id: string;
+    label?: string;
+    max: number;
+    min: number;
+    name: string;
+    step?: number;
+}
+
+// @public
+export interface SliderGroupConfig {
+    sliders: SliderConfig[];
+}
+
+// @public
+export interface SliderProps {
+    color?: string;
+    label?: string;
+    max: number;
+    min: number;
+    name: string;
+    onChange: (value: number) => void;
+    showValue?: boolean;
+    step?: number;
+    value: number;
 }
 
 // @public (undocumented)
@@ -324,6 +635,9 @@ export interface Stroked {
     // (undocumented)
     weight?: number;
 }
+
+// @public
+export function substituteParams(expression: string, params: Record<string, number>): string;
 
 // @public (undocumented)
 function Text_2({ children, x, y, color, size, svgTextProps, attach, attachDistance, }: TextProps): JSX_2.Element;
@@ -386,6 +700,73 @@ export type TransformProps = React_2.PropsWithChildren<{
     shear?: vec.Vector2;
 }>;
 
+// @public
+export function TruthTable({ variables, expressions, highlightRows, interactive, onSubmit, }: TruthTableProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace TruthTable {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface TruthTableConfig {
+    expressions: string[];
+    highlightRows?: number[];
+    interactive?: boolean;
+    variables: string[];
+}
+
+// @public
+export interface TruthTableProps {
+    expressions: string[];
+    highlightRows?: number[];
+    interactive?: boolean;
+    onSubmit?: (correct: boolean, score: number) => void;
+    variables: string[];
+}
+
+// @public
+export function UnitCircle({ width, height, ...props }: UnitCircleProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace UnitCircle {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface UnitCircleConfig {
+    angle?: number;
+    draggable?: boolean;
+    height?: number;
+    labelMode?: "radians" | "degrees" | "both";
+    showArc?: boolean;
+    showCos?: boolean;
+    showSin?: boolean;
+    showTan?: boolean;
+    specialAngles?: boolean;
+    width?: number;
+}
+
+// @public
+export type UnitCircleLabelMode = "radians" | "degrees" | "both";
+
+// @public
+export interface UnitCircleProps {
+    angle?: number;
+    draggable?: boolean;
+    height?: number;
+    labelMode?: UnitCircleLabelMode;
+    onAngleChange?: (angle: number) => void;
+    showArc?: boolean;
+    showCos?: boolean;
+    showSin?: boolean;
+    showTan?: boolean;
+    specialAngles?: boolean;
+    width?: number;
+}
+
 // @public (undocumented)
 export interface UseMovable {
     // (undocumented)
@@ -443,6 +824,16 @@ export function useStopwatch(options?: StopwatchArguments): Stopwatch;
 //
 // @public
 export function useTransformContext(): TransformContextShape;
+
+// @public
+export interface ValueTableConfig {
+    functions: Array<{
+        expression: string;
+        label: string;
+    }>;
+    highlightIntersections?: boolean;
+    xValues: number[];
+}
 
 // @public (undocumented)
 export namespace vec {
@@ -511,6 +902,52 @@ export interface VectorProps extends Stroked {
     tail?: vec.Vector2;
     // (undocumented)
     tip: vec.Vector2;
+}
+
+// @public
+export interface VennConfig {
+    height?: number;
+    highlights?: string[];
+    interactive?: boolean;
+    sets: Array<{
+        id: string;
+        label: string;
+        elements: (string | number)[];
+        color?: string;
+    }>;
+    showElements?: boolean;
+    width?: number;
+}
+
+// @public
+export function VennDiagram({ sets, highlights: controlledHighlights, showElements, interactive, width, height, onHighlightChange, }: VennDiagramProps): JSX_2.Element;
+
+// @public (undocumented)
+export namespace VennDiagram {
+    var // (undocumented)
+    displayName: string;
+}
+
+// @public
+export interface VennDiagramProps {
+    height?: number;
+    highlights?: VennHighlight[];
+    interactive?: boolean;
+    onHighlightChange?: (highlights: VennHighlight[]) => void;
+    sets: VennSet[];
+    showElements?: boolean;
+    width?: number;
+}
+
+// @public
+export type VennHighlight = "intersection" | "union" | "difference" | "complement" | string;
+
+// @public
+export interface VennSet {
+    color?: string;
+    elements: (string | number)[];
+    id: string;
+    label: string;
 }
 
 // Warnings were encountered during analysis:

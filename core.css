@@ -466,6 +466,14 @@
   --mafs-origin-color: #888;
 }
 
+.mathflow-renderer .MafsView {
+  --mafs-bg: white;
+  --mafs-fg: #1a1a1a;
+  --mafs-line-color: #ddd;
+  --grid-line-subdivision-color: #f0f0f0;
+  --mafs-origin-color: #888;
+}
+
 .mathflow-renderer[data-theme="dark"] {
   --mafs-bg: #1a1a2e;
   --mafs-fg: #e0e0e0;

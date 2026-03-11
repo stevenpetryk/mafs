@@ -67,9 +67,10 @@ function resolveColor(color?: string): string | undefined {
 
 function TextBlockRenderer({ block }: { block: MathFlowBlock & { type: "text" } }) {
   const ref = React.useRef<HTMLDivElement>(null)
+  const hasMath = block.katex || /\$[^$]+\$/.test(block.content)
 
   React.useEffect(() => {
-    if (!ref.current || !block.katex) return
+    if (!ref.current || !hasMath) return
     // Replace $...$ with KaTeX rendered spans
     const html = block.content.replace(/\$([^$]+)\$/g, (_, tex) => {
       try {
@@ -79,9 +80,9 @@ function TextBlockRenderer({ block }: { block: MathFlowBlock & { type: "text" } 
       }
     })
     ref.current.innerHTML = html
-  }, [block.content, block.katex])
+  }, [block.content, hasMath])
 
-  if (block.katex) {
+  if (hasMath) {
     return <div ref={ref} className="mafs-block-text mafs-block-text-katex" />
   }
   return <div className="mafs-block-text">{block.content}</div>
@@ -442,11 +443,6 @@ export function MathFlowRenderer({
       <div className="mathflow-header">
         <h2 className="mathflow-title">{payload.title}</h2>
         {payload.subtitle && <p className="mathflow-subtitle">{payload.subtitle}</p>}
-        {payload.difficulty && (
-          <span className={`mathflow-difficulty mathflow-difficulty-${payload.difficulty}`}>
-            {payload.difficulty}
-          </span>
-        )}
       </div>
 
       {/* Blocks */}

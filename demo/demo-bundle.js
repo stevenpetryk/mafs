@@ -74481,8 +74481,9 @@ function resolveColor(color) {
 }
 function TextBlockRenderer({ block }) {
   const ref = React30.useRef(null);
+  const hasMath = block.katex || /\$[^$]+\$/.test(block.content);
   React30.useEffect(() => {
-    if (!ref.current || !block.katex)
+    if (!ref.current || !hasMath)
       return;
     const html = block.content.replace(/\$([^$]+)\$/g, (_, tex) => {
       try {
@@ -74492,8 +74493,8 @@ function TextBlockRenderer({ block }) {
       }
     });
     ref.current.innerHTML = html;
-  }, [block.content, block.katex]);
-  if (block.katex) {
+  }, [block.content, hasMath]);
+  if (hasMath) {
     return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { ref, className: "mafs-block-text mafs-block-text-katex" });
   }
   return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "mafs-block-text", children: block.content });
@@ -74776,8 +74777,7 @@ function MathFlowRenderer({
   return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mathflow-renderer", "data-theme": theme, children: [
     /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mathflow-header", children: [
       /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("h2", { className: "mathflow-title", children: payload.title }),
-      payload.subtitle && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("p", { className: "mathflow-subtitle", children: payload.subtitle }),
-      payload.difficulty && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("span", { className: `mathflow-difficulty mathflow-difficulty-${payload.difficulty}`, children: payload.difficulty })
+      payload.subtitle && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("p", { className: "mathflow-subtitle", children: payload.subtitle })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "mathflow-blocks", children: payload.blocks.map((block, i2) => renderBlock(block, i2)) }),
     payload.steps && payload.steps.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(

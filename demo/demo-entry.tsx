@@ -2,6 +2,7 @@ import * as React from "react"
 import { createRoot } from "react-dom/client"
 import { MathFlowRenderer } from "../src/mathflow/MathFlowRenderer"
 import type { MathFlowPayload } from "../src/mathflow/types"
+import "../core.css"
 
 // ─── Example Payloads ───────────────────────────────────────────────
 

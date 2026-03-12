@@ -5,6 +5,7 @@ import type {
   MathFlowStep,
   MathFlowChallenge,
   GraphConfig,
+  GraphPoint,
   SliderGroupConfig,
 } from "./types"
 import { BlockErrorBoundary } from "./BlockErrorBoundary"
@@ -26,6 +27,7 @@ import { UnitCircle } from "../standalone/UnitCircle"
 import { EquationSteps } from "../standalone/EquationSteps"
 import { ValueTableBlock } from "./ValueTableBlock"
 import { Theme } from "../display/Theme"
+import { useMovablePoint } from "../interaction/useMovablePoint"
 import { vec } from "../vec"
 import katex from "katex"
 
@@ -87,12 +89,65 @@ function TextBlockRenderer({ block }: { block: MathFlowBlock & { type: "text" } 
   return <div className="mafs-block-text">{block.content}</div>
 }
 
+function MovableGraphPoint({
+  point,
+  params,
+  onParamChange,
+}: {
+  point: GraphPoint
+  params: Record<string, number>
+  onParamChange: (id: string, value: number) => void
+}) {
+  const constraint = point.constraintExpression
+    ? (p: vec.Vector2): vec.Vector2 => {
+        const fn = compileWithParams(point.constraintExpression!, params)
+        return [p[0], fn(p[0])]
+      }
+    : undefined
+
+  const movable = useMovablePoint(
+    [evaluateNumeric(point.x, params), evaluateNumeric(point.y, params)],
+    { constrain: constraint, color: resolveColor(point.color) ?? Theme.pink },
+  )
+
+  // Sync position back to params
+  const prevPoint = React.useRef(movable.point)
+  React.useEffect(() => {
+    if (
+      prevPoint.current[0] === movable.point[0] &&
+      prevPoint.current[1] === movable.point[1]
+    )
+      return
+    prevPoint.current = movable.point
+    if (point.syncParams?.x) onParamChange(point.syncParams.x, movable.point[0])
+    if (point.syncParams?.y) onParamChange(point.syncParams.y, movable.point[1])
+  }, [movable.point, point.syncParams, onParamChange])
+
+  return (
+    <>
+      {movable.element}
+      {point.label && (
+        <Text
+          x={movable.point[0]}
+          y={movable.point[1] + 0.4}
+          size={14}
+          color={resolveColor(point.color)}
+        >
+          {point.label}
+        </Text>
+      )}
+    </>
+  )
+}
+
 function GraphBlockRenderer({
   config,
   params,
+  onParamChange,
 }: {
   config: GraphConfig
   params: Record<string, number>
+  onParamChange: (id: string, value: number) => void
 }) {
   const viewBox = config.viewBox ?? {}
 
@@ -125,6 +180,16 @@ function GraphBlockRenderer({
 
       {/* Points */}
       {config.points?.map((pt, i) => {
+        if (pt.movable) {
+          return (
+            <MovableGraphPoint
+              key={`pt-${i}`}
+              point={pt}
+              params={params}
+              onParamChange={onParamChange}
+            />
+          )
+        }
         const x = evaluateNumeric(pt.x, params)
         const y = evaluateNumeric(pt.y, params)
         return (
@@ -486,7 +551,7 @@ function renderBlockContent(
       return <TextBlockRenderer block={block} />
 
     case "graph":
-      return <GraphBlockRenderer config={block.config} params={params} />
+      return <GraphBlockRenderer config={block.config} params={params} onParamChange={onParamChange} />
 
     case "slider_group":
       return (

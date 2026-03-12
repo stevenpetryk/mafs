@@ -192,7 +192,13 @@ export interface GraphLine {
 // @public
 export interface GraphPoint {
     color?: string;
+    constraintExpression?: string;
     label?: string;
+    movable?: boolean;
+    syncParams?: {
+        x?: string;
+        y?: string;
+    };
     x: number | string;
     y: number | string;
 }

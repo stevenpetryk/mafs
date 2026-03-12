@@ -221,9 +221,14 @@
 
 .mafs-truth-table-grid {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
   font-variant-numeric: tabular-nums;
+}
+
+.mafs-truth-table-grid tr:nth-child(even) td {
+  background: rgba(128, 128, 128, 0.04);
 }
 
 .mafs-truth-table-grid th {
@@ -329,8 +334,8 @@
 
 .mafs-equation-step-number {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--mafs-blue, #58a6ff);
   color: white;
@@ -339,6 +344,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .mafs-equation-step-content {
@@ -362,11 +368,11 @@
 
 .mafs-equation-step-connector {
   position: absolute;
-  left: 25px;
+  left: 27px;
   bottom: -8px;
-  width: 2px;
+  width: 0;
   height: 8px;
-  background: rgba(128, 128, 128, 0.3);
+  border-left: 2px dashed rgba(128, 128, 128, 0.3);
 }
 
 .mafs-equation-nav {
@@ -416,9 +422,14 @@
 
 .mafs-value-table-grid {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
   font-variant-numeric: tabular-nums;
+}
+
+.mafs-value-table-grid tr:nth-child(even) td {
+  background: rgba(128, 128, 128, 0.04);
 }
 
 .mafs-value-table-header {
@@ -467,13 +478,95 @@
 }
 
 .mathflow-renderer[data-theme="dark"] {
-  --mafs-bg: #1a1a2e;
-  --mafs-fg: #e0e0e0;
+  --mafs-bg: #171B21;
+  --mafs-fg: #E8E8E8;
   --mafs-line-color: #333;
   --grid-line-subdivision-color: #222;
-  --mafs-origin-color: #666;
-  background: #1a1a2e;
-  color: #e0e0e0;
+  --mafs-origin-color: #555;
+  background: transparent;
+  color: #E8E8E8;
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-block {
+  background: #1E2228;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-slider-group {
+  padding: 12px 16px;
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-slider-input {
+  background: linear-gradient(
+    to right,
+    var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) 0%,
+    var(--mafs-slider-color, var(--mafs-indigo, #7c58ff)) var(--mafs-slider-percent, 50%),
+    rgba(255, 255, 255, 0.1) var(--mafs-slider-percent, 50%),
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-slider-input::-webkit-slider-thumb {
+  border-color: #1E2228;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-slider-input::-moz-range-thumb {
+  border-color: #1E2228;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.mathflow-renderer[data-theme="dark"] .mathflow-difficulty-basic {
+  background: rgba(21, 226, 114, 0.12);
+  color: #4ade80;
+}
+
+.mathflow-renderer[data-theme="dark"] .mathflow-difficulty-intermediate {
+  background: rgba(88, 166, 255, 0.12);
+  color: #58a6ff;
+}
+
+.mathflow-renderer[data-theme="dark"] .mathflow-difficulty-advanced {
+  background: rgba(241, 29, 14, 0.12);
+  color: #f87171;
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-step-nav {
+  background: rgba(88, 166, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-challenge {
+  border-color: rgba(124, 88, 255, 0.3);
+  background: rgba(124, 88, 255, 0.05);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-challenge-input {
+  background: #171B21;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-truth-table-grid th {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-truth-table-grid tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-value-table-grid tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-equation-step-number {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mathflow-renderer[data-theme="dark"] .mafs-block-error {
+  border-color: rgba(241, 29, 14, 0.2);
+  background: rgba(241, 29, 14, 0.06);
 }
 
 .mathflow-header {

@@ -74498,9 +74498,47 @@ function TextBlockRenderer({ block }) {
   }
   return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "mafs-block-text", children: block.content });
 }
+function MovableGraphPoint({
+  point,
+  params,
+  onParamChange
+}) {
+  const constraint = point.constraintExpression ? (p) => {
+    const fn = compileWithParams(point.constraintExpression, params);
+    return [p[0], fn(p[0])];
+  } : void 0;
+  const movable = useMovablePoint(
+    [evaluateNumeric(point.x, params), evaluateNumeric(point.y, params)],
+    { constrain: constraint, color: resolveColor(point.color) ?? Theme.pink }
+  );
+  const prevPoint = React30.useRef(movable.point);
+  React30.useEffect(() => {
+    if (prevPoint.current[0] === movable.point[0] && prevPoint.current[1] === movable.point[1])
+      return;
+    prevPoint.current = movable.point;
+    if (point.syncParams?.x)
+      onParamChange(point.syncParams.x, movable.point[0]);
+    if (point.syncParams?.y)
+      onParamChange(point.syncParams.y, movable.point[1]);
+  }, [movable.point, point.syncParams, onParamChange]);
+  return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)(import_jsx_runtime41.Fragment, { children: [
+    movable.element,
+    point.label && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+      Text,
+      {
+        x: movable.point[0],
+        y: movable.point[1] + 0.4,
+        size: 14,
+        color: resolveColor(point.color),
+        children: point.label
+      }
+    )
+  ] });
+}
 function GraphBlockRenderer({
   config: config4,
-  params
+  params,
+  onParamChange
 }) {
   const viewBox = config4.viewBox ?? {};
   return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)(
@@ -74530,6 +74568,17 @@ function GraphBlockRenderer({
           );
         }),
         config4.points?.map((pt, i2) => {
+          if (pt.movable) {
+            return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+              MovableGraphPoint,
+              {
+                point: pt,
+                params,
+                onParamChange
+              },
+              `pt-${i2}`
+            );
+          }
           const x = evaluateNumeric(pt.x, params);
           const y = evaluateNumeric(pt.y, params);
           return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)(React30.Fragment, { children: [
@@ -74803,7 +74852,7 @@ function renderBlockContent(block, params, onParamChange) {
     case "text":
       return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(TextBlockRenderer, { block });
     case "graph":
-      return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(GraphBlockRenderer, { config: block.config, params });
+      return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(GraphBlockRenderer, { config: block.config, params, onParamChange });
     case "slider_group":
       return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
         SliderGroupRenderer,
@@ -74919,7 +74968,7 @@ var examples = [
               { expression: "{a}*(x-{h})^2+{k}", color: "blue", weight: 3 },
               { expression: "x^2", color: "indigo", style: "dashed", weight: 1 }
             ],
-            points: [{ x: "{h}", y: "{k}", color: "red", label: "vertex" }],
+            points: [{ x: "{h}", y: "{k}", color: "red", label: "vertex", movable: true, syncParams: { x: "h", y: "k" } }],
             annotations: [
               { position: [5, 8], label: "y = a(x\u2212h)\xB2 + k", style: "callout", color: "blue" }
             ]
@@ -75137,25 +75186,38 @@ var examples = [
       difficulty: "basic",
       blocks: [
         {
+          type: "text",
+          content: "Drag the vertices to reshape the triangle and watch the side lengths update."
+        },
+        {
+          type: "slider_group",
+          id: "tri-sliders",
+          config: {
+            sliders: [
+              { id: "Ax", name: "Ax", min: -5, max: 6, step: 0.1, default: 0, label: "A.x" },
+              { id: "Ay", name: "Ay", min: -5, max: 6, step: 0.1, default: 0, label: "A.y" },
+              { id: "Bx", name: "Bx", min: -5, max: 6, step: 0.1, default: 5, label: "B.x" },
+              { id: "By", name: "By", min: -5, max: 6, step: 0.1, default: 0, label: "B.y" },
+              { id: "Cx", name: "Cx", min: -5, max: 6, step: 0.1, default: 2, label: "C.x" },
+              { id: "Cy", name: "Cy", min: -5, max: 6, step: 0.1, default: 4, label: "C.y" }
+            ]
+          }
+        },
+        {
           type: "graph",
           id: "triangle",
           config: {
-            viewBox: { x: [-1, 6], y: [-1, 5] },
+            viewBox: { x: [-2, 7], y: [-2, 6] },
             height: 400,
             lines: [
-              { from: [0, 0], to: [5, 0], color: "blue" },
-              { from: [5, 0], to: [2, 4], color: "red" },
-              { from: [2, 4], to: [0, 0], color: "green" }
+              { from: ["{Ax}", "{Ay}"], to: ["{Bx}", "{By}"], color: "blue" },
+              { from: ["{Bx}", "{By}"], to: ["{Cx}", "{Cy}"], color: "red" },
+              { from: ["{Cx}", "{Cy}"], to: ["{Ax}", "{Ay}"], color: "green" }
             ],
             points: [
-              { x: 0, y: 0, label: "A", color: "blue" },
-              { x: 5, y: 0, label: "B", color: "red" },
-              { x: 2, y: 4, label: "C", color: "green" }
-            ],
-            annotations: [
-              { position: [2.5, -0.5], label: "c = 5", style: "minimal", color: "blue" },
-              { position: [3.8, 2.3], label: "a = \u221A13", style: "minimal", color: "red" },
-              { position: [0.7, 2.3], label: "b = \u221A20", style: "minimal", color: "green" }
+              { x: "{Ax}", y: "{Ay}", label: "A", color: "blue", movable: true, syncParams: { x: "Ax", y: "Ay" } },
+              { x: "{Bx}", y: "{By}", label: "B", color: "red", movable: true, syncParams: { x: "Bx", y: "By" } },
+              { x: "{Cx}", y: "{Cy}", label: "C", color: "green", movable: true, syncParams: { x: "Cx", y: "Cy" } }
             ]
           }
         }
@@ -75276,7 +75338,7 @@ var examples = [
               { expression: "x^2", color: "blue", weight: 3 },
               { expression: "2*{a}*(x-{a})+{a}^2", color: "red", weight: 2, style: "dashed" }
             ],
-            points: [{ x: "{a}", y: "{a}^2", color: "red", label: "tangent point" }]
+            points: [{ x: "{a}", y: "{a}^2", color: "red", label: "tangent point", movable: true, constraintExpression: "x^2", syncParams: { x: "a" } }]
           }
         },
         {
@@ -75343,7 +75405,7 @@ function App() {
       MathFlowRenderer,
       {
         payload: current.payload,
-        theme: "light"
+        theme: "dark"
       },
       current.payload.id
     ) })

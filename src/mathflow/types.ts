@@ -143,6 +143,12 @@ export interface GraphPoint {
   color?: string
   /** Optional label */
   label?: string
+  /** Whether this point is draggable via useMovablePoint */
+  movable?: boolean
+  /** Math expression to constrain point to a curve (e.g. "x^2"). Uses existing compileWithParams. */
+  constraintExpression?: string
+  /** Maps point position back to slider params for bidirectional sync */
+  syncParams?: { x?: string; y?: string }
 }
 
 /** A line segment on the graph */

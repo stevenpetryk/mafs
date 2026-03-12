@@ -9,9 +9,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Computer Modern", Georgia, "Times New Roman", serif;
-      background: #fafafa;
-      color: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #171B21;
+      color: #E8E8E8;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -39,7 +39,7 @@
 
     .demo-tagline {
       font-size: 1em;
-      color: #666;
+      color: #8A8F98;
       margin-top: 4px;
     }
 
@@ -49,15 +49,21 @@
       gap: 6px;
       justify-content: center;
       padding: 20px 0;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: sticky;
+      top: 0;
+      background: rgba(23, 27, 33, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 10;
     }
 
     .demo-tab {
       padding: 6px 14px;
-      border: 1px solid #ddd;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      background: white;
-      color: #555;
+      background: transparent;
+      color: #8A8F98;
       font-size: 13px;
       font-family: inherit;
       cursor: pointer;
@@ -65,19 +71,19 @@
     }
 
     .demo-tab:hover {
-      border-color: #aaa;
-      color: #1a1a1a;
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #E8E8E8;
     }
 
     .demo-tab-active {
-      background: #7c58ff;
-      border-color: #7c58ff;
+      background: #58a6ff;
+      border-color: #58a6ff;
       color: white;
     }
 
     .demo-tab-active:hover {
       color: white;
-      border-color: #6a48e0;
+      border-color: #4a94e8;
     }
 
     .demo-controls {
@@ -88,33 +94,33 @@
 
     .demo-json-toggle {
       padding: 4px 14px;
-      border: 1px solid #ccc;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 6px;
-      background: white;
-      color: #555;
+      background: transparent;
+      color: #8A8F98;
       font-size: 12px;
-      font-family: monospace;
+      font-family: "SF Mono", "Fira Code", monospace;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .demo-json-toggle:hover {
-      border-color: #999;
-      color: #1a1a1a;
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #E8E8E8;
     }
 
     .demo-json {
       padding: 16px;
-      border: 1px solid #e0e0e0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 8px;
-      background: #f8f8f8;
+      background: #1E2228;
       font-family: "SF Mono", "Fira Code", monospace;
       font-size: 11px;
       line-height: 1.5;
       overflow-x: auto;
       max-height: 400px;
       margin-bottom: 16px;
-      color: #333;
+      color: #B0B8C4;
     }
 
     .demo-renderer {

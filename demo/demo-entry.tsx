@@ -41,7 +41,7 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
               { expression: "{a}*(x-{h})^2+{k}", color: "blue", weight: 3 },
               { expression: "x^2", color: "indigo", style: "dashed", weight: 1 },
             ],
-            points: [{ x: "{h}", y: "{k}", color: "red", label: "vertex" }],
+            points: [{ x: "{h}", y: "{k}", color: "red", label: "vertex", movable: true, syncParams: { x: "h", y: "k" } }],
             annotations: [
               { position: [5, 8], label: "y = a(x−h)² + k", style: "callout", color: "blue" },
             ],
@@ -262,25 +262,38 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
       difficulty: "basic",
       blocks: [
         {
+          type: "text",
+          content: "Drag the vertices to reshape the triangle and watch the side lengths update.",
+        },
+        {
+          type: "slider_group",
+          id: "tri-sliders",
+          config: {
+            sliders: [
+              { id: "Ax", name: "Ax", min: -5, max: 6, step: 0.1, default: 0, label: "A.x" },
+              { id: "Ay", name: "Ay", min: -5, max: 6, step: 0.1, default: 0, label: "A.y" },
+              { id: "Bx", name: "Bx", min: -5, max: 6, step: 0.1, default: 5, label: "B.x" },
+              { id: "By", name: "By", min: -5, max: 6, step: 0.1, default: 0, label: "B.y" },
+              { id: "Cx", name: "Cx", min: -5, max: 6, step: 0.1, default: 2, label: "C.x" },
+              { id: "Cy", name: "Cy", min: -5, max: 6, step: 0.1, default: 4, label: "C.y" },
+            ],
+          },
+        },
+        {
           type: "graph",
           id: "triangle",
           config: {
-            viewBox: { x: [-1, 6], y: [-1, 5] },
+            viewBox: { x: [-2, 7], y: [-2, 6] },
             height: 400,
             lines: [
-              { from: [0, 0], to: [5, 0], color: "blue" },
-              { from: [5, 0], to: [2, 4], color: "red" },
-              { from: [2, 4], to: [0, 0], color: "green" },
+              { from: ["{Ax}", "{Ay}"], to: ["{Bx}", "{By}"], color: "blue" },
+              { from: ["{Bx}", "{By}"], to: ["{Cx}", "{Cy}"], color: "red" },
+              { from: ["{Cx}", "{Cy}"], to: ["{Ax}", "{Ay}"], color: "green" },
             ],
             points: [
-              { x: 0, y: 0, label: "A", color: "blue" },
-              { x: 5, y: 0, label: "B", color: "red" },
-              { x: 2, y: 4, label: "C", color: "green" },
-            ],
-            annotations: [
-              { position: [2.5, -0.5], label: "c = 5", style: "minimal", color: "blue" },
-              { position: [3.8, 2.3], label: "a = √13", style: "minimal", color: "red" },
-              { position: [0.7, 2.3], label: "b = √20", style: "minimal", color: "green" },
+              { x: "{Ax}", y: "{Ay}", label: "A", color: "blue", movable: true, syncParams: { x: "Ax", y: "Ay" } },
+              { x: "{Bx}", y: "{By}", label: "B", color: "red", movable: true, syncParams: { x: "Bx", y: "By" } },
+              { x: "{Cx}", y: "{Cy}", label: "C", color: "green", movable: true, syncParams: { x: "Cx", y: "Cy" } },
             ],
           },
         },
@@ -402,7 +415,7 @@ const examples: { name: string; payload: MathFlowPayload }[] = [
               { expression: "x^2", color: "blue", weight: 3 },
               { expression: "2*{a}*(x-{a})+{a}^2", color: "red", weight: 2, style: "dashed" },
             ],
-            points: [{ x: "{a}", y: "{a}^2", color: "red", label: "tangent point" }],
+            points: [{ x: "{a}", y: "{a}^2", color: "red", label: "tangent point", movable: true, constraintExpression: "x^2", syncParams: { x: "a" } }],
           },
         },
         {
@@ -487,7 +500,7 @@ function App() {
         <MathFlowRenderer
           key={current.payload.id}
           payload={current.payload}
-          theme="light"
+          theme="dark"
         />
       </div>
     </div>

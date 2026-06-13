@@ -10,7 +10,7 @@ export interface CircleProps extends Filled {
 }
 
 export function Circle({ radius, ...rest }: CircleProps) {
-  return <Ellipse radius={[radius, radius]} {...rest} />
+  return <Ellipse.Center radius={[radius, radius]} {...rest} />
 }
 
 Circle.displayName = "Circle"

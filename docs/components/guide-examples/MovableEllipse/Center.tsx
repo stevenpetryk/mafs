@@ -46,7 +46,7 @@ export default function MovableEllipse() {
             fillOpacity={0}
           />
 
-          <Ellipse
+          <Ellipse.Center
             center={[0, 0]}
             radius={[Math.abs(width.x), Math.abs(height.y)]}
           />

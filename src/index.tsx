@@ -21,7 +21,12 @@ export { Circle } from "./display/Circle"
 export type { CircleProps } from "./display/Circle"
 
 export { Ellipse } from "./display/Ellipse"
-export type { EllipseProps } from "./display/Ellipse"
+export type {
+  CenterProps,
+  EccentricityProps,
+  SemiMajorAxisProps,
+  SemiMinorAxisProps,
+} from "./display/Ellipse"
 
 export { Polygon } from "./display/Polygon"
 export type { PolygonProps } from "./display/Polygon"

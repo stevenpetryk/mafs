@@ -52,6 +52,9 @@ function CoordinatesPage() {
         <li>
           <code>labels</code>: A function that returns a label for each line.
         </li>
+        <li>
+          <code>axisArrow</code>: Whether to draw arrowheads at both visible ends of the axis.
+        </li>
       </ul>
 
       <p>

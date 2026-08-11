@@ -31,8 +31,10 @@ export default function LatexPage() {
       </p>
 
       <Experimental>
-        This component does not work properly in Safari due to some quirks with how WebKit handles
-        the SVG foreignObject element.
+        LaTeX labels are rendered in a regular HTML overlay and positioned from the SVG's screen
+        transform. This keeps them attached to the math plane across camera movement, responsive
+        layout changes, browser zoom, and browsers that implement SVG and HTML boundaries
+        differently.
       </Experimental>
 
       <PropTable of={"LaTeX"} />

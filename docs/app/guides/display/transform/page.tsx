@@ -62,7 +62,9 @@ export default function Page() {
       <h2>Exceptions</h2>
 
       <p>
-        Not all elements support <code>Transform</code>. This may change in the future.
+        Most display components support <code>Transform</code>, including lines, points, plots,
+        inequalities, and vector fields. A few components intentionally keep viewport-relative
+        behavior or transform only their anchor point:
       </p>
 
       <ul>
@@ -72,14 +74,6 @@ export default function Page() {
 
         <li>
           <code>Coordinates.*</code> cannot be transformed.
-        </li>
-
-        <li>
-          <code>Function.OfX</code> cannot be transformed.
-        </li>
-
-        <li>
-          <code>VectorField</code> cannot be transformed.
         </li>
       </ul>
     </>

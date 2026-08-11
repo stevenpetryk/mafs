@@ -2,6 +2,7 @@ build
 dist
 .api-report
 
+docs/generated-docgen.tsx
 docs/.cache
 docs/.next
 docs/public

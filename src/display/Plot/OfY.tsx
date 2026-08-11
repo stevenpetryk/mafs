@@ -21,6 +21,10 @@ export function OfY({ x, domain, ...props }: OfYProps) {
   const xy = React.useCallback<ParametricProps["xy"]>((y) => [x(y), y], [x])
   const parametricDomain = React.useMemo<vec.Vector2>(() => [yMin, yMax], [yMin, yMax])
 
+  // See OfX: never ask the sampler to walk an inverted range when a plot's
+  // explicit domain is entirely off-screen.
+  if (yMin > yMax) return null
+
   return <Parametric xy={xy} domain={parametricDomain} {...props} />
 }
 

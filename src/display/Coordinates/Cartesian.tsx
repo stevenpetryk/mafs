@@ -2,14 +2,12 @@ import * as React from "react"
 import { pickClosestToValue, range, round, roundToNearestPowerOf10 } from "../../math"
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
+import { useCoordinateContext } from "../../context/CoordinateContext"
 import { vec } from "../../vec"
 import { XLabels, YLabels, AxisOptions, defaultAxisOptions } from "./Axes"
 import { useSpanContext } from "../../context/SpanContext"
 
-// This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
-let incrementer = 0
-
-type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
+export type GridAxisOptions = Partial<AxisOptions & { subdivisions: number | false }>
 
 export interface CartesianCoordinatesProps {
   xAxis?: GridAxisOptions | false | "auto"
@@ -75,16 +73,38 @@ export function Cartesian({
     ...yAxisOverrides,
   } as GridAxisOptions
 
-  const id = React.useMemo(() => `cartesian-${incrementer++}`, [])
+  // React's id is stable across server rendering and hydration, unlike a
+  // module-level counter which can drift when StrictMode renders twice.
+  const id = `cartesian-${React.useId().replace(/:/g, "")}`
 
   const { viewTransform } = useTransformContext()
   const { xPaneRange, yPaneRange } = usePaneContext()
+  const {
+    xMin: viewXMin,
+    xMax: viewXMax,
+    yMin: viewYMin,
+    yMax: viewYMax,
+    width: viewWidth,
+    height: viewHeight,
+  } = useCoordinateContext()
 
   const [xMin, xMax] = xPaneRange
   const [yMin, yMax] = yPaneRange
 
   const [vxMin, vyMin] = vec.transform([xMin, yMin], viewTransform)
   const [vxMax, vyMax] = vec.transform([xMax, yMax], viewTransform)
+
+  // The pixel-space positions of the visible viewport's edges, used to place
+  // axis arrows so that they hug the actual SVG viewBox rather than a pane
+  // boundary. Derive these from the same values used by Mafs' viewBox so
+  // rounding in the view transform cannot pull the arrowheads inward (#119).
+  const xLeftPx = (viewXMin / (viewXMax - viewXMin)) * viewWidth
+  const xRightPx = xLeftPx + viewWidth
+  const yTopPx = (viewYMax / (viewYMin - viewYMax)) * viewHeight
+  const yBottomPx = yTopPx + viewHeight
+
+  const showXAxisArrow = xAxisEnabled && xAxis.axis && xAxis.axisArrow
+  const showYAxisArrow = yAxisEnabled && yAxis.axis && yAxis.axisArrow
 
   const xLines = xAxis.lines || 1
   const yLines = yAxis.lines || 1
@@ -146,6 +166,19 @@ export function Cartesian({
         {xAxisEnabled && xAxis.axis && <line x1={vxMin} y1={0} x2={vxMax} y2={0} />}
         {yAxisEnabled && yAxis.axis && <line x1={0} y1={vyMin} x2={0} y2={vyMax} />}
       </g>
+
+      {showXAxisArrow && (
+        <path
+          d={`M ${xRightPx} 0 l -12 -5 v 10 Z M ${xLeftPx} 0 l 12 -5 v 10 Z`}
+          fill="var(--mafs-origin-color)"
+        />
+      )}
+      {showYAxisArrow && (
+        <path
+          d={`M 0 ${yTopPx} l -5 12 h 10 Z M 0 ${yBottomPx} l -5 -12 h 10 Z`}
+          fill="var(--mafs-origin-color)"
+        />
+      )}
 
       <g className="mafs-shadow">
         {xAxisEnabled && xAxis.labels && (

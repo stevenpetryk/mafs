@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable no-undef, @typescript-eslint/no-var-requires */
 
 import { createStarryNight, all } from "@wooorm/starry-night"
 

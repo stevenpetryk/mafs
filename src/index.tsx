@@ -2,12 +2,25 @@
 
 export { Mafs } from "./view/Mafs"
 export type { MafsProps } from "./view/Mafs"
+export type { PanBounds } from "./gestures/useCamera"
+export type { Anchor } from "./math"
 
 export { Coordinates } from "./display/Coordinates"
 export { autoPi as labelPi } from "./display/Coordinates/Cartesian"
+export type { CartesianCoordinatesProps, GridAxisOptions } from "./display/Coordinates/Cartesian"
+export type { PolarCoordinatesProps } from "./display/Coordinates/Polar"
+export type { AxisOptions, LabelMaker } from "./display/Coordinates/Axes"
 
 export { Plot } from "./display/Plot"
-export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"
+export type {
+  Exclusions,
+  OfXProps,
+  OfYProps,
+  ParametricProps,
+  ParametricPropsLegacy,
+  ParametricPropsNew,
+  VectorFieldProps,
+} from "./display/Plot"
 
 export { Line } from "./display/Line"
 export type {
@@ -15,6 +28,9 @@ export type {
   PointSlopeProps,
   ThroughPointsProps,
   SegmentProps,
+  BezierProps,
+  VerticalProps,
+  HorizontalProps,
 } from "./display/Line"
 
 export { Circle } from "./display/Circle"
@@ -43,6 +59,7 @@ export type { TextProps, CardinalDirection } from "./display/Text"
 
 export { Theme } from "./display/Theme"
 export type { Filled, Stroked } from "./display/Theme"
+export type { PolyBaseProps } from "./display/PolyBase"
 
 export { MovablePoint } from "./interaction/MovablePoint"
 export type { MovablePointProps } from "./interaction/MovablePoint"
@@ -74,3 +91,6 @@ export { usePaneContext } from "./context/PaneContext"
 export { Debug } from "./debug"
 
 export { LaTeX } from "./display/LaTeX"
+export type { LatexProps } from "./display/LaTeX"
+export type { PaneContextShape } from "./context/PaneContext"
+export type { TransformContextShape } from "./context/TransformContext"

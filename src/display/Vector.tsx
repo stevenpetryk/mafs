@@ -4,9 +4,6 @@ import { Theme } from "./Theme"
 import { vec } from "../vec"
 import { useTransformContext } from "../context/TransformContext"
 
-// This is sort of a hack—every SVG pattern on a page needs a unique ID, otherwise they conflict.
-let incrementer = 0
-
 export interface VectorProps extends Stroked {
   tail?: vec.Vector2
   tip: vec.Vector2
@@ -28,7 +25,10 @@ export function Vector({
   const pixelTail = vec.transform(tail, combinedTransform)
   const pixelTip = vec.transform(tip, combinedTransform)
 
-  const id = React.useMemo(() => `mafs-triangle-${incrementer++}`, [])
+  // React's id is stable across server rendering and hydration. Colons are
+  // valid in HTML ids, but removing them also keeps SVG url fragments easy to
+  // inspect and compatible with older SVG implementations.
+  const id = `mafs-triangle-${React.useId().replace(/:/g, "")}`
 
   return (
     <>

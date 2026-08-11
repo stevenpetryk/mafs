@@ -39,7 +39,9 @@ export function Text({
   let yOffset = 0
   let dominantBaseline: React.SVGProps<SVGTextElement>["dominantBaseline"] = "middle"
   if (attach?.includes("n")) {
-    dominantBaseline = "baseline"
+    // "auto" aligns the alphabetic baseline of the text with the anchor point,
+    // causing the text to render above it.
+    dominantBaseline = "auto"
     yOffset = 1
   } else if (attach?.includes("s")) {
     dominantBaseline = "hanging"

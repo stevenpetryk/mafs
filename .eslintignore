@@ -1,5 +1,0 @@
-node_modules
-build
-*.config.js
-
-tests/frameworks/

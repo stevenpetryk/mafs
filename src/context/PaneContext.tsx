@@ -3,7 +3,7 @@ import { useCoordinateContext } from "./CoordinateContext"
 import { range, Interval } from "../math"
 const { round, ceil, floor, log2 } = Math
 
-interface PaneContextShape {
+export interface PaneContextShape {
   xPanes: Interval[]
   yPanes: Interval[]
   xPaneRange: Interval

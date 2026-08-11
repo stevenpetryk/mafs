@@ -28,6 +28,12 @@ function Functions() {
       <PropTable of={"Plot.OfX"} />
       <PropTable of={"Plot.OfY"} />
 
+      <p>
+        Logarithmic functions use the same API. Restrict the domain to positive values when needed;
+        for example, pass a <code>y</code> function that calls <code>Math.log10</code> and a
+        positive <code>domain</code>. This renders functions such as 3 log₁₀(x) + 1.
+      </p>
+
       <h2>
         Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>
       </h2>

@@ -15,6 +15,20 @@ export const Plot = {
 import type { InequalityProps } from "./Plot/Inequality"
 import type { OfXProps } from "./Plot/OfX"
 import type { OfYProps } from "./Plot/OfY"
-import type { ParametricProps } from "./Plot/Parametric"
+import type {
+  ParametricProps,
+  ParametricPropsLegacy,
+  ParametricPropsNew,
+  Exclusions,
+} from "./Plot/Parametric"
 import type { VectorFieldProps } from "./Plot/VectorField"
-export type { InequalityProps, OfXProps, OfYProps, ParametricProps, VectorFieldProps }
+export type {
+  InequalityProps,
+  OfXProps,
+  OfYProps,
+  ParametricProps,
+  ParametricPropsLegacy,
+  ParametricPropsNew,
+  VectorFieldProps,
+  Exclusions,
+}

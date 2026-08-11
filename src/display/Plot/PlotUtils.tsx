@@ -84,15 +84,40 @@ export function sampleParametric(
   minDepth: number,
   maxDepth: number,
   threshold: number,
+  exclusions: number[] = [],
 ) {
-  let result = "M "
+  let needsMove = true
+  let lastT: number | null = null
+
+  const sortedExclusions = [...exclusions].sort((a, b) => a - b)
+
+  // Returns true if any exclusion point lies strictly between `from` and `to`
+  // (exclusive of `from`, inclusive of `to`), assuming `from < to`.
+  function crossesExclusion(from: number, to: number): boolean {
+    for (const e of sortedExclusions) {
+      if (e > from && e <= to) return true
+      if (e > to) break
+    }
+    return false
+  }
+
+  // Accumulate path segments in an array and join once at the end, which is
+  // much faster than repeated string concatenation for dense samples.
+  const parts: string[] = []
 
   sample({
     fn,
     error: (a, b) => vec.squareDist(a, b),
-    onPoint: (_t, [x, y]) => {
+    onPoint: (t, [x, y]) => {
       if (Number.isFinite(x) && Number.isFinite(y)) {
-        result += `${x} ${y} L `
+        const breakPath = needsMove || (lastT !== null && crossesExclusion(lastT, t))
+        parts.push(breakPath ? `M ${x} ${y}` : `L ${x} ${y}`)
+        needsMove = false
+        lastT = t
+      } else {
+        // A non-finite point breaks the curve; the next finite point starts a
+        // new subpath so that discontinuities aren't connected with a line.
+        needsMove = true
       }
     },
     lerp: (p1, p2, t) => vec.lerp(p1, p2, t),
@@ -102,7 +127,7 @@ export function sampleParametric(
     threshold,
   })
 
-  return result.substring(0, result.length - 2)
+  return parts.join(" ")
 }
 
 export function sampleInequality(

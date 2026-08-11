@@ -9,7 +9,18 @@ import { sampleParametric } from "./PlotUtils"
 //       Also, remove the `t` property at that time.
 //       Waiting until the major update to batch them together,
 //          and to give time for consumers to update their usage.
-interface ParametricPropsLegacy extends Stroked {
+
+/**
+ * Points at which the plotted function is discontinuous. The plot is broken at
+ * these values so that discontinuities aren't connected with a straight line.
+ *
+ * This can either be a static list of values, or a function that receives the
+ * current domain and returns a list of values (useful when the discontinuities
+ * depend on the visible range).
+ */
+export type Exclusions = number[] | ((domain: vec.Vector2) => number[])
+
+export interface ParametricPropsLegacy extends Stroked {
   /** A function that takes a `t` value and returns a point. */
   xy: (t: number) => vec.Vector2
   /** The domain between which to evaluate `xy`. */
@@ -22,11 +33,13 @@ interface ParametricPropsLegacy extends Stroked {
   minSamplingDepth?: number
   /** The maximum recursive depth of the sampling algorithm. */
   maxSamplingDepth?: number
+  /** Points at which the function is discontinuous. */
+  exclusions?: Exclusions
 
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
 
-interface ParametricPropsNew extends Stroked {
+export interface ParametricPropsNew extends Stroked {
   /** A function that takes a `t` value and returns a point. */
   xy: (t: number) => vec.Vector2
   /** The domain between which to evaluate `xy`. */
@@ -39,6 +52,8 @@ interface ParametricPropsNew extends Stroked {
   minSamplingDepth?: number
   /** The maximum recursive depth of the sampling algorithm. */
   maxSamplingDepth?: number
+  /** Points at which the function is discontinuous. */
+  exclusions?: Exclusions
 
   svgPathProps?: React.SVGProps<SVGPathElement>
 }
@@ -55,19 +70,39 @@ export function Parametric({
   opacity = 1.0,
   maxSamplingDepth = 14,
   minSamplingDepth = 8,
+  exclusions,
   svgPathProps = {},
 }: ParametricProps) {
-  const { viewTransform } = useTransformContext()
+  const { viewTransform, userTransform } = useTransformContext()
+  const transform = React.useMemo(
+    () => vec.matrixMult(viewTransform, userTransform),
+    [viewTransform, userTransform],
+  )
 
-  // Negative because the y-axis is flipped in the SVG coordinate system.
-  const pixelsPerSquare = -vec.det(viewTransform)
+  // Sampling quality should account for user transforms as well as the view
+  // transform. The absolute determinant is the pixel area of one world-space
+  // square (and remains positive when a transform flips an axis).
+  const pixelsPerSquare = Math.abs(vec.det(transform))
 
   const [tMin, tMax] = domain || t
   const errorThreshold = 0.1 / pixelsPerSquare
 
+  const exclusionPoints = React.useMemo(() => {
+    if (!exclusions) return []
+    return typeof exclusions === "function" ? exclusions([tMin, tMax]) : exclusions
+  }, [exclusions, tMin, tMax])
+
   const svgPath = React.useMemo(
-    () => sampleParametric(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
-    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax],
+    () =>
+      sampleParametric(
+        xy,
+        [tMin, tMax],
+        minSamplingDepth,
+        maxSamplingDepth,
+        errorThreshold,
+        exclusionPoints,
+      ),
+    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax, exclusionPoints],
   )
 
   return (
@@ -83,7 +118,7 @@ export function Parametric({
         strokeOpacity: opacity,
         strokeDasharray: style === "dashed" ? "var(--mafs-line-stroke-dash-style)" : undefined,
         vectorEffect: "non-scaling-stroke",
-        transform: "var(--mafs-view-transform)",
+        transform: "var(--mafs-view-transform) var(--mafs-user-transform)",
         ...(svgPathProps.style || {}),
       }}
     />

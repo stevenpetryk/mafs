@@ -80,6 +80,12 @@ function Stopwatch() {
         arrow keys, so it should be side-effect free.
       </p>
 
+      <p>
+        To use a movable point as an interactive control, pass <code>onClick</code> or additional
+        SVG group attributes through <code>svgGroupProps</code>. The click handler is intended for
+        clicks without dragging, so moving a point does not accidentally trigger a button action.
+      </p>
+
       <h2>Transformations and constraints</h2>
 
       <p>

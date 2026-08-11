@@ -21,6 +21,11 @@ export function OfX({ y, domain, ...props }: OfXProps) {
   const xy = React.useCallback<ParametricProps["xy"]>((x) => [x, y(x)], [y])
   const parametricDomain = React.useMemo<vec.Vector2>(() => [xMin, xMax], [xMin, xMax])
 
+  // A user domain can be completely outside the visible pane. Passing an
+  // inverted domain to the sampler produces a backwards path instead of
+  // culling the plot, which becomes especially noticeable while panning.
+  if (xMin > xMax) return null
+
   return <Parametric xy={xy} domain={parametricDomain} {...props} />
 }
 

@@ -21,8 +21,7 @@ export interface DocgenProp {
 }
 
 export type DocgenPropType =
-  | { name: "enum" | "boolean"; raw: string; value: Array<{ value: string }> }
-  | { name: string }
+  { name: "enum" | "boolean"; raw: string; value: Array<{ value: string }> } | { name: string }
 
 interface PropTableProps {
   // Get literal displayName union from DocgenInfo (an array of objects with displayName values)

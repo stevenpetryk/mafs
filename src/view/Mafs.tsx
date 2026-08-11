@@ -8,8 +8,9 @@ import { round } from "../math"
 import { vec } from "../vec"
 import { TransformContext } from "../context/TransformContext"
 import { SpanContext } from "../context/SpanContext"
+import { MafsContext } from "../context/MafsContext"
 import invariant from "tiny-invariant"
-import { useCamera } from "../gestures/useCamera"
+import { useCamera, PanBounds } from "../gestures/useCamera"
 import { useWheelEnabler } from "../gestures/useWheelEnabler"
 import { TestContext } from "../context/TestContext"
 import { Debug } from "../debug"
@@ -18,8 +19,13 @@ export type MafsProps = React.PropsWithChildren<{
   width?: number | "auto"
   height?: number
 
-  /** Whether to enable panning with the mouse and keyboard */
-  pan?: boolean
+  /**
+   * Whether to enable panning with the mouse and keyboard. This can also be an
+   * object with `x` and/or `y` properties to constrain how far the viewport can
+   * be panned. Each is a `[min, max]` range that the viewport's center is kept
+   * within, which is useful for limiting panning to a region or direction.
+   */
+  pan?: boolean | PanBounds
 
   /**
    * Whether to enable zooming with the mouse and keyboard. This can also be an
@@ -81,7 +87,7 @@ export function Mafs({
   return (
     <div
       className="MafsView"
-      style={{ width: desiredCssWidth, height }}
+      style={{ width: desiredCssWidth, height, position: "relative" }}
       tabIndex={pan || zoom ? 0 : -1}
       ref={rootRef}
     >
@@ -141,7 +147,8 @@ function MafsCanvas({
     maxZoom = 5
   }
 
-  const camera = useCamera({ minZoom, maxZoom })
+  const panEnabled = pan !== false
+  const panBounds = typeof pan === "object" ? pan : undefined
 
   const padding = viewBox?.padding ?? 0.5
   // Default behavior for `preserveAspectRatio == false`
@@ -167,6 +174,12 @@ function MafsCanvas({
     }
   }
 
+  // The center of the viewport before the camera transformation is applied,
+  // used as the reference point when constraining panning (#115).
+  const baseCenter: vec.Vector2 = [(xMin + xMax) / 2, (yMin + yMax) / 2]
+
+  const camera = useCamera({ minZoom, maxZoom, baseCenter, panBounds })
+
   ;[xMin, yMin] = vec.transform([xMin, yMin], camera.matrix)
   ;[xMax, yMax] = vec.transform([xMax, yMax], camera.matrix)
 
@@ -186,26 +199,51 @@ function MafsCanvas({
 
   const pickupOrigin = React.useRef<vec.Vector2>([0, 0])
   const pickupPoint = React.useRef<vec.Vector2>([0, 0])
+  const svgRef = React.useRef<SVGSVGElement>(null)
+  const [latexLayer, setLatexLayer] = React.useState<HTMLDivElement | null>(null)
+  const latexLayerRef = React.useCallback((element: HTMLDivElement | null) => {
+    setLatexLayer(element)
+  }, [])
 
   function mapGesturePoint(point: vec.Vector2): vec.Vector2 {
-    const el = rootRef.current
-    invariant(el, "SVG is not mounted")
+    const svg = svgRef.current
+    invariant(svg, "SVG is not mounted")
     invariant(inverseViewTransform, "View transform is not invertible")
 
-    const rect = el.getBoundingClientRect()
-    return vec.transform(
-      [point[0] - rect.left + viewBoxX, point[1] - rect.top + viewBoxY],
-      inverseViewTransform,
-    )
+    // SVG can be letterboxed by preserveAspectRatio, CSS sizing, browser
+    // zoom, or a user-supplied stylesheet. `getScreenCTM` accounts for all of
+    // those transforms; using the CSS rectangle directly does not (#116).
+    const screenTransform = svg.getScreenCTM()
+    if (screenTransform) {
+      const screenPoint = svg.createSVGPoint()
+      screenPoint.x = point[0]
+      screenPoint.y = point[1]
+      const svgPoint = screenPoint.matrixTransform(screenTransform.inverse())
+      return vec.transform([svgPoint.x, svgPoint.y], inverseViewTransform)
+    }
+
+    // Some test DOMs do not implement getScreenCTM. Keep a geometry-based
+    // fallback for those environments, including the SVG's aspect-ratio fit.
+    const rect = svg.getBoundingClientRect()
+    const box = svg.viewBox.baseVal
+    const scale = Math.min(rect.width / box.width, rect.height / box.height)
+    const offsetX = (rect.width - box.width * scale) / 2
+    const offsetY = (rect.height - box.height * scale) / 2
+    const svgPoint: vec.Vector2 = [
+      (point[0] - rect.left - offsetX) / scale + box.x,
+      (point[1] - rect.top - offsetY) / scale + box.y,
+    ]
+    return vec.transform(svgPoint, inverseViewTransform)
   }
 
   const wheelEnabler = useWheelEnabler(!!zoom)
 
-  const justDragged = React.useRef(false)
+  const pointerDownPos = React.useRef<vec.Vector2 | null>(null)
+  const activePointers = React.useRef(0)
 
   useGesture(
     {
-      onDrag: ({ movement, first, event, type, pinching, memo = [0, 0], last }) => {
+      onDrag: ({ movement, first, event, type, pinching, memo = [0, 0] }) => {
         if (pinching) return movement
 
         if (first) camera.setBase()
@@ -216,11 +254,6 @@ function MafsCanvas({
         const keyboard = type.includes("key")
         if (keyboard) event?.preventDefault()
 
-        // Some minor jank so that onClick doesn't fire on drag.
-        if (last) {
-          justDragged.current = true
-          setTimeout(() => (justDragged.current = false), 10)
-        }
         return !keyboard && first ? movement : memo
       },
       onPinch: ({ first, movement: [scale], origin, event, last }) => {
@@ -229,13 +262,13 @@ function MafsCanvas({
         if (first) {
           camera.setBase()
           pickupOrigin.current = origin
-          pickupPoint.current = pan
+          pickupPoint.current = panEnabled
             ? mapGesturePoint(origin)
             : [(xMin + xMax) / 2, (yMin + yMax) / 2]
         }
 
         let offset: vec.Vector2 = [0, 0]
-        if (pan) {
+        if (panEnabled) {
           offset = vec.transform(vec.sub(origin, pickupOrigin.current), inverseViewTransform)
         }
         camera.move({ zoom: { at: pickupPoint.current, scale }, pan: vec.scale(offset, -1) })
@@ -274,20 +307,9 @@ function MafsCanvas({
       onMouseMove: () => {
         wheelEnabler.handleMouseMove()
       },
-      onClick: ({ event }) => {
-        if (!onClick || !rootRef.current || justDragged.current) return
-
-        const box = rootRef.current.getBoundingClientRect()
-        const pxX = event.clientX - box.left
-        const pxY = box.bottom - event.clientY
-        const x = (pxX / width) * xSpan + xMin
-        const y = (pxY / height) * ySpan + yMin
-
-        onClick([x, y], event)
-      },
     },
     {
-      drag: { enabled: pan, eventOptions: { passive: false }, threshold: 1 },
+      drag: { enabled: panEnabled, eventOptions: { passive: false }, threshold: 1 },
       pinch: { enabled: !!zoom, eventOptions: { passive: false } },
       wheel: {
         enabled: wheelEnabler.wheelEnabled,
@@ -304,48 +326,88 @@ function MafsCanvas({
     () => ({ xMin, xMax, yMin, yMax, height, width }),
     [xMin, xMax, yMin, yMax, height, width],
   )
+  const spanContext = React.useMemo(() => ({ xSpan, ySpan }), [xSpan, ySpan])
+  const transformContext = React.useMemo(
+    () => ({ userTransform: vec.identity, viewTransform }),
+    [viewTransform],
+  )
+  const mafsContext = React.useMemo(() => ({ svgRef, latexLayer }), [latexLayer])
 
   return (
     <CoordinateContext.Provider value={coordinateContext}>
-      <SpanContext.Provider value={{ xSpan, ySpan }}>
-        <TransformContext.Provider
-          value={{ userTransform: vec.identity, viewTransform: viewTransform }}
-        >
-          <PaneManager>
-            <svg
-              width={width}
-              height={height}
-              viewBox={[
-                viewBoxX - (debug ? 150 : 0),
-                viewBoxY - (debug ? 150 : 0),
-                width + (debug ? 300 : 0),
-                height + (debug ? 300 : 0),
-              ].join(" ")}
-              preserveAspectRatio="xMidYMin"
-              style={{
-                width: desiredCssWidth,
-                touchAction: pan ? "none" : "auto",
-                ...({
-                  "--mafs-view-transform": viewTransformCSS,
-                  "--mafs-user-transform": "translate(0, 0)",
-                } as React.CSSProperties),
-              }}
-            >
-              {children}
-              {debug && (
-                <rect
-                  x={viewBoxX}
-                  y={viewBoxY}
-                  width={width}
-                  height={height}
-                  fill="none"
-                  stroke="red"
-                  style={{ outline: "9999px solid #f002" }}
-                />
-              )}
-              {debug && <Debug.ViewportInfo />}
-            </svg>
-          </PaneManager>
+      <SpanContext.Provider value={spanContext}>
+        <TransformContext.Provider value={transformContext}>
+          <MafsContext.Provider value={mafsContext}>
+            <PaneManager>
+              <svg
+                ref={svgRef}
+                width={width}
+                height={height}
+                viewBox={[
+                  viewBoxX - (debug ? 150 : 0),
+                  viewBoxY - (debug ? 150 : 0),
+                  width + (debug ? 300 : 0),
+                  height + (debug ? 300 : 0),
+                ].join(" ")}
+                preserveAspectRatio="xMidYMin"
+                style={{
+                  width: desiredCssWidth,
+                  touchAction: panEnabled ? "none" : "auto",
+                  ...({
+                    "--mafs-view-transform": viewTransformCSS,
+                    "--mafs-user-transform": "translate(0, 0)",
+                  } as React.CSSProperties),
+                }}
+                onPointerDown={(event) => {
+                  pointerDownPos.current = [event.clientX, event.clientY]
+                  activePointers.current++
+                }}
+                onPointerUp={(event) => {
+                  activePointers.current = Math.max(0, activePointers.current - 1)
+                  if (activePointers.current > 0 || !pointerDownPos.current) return
+
+                  const down = pointerDownPos.current
+                  pointerDownPos.current = null
+
+                  // Ignore releases that are part of a drag or pinch gesture.
+                  if (Math.hypot(event.clientX - down[0], event.clientY - down[1]) > 8) return
+
+                  if (!onClick) return
+
+                  onClick(mapGesturePoint([event.clientX, event.clientY]), event.nativeEvent)
+                }}
+                onPointerCancel={() => {
+                  pointerDownPos.current = null
+                  activePointers.current = 0
+                }}
+              >
+                {children}
+                {debug && (
+                  <rect
+                    x={viewBoxX}
+                    y={viewBoxY}
+                    width={width}
+                    height={height}
+                    fill="none"
+                    stroke="red"
+                    style={{ outline: "9999px solid #f002" }}
+                  />
+                )}
+                {debug && <Debug.ViewportInfo />}
+              </svg>
+              <div
+                ref={latexLayerRef}
+                className="mafs-latex-layer"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  zIndex: 1,
+                  overflow: "hidden",
+                  pointerEvents: "none",
+                }}
+              />
+            </PaneManager>
+          </MafsContext.Provider>
         </TransformContext.Provider>
       </SpanContext.Provider>
     </CoordinateContext.Provider>

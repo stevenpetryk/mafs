@@ -7,6 +7,9 @@ export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
 
 export interface UseMovablePointArguments {
   color?: string
+  /** Additional props passed to the rendered movable point. */
+  onClick?: React.MouseEventHandler<SVGGElement>
+  svgGroupProps?: React.SVGProps<SVGGElement>
 
   /**
    * Constrain the point to only horizontal movement, vertical movement, or mapped movement.
@@ -27,11 +30,9 @@ export interface UseMovablePoint {
 
 export function useMovablePoint(
   initialPoint: vec.Vector2,
-  { constrain, color = Theme.pink }: UseMovablePointArguments = {},
+  { constrain, color = Theme.pink, onClick, svgGroupProps }: UseMovablePointArguments = {},
 ): UseMovablePoint {
   const [initialX, initialY] = initialPoint
-  const [point, setPoint] = React.useState<vec.Vector2>(initialPoint)
-  const [x, y] = point
 
   const constraintFunction: ConstraintFunction = React.useMemo(() => {
     if (constrain === "horizontal") {
@@ -45,9 +46,33 @@ export function useMovablePoint(
     return ([x, y]) => [x, y]
   }, [constrain, initialX, initialY])
 
+  // Apply the constraint to the initial point so that the point never
+  // starts in a position that violates the constraint (#99).
+  const [point, setPointInternal] = React.useState<vec.Vector2>(() =>
+    constraintFunction(initialPoint),
+  )
+  const [x, y] = point
+
+  // The drag handler in `useMovable` already applies the constraint before
+  // calling `onMove`, so the raw setter is passed here to avoid constraining
+  // twice.
   const element = React.useMemo(() => {
-    return <MovablePoint {...{ point, color }} constrain={constraintFunction} onMove={setPoint} />
-  }, [point, color, constraintFunction])
+    return (
+      <MovablePoint
+        {...{ point, color }}
+        constrain={constraintFunction}
+        onMove={setPointInternal}
+        onClick={onClick}
+        svgGroupProps={svgGroupProps}
+      />
+    )
+  }, [point, color, constraintFunction, onClick, svgGroupProps])
+
+  // Imperative updates should also respect the constraint (#99).
+  const setPoint = React.useCallback(
+    (point: vec.Vector2) => setPointInternal(constraintFunction(point)),
+    [constraintFunction],
+  )
 
   return {
     x,

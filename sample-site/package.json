@@ -1,0 +1,26 @@
+{
+  "name": "mafs-fixes-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Sample site demonstrating the fixes and improvements made to Mafs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "smoke": "node smoke.mjs",
+    "verify": "node verify.mjs",
+    "probe": "node probe.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

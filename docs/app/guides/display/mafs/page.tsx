@@ -96,6 +96,47 @@ function MafsPage() {
         `}
         language="tsx"
       />
+      <h2>Colors and themes</h2>
+
+      <p>
+        Mafs uses CSS custom properties for its built-in palette. Override them on{" "}
+        <code>.MafsView</code> (or a parent element) after importing <code>mafs/core.css</code> to
+        create a light theme or match your application. Components that accept a <code>color</code>
+        prop can use the exported <code>Theme</code> values or any valid CSS color.
+      </p>
+
+      <Code
+        language="css"
+        source={[
+          ".my-light-mafs {",
+          "  --mafs-bg: #fff;",
+          "  --mafs-fg: #172033;",
+          "  --mafs-line-color: #cbd5e1;",
+          "  --grid-line-subdivision-color: #e2e8f0;",
+          "  --mafs-blue: #2563eb;",
+          "}",
+        ].join("\n")}
+      />
+
+      <p>
+        The main variables are <code>--mafs-bg</code>, <code>--mafs-fg</code>,{" "}
+        <code>--mafs-origin-color</code>, <code>--mafs-line-color</code>,{" "}
+        <code>--grid-line-subdivision-color</code>, and the palette variables{" "}
+        <code>--mafs-red</code>, <code>--mafs-orange</code>, <code>--mafs-yellow</code>,{" "}
+        <code>--mafs-green</code>, <code>--mafs-blue</code>, <code>--mafs-indigo</code>,{" "}
+        <code>--mafs-violet</code>, and <code>--mafs-pink</code>. The CSS variables are the source
+        of truth, while <code>Theme</code> provides convenient references for component props.
+      </p>
+
+      <h2>Accessibility</h2>
+
+      <p>
+        Mafs keeps movable points keyboard-operable and gives the canvas a focus target when panning
+        or zooming is enabled. For a complete accessible visualization, add a nearby text heading or
+        description, keep the number of interactive points manageable, and provide a non-visual
+        explanation or equivalent controls for important information. Custom SVG components should
+        preserve keyboard focus, visible focus styles, and meaningful labels where appropriate.
+      </p>
     </>
   )
 }

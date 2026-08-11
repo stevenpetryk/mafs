@@ -50,9 +50,11 @@ import ZoomExample from "../docs/components/guide-examples/display/viewbox/ZoomE
 
 async function visualTest(mount: any, page: Page, node: React.ReactElement) {
   const component = await mount(node)
-  ;(await component.locator(".MafsView").count()) === 0
-    ? await expect(component).toHaveClass("MafsView")
-    : await expect(component.locator(".MafsView")).toHaveClass("MafsView")
+  if ((await component.locator(".MafsView").count()) === 0) {
+    await expect(component).toHaveClass("MafsView")
+  } else {
+    await expect(component.locator(".MafsView")).toHaveClass("MafsView")
+  }
   await expect(page).toHaveScreenshot()
 }
 

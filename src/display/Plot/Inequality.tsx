@@ -122,7 +122,7 @@ export function Inequality({
           fill: fillColor || "var(--mafs-fg)",
           fillOpacity,
           stroke: "none",
-          transform: "var(--mafs-view-transform)",
+          transform: "var(--mafs-view-transform) var(--mafs-user-transform)",
           vectorEffect: "non-scaling-stroke",
           ...svgFillPathProps?.style,
         }}
@@ -140,7 +140,7 @@ export function Inequality({
             fill: "none",
             stroke: upperColor,
             strokeOpacity: upperOpacity,
-            transform: "var(--mafs-view-transform)",
+            transform: "var(--mafs-view-transform) var(--mafs-user-transform)",
             vectorEffect: "non-scaling-stroke",
             ...svgUpperPathProps?.style,
           }}
@@ -159,7 +159,7 @@ export function Inequality({
             fill: "none",
             stroke: lowerColor,
             strokeOpacity: lowerOpacity,
-            transform: "var(--mafs-view-transform)",
+            transform: "var(--mafs-view-transform) var(--mafs-user-transform)",
             vectorEffect: "non-scaling-stroke",
             ...svgLowerPathProps?.style,
           }}

@@ -1,6 +1,6 @@
 import * as esbuild from "esbuild"
 import fs from "fs-extra"
-import { Extractor } from "@microsoft/api-extractor"
+import { Extractor, ExtractorConfig } from "@microsoft/api-extractor"
 import typescript from "typescript"
 import invariant from "tiny-invariant"
 
@@ -13,7 +13,7 @@ async function main() {
   await runEsbuild()
   runTypeScript()
   runApiExtractor()
-  fs.rm("build/types", { recursive: true })
+  fs.rmSync("build/types", { recursive: true })
 }
 
 function runEsbuild() {
@@ -21,7 +21,12 @@ function runEsbuild() {
     entryPoints: ["src/index.tsx"],
     bundle: true,
     platform: "browser",
+    // Keep published bundles usable in the browsers supported by the original
+    // package instead of leaving proposal-only syntax to consumers.
+    target: "es2019",
     sourcemap: true,
+    // Keep the bundle small for consumers by letting their bundler minify.
+    legalComments: "none",
     external: Object.keys({ ...peerDependencies, ...dependencies }),
   }
 
@@ -48,12 +53,33 @@ function runTypeScript() {
     tsConfigParseResult.fileNames,
     tsConfigParseResult.options,
   )
-  return program.emit()
+  const result = program.emit()
+  const diagnostics = typescript
+    .getPreEmitDiagnostics(program)
+    .concat(result.diagnostics)
+    .filter((d) => d.category === typescript.DiagnosticCategory.Error)
+
+  invariant(
+    diagnostics.length === 0,
+    `TypeScript declaration emit failed with ${diagnostics.length} error(s)`,
+  )
+
+  return result
 }
 
 function runApiExtractor() {
-  const result = Extractor.loadConfigAndInvoke("./api-extractor.json")
+  const config = ExtractorConfig.loadFileAndPrepare("./api-extractor.json")
+  invariant(config, "Could not load api-extractor.json")
+  // Local builds automatically update the API report file.
+  const result = Extractor.invoke(config, { localBuild: true })
   invariant(result.succeeded, "API Extractor failed")
+
+  // API Extractor writes reports with CRLF line endings. Normalize the checked
+  // in report so builds remain clean on Unix and Windows alike.
+  const reportPath = "./.api-report/mafs.api.md"
+  const report = fs.readFileSync(reportPath, "utf8")
+  if (report.includes("\r\n")) fs.writeFileSync(reportPath, report.replaceAll("\r\n", "\n"))
+
   return result
 }
 

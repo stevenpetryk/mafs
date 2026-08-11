@@ -8,6 +8,10 @@ export interface MovablePointDisplayProps {
   ringRadiusPx?: number
   dragging: boolean
   point: vec.Vector2
+  /** Called when the point is clicked without dragging it. */
+  onClick?: React.MouseEventHandler<SVGGElement>
+  /** Additional attributes for the outer SVG group. */
+  svgGroupProps?: React.SVGProps<SVGGElement>
 }
 
 export const MovablePointDisplay = React.forwardRef<SVGGElement, MovablePointDisplayProps>(
@@ -15,6 +19,7 @@ export const MovablePointDisplay = React.forwardRef<SVGGElement, MovablePointDis
     const { color = Theme.pink, ringRadiusPx = 15, dragging, point } = props
 
     const { viewTransform, userTransform } = useTransformContext()
+    const { onClick, svgGroupProps = {} } = props
 
     const combinedTransform = React.useMemo(
       () => vec.matrixMult(viewTransform, userTransform),
@@ -26,14 +31,23 @@ export const MovablePointDisplay = React.forwardRef<SVGGElement, MovablePointDis
     return (
       <g
         ref={ref}
+        {...svgGroupProps}
         style={
           {
             "--movable-point-color": color,
             "--movable-point-ring-size": `${ringRadiusPx}px`,
+            ...svgGroupProps.style,
           } as React.CSSProperties
         }
-        className={`mafs-movable-point ${dragging ? "mafs-movable-point-dragging" : ""}`}
+        className={[
+          "mafs-movable-point",
+          dragging ? "mafs-movable-point-dragging" : "",
+          svgGroupProps.className,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         tabIndex={0}
+        onClick={onClick ?? svgGroupProps.onClick}
       >
         <circle className="mafs-movable-point-hitbox" r={30} cx={xPx} cy={yPx}></circle>
         <circle

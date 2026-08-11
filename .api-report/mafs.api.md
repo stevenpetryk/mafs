@@ -4,15 +4,46 @@
 
 ```ts
 
-import { JSX as JSX_2 } from 'react/jsx-runtime';
+import { JSX as JSX_2 } from 'react';
 import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
+
+// @public (undocumented)
+export type Anchor = "tl" | "tc" | "tr" | "cl" | "cc" | "cr" | "bl" | "bc" | "br";
+
+// @public (undocumented)
+export type AxisOptions = {
+    axis: boolean;
+    lines: number | false;
+    labels?: false | LabelMaker;
+    axisArrow?: boolean;
+};
+
+// @public (undocumented)
+export interface BezierProps extends Stroked {
+    control1: vec.Vector2;
+    control2?: vec.Vector2;
+    end: vec.Vector2;
+    start: vec.Vector2;
+    // (undocumented)
+    svgPathProps?: React_2.SVGProps<SVGPathElement>;
+}
 
 // @public (undocumented)
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
 
 // @public (undocumented)
-export function Circle({ radius, ...rest }: CircleProps): JSX_2.Element;
+export interface CartesianCoordinatesProps {
+    // (undocumented)
+    subdivisions?: number | false;
+    // (undocumented)
+    xAxis?: GridAxisOptions | false | "auto";
+    // (undocumented)
+    yAxis?: GridAxisOptions | false | "auto";
+}
+
+// @public (undocumented)
+export function Circle(input: CircleProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Circle {
@@ -46,7 +77,7 @@ export const Debug: {
 };
 
 // @public (undocumented)
-export function Ellipse({ center, radius, angle, strokeStyle, strokeOpacity, weight, color, fillOpacity, svgEllipseProps, }: EllipseProps): JSX_2.Element;
+export function Ellipse(input: EllipseProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Ellipse {
@@ -66,6 +97,9 @@ export interface EllipseProps extends Filled {
     svgEllipseProps?: React_2.SVGProps<SVGEllipseElement>;
 }
 
+// @public
+export type Exclusions = number[] | ((domain: vec.Vector2) => number[]);
+
 // @public (undocumented)
 export interface Filled {
     // (undocumented)
@@ -81,12 +115,21 @@ export interface Filled {
 }
 
 // @public (undocumented)
-function Image_2({ href, x, y, width, height, anchor, preserveAspectRatio, svgImageProps, }: ImageProps): JSX_2.Element;
+export type GridAxisOptions = Partial<AxisOptions & {
+    subdivisions: number | false;
+}>;
+
+// @public (undocumented)
+export interface HorizontalProps extends Omit<PointAngleProps, "point" | "angle"> {
+    y: number;
+}
+
+// @public (undocumented)
+function Image_2(input: ImageProps): JSX_2.Element;
 export { Image_2 as Image }
 
 // @public (undocumented)
 export interface ImageProps {
-    // Warning: (ae-forgotten-export) The symbol "Anchor" needs to be exported by the entry point index.d.ts
     anchor?: Anchor;
     // (undocumented)
     height: number;
@@ -107,12 +150,25 @@ export interface ImageProps {
 export type Interval = [min: number, max: number];
 
 // @public (undocumented)
+export type LabelMaker = (value: number) => React_2.ReactNode;
+
+// @public (undocumented)
 export function labelPi(x: number): string;
 
-// Warning: (ae-forgotten-export) The symbol "LatexProps" needs to be exported by the entry point index.d.ts
-//
 // @public (undocumented)
-export function LaTeX({ at: center, tex, color, katexOptions }: LatexProps): JSX_2.Element;
+export function LaTeX(input: LatexProps): React_2.ReactPortal | null;
+
+// @public (undocumented)
+export interface LatexProps {
+    // (undocumented)
+    at: vec.Vector2;
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    katexOptions?: KatexOptions;
+    // (undocumented)
+    tex: string;
+}
 
 // @public (undocumented)
 export const Line: {
@@ -120,10 +176,13 @@ export const Line: {
     PointSlope: typeof PointSlope;
     ThroughPoints: typeof ThroughPoints;
     Segment: typeof Segment;
+    Bezier: typeof Bezier;
+    Vertical: typeof Vertical;
+    Horizontal: typeof Horizontal;
 };
 
 // @public (undocumented)
-export function Mafs({ width: propWidth, height: propHeight, pan, zoom, viewBox, preserveAspectRatio, children, ssr, debug, onClick, }: MafsProps): JSX_2.Element;
+export function Mafs(input: MafsProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Mafs {
@@ -135,7 +194,7 @@ export namespace Mafs {
 export type MafsProps = React_2.PropsWithChildren<{
     width?: number | "auto";
     height?: number;
-    pan?: boolean;
+    pan?: boolean | PanBounds;
     zoom?: boolean | {
         min: number;
         max: number;
@@ -152,7 +211,7 @@ export type MafsProps = React_2.PropsWithChildren<{
 }>;
 
 // @public (undocumented)
-export function MovablePoint({ point, onMove, constrain, color, }: MovablePointProps): JSX_2.Element;
+export function MovablePoint(input: MovablePointProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace MovablePoint {
@@ -169,20 +228,23 @@ export interface MovablePointDisplayProps {
     color?: string;
     // (undocumented)
     dragging: boolean;
+    onClick?: React_2.MouseEventHandler<SVGGElement>;
     // (undocumented)
     point: vec.Vector2;
     // (undocumented)
     ringRadiusPx?: number;
+    svgGroupProps?: React_2.SVGProps<SVGGElement>;
 }
 
 // @public (undocumented)
 export interface MovablePointProps {
     // (undocumented)
     color?: string;
-    // Warning: (ae-forgotten-export) The symbol "ConstraintFunction_2" needs to be exported by the entry point index.d.ts
-    constrain?: ConstraintFunction_2;
+    constrain?: ConstraintFunction;
+    onClick?: React_2.MouseEventHandler<SVGGElement>;
     onMove: (point: vec.Vector2) => void;
     point: vec.Vector2;
+    svgGroupProps?: React_2.SVGProps<SVGGElement>;
 }
 
 // @public (undocumented)
@@ -205,11 +267,54 @@ export interface OfYProps extends Omit<ParametricProps, "xy" | "domain" | "t"> {
     x: (y: number) => number;
 }
 
-// Warning: (ae-forgotten-export) The symbol "ParametricPropsNew" needs to be exported by the entry point index.d.ts
-// Warning: (ae-forgotten-export) The symbol "ParametricPropsLegacy" needs to be exported by the entry point index.d.ts
-//
+// @public
+export interface PanBounds {
+    // (undocumented)
+    x?: vec.Vector2;
+    // (undocumented)
+    y?: vec.Vector2;
+}
+
+// @public (undocumented)
+export interface PaneContextShape {
+    // (undocumented)
+    xPaneRange: Interval;
+    // (undocumented)
+    xPanes: Interval[];
+    // (undocumented)
+    yPaneRange: Interval;
+    // (undocumented)
+    yPanes: Interval[];
+}
+
 // @public (undocumented)
 export type ParametricProps = ParametricPropsNew | ParametricPropsLegacy;
+
+// @public (undocumented)
+export interface ParametricPropsLegacy extends Stroked {
+    domain?: never;
+    exclusions?: Exclusions;
+    maxSamplingDepth?: number;
+    minSamplingDepth?: number;
+    // (undocumented)
+    svgPathProps?: React_2.SVGProps<SVGPathElement>;
+    // @deprecated (undocumented)
+    t: vec.Vector2;
+    xy: (t: number) => vec.Vector2;
+}
+
+// @public (undocumented)
+export interface ParametricPropsNew extends Stroked {
+    domain: vec.Vector2;
+    exclusions?: Exclusions;
+    maxSamplingDepth?: number;
+    minSamplingDepth?: number;
+    // (undocumented)
+    svgPathProps?: React_2.SVGProps<SVGPathElement>;
+    // @deprecated (undocumented)
+    t?: never;
+    xy: (t: number) => vec.Vector2;
+}
 
 // @public (undocumented)
 export const Plot: {
@@ -221,7 +326,7 @@ export const Plot: {
 };
 
 // @public (undocumented)
-export function Point({ x, y, color, opacity, svgCircleProps, }: PointProps): JSX_2.Element;
+export function Point(input: PointProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Point {
@@ -260,7 +365,25 @@ export interface PointSlopeProps extends Stroked {
 }
 
 // @public (undocumented)
-export function Polygon({ svgPolygonProps, ...otherProps }: PolygonProps): JSX_2.Element;
+export interface PolarCoordinatesProps {
+    // (undocumented)
+    lines?: number;
+    // (undocumented)
+    subdivisions?: number;
+    // (undocumented)
+    xAxis?: Partial<AxisOptions> | false;
+    // (undocumented)
+    yAxis?: Partial<AxisOptions> | false;
+}
+
+// @public (undocumented)
+export interface PolyBaseProps extends Filled {
+    // (undocumented)
+    points: vec.Vector2[];
+}
+
+// @public (undocumented)
+export function Polygon(input: PolygonProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Polygon {
@@ -268,8 +391,6 @@ export namespace Polygon {
     displayName: string;
 }
 
-// Warning: (ae-forgotten-export) The symbol "PolyBaseProps" needs to be exported by the entry point index.d.ts
-//
 // @public (undocumented)
 export interface PolygonProps extends PolyBaseProps {
     // (undocumented)
@@ -277,7 +398,7 @@ export interface PolygonProps extends PolyBaseProps {
 }
 
 // @public (undocumented)
-export function Polyline({ fillOpacity, svgPolylineProps, ...otherProps }: PolylineProps): JSX_2.Element;
+export function Polyline(input: PolylineProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Polyline {
@@ -301,6 +422,9 @@ export interface SegmentProps extends Stroked {
 
 // @public (undocumented)
 export interface Stopwatch {
+    pause: () => void;
+    playing: boolean;
+    rawTime: number;
     setTime: (time: number) => void;
     start: () => void;
     stop: () => void;
@@ -309,7 +433,10 @@ export interface Stopwatch {
 
 // @public (undocumented)
 export interface StopwatchArguments {
+    ease?: (t: number) => number;
     endTime?: number;
+    repeat?: boolean;
+    reversed?: boolean;
     startTime?: number;
 }
 
@@ -326,7 +453,7 @@ export interface Stroked {
 }
 
 // @public (undocumented)
-function Text_2({ children, x, y, color, size, svgTextProps, attach, attachDistance, }: TextProps): JSX_2.Element;
+function Text_2(input: TextProps): React_2.JSX.Element;
 
 // @public (undocumented)
 namespace Text_2 {
@@ -369,12 +496,18 @@ export interface ThroughPointsProps extends Stroked {
 }
 
 // @public (undocumented)
-export function Transform(props: TransformProps): JSX_2.Element;
+export function Transform(props: TransformProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Transform {
     var // (undocumented)
     displayName: string;
+}
+
+// @public (undocumented)
+export interface TransformContextShape {
+    userTransform: vec.Matrix;
+    viewTransform: vec.Matrix;
 }
 
 // @public (undocumented)
@@ -422,25 +555,24 @@ export interface UseMovablePoint {
 }
 
 // @public (undocumented)
-export function useMovablePoint(initialPoint: vec.Vector2, { constrain, color }?: UseMovablePointArguments): UseMovablePoint;
+export function useMovablePoint(initialPoint: vec.Vector2, input?: UseMovablePointArguments): UseMovablePoint;
 
 // @public (undocumented)
 export interface UseMovablePointArguments {
     // (undocumented)
     color?: string;
     constrain?: "horizontal" | "vertical" | ConstraintFunction;
+    onClick?: React_2.MouseEventHandler<SVGGElement>;
+    // (undocumented)
+    svgGroupProps?: React_2.SVGProps<SVGGElement>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "PaneContextShape" needs to be exported by the entry point index.d.ts
-//
 // @public (undocumented)
 export function usePaneContext(): PaneContextShape;
 
 // @public (undocumented)
 export function useStopwatch(options?: StopwatchArguments): Stopwatch;
 
-// Warning: (ae-forgotten-export) The symbol "TransformContextShape" needs to be exported by the entry point index.d.ts
-//
 // @public
 export function useTransformContext(): TransformContextShape;
 
@@ -454,11 +586,11 @@ export namespace vec {
     export function mag(v: Vector2): number;
     export type Matrix = [number, number, number, number, number, number];
     export function matrixBuilder(m?: Matrix | null): {
-        mult: (m: Matrix) => any;
-        translate: (x: number, y: number) => any;
-        rotate: (a: number) => any;
-        scale: (x: number, y: number) => any;
-        shear: (x: number, y: number) => any;
+        mult: (m: Matrix) => /*elided*/ any;
+        translate: (x: number, y: number) => /*elided*/ any;
+        rotate: (a: number) => /*elided*/ any;
+        scale: (x: number, y: number) => /*elided*/ any;
+        shear: (x: number, y: number) => /*elided*/ any;
         get: () => Matrix;
     };
     export function matrixInvert(a: Matrix): Matrix | null;
@@ -481,7 +613,7 @@ export namespace vec {
 }
 
 // @public (undocumented)
-export function Vector({ tail, tip, color, weight, style, opacity, svgLineProps, }: VectorProps): JSX_2.Element;
+export function Vector(input: VectorProps): React_2.JSX.Element;
 
 // @public (undocumented)
 export namespace Vector {
@@ -513,16 +645,24 @@ export interface VectorProps extends Stroked {
     tip: vec.Vector2;
 }
 
+// @public (undocumented)
+export interface VerticalProps extends Omit<PointAngleProps, "point" | "angle"> {
+    x: number;
+}
+
 // Warnings were encountered during analysis:
 //
 // src/debug/index.tsx:4:19 - (ae-forgotten-export) The symbol "ViewportInfo" needs to be exported by the entry point index.d.ts
 // src/debug/index.tsx:4:19 - (ae-forgotten-export) The symbol "TransformWidget" needs to be exported by the entry point index.d.ts
 // src/display/Coordinates/index.tsx:4:25 - (ae-forgotten-export) The symbol "Cartesian" needs to be exported by the entry point index.d.ts
 // src/display/Coordinates/index.tsx:4:25 - (ae-forgotten-export) The symbol "PolarCoordinates" needs to be exported by the entry point index.d.ts
-// src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointAngle" needs to be exported by the entry point index.d.ts
-// src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "PointSlope" needs to be exported by the entry point index.d.ts
-// src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "ThroughPoints" needs to be exported by the entry point index.d.ts
-// src/display/Line.tsx:6:18 - (ae-forgotten-export) The symbol "Segment" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "PointAngle" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "PointSlope" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "ThroughPoints" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "Segment" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "Bezier" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "Vertical" needs to be exported by the entry point index.d.ts
+// src/display/Line.tsx:9:18 - (ae-forgotten-export) The symbol "Horizontal" needs to be exported by the entry point index.d.ts
 // src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "OfX" needs to be exported by the entry point index.d.ts
 // src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "OfY" needs to be exported by the entry point index.d.ts
 // src/display/Plot.tsx:7:18 - (ae-forgotten-export) The symbol "Parametric" needs to be exported by the entry point index.d.ts

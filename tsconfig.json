@@ -4,16 +4,19 @@
     "declarationDir": "build/types",
     "declarationMap": true,
     "emitDeclarationOnly": true,
-    "module": "es6",
-    "target": "ES2021",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "ES2022",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
     "noImplicitAny": true,
-    "checkJs": true,
-    "allowJs": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": false,
+    "skipLibCheck": true,
+    "rootDir": "./",
+    "types": []
   },
   "include": ["src/**/*", "e2e"]
 }

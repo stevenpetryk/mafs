@@ -36,7 +36,7 @@ export default function RiemannHomepage() {
 
   React.useEffect(() => start(), [start])
   React.useEffect(() => {
-    time === duration && setReady(true)
+    if (time === duration) setReady(true)
   }, [time, duration])
 
   const constrain: ConstraintFunction = ([x]) => [Math.min(Math.max(xBounds[0], x), xBounds[1]), 0]

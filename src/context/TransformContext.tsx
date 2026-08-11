@@ -2,7 +2,7 @@ import * as React from "react"
 import invariant from "tiny-invariant"
 import { vec } from "../vec"
 
-interface TransformContextShape {
+export interface TransformContextShape {
   /**
    * The resulting transformation matrix from any user-provided transforms (via
    * the `<Transform />` component).

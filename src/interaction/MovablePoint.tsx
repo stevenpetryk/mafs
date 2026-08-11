@@ -3,8 +3,7 @@ import { Theme } from "../display/Theme"
 import { vec } from "../vec"
 import { useMovable } from "./useMovable"
 import { MovablePointDisplay } from "../display/MovablePointDisplay"
-
-export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2
+import type { ConstraintFunction } from "./useMovablePoint"
 
 export interface MovablePointProps {
   /** The current position `[x, y]` of the point. */
@@ -19,6 +18,10 @@ export interface MovablePointProps {
    */
   constrain?: ConstraintFunction
   color?: string
+  /** Called when the point is clicked without dragging it. */
+  onClick?: React.MouseEventHandler<SVGGElement>
+  /** Additional attributes for the rendered SVG group. */
+  svgGroupProps?: React.SVGProps<SVGGElement>
 }
 
 export function MovablePoint({
@@ -26,12 +29,23 @@ export function MovablePoint({
   onMove,
   constrain = (point) => point,
   color = Theme.pink,
+  onClick,
+  svgGroupProps,
 }: MovablePointProps) {
   const ref = React.useRef<SVGGElement>(null)
 
   const { dragging } = useMovable({ gestureTarget: ref, onMove, point, constrain })
 
-  return <MovablePointDisplay ref={ref} point={point} color={color} dragging={dragging} />
+  return (
+    <MovablePointDisplay
+      ref={ref}
+      point={point}
+      color={color}
+      dragging={dragging}
+      onClick={onClick}
+      svgGroupProps={svgGroupProps}
+    />
+  )
 }
 
 MovablePoint.displayName = "MovablePoint"

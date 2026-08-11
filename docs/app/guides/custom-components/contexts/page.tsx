@@ -85,6 +85,16 @@ export default function TransformContextsPage() {
       </p>
 
       <CodeAndExample example={PointCloud} />
+
+      <h2>Custom draggable elements</h2>
+
+      <p>
+        Use <code>useMovable</code> when a custom SVG element needs the same pointer and keyboard
+        behavior as a <code>MovablePoint</code>. Give it a ref to the group that should receive the
+        gesture, the current point, a constraint function, and an <code>onMove</code> callback. The
+        hook handles view and user transforms for you and returns a <code>dragging</code> state for
+        styling. This is useful for custom handles, shapes, and controls.
+      </p>
     </>
   )
 }

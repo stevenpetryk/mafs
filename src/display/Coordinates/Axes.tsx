@@ -1,3 +1,4 @@
+import * as React from "react"
 import { usePaneContext } from "../../context/PaneContext"
 import { useTransformContext } from "../../context/TransformContext"
 import { vec } from "../../vec"
@@ -14,6 +15,11 @@ export type AxisOptions = {
   axis: boolean
   lines: number | false
   labels?: false | LabelMaker
+  /**
+   * Whether to draw arrows at the ends of the axis (#119). The arrows are
+   * placed at the edges of the visible viewport and move with it.
+   */
+  axisArrow?: boolean
 }
 
 export const defaultLabelMaker: LabelMaker = (x) => (
@@ -33,24 +39,32 @@ export function XLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform } = useTransformContext()
   const { xPanes } = usePaneContext()
 
+  // The label values only change when the panes or their separation change,
+  // not on every zoom frame, so they are memoized to avoid redundant work.
+  const labelSets = React.useMemo(
+    () =>
+      xPanes.map(([min, max]) =>
+        snappedRange(min, max, separation).filter((x) => Math.abs(x) > separation / 1e6),
+      ),
+    [xPanes, separation],
+  )
+
   return (
     <g className="mafs-axis">
-      {xPanes.map(([min, max]) => (
+      {xPanes.map(([min, max], index) => (
         <g key={`${min},${max}`}>
-          {snappedRange(min, max, separation)
-            .filter((x) => Math.abs(x) > separation / 1e6)
-            .map((x) => (
-              <text
-                x={vec.transform([x, 0], viewTransform)[0]}
-                y={5}
-                key={x}
-                dominantBaseline="hanging"
-                textAnchor="middle"
-                style={{ fill: "var(--mafs-origin-color)", paintOrder: "stroke" }}
-              >
-                {labelMaker(x)}
-              </text>
-            ))}
+          {labelSets[index].map((x) => (
+            <text
+              x={vec.transform([x, 0], viewTransform)[0]}
+              y={5}
+              key={x}
+              dominantBaseline="hanging"
+              textAnchor="middle"
+              style={{ fill: "var(--mafs-origin-color)", paintOrder: "stroke" }}
+            >
+              {labelMaker(x)}
+            </text>
+          ))}
         </g>
       ))}
     </g>
@@ -62,23 +76,29 @@ export function YLabels({ separation, labelMaker }: LabelsProps) {
   const { viewTransform } = useTransformContext()
   const { yPanes } = usePaneContext()
 
+  const labelSets = React.useMemo(
+    () =>
+      yPanes.map(([min, max]) =>
+        snappedRange(min, max, separation).filter((y) => Math.abs(y) > separation / 1e6),
+      ),
+    [yPanes, separation],
+  )
+
   return (
     <g className="mafs-axis">
-      {yPanes.map(([min, max]) => (
+      {yPanes.map(([min, max], index) => (
         <g key={`${min},${max}`}>
-          {snappedRange(min, max, separation)
-            .filter((y) => Math.abs(y) > separation / 1e6)
-            .map((y) => (
-              <text
-                x={5}
-                y={vec.transform([0, y], viewTransform)[1]}
-                key={y}
-                dominantBaseline="central"
-                style={{ fill: "var(--mafs-origin-color)", paintOrder: "stroke" }}
-              >
-                {labelMaker(y)}
-              </text>
-            ))}
+          {labelSets[index].map((y) => (
+            <text
+              x={5}
+              y={vec.transform([0, y], viewTransform)[1]}
+              key={y}
+              dominantBaseline="central"
+              style={{ fill: "var(--mafs-origin-color)", paintOrder: "stroke" }}
+            >
+              {labelMaker(y)}
+            </text>
+          ))}
         </g>
       ))}
     </g>

@@ -1,4 +1,44 @@
-@import "computer-modern/cmu-serif.css";
+/*
+ * Computer Modern (CMU Serif), self-hosted.
+ *
+ * The font files are bundled with Mafs (see ./fonts) so that this stylesheet
+ * works no matter how Mafs is loaded—including from a CDN like unpkg, where
+ * importing the `computer-modern` package by name cannot be resolved (#89).
+ *
+ * CMU Serif is distributed under the SIL Open Font License; see fonts/OFL.txt.
+ */
+
+@font-face {
+  font-family: "CMU Serif";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/cmu-serif-500-roman.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "CMU Serif";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/cmu-serif-500-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "CMU Serif";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/cmu-serif-700-roman.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "CMU Serif";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/cmu-serif-700-italic.woff2") format("woff2");
+}
 
 .MafsView {
   font-family: "CMU Serif", serif;

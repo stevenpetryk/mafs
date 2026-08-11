@@ -1,5 +1,69 @@
 # Changelog
 
+## 0.22.0
+
+### Performance
+
+- `Plot.Parametric`, `Plot.OfX`, and `Plot.OfY` now accumulate SVG path strings in
+  an array and join them once, instead of repeatedly concatenating strings, which
+  is significantly faster for dense plots.
+- `Plot.VectorField` now renders all vectors for a given opacity into a single
+  `<path>` layer instead of one `<path>` per vector, drastically reducing the
+  number of DOM nodes and improving framerate on dense fields ([#55](https://github.com/stevenpetryk/mafs/issues/55)).
+- `VectorField` grid iteration now uses integer indices with a half-open range so
+  adjacent panes never draw the same vector twice, avoiding duplicate arrows along
+  pane boundaries.
+- Mafs now ships dual `import`/`require` builds (ESM + CJS) via esbuild ([#49](https://github.com/stevenpetryk/mafs/issues/49)).
+- The `vec` module uses 2x3 matrices, avoiding the wasted third column ([#92](https://github.com/stevenpetryk/mafs/pull/92)).
+
+### Plot quality
+
+- Plots now support an `exclusions` prop so discontinuous functions are rendered
+  with a gap instead of a misleading vertical line ([#133](https://github.com/stevenpetryk/mafs/issues/133)).
+- Non-finite samples no longer connect neighboring points across discontinuities.
+- `Plot.OfX` and `Plot.OfY` respect the `domain` prop in addition to the visible
+  pane range.
+
+### Bug fixes
+
+- `Text` with `attach="n"`/`"s"` now renders above/below correctly by using the
+  `auto` and `hanging` dominant baselines, instead of swapping the two ([#181](https://github.com/stevenpetryk/mafs/issues/181)).
+- Text no longer uses a text-shadow that makes colored text look fuzzy; it now
+  paints a background-colored halo via `paint-order: stroke` instead ([#85](https://github.com/stevenpetryk/mafs/issues/85)).
+- `MovablePoint` constraints are now applied when the point is initialized, not
+  only while dragging ([#99](https://github.com/stevenpetryk/mafs/issues/99)).
+- Panning can now be limited via the `pan={{ x: [min, max], y: [min, max] }}`
+  bounds ([#115](https://github.com/stevenpetryk/mafs/issues/115)).
+- The `onClick` handler reports the correct y-coordinate when the view is zoomed
+  ([#116](https://github.com/stevenpetryk/mafs/issues/116)).
+- Mafs no longer flashes a 1px-wide canvas on its initial render; it waits until
+  the container width is known ([#113](https://github.com/stevenpetryk/mafs/issues/113)).
+- `Vector` arrows render correctly in iOS Safari and no longer conflict across
+  instances ([#95](https://github.com/stevenpetryk/mafs/issues/95)).
+- `Coordinates.Cartesian` no longer re-renders constantly due to a changing ID
+  ([#159](https://github.com/stevenpetryk/mafs/pull/159)).
+- All exported components have stable `displayName`s for clearer React DevTools
+  output ([#11](https://github.com/stevenpetryk/mafs/issues/11)).
+- TypeScript declarations are merged into a single `build/index.d.ts` with a
+  consistent public API surface ([#15](https://github.com/stevenpetryk/mafs/issues/15),
+  [#90](https://github.com/stevenpetryk/mafs/issues/90)).
+
+### Tooling and modernizations
+
+- The project now builds and typechecks with TypeScript 6, and is verified
+  against the native TypeScript 7 compiler.
+- Unit tests have been migrated from Jest to Vitest, running in ~1 second.
+- Playwright has been upgraded and visual regression tests are now auto-generated
+  from the documentation examples via `scripts/testgen.ts`.
+- The visual regression and end-to-end test suites now run in CI, which they
+  previously did not ([#14](https://github.com/stevenpetryk/mafs/issues/14)).
+- Added framework smoke tests that verify Mafs renders correctly in Vite and
+  Next.js projects ([#111](https://github.com/stevenpetryk/mafs/issues/111),
+  [#147](https://github.com/stevenpetryk/mafs/issues/147),
+  [#163](https://github.com/stevenpetryk/mafs/issues/163)).
+- The documentation site build is pinned to a single set of React type
+  definitions, resolving a `ReactNode` mismatch that broke `next build`.
+
 ## 0.21.0
 
 - Adds an `Image` component for embedding images in your visualizations. ([#174](https://github.com/stevenpetryk/mafs/pull/174)).

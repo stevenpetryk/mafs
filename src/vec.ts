@@ -117,7 +117,7 @@ export namespace vec {
    * Gets the midpoint of two vectors
    */
   export function midpoint(v: Vector2, v2: Vector2): Vector2 {
-    return lerp(v, v2, 0.5)
+    return scale(add(v, v2), 0.5)
   }
 
   /**

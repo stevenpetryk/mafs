@@ -53,8 +53,7 @@ export namespace vec {
    */
   export function lerp(v1: Vector2, v2: Vector2, t: number): Vector2 {
     const d = sub(v2, v1)
-    const m = mag(d)
-    return add(v1, withMag(d, t * m))
+    return add(v1, scale(d, t))
   }
 
   export function withMag(v: Vector2, m: number): Vector2 {

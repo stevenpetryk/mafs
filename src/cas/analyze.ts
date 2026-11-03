@@ -77,8 +77,8 @@ export function analyze(
   const candidates = findCandidates(expr, [a, b], variable, resolution)
   const width = b - a
   const features: Feature[] = []
-  for (const { x, reason } of candidates) {
-    const feature = classify(f, x, width, reason)
+  for (const { x, reason, undefinedAt } of candidates) {
+    const feature = classify(f, x, width, reason, undefinedAt)
     if (feature) features.push(feature)
   }
 
@@ -94,6 +94,13 @@ type Reason = "singular" | "step" | "kink"
 interface Candidate {
   x: number
   reason: Reason
+  /**
+   * The expression is undefined exactly at x in exact arithmetic (a zero
+   * denominator, ln(0), tan at a pole...), even if floating point evaluation
+   * at the nearest double happens to produce a finite number. Without this,
+   * a hole like (x^2 - a^2)/(x - a) at an irrational a goes unnoticed.
+   */
+  undefinedAt: boolean
 }
 
 /** A set of target values: either finitely many, or a lattice offset + k * period. */
@@ -108,10 +115,16 @@ function findCandidates(
   resolution: number,
 ): Candidate[] {
   const out: Candidate[] = []
-  const solve = (u: Expr, levels: Levels, reason: Reason, touching = false) => {
+  const solve = (
+    u: Expr,
+    levels: Levels,
+    reason: Reason,
+    touching = false,
+    undefinedAt = false,
+  ) => {
     if (!dependsOn(u, variable)) return
     for (const x of solveLevels(u, levels, [a, b], variable, resolution, touching)) {
-      out.push({ x, reason })
+      out.push({ x, reason, undefinedAt })
     }
   }
 
@@ -120,22 +133,22 @@ function findCandidates(
       const p = constantValue(node.exp)
       if (p === null || p < 0 || !Number.isInteger(p)) {
         // Zeros of a denominator, or the edge of a root's domain.
-        solve(node.base, { values: [0] }, "singular", true)
+        solve(node.base, { values: [0] }, "singular", true, p === null || p < 0)
       }
     } else if (node.kind === "call") {
       const u = node.arg
       switch (node.fn) {
         case "tan":
         case "sec":
-          solve(u, { offset: Math.PI / 2, period: Math.PI }, "singular")
+          solve(u, { offset: Math.PI / 2, period: Math.PI }, "singular", false, true)
           break
         case "cot":
         case "csc":
-          solve(u, { offset: 0, period: Math.PI }, "singular")
+          solve(u, { offset: 0, period: Math.PI }, "singular", false, true)
           break
         case "ln":
         case "log":
-          solve(u, { values: [0] }, "singular", true)
+          solve(u, { values: [0] }, "singular", true, true)
           break
         case "asin":
         case "acos":
@@ -167,6 +180,7 @@ function findCandidates(
     const last = merged[merged.length - 1]
     if (last && c.x - last.x <= tol) {
       if (rank[c.reason] > rank[last.reason]) last.reason = c.reason
+      last.undefinedAt ||= c.undefinedAt
     } else merged.push({ ...c })
     if (merged.length >= MAX_CANDIDATES) break
   }
@@ -385,6 +399,20 @@ function limitOfSequence(values: number[]): OneSidedBehavior {
   // Settled down: the last several samples agree.
   if (spread <= 1e-7 * (1 + Math.abs(last))) return { type: "finite", limit: last }
 
+  // Settled down earlier, before rounding noise took over at tiny h (e.g.
+  // cancellation in (x^2 - a^2)/(x - a) right next to a). Any run of samples
+  // that agrees this closely can't be oscillation or blow-up.
+  // Use the tightest such run, where truncation and rounding error balance.
+  let best: { spread: number; v: number } | null = null
+  for (let i = 0; i + 8 <= values.length; i++) {
+    const window = values.slice(i, i + 8)
+    if (!window.every(Number.isFinite)) continue
+    const spread = Math.max(...window) - Math.min(...window)
+    const v = window[window.length - 1]
+    if (spread <= 1e-6 * (1 + Math.abs(v)) && (!best || spread < best.spread)) best = { spread, v }
+  }
+  if (best) return { type: "finite", limit: best.v }
+
   // Converging geometrically (e.g. sqrt(h) or h^(1/3)): extrapolate the tail.
   const diffs = tail.slice(1).map((v, i) => v - tail[i])
   const ratios = diffs.slice(1).map((d, i) => d / diffs[i])
@@ -430,10 +458,11 @@ function classify(
   x: number,
   width: number,
   reason: Reason,
+  undefinedAt: boolean,
 ): Feature | null {
   const left = cleanLimit(oneSided(f, x, width, -1))
   const right = cleanLimit(oneSided(f, x, width, 1))
-  const value = f(x)
+  const value = undefinedAt ? NaN : f(x)
   const feature = (kind: FeatureKind): Feature => ({ x, kind, left, right, value })
 
   if (left.type === "infinite" || right.type === "infinite") return feature("pole")

@@ -169,6 +169,15 @@ describe("analyze", () => {
     expect(features(s)).toEqual(expected)
   })
 
+  test("finds holes at points that aren't nice numbers", () => {
+    const a = Math.SQRT2
+    const [f] = analyze(parse(`(x^2 - ${a * a})/(x - ${a})`), [-3, 3]).features
+    expect(f.kind).toBe("removable")
+    expect(f.x).toBeCloseTo(a, 12)
+    expect(f.left).toMatchObject({ type: "finite" })
+    expect((f.left as { limit: number }).limit).toBeCloseTo(2 * a, 6)
+  })
+
   test("floor has a jump at every integer", () => {
     const f = analyze(parse("floor(x)"), [-2.5, 2.5]).features
     expect(f.map((x) => x.x)).toEqual([-2, -1, 0, 1, 2])

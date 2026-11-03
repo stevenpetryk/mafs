@@ -1,5 +1,7 @@
 import { describe, test, expect } from "vitest"
 import { sample, sampleParametric } from "./PlotUtils"
+import { sampleExpression } from "./sampleExpression"
+import { analyze, parse } from "../../cas"
 
 test("sample", () => {
   const ts: number[] = []
@@ -55,5 +57,24 @@ describe("sampleParametric", () => {
     })
     const ys = d.match(/-?[\d.e+-]+/g)!.map(Number)
     expect(Math.max(...ys.map(Math.abs))).toBeLessThanOrEqual(10)
+  })
+})
+
+describe("sampleExpression", () => {
+  test("a fully aliased region is one band, with no curve slivers inside it", () => {
+    const expr = parse("sin(1/x)")
+    const domain: [number, number] = [-0.003, 0.003]
+    const { curve, band } = sampleExpression({
+      expr,
+      analysis: analyze(expr, domain),
+      domain,
+      pixelWidth: 0.006 / 1000,
+      minDepth: 8,
+      maxDepth: 14,
+      threshold: 1e-10,
+      clip: { xMin: -1, xMax: 1, yMin: -2, yMax: 2 },
+    })
+    expect(band.split("M").filter((s) => s.trim()).length).toBe(1)
+    expect(curve.split("M").filter((s) => s.trim()).length).toBeLessThanOrEqual(2)
   })
 })

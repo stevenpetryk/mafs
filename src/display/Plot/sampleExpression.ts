@@ -145,8 +145,11 @@ function findBands(
   }
 
   for (let i = 0; i < columns; i++) {
+    // Compute both edges with the same formula, so that adjacent columns
+    // share an edge exactly. (x0 + w would differ from the next column's x0
+    // by an ulp, leaving slivers of "curve" between band columns.)
     const x0 = A + i * w
-    const x1 = i === columns - 1 ? B : x0 + w
+    const x1 = i === columns - 1 ? B : A + (i + 1) * w
     if (!aliased(x0, x1)) {
       flush()
       continue

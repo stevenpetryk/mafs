@@ -7,6 +7,8 @@ export { Coordinates } from "./display/Coordinates"
 export { autoPi as labelPi } from "./display/Coordinates/Cartesian"
 
 export { Plot } from "./display/Plot"
+import * as cas from "./cas"
+export { cas }
 export type { OfXProps, OfYProps, ParametricProps, VectorFieldProps } from "./display/Plot"
 
 export { Line } from "./display/Line"

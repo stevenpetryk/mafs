@@ -1,6 +1,7 @@
 import CodeAndExample from "components/CodeAndExample"
 
 import OfXAndY from "guide-examples/plots/of-x-and-y"
+import Expressions from "guide-examples/plots/expressions"
 import TwistyBoi from "guide-examples/plots/twisty-boi"
 import VectorFieldExample from "guide-examples/VectorFieldExample"
 import SineStressTest from "guide-examples/plots/sine-stress-test"
@@ -27,6 +28,20 @@ function Functions() {
       <CodeAndExample example={OfXAndY} />
       <PropTable of={"Plot.OfX"} />
       <PropTable of={"Plot.OfY"} />
+
+      <h3>Math expressions</h3>
+
+      <p>
+        <code>Plot.OfX</code> also accepts a math expression as a string, like{" "}
+        <code>"sin(1/x)"</code> or <code>"(x^2 - 1)/(x - 1)"</code>. Mafs parses it with its small
+        built-in computer algebra system (exported as <code>cas</code>) and analyzes it symbolically
+        before plotting. That lets it find every vertical asymptote, jump, hole and domain boundary
+        in view, so the plot has no false vertical lines, holes and jumps get open and filled dots,
+        asymptotes get dashed guides, and regions that oscillate faster than a pixel (like{" "}
+        <code>sin(1/x)</code> near zero) are shaded as a band computed with interval arithmetic
+        instead of being aliased.
+      </p>
+      <CodeAndExample example={Expressions} />
 
       <h2>
         Inequalities of <em className="font-display">x</em> and <em className="font-display">y</em>

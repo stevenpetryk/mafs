@@ -17,6 +17,14 @@ interface SampleParams<P> {
   maxDepth: number
   /** The maximium tolerated error returned by the error function */
   threshold: number
+  /**
+   * Called for a final segment (between two consecutive `onPoint` calls) that
+   * still had too much error at the maximum depth. That's usually a sign of a
+   * discontinuity, which callers may want to look into.
+   */
+  onUnresolved?: (min: number, max: number, pMin: P, pMax: P) => void
+  /** Whether a sampled value is real (defaults to always). */
+  isDefined?: (p: P) => boolean
 }
 
 /**
@@ -44,6 +52,8 @@ export function sample<SampledReturnType>({
   error,
   onPoint,
   lerp,
+  onUnresolved,
+  isDefined = () => true,
 }: SampleParams<SampledReturnType>) {
   const [min, max] = domain
 
@@ -66,16 +76,173 @@ export function sample<SampledReturnType>({
 
     if (depth < minDepth) {
       deepen()
-    } else if (depth < maxDepth) {
-      const fnMidpoint = lerp(pMin, pMax, t)
-      const e = error(pMid, fnMidpoint)
-      if (e > threshold) deepen()
+      return
     }
+
+    const definedMin = isDefined(pMin)
+    const definedMid = isDefined(pMid)
+    const definedMax = isDefined(pMax)
+    // Nothing to draw here at all.
+    if (!definedMin && !definedMid && !definedMax) return
+
+    // Partially defined segments get refined too, so we find where the function
+    // starts or stops existing (e.g. sqrt(x) near 0) instead of skipping it.
+    const partial = !(definedMin && definedMid && definedMax)
+    const tooFar = partial || error(pMid, lerp(pMin, pMax, t)) > threshold
+
+    if (!tooFar) return
+    if (depth < maxDepth) deepen()
+    else onUnresolved?.(min, max, pMin, pMax)
   }
 
   onPoint(min, fn(min))
   subdivide(min, max, 0, fn(min), fn(max))
   onPoint(max, fn(max))
+}
+
+export interface Box {
+  xMin: number
+  xMax: number
+  yMin: number
+  yMax: number
+}
+
+const isFinitePoint = (p: vec.Vector2) => Number.isFinite(p[0]) && Number.isFinite(p[1])
+
+/**
+ * Clip the segment a-b to a box (Liang-Barsky). Returns null if the segment
+ * lies entirely outside.
+ */
+function clipSegment(a: vec.Vector2, b: vec.Vector2, box: Box): [vec.Vector2, vec.Vector2] | null {
+  let t0 = 0
+  let t1 = 1
+  const dx = b[0] - a[0]
+  const dy = b[1] - a[1]
+  const checks: [number, number][] = [
+    [-dx, a[0] - box.xMin],
+    [dx, box.xMax - a[0]],
+    [-dy, a[1] - box.yMin],
+    [dy, box.yMax - a[1]],
+  ]
+  for (const [p, q] of checks) {
+    if (p === 0) {
+      if (q < 0) return null
+    } else {
+      const r = q / p
+      if (p < 0) {
+        if (r > t1) return null
+        if (r > t0) t0 = r
+      } else {
+        if (r < t0) return null
+        if (r < t1) t1 = r
+      }
+    }
+  }
+  const at = (t: number): vec.Vector2 =>
+    t === 0 ? a : t === 1 ? b : [a[0] + t * dx, a[1] + t * dy]
+  const start = at(t0)
+  const end = at(t1)
+  // With huge coordinates (near an asymptote) t can round to exactly 0 or 1
+  // even though the segment misses the box, so double check.
+  const slackX = (box.xMax - box.xMin) * 1e-9
+  const slackY = (box.yMax - box.yMin) * 1e-9
+  const inside = (p: vec.Vector2) =>
+    p[0] >= box.xMin - slackX &&
+    p[0] <= box.xMax + slackX &&
+    p[1] >= box.yMin - slackY &&
+    p[1] <= box.yMax + slackY
+  if (!inside(start) || !inside(end)) return null
+  return [start, end]
+}
+
+/**
+ * Builds an SVG path out of a stream of points, lifting the pen at gaps and
+ * (optionally) clipping to a box so that points near an asymptote at y = 1e15
+ * don't end up as giant coordinates in the DOM.
+ */
+export class PathBuilder {
+  private d = ""
+  private last: vec.Vector2 | null = null
+  private penAt: vec.Vector2 | null = null
+
+  constructor(private box?: Box) {}
+
+  /** Start a new subpath at p (the pen is lifted). */
+  moveTo(p: vec.Vector2) {
+    this.last = isFinitePoint(p) ? p : null
+    this.penAt = null
+  }
+
+  /** Lift the pen; the next point starts a new subpath. */
+  break() {
+    this.last = null
+    this.penAt = null
+  }
+
+  lineTo(p: vec.Vector2) {
+    if (!isFinitePoint(p)) {
+      this.break()
+      return
+    }
+    const last = this.last
+    this.last = p
+    if (!last) return
+
+    const seg = this.box ? clipSegment(last, p, this.box) : [last, p]
+    if (!seg) {
+      this.penAt = null
+      return
+    }
+    const [a, b] = seg
+    if (this.penAt !== last || a !== last) this.d += `M ${a[0]} ${a[1]} `
+    this.d += `L ${b[0]} ${b[1]} `
+    this.penAt = b === p ? p : null
+  }
+
+  toString() {
+    return this.d.trimEnd()
+  }
+}
+
+function squareDistOrInfinity(a: vec.Vector2, b: vec.Vector2) {
+  const d = vec.squareDist(a, b)
+  return Number.isNaN(d) ? Infinity : d
+}
+
+/**
+ * Given a segment that couldn't be resolved by adaptive sampling, decide
+ * whether it contains a genuine discontinuity (a jump, an asymptote, or the
+ * edge of the domain) or is just very steep.
+ *
+ * It repeatedly halves the segment, keeping whichever half has the bigger gap
+ * between its endpoints. For a continuous function that gap shrinks to
+ * nothing; across a discontinuity it never does. If it's a discontinuity,
+ * returns the points on either side of it.
+ */
+export function findDiscontinuity(
+  fn: (t: number) => vec.Vector2,
+  a: number,
+  b: number,
+  pa: vec.Vector2,
+  pb: vec.Vector2,
+  threshold: number,
+): [vec.Vector2, vec.Vector2] | null {
+  for (let i = 0; i < 64; i++) {
+    const m = (a + b) / 2
+    if (m <= a || m >= b) break
+    const pm = fn(m)
+    const dl = squareDistOrInfinity(pa, pm)
+    const dr = squareDistOrInfinity(pm, pb)
+    if (dl >= dr) {
+      b = m
+      pb = pm
+    } else {
+      a = m
+      pa = pm
+    }
+    if (Math.max(dl, dr) <= threshold) return null
+  }
+  return squareDistOrInfinity(pa, pb) <= threshold ? null : [pa, pb]
 }
 
 export function sampleParametric(
@@ -84,15 +251,20 @@ export function sampleParametric(
   minDepth: number,
   maxDepth: number,
   threshold: number,
+  clip?: Box,
+  path = new PathBuilder(clip),
 ) {
-  let result = "M "
-
   sample({
     fn,
     error: (a, b) => vec.squareDist(a, b),
-    onPoint: (_t, [x, y]) => {
-      if (Number.isFinite(x) && Number.isFinite(y)) {
-        result += `${x} ${y} L `
+    isDefined: isFinitePoint,
+    onPoint: (_t, p) => path.lineTo(p),
+    onUnresolved: (min, max, pMin, pMax) => {
+      const jump = findDiscontinuity(fn, min, max, pMin, pMax, threshold)
+      if (jump) {
+        // Draw right up to the discontinuity, then lift the pen.
+        path.lineTo(jump[0])
+        path.moveTo(jump[1])
       }
     },
     lerp: (p1, p2, t) => vec.lerp(p1, p2, t),
@@ -102,7 +274,7 @@ export function sampleParametric(
     threshold,
   })
 
-  return result.substring(0, result.length - 2)
+  return path.toString()
 }
 
 export function sampleInequality(

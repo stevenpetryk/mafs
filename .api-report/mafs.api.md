@@ -9,7 +9,64 @@ import { KatexOptions } from 'katex';
 import * as React_2 from 'react';
 
 // @public (undocumented)
+interface Analysis {
+    asymptotes: Asymptote[];
+    features: Feature[];
+}
+
+// @public
+function analyze(expr: Expr, [a, b]: [number, number], options?: AnalyzeOptions): Analysis;
+
+// @public (undocumented)
+interface AnalyzeOptions {
+    resolution?: number;
+    // (undocumented)
+    variable?: string;
+}
+
+// @public (undocumented)
+type Asymptote = {
+    type: "horizontal";
+    side: 1 | -1;
+    y: number;
+} | {
+    type: "oblique";
+    side: 1 | -1;
+    slope: number;
+    intercept: number;
+};
+
+// @public (undocumented)
 export type CardinalDirection = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
+
+declare namespace cas {
+    export {
+        Expr,
+        FnName,
+        ConstName,
+        toString_2 as toString,
+        toTex,
+        equals,
+        dependsOn,
+        parse,
+        ParseError,
+        simplify,
+        diff,
+        evaluate,
+        compile,
+        compile1,
+        evaluateInterval,
+        Interval_2 as Interval,
+        analyze,
+        Analysis,
+        AnalyzeOptions,
+        Feature,
+        FeatureKind,
+        OneSidedBehavior,
+        Asymptote
+    }
+}
+export { cas }
 
 // @public (undocumented)
 export function Circle({ radius, ...rest }: CircleProps): JSX_2.Element;
@@ -30,6 +87,15 @@ export interface CircleProps extends Filled {
     svgEllipseProps?: React_2.SVGProps<SVGEllipseElement>;
 }
 
+// @public
+function compile(e: Expr): (scope: Scope) => number;
+
+// @public
+function compile1(e: Expr, variable?: string): (x: number) => number;
+
+// @public (undocumented)
+type ConstName = "pi" | "e";
+
 // @public (undocumented)
 export type ConstraintFunction = (position: vec.Vector2) => vec.Vector2;
 
@@ -44,6 +110,12 @@ export const Debug: {
     ViewportInfo: typeof ViewportInfo;
     TransformWidget: typeof TransformWidget;
 };
+
+// @public
+function dependsOn(e: Expr, name: string): boolean;
+
+// @public
+function diff(e: Expr, x?: string): Expr;
 
 // @public (undocumented)
 export function Ellipse({ center, radius, angle, strokeStyle, strokeOpacity, weight, color, fillOpacity, svgEllipseProps, }: EllipseProps): JSX_2.Element;
@@ -67,6 +139,71 @@ export interface EllipseProps extends Filled {
 }
 
 // @public (undocumented)
+function equals(a: Expr, b: Expr): boolean;
+
+// Warning: (ae-forgotten-export) The symbol "Scope" needs to be exported by the entry point index.d.ts
+//
+// @public
+function evaluate(e: Expr, scope: Scope): number;
+
+// @public
+function evaluateInterval(e: Expr, x: readonly [number, number], variable?: string): Interval_2;
+
+// @public (undocumented)
+type Expr = {
+    kind: "num";
+    value: number;
+} | {
+    kind: "var";
+    name: string;
+} | {
+    kind: "const";
+    name: ConstName;
+} | {
+    kind: "add";
+    terms: Expr[];
+} | {
+    kind: "mul";
+    factors: Expr[];
+} | {
+    kind: "pow";
+    base: Expr;
+    exp: Expr;
+} | {
+    kind: "call";
+    fn: FnName;
+    arg: Expr;
+};
+
+// @public (undocumented)
+interface Feature {
+    // (undocumented)
+    kind: FeatureKind;
+    // (undocumented)
+    left: OneSidedBehavior;
+    // (undocumented)
+    right: OneSidedBehavior;
+    value: number;
+    // (undocumented)
+    x: number;
+}
+
+// @public (undocumented)
+type FeatureKind =
+/** Vertical asymptote, like 1/x at 0. */
+"pole"
+/** Finite jump, like floor(x) at integers. */
+| "jump"
+/** A hole: both sides agree but the point itself is missing or different, like sin(x)/x at 0. */
+| "removable"
+/** No limit at all, like sin(1/x) at 0. */
+| "essential"
+/** Edge of the domain, like sqrt(x) at 0. */
+| "boundary"
+/** Continuous but not differentiable, like |x| at 0. */
+| "kink";
+
+// @public (undocumented)
 export interface Filled {
     // (undocumented)
     color?: string;
@@ -79,6 +216,9 @@ export interface Filled {
     // (undocumented)
     weight?: number;
 }
+
+// @public
+type FnName = "sin" | "cos" | "tan" | "sec" | "csc" | "cot" | "asin" | "acos" | "atan" | "sinh" | "cosh" | "tanh" | "exp" | "ln" | "log" | "abs" | "floor" | "ceil" | "round" | "sign";
 
 // @public (undocumented)
 function Image_2({ href, x, y, width, height, anchor, preserveAspectRatio, svgImageProps, }: ImageProps): JSX_2.Element;
@@ -105,6 +245,9 @@ export interface ImageProps {
 
 // @public (undocumented)
 export type Interval = [min: number, max: number];
+
+// @public
+type Interval_2 = readonly [lo: number, hi: number] | null;
 
 // @public (undocumented)
 export function labelPi(x: number): string;
@@ -189,10 +332,11 @@ export interface MovablePointProps {
 export interface OfXProps extends Omit<ParametricProps, "xy" | "domain" | "t"> {
     // (undocumented)
     domain?: vec.Vector2;
+    showAsymptotes?: boolean;
+    showDiscontinuities?: boolean;
     // (undocumented)
     svgPathProps?: React_2.SVGProps<SVGPathElement>;
-    // (undocumented)
-    y: (x: number) => number;
+    y: ((x: number) => number) | string | Expr;
 }
 
 // @public (undocumented)
@@ -205,11 +349,36 @@ export interface OfYProps extends Omit<ParametricProps, "xy" | "domain" | "t"> {
     x: (y: number) => number;
 }
 
+// @public
+type OneSidedBehavior = {
+    type: "finite";
+    limit: number;
+} | {
+    type: "infinite";
+    sign: 1 | -1;
+} | {
+    type: "oscillating";
+    lo: number;
+    hi: number;
+} | {
+    type: "undefined";
+};
+
 // Warning: (ae-forgotten-export) The symbol "ParametricPropsNew" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "ParametricPropsLegacy" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
 export type ParametricProps = ParametricPropsNew | ParametricPropsLegacy;
+
+// @public
+function parse(input: string): Expr;
+
+// @public (undocumented)
+class ParseError extends Error {
+    constructor(message: string, position: number);
+    // (undocumented)
+    readonly position: number;
+}
 
 // @public (undocumented)
 export const Plot: {
@@ -299,6 +468,9 @@ export interface SegmentProps extends Stroked {
     point2: vec.Vector2;
 }
 
+// @public
+function simplify(e: Expr): Expr;
+
 // @public (undocumented)
 export interface Stopwatch {
     setTime: (time: number) => void;
@@ -367,6 +539,12 @@ export interface ThroughPointsProps extends Stroked {
     // (undocumented)
     point2: vec.Vector2;
 }
+
+// @public (undocumented)
+function toString_2(e: Expr): string;
+
+// @public
+function toTex(e: Expr): string;
 
 // @public (undocumented)
 export function Transform(props: TransformProps): JSX_2.Element;

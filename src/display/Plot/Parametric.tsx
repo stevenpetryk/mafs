@@ -2,7 +2,8 @@ import * as React from "react"
 import { vec } from "../../vec"
 import { Stroked } from "../Theme"
 import { useTransformContext } from "../../context/TransformContext"
-import { sampleParametric } from "./PlotUtils"
+import { usePaneContext } from "../../context/PaneContext"
+import { Box, sampleParametric } from "./PlotUtils"
 
 // TODO: (v1.0.0) When the project has it's first major (breaking) update,
 //          remove the Legacy interface and just have the new props interface (renamed, of course).
@@ -65,9 +66,12 @@ export function Parametric({
   const [tMin, tMax] = domain || t
   const errorThreshold = 0.1 / pixelsPerSquare
 
+  const clip = useClipBox()
+
   const svgPath = React.useMemo(
-    () => sampleParametric(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold),
-    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax],
+    () =>
+      sampleParametric(xy, [tMin, tMax], minSamplingDepth, maxSamplingDepth, errorThreshold, clip),
+    [xy, minSamplingDepth, maxSamplingDepth, errorThreshold, tMin, tMax, clip],
   )
 
   return (
@@ -91,3 +95,21 @@ export function Parametric({
 }
 
 Parametric.displayName = "Plot.Parametric"
+
+/**
+ * A generous box around the visible panes. Curves are clipped to it, so that
+ * near an asymptote we don't put coordinates like 1e15 into the SVG.
+ */
+export function useClipBox(): Box | undefined {
+  const {
+    xPaneRange: [xMin, xMax],
+    yPaneRange: [yMin, yMax],
+  } = usePaneContext()
+  return React.useMemo(() => {
+    // Outside of a <Mafs> there are no panes, so don't clip.
+    if (xMin === xMax || yMin === yMax) return undefined
+    const w = Math.max(xMax - xMin, 1e-9)
+    const h = Math.max(yMax - yMin, 1e-9)
+    return { xMin: xMin - w, xMax: xMax + w, yMin: yMin - h, yMax: yMax + h }
+  }, [xMin, xMax, yMin, yMax])
+}

@@ -9,7 +9,6 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ["CMU Serif", "serif"],
       display: ["CMU Serif", "serif"],
     },
     extend: {

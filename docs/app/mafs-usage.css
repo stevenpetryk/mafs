@@ -27,3 +27,7 @@
     --grid-line-subdivision-color: transparent;
   }
 }
+
+.feature-mafs .MafsView {
+  @apply rounded-none;
+}
